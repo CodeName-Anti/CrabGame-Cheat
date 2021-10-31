@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace JNNJMods.UI.Utils
@@ -13,7 +15,6 @@ namespace JNNJMods.UI.Utils
 		public Color BoxColor = Color.green;
 		public int BoxThickness = 4;
 
-		public CustomGetStringDelegate GetStringMethod = delegate(GameObject obj) { return obj.name; };
 		public bool String = true;
 		public Color StringColor = Color.green;
 		public int StringFontSize = 25;
@@ -57,7 +58,12 @@ namespace JNNJMods.UI.Utils
 			StringFontSize = stringFontSize;
 		}
 
-		public void Draw(GameObject[] targets)
+		public void Draw(Dictionary<GameObject, string> objs)
+        {
+			Draw(objs.Keys.ToArray(), objs.Values.ToArray());
+        }
+
+		public void Draw(GameObject[] targets, string[] names)
 		{
 			Rect rect = default;
 			if (targets == null)
@@ -86,7 +92,7 @@ namespace JNNJMods.UI.Utils
                 {
 					Vector2 txtPos = new Vector2(rect.x, rect.y - 40);
 
-					DrawString(txtPos, GetStringMethod.Invoke(targets[i]), StringColor, StringFontSize, false);
+					DrawString(txtPos, names[i], StringColor, StringFontSize, false);
                 }
 
 				if (Box)
@@ -167,7 +173,5 @@ namespace JNNJMods.UI.Utils
 			DrawLine(vector3, vector4, color, thickness);
 			DrawLine(vector4, vector, color, thickness);
 		}
-
-		public delegate string CustomGetStringDelegate(GameObject obj);
 	}
 }
