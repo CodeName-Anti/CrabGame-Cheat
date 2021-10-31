@@ -1,4 +1,4 @@
-﻿using Il2CppSystem.Reflection;
+﻿using System.Reflection;
 
 namespace JNNJMods.CrabGameCheat.Util
 {
