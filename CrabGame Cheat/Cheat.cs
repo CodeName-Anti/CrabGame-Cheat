@@ -82,7 +82,7 @@ namespace JNNJMods.CrabGameCheat
             if(!gui.Shown)
             {
 
-                string text = "CrabGame Cheat by JNNJ";
+                string text = "CrabGame Cheat " + Utilities.FormatAssemblyVersion(Assembly, true) +  " by JNNJ";
 
 #if DEBUG
                 text += " (DEBUG VERSION, DO NOT SHARE)";
