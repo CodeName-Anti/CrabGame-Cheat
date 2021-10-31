@@ -10,7 +10,7 @@ namespace JNNJMods.UI.Elements
         public string text;
         public event ButtonPressCallback ButtonPress = delegate { };
 
-        public ButtonInfo(int windowId, string text) : base(windowId)
+        public ButtonInfo(int windowId, string text, bool keyBindable = false) : base(windowId, keyBindable)
         {
             this.text = text;
         }

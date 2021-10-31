@@ -13,9 +13,8 @@ namespace JNNJMods.Render
                 fontSize = fontSize,
                 alignment = TextAnchor.MiddleCenter,
             };
-
-            if (textColor != Color.clear)
-                style.normal.textColor = textColor;
+            
+            style.normal.textColor = textColor;
 
             return style;
         }
@@ -46,11 +45,11 @@ namespace JNNJMods.Render
             return new Rect(x, y, textWidth, textHeight);
         }
 
-        public static void DrawText(string text, Vector2 pos, int fontSize, Color textColor)
+        public static void DrawText(string text, float x, float y, int fontSize, Color textColor)
         {
             GUIStyle style = GetTextStyle(fontSize, textColor);
 
-            GUI.Label(CalcTextSize(pos.x, pos.y, style, text), text, style);
+            GUI.Label(CalcTextSize(x, y, style, text), text, style);
         }
 
         public static void DrawText(string text, Rect pos, int fontSize, Color textColor)

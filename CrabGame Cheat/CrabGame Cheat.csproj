@@ -508,11 +508,14 @@
     <Compile Include="Modules\Base\ModuleBase.cs" />
     <Compile Include="Modules\Base\MultiElementModuleBase.cs" />
     <Compile Include="Modules\FlyModule.cs" />
+    <Compile Include="Modules\GodModeModule.cs" />
     <Compile Include="Modules\SpawnerModule.cs" />
+    <Compile Include="Modules\SpeedModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AntiCheat.cs" />
     <Compile Include="Util\Config.cs" />
     <Compile Include="Util\ConfigPaths.cs" />
+    <Compile Include="Util\RainbowColor.cs" />
     <Compile Include="Util\WelcomeScreen.cs" />
     <Compile Include="Util\Utilities.cs" />
     <Compile Include="WindowIDs.cs" />

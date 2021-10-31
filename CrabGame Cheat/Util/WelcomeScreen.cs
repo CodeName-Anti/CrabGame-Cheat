@@ -28,6 +28,7 @@ namespace JNNJMods.CrabGameCheat.Util
         static void DrawWelcome()
         {
             if (!draw) return;
+
             //Black out
             DrawFullScreenColor(TransparentBlack);
 

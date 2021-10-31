@@ -13,7 +13,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return Element = new ToggleInfo(windowId, Name);
+            return Element = new ToggleInfo(windowId, Name, false, true);
         }
 
         private static Vector3 FindTpPos()

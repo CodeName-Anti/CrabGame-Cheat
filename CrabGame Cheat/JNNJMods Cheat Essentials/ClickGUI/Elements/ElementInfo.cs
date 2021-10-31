@@ -68,9 +68,10 @@ namespace JNNJMods.UI.Elements
             return default;
         }
 
-        public ElementInfo(int windowId)
+        public ElementInfo(int windowId, bool keyBindable = false)
         {
             WindowId = windowId;
+            KeyBindable = keyBindable;
         }
         
         /// <summary>

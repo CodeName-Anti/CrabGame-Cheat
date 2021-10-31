@@ -13,7 +13,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return new ToggleInfo(windowId, "Fly");
+            return new ToggleInfo(windowId, "Fly", false, true);
         }
 
         public override void Update()
