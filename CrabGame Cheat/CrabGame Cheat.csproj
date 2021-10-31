@@ -508,7 +508,10 @@
     <Compile Include="Modules\Base\ModuleBase.cs" />
     <Compile Include="Modules\Base\MultiElementModuleBase.cs" />
     <Compile Include="Modules\FlyModule.cs" />
+    <Compile Include="Modules\GlassBreakESPModule.cs" />
     <Compile Include="Modules\GodModeModule.cs" />
+    <Compile Include="Modules\MegaJumpModule.cs" />
+    <Compile Include="Modules\MegaSlapModule.cs" />
     <Compile Include="Modules\SpawnerModule.cs" />
     <Compile Include="Modules\SpeedModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -521,7 +524,7 @@
     <Compile Include="WindowIDs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="JNNJMods Cheat Essentials\Resources\chams.assets" />
+    <EmbeddedResource Include="Resources\chams.assets" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Patches\" />
