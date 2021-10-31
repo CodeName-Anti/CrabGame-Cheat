@@ -1,88 +1,85 @@
 ﻿using JNNJMods.UI;
-using JNNJMods.UI.Elements;
 using UnityEngine;
 using MelonLoader;
-using CodeStage.AntiCheat.Detectors;
 using JNNJMods.Render;
+using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.CrabGameCheat.Modules;
 
 namespace JNNJMods.CrabGameCheat
 {
     public class Cheat : MelonMod
     {
         public static Cheat Instance { get; private set; }
+        public Config config;
         private ClickGUI gui;
-
-        private ToggleInfo clickTp;
 
         public override void OnApplicationStart()
         {
             Instance = this;
 
-            StopAntiCheat();
+            AntiCheat.StopAntiCheat();
 
+            //Create ClickGUI
             gui = new ClickGUI(10, 40, 10)
             {
                 BlackOut = true
             };
 
+            //Add Main Window
             gui.AddWindow((int)WindowIDs.MAIN, "JNNJ's CrabGame Cheat", 100, 100, 400, 500);
 
-            clickTp = new ToggleInfo((int)WindowIDs.MAIN, "ClickTP")
-            {
-                KeyBindable = true
-            };
+            //Read Config
+            config = Config.FromFile(ConfigPaths.ConfigFile, gui);
 
-            gui.AddElement(clickTp);
+            if(config == null)
+            {
+                config = new Config(gui);
+            }
         }
 
-        void StopAntiCheat()
+        public override void OnApplicationLateStart()
         {
-            TimeCheatingDetector.StopDetection();
-            InjectionDetector.StopDetection();
-            WallHackDetector.StopDetection();
-            SpeedHackDetector.StopDetection();
-            ObscuredCheatingDetector.StopDetection();
-
-            TimeCheatingDetector.Dispose();
-            InjectionDetector.Dispose();
-            WallHackDetector.Dispose();
-            SpeedHackDetector.Dispose();
-            ObscuredCheatingDetector.Dispose();
+            WelcomeScreen.draw = true;
         }
 
         public override void OnUpdate()
         {
+            //Run Update on every module
+            config.ExecuteForModules((ModuleBase m) =>
+            {
+                m.Update();
+            });
+
+            //Hook Update for ClickGUI
             gui.Update();
 
-            if (Input.GetKeyDown(KeyCode.RightShift))
+            if(Input.GetKeyDown(KeyCode.T))
+            {
+                WelcomeScreen.draw = !WelcomeScreen.draw;
+            }
+
+            //Hide and Show ClickGUI
+            if (Input.GetKeyDown(config.ClickGuiKeyBind))
             {
                 gui.Shown = !gui.Shown;
             }
-
-            if (PlayerMovement.Instance == null)
-                return;
-
-            if (Input.GetKeyDown(KeyCode.Mouse0) && clickTp.GetValue<bool>())
-            {
-                Object.FindObjectOfType<PlayerMovement>().GetRb().position = FindTpPos();
-            }
-        }
-
-        private static Vector3 FindTpPos()
-        {
-            Transform playerCam = PlayerMovement.Instance.playerCam;
-            if (!Physics.Raycast(playerCam.position, playerCam.forward, out RaycastHit hitInfo, 1500f))
-                return Vector3.zero;
-            Vector3 vector3 = Vector3.zero;
-            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                vector3 = Vector3.one;
-            return hitInfo.point + vector3;
         }
 
         public override void OnGUI()
         {
+            //Run OnGUI on every Module
+            config.ExecuteForModules((ModuleBase m) =>
+            {
+                m.OnGUI();
+            });
+
+            //Hook OnGUI for WelcomeScreen
+            WelcomeScreen.OnGUI();
+
+            //Draw ClickGUI
             gui.DrawWindows();
 
+            //Draw WaterMark
             if(!gui.Shown)
             {
                 DrawingUtil.DrawText("CrabGame Cheat by JNNJ", new Vector2(0, 10), 17, Color.black);

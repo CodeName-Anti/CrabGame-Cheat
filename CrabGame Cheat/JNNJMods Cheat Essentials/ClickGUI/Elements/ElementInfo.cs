@@ -1,5 +1,4 @@
 ﻿using JNNJMods.Utils;
-using System;
 using UnityEngine;
 
 namespace JNNJMods.UI.Elements
@@ -29,7 +28,6 @@ namespace JNNJMods.UI.Elements
 
         /// <summary>
         /// <see cref="GUIStyle"/> of the Element
-        /// </summary>
         public GUIStyle style;
 
         public int WindowId { get; private set; }
