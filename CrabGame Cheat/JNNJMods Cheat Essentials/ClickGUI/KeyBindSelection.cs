@@ -1,4 +1,5 @@
 ﻿using JNNJMods.Utils;
+using System;
 using UnityEngine;
 using static JNNJMods.Render.DrawingUtil;
 
@@ -16,7 +17,7 @@ namespace JNNJMods.UI
 
         public bool Shown;
 
-        private KeyCode key;
+        private KeyCode key = KeyCode.None;
 
         public event KeySelectedCallback KeySelected = delegate { };
 
@@ -61,7 +62,7 @@ namespace JNNJMods.UI
                         JNNJMods.Utils.Timer.Run(() =>
                         {
                             Shown = false;
-                            key = KeyCode.None;
+                            this.key = KeyCode.None;
                             ClickGUI.Instance.Shown = true;
                         }, 2);
                     }

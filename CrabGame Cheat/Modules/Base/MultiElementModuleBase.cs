@@ -11,6 +11,21 @@ namespace JNNJMods.CrabGameCheat.Modules
         [JsonIgnore]
         public List<ElementInfo> Elements;
 
+        public void SetKeyBinds()
+        {
+            int i = 0;
+            foreach(ElementInfo info in Elements)
+            {
+
+                if(info.KeyBindable)
+                {
+                    info.KeyBind = KeyBinds[i];
+                    i++;
+                }
+
+            }
+        }
+
         public List<KeyCode> KeyBinds
         {
             get
