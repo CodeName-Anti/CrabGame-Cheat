@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
-    public class ESPModule : Module<ToggleInfo>
+    public class ESPModule : SingleElementModule<ToggleInfo>
     {
         [JsonIgnore]
         private Dictionary<GameObject, string> targets = new Dictionary<GameObject, string>();

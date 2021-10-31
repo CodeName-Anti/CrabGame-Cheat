@@ -26,7 +26,7 @@ namespace JNNJMods.CrabGameCheat
             };
 
             //Add Main Window
-            gui.AddWindow((int)WindowIDs.MAIN, "JNNJ's CrabGame Cheat", 100, 100, 400, 500);
+            gui.AddWindow((int)WindowIDs.MAIN, "JNNJ's CrabGame Cheat", 100, 100, 320, 250);
 
             //Read Config
             config = Config.FromFile(ConfigPaths.ConfigFile, gui);
@@ -52,11 +52,6 @@ namespace JNNJMods.CrabGameCheat
 
             //Hook Update for ClickGUI
             gui.Update();
-
-            if(Input.GetKeyDown(KeyCode.T))
-            {
-                WelcomeScreen.draw = !WelcomeScreen.draw;
-            }
 
             //Hide and Show ClickGUI
             if (Input.GetKeyDown(config.ClickGuiKeyBind))
