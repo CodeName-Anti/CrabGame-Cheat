@@ -40,7 +40,7 @@ namespace JNNJMods.UI.Elements
             this.text = text;
         }
 
-        public ToggleInfo(int windowId, string text, bool startState) : base(windowId)
+        public ToggleInfo(int windowId, string text, bool startState, bool keyBindable = false) : base(windowId, keyBindable)
         {
             this.text = text;
             SetValue(startState);

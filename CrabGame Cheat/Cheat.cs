@@ -12,6 +12,7 @@ namespace JNNJMods.CrabGameCheat
         public static Cheat Instance { get; private set; }
         public Config config;
         private ClickGUI gui;
+        private RainbowColor rainbow;
 
         public override void OnApplicationStart()
         {
@@ -26,7 +27,7 @@ namespace JNNJMods.CrabGameCheat
             };
 
             //Add Main Window
-            gui.AddWindow((int)WindowIDs.MAIN, "JNNJ's CrabGame Cheat", 100, 100, 320, 250);
+            gui.AddWindow((int)WindowIDs.MAIN, "JNNJ's CrabGame Cheat", 100, 100, 320, 400); //250
 
             //Read Config
             config = Config.FromFile(ConfigPaths.ConfigFile, gui);
@@ -35,6 +36,9 @@ namespace JNNJMods.CrabGameCheat
             {
                 config = new Config(gui);
             }
+
+            //Create RainbowColor for watermark
+            rainbow = new RainbowColor();
         }
 
         public override void OnApplicationLateStart()
@@ -77,7 +81,18 @@ namespace JNNJMods.CrabGameCheat
             //Draw WaterMark
             if(!gui.Shown)
             {
-                DrawingUtil.DrawText("CrabGame Cheat by JNNJ", new Vector2(0, 10), 17, Color.black);
+
+                string text = "CrabGame Cheat by JNNJ";
+
+#if DEBUG
+                text += " (DEBUG VERSION, DO NOT SHARE)";
+#endif
+
+                int fontSize = 17;
+
+                Rect centeredRect = DrawingUtil.CenteredTextRect(text, 17);
+
+                DrawingUtil.DrawText(text, centeredRect.x, 10, fontSize, rainbow.GetColor());
             }
         }
     }

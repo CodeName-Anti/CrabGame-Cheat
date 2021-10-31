@@ -9,7 +9,7 @@ namespace JNNJMods.UI.Elements
         /// </summary>
         public CustomRenderMethod CustomRender = delegate { return null; };
 
-        public CustomInfo(int windowId) : base(windowId)
+        public CustomInfo(int windowId, bool keyBindable = false) : base(windowId, keyBindable)
         {
 
         }

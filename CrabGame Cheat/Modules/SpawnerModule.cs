@@ -37,7 +37,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
                 foreach (KeyValuePair<int, ItemData> entry in ItemManager.idToItem)
                 {
-                    ButtonInfo info = new ButtonInfo(ID, "Spawn " + entry.value.name);
+                    ButtonInfo info = new ButtonInfo(ID, "Spawn " + entry.value.name, true);
                     info.ButtonPress += () =>
                     {
                         if (!InGame)

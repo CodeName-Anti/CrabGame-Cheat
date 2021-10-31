@@ -8,7 +8,7 @@ namespace JNNJMods.UI.Elements
         /// Text of the Label.
         /// </summary>
         public string text;
-        public LabelInfo(int windowId, string text) : base(windowId)
+        public LabelInfo(int windowId, string text) : base(windowId, false)
         {
             this.text = text;
         }

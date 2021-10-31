@@ -11,7 +11,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class ESPModule : SingleElementModule<ToggleInfo>
     {
         [JsonIgnore]
-        private Dictionary<GameObject, string> targets = new Dictionary<GameObject, string>();
+        private readonly Dictionary<GameObject, string> targets = new Dictionary<GameObject, string>();
 
         [JsonIgnore]
         private ESP esp;
@@ -26,12 +26,12 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return new ToggleInfo(windowId, "ESP");
+            return new ToggleInfo(windowId, "ESP", false, true);
         }
 
         public override void OnGUI()
         {
-            if(Element.GetValue<bool>())
+            if(InGame && Element.GetValue<bool>())
             {
 
                 if(targets.Count != GameManager.Instance.activePlayers.Count)
