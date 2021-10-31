@@ -10,6 +10,11 @@ namespace JNNJMods.CrabGameCheat.Modules
         [JsonIgnore]
         protected ElementInfo Element;
 
+        public void SetKeyBind()
+        {
+            Element.KeyBind = KeyBind;
+        }
+
         public KeyCode KeyBind
         {
             get
@@ -32,6 +37,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             base.Init(gui, json);
             gui.AddElement(Element = CreateElement(ID));
+            SetKeyBind();
         }
 
         /// <summary>
