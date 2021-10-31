@@ -46,7 +46,10 @@ namespace JNNJMods.CrabGameCheat.Util
             List<ModuleBase> modules = new List<ModuleBase>
             {
                 new ClickTPModule(gui),
-                new ESPModule(gui)
+                new ESPModule(gui),
+                new SpawnerModule(gui),
+                new FlyModule(gui),
+                new AirJumpModule(gui)
             };
 
             return modules;
@@ -100,14 +103,20 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public static Config FromJson(string json, ClickGUI gui)
         {
-            Config instance = JsonConvert.DeserializeObject<Config>(json);
-
-            if(instance.Modules.Count <= 0 || instance.Modules.Count != GetModuleTypes().Length)
+            try
             {
-                instance.Modules = instance.GetModules(gui);
-            }
+                Config instance = JsonConvert.DeserializeObject<Config>(json);
 
-            return instance;
+                if(instance.Modules.Count <= 0 || instance.Modules.Count != GetModuleTypes().Length)
+                {
+                    instance.Modules = instance.GetModules(gui);
+                }
+
+                return instance;
+            } catch(Exception)
+            {
+                return new Config(gui);
+            }
         }
     }
 }

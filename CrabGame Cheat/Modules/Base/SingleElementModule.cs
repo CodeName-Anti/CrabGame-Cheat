@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
-    public abstract class Module<T> : ModuleBase where T : ElementInfo
+    public abstract class SingleElementModule<T> : SingleElementModuleBase where T : ElementInfo
     {
         [JsonIgnore]
         protected new T Element
@@ -19,10 +19,9 @@ namespace JNNJMods.CrabGameCheat.Modules
             }
         }
 
-        public Module(string name, ClickGUI gui, WindowIDs windowId, bool empty = false) : base(name, gui, windowId, empty)
+        public SingleElementModule(string name, ClickGUI gui, WindowIDs windowId) : base(name, gui, windowId)
         {
 
         }
-
     }
 }

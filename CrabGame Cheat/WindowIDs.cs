@@ -2,6 +2,7 @@
 {
     public enum WindowIDs : int
     {
-        MAIN = 0
+        MAIN = 0,
+        ITEM_SPAWNER = 1
     }
 }

@@ -500,10 +500,15 @@
     <Compile Include="JNNJMods Cheat Essentials\Utils\Timer.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\WinConsole.cs" />
     <Compile Include="Cheat.cs" />
+    <Compile Include="Modules\AirJumpModule.cs" />
     <Compile Include="Modules\ClickTPModule.cs" />
     <Compile Include="Modules\ESPModule.cs" />
-    <Compile Include="Modules\Module.cs" />
-    <Compile Include="Modules\ModuleBase.cs" />
+    <Compile Include="Modules\Base\SingleElementModuleBase.cs" />
+    <Compile Include="Modules\Base\SingleElementModule.cs" />
+    <Compile Include="Modules\Base\ModuleBase.cs" />
+    <Compile Include="Modules\Base\MultiElementModuleBase.cs" />
+    <Compile Include="Modules\FlyModule.cs" />
+    <Compile Include="Modules\SpawnerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AntiCheat.cs" />
     <Compile Include="Util\Config.cs" />

@@ -1,7 +1,5 @@
 ﻿using JNNJMods.UI;
-using JNNJMods.UI.Elements;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -9,9 +7,6 @@ namespace JNNJMods.CrabGameCheat.Modules
     {
         [JsonIgnore]
         protected ClickGUI Gui { get; private set; }
-
-        [JsonIgnore]
-        public ElementInfo Element { get; protected set; }
 
         public WindowIDs WindowId { get; protected set; }
 
@@ -38,19 +33,6 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public string Name { get; protected set; }
 
-        public KeyCode KeyBind
-        {
-            get
-            {
-                return Element.KeyBind;
-            }
-            set
-            {
-                if (Element.KeyBindable)
-                    Element.KeyBind = value;
-            }
-        }
-
         /// <summary>
         /// Called from Constructor or after Json Deserialization.
         /// </summary>
@@ -61,26 +43,18 @@ namespace JNNJMods.CrabGameCheat.Modules
         public virtual void Init(ClickGUI gui, bool json = false)
         {
             Gui = gui;
-
-            gui.AddElement(Element = CreateElement(ID));
         }
 
-        public ModuleBase(string name, ClickGUI gui, WindowIDs windowId, bool empty = false)
+        public ModuleBase(string name, ClickGUI gui, WindowIDs windowId)
         {
             Name = name;
             WindowId = windowId;
             
-            if(!empty) Init(gui);
+            Init(gui);
         }
 
         public virtual void Update() { }
 
         public virtual void OnGUI() { }
-
-        /// <summary>
-        /// Called after Module initializes.
-        /// </summary>
-        /// <returns></returns>
-        public abstract ElementInfo CreateElement(int windowId);
     }
 }

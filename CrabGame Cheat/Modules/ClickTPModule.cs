@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
-    public class ClickTPModule : Module<ToggleInfo>
+    public class ClickTPModule : SingleElementModule<ToggleInfo>
     {
 
         public ClickTPModule(ClickGUI gui) : base("ClickTP", gui, WindowIDs.MAIN)

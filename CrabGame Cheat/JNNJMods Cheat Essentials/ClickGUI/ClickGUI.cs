@@ -125,6 +125,11 @@ namespace JNNJMods.UI
             info.manager = elementMap[info.WindowId];
         }
 
+        public ElementManager GetWindow(int windowId)
+        {
+            return elementMap[windowId];
+        }
+
         #region DrawWindows
         /// <summary>
         /// Adds an Window.
@@ -150,7 +155,7 @@ namespace JNNJMods.UI
             {
                 if(BlackOut)
                 {
-                    DrawingUtil.DrawFullScreenColor(DrawingUtil.TransparentBlack);
+                    DrawingUtil.DrawFullScreenColor(new Color(0, 0, 0, 0.7f));
                 }
             }
             else
