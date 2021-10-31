@@ -12,14 +12,31 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return new ToggleInfo(windowId, "GodMode", false, true);
+            Element = new ToggleInfo(windowId, "GodMode", false, true);
+
+            Element.ToggleChanged += Element_ToggleChanged;
+
+            return Element;
+        }
+
+        private void Element_ToggleChanged(bool toggled)
+        {
+            if(toggled)
+            {
+                PlayerStatus.Instance.currentHp = 6942000;
+                PlayerStatus.Instance.maxHp = 6942000;
+            } else
+            {
+                PlayerStatus.Instance.currentHp = 100;
+                PlayerStatus.Instance.maxHp = 100;
+            }
         }
 
         public override void Update()
         {
             if(InGame & Element.GetValue<bool>())
             {
-                PlayerStatus.Instance.currentHp = 100;
+                Element_ToggleChanged(true);
             }
         }
 

@@ -27,7 +27,7 @@ namespace JNNJMods.CrabGameCheat
             };
 
             //Add Main Window
-            gui.AddWindow((int)WindowIDs.MAIN, "JNNJ's CrabGame Cheat", 100, 100, 320, 400); //250
+            gui.AddWindow((int)WindowIDs.MAIN, "JNNJ's CrabGame Cheat", 100, 100, 320, 700); //250
 
             //Read Config
             config = Config.FromFile(ConfigPaths.ConfigFile, gui);

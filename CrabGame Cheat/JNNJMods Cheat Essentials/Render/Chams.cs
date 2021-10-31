@@ -1,5 +1,7 @@
-﻿using System;
+﻿using JNNJMods.CrabGameCheat;
+using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -11,10 +13,11 @@ namespace JNNJMods.Render
         private static Material ChamMaterial;
         private static Material[] ChamMats;
 
-        public bool Cham = true;
+        public bool Cham;
 
-        public Chams()
+        public Chams(bool cham = true)
         {
+            Cham = cham;
             LoadResources();
         }
 
@@ -32,7 +35,16 @@ namespace JNNJMods.Render
         {
             if(assets == null)
             {
-                assets = AssetBundle.LoadFromMemory(GetResourceBytes(typeof(Chams) + ".Resources.chams.assets"));
+
+                foreach(Type t in Assembly.GetExecutingAssembly().GetTypes())
+                {
+                    if(t.FullName.ToLower().Contains("asset"))
+                        MelonLoader.MelonLogger.Msg(t.FullName);
+                }
+
+                Il2CppSystem.IO.MemoryStream stream = new Il2CppSystem.IO.MemoryStream(GetResourceBytes(typeof(Cheat).Namespace + ".Resources.chams.assets"));
+
+                assets = AssetBundle.LoadFromStream(stream);
             }
 
             if(ChamMaterial == null)

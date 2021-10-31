@@ -92,17 +92,15 @@ namespace JNNJMods.UI
             elementMap = new SortedDictionary<int, ElementManager>();
         }
 
-        private CursorLockMode prevLockState;
-
         /// <summary>
         /// Show the ClickGUI.
         /// </summary>
         public void Show()
         {
             shown = true;
-            prevLockState = Cursor.lockState;
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            PlayerInput.Instance.active = false;
         }
 
         /// <summary>
@@ -111,8 +109,9 @@ namespace JNNJMods.UI
         public void Hide()
         {
             shown = false;
-            Cursor.lockState = prevLockState;
-            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            PlayerInput.Instance.active = true;
         }
 
         /// <summary>
@@ -183,6 +182,11 @@ namespace JNNJMods.UI
         /// </summary>
         public void Update()
         {
+            if(Shown && Cursor.lockState != CursorLockMode.Confined)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+
             foreach(ElementInfo info in AllElements)
             {
                 if(info.KeyBindable && info.KeyBind != KeyCode.None)
