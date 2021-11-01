@@ -1,5 +1,7 @@
+using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.Render;
 using JNNJMods.UI.Elements;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,9 +33,9 @@ namespace JNNJMods.UI
             set 
             {
                 if (value)
-                    Show();
+                    Show(true);
                 else
-                    Hide();
+                    Hide(true);
             }
         }
 
@@ -92,26 +94,45 @@ namespace JNNJMods.UI
             elementMap = new SortedDictionary<int, ElementManager>();
         }
 
+        private CursorLockMode prevLockMode;
+        private bool prevVisible;
+
         /// <summary>
         /// Show the ClickGUI.
         /// </summary>
-        public void Show()
+        public void Show(bool setPrevs = true)
         {
             shown = true;
+            if(setPrevs)
+            {
+                prevLockMode = Cursor.lockState;
+                prevVisible = Cursor.visible;
+            }
+
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-            PlayerInput.Instance.active = false;
+
+            if (PlayerInput.Instance != null)
+                PlayerInput.Instance.active = false;
+
         }
 
         /// <summary>
         /// Hide the ClickGUI.
         /// </summary>
-        public void Hide()
+        public void Hide(bool setPrevs = true)
         {
             shown = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            PlayerInput.Instance.active = true;
+
+            if(setPrevs)
+            {
+                Cursor.lockState = prevLockMode;
+                Cursor.visible = prevVisible;
+            }
+
+            if (PlayerInput.Instance != null)
+                PlayerInput.Instance.active = true;
+
         }
 
         /// <summary>
@@ -182,9 +203,25 @@ namespace JNNJMods.UI
         /// </summary>
         public void Update()
         {
+
+            if(keyBindSelection.Shown) return;
+
+            if(PlayerMovement.Instance != null && !Shown && !PauseUI.paused)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+            }
+
             if(Shown && Cursor.lockState != CursorLockMode.Confined)
             {
+                CheatLog.Msg("A");
                 Cursor.lockState = CursorLockMode.Confined;
+            }
+
+            if(Shown && !Cursor.visible)
+            {
+                CheatLog.Msg("A1");
+                Cursor.visible = true;
             }
 
             foreach(ElementInfo info in AllElements)

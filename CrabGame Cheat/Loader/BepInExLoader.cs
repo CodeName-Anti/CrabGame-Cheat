@@ -71,7 +71,7 @@ namespace JNNJMods.CrabGameCheat.Loader
                 CheatObject obj = loader.AddComponent<CheatObject>();
 
                 DontDestroyOnLoad(obj.gameObject);
-                obj.hideFlags = HideFlags.HideAndDontSave;
+                obj.hideFlags |= HideFlags.HideAndDontSave;
 
                 obj.cheat = cheat;
             }

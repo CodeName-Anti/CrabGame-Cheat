@@ -119,7 +119,7 @@ namespace JNNJMods.UI.Elements
                 if (GUI.Button(keyBindRect, btnText))
                 {
                     ClickGUI gui = ClickGUI.Instance;
-                    gui.Shown = false;
+                    gui.Hide(false);
                     gui.keyBindSelection.Shown = true;
                     gui.keyBindSelection.KeySelected += KeyBindSelection_KeySelected;
                 }
