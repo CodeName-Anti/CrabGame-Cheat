@@ -27,4 +27,5 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
  - Mega Jump
  - Mega Slap
  - Speed
+ - Rainbow Watermark (Most Important)
  - ...and more to come
