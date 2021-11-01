@@ -7,7 +7,7 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
 ## Installation MelonLoader
 
  1. Download [MelonLoader Installer](https://github.com/LavaGang/MelonLoader.Installer/releases/latest/download/MelonLoader.Installer.exe) and install it for CrabGame.
- 2. Then copy [CrabGame_Cheat.dll](https://github.com/DasJNNJ/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_MelonLoader.dll) in the "Mods" folder contained in the CrabGame Installation directory.
+ 2. Then copy [CrabGame_Cheat_MelonLoader.dll](https://github.com/DasJNNJ/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_MelonLoader.dll) in the "Mods" folder contained in the CrabGame Installation directory.
 
 **NOTE: The latest MelonLoader Version(v0.4.3 Open-Beta) is glitched.**
 

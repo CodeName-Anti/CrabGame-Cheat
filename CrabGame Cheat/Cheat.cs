@@ -4,7 +4,6 @@ using JNNJMods.Render;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.CrabGameCheat.Modules;
 using System.Reflection;
-using System;
 
 namespace JNNJMods.CrabGameCheat
 {

@@ -23,10 +23,10 @@ namespace JNNJMods.CrabGameCheat.Modules
             if(InGame && Element.GetValue<bool>())
             {
 
-                foreach (GlassBreak glassBreak in UnityEngine.Object.FindObjectsOfType<GlassBreak>())
+                foreach (GlassBreak glassBreak in GlassManager.Instance.pieces)
                 {
                     //Distance from Player to Glass
-                    int num = (int)Vector3.Distance(PlayerStatus.Instance.transform.position, glassBreak.transform.position);
+                    int distance = (int)Vector3.Distance(PlayerStatus.Instance.transform.position, glassBreak.transform.position);
 
                     //Create Style
                     GUIStyle style = new GUIStyle(GUI.skin.label)
@@ -39,7 +39,7 @@ namespace JNNJMods.CrabGameCheat.Modules
                     Vector3 screenPoint = Camera.main.WorldToScreenPoint(glassBreak.transform.position);
                     if (screenPoint.z > 0.0)
                         //Render Text above glass
-                        GUI.Label(new Rect(screenPoint.x, Screen.currentResolution.height - screenPoint.y, 0.0f, 0.0f), glassBreak.name + " [" + num.ToString() + "m]", style);
+                        GUI.Label(new Rect(screenPoint.x, Screen.currentResolution.height - screenPoint.y, 0.0f, 0.0f), glassBreak.name + " [" + distance + "m]", style);
                 }
             }
             
