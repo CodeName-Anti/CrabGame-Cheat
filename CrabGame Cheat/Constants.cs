@@ -4,7 +4,7 @@
     {
 
         public const string 
-            Version = "1.4.0.0",
+            Version = "1.4.1.0",
             GUID = "de.jnnj.crabgamecheat";
     }
 }
