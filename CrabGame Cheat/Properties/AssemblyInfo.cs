@@ -2,13 +2,18 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using JNNJMods.CrabGameCheat;
+#if MELONLOADER
+using JNNJMods.CrabGameCheat.Loader;
 using MelonLoader;
+#endif
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: MelonInfo(typeof(Cheat), "CrabGame Cheat", "1.3", "JNNJ")]
+#if MELONLOADER
+[assembly: MelonInfo(typeof(Melon), "CrabGame Cheat", Constants.Version, "JNNJ")]
 [assembly: MelonGame("Dani", "Crab Game")]
+#endif
 [assembly: AssemblyTitle("CrabGame Cheat")]
 [assembly: AssemblyDescription("A cheat for the Game \"Crab Game\"")]
 [assembly: AssemblyConfiguration("")]
@@ -36,6 +41,6 @@ using MelonLoader;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.3.0.0")]
-[assembly: AssemblyFileVersion("1.3.0.0")]
+[assembly: AssemblyVersion(Constants.Version)]
+[assembly: AssemblyFileVersion(Constants.Version)]
 [assembly: NeutralResourcesLanguage("en")]
