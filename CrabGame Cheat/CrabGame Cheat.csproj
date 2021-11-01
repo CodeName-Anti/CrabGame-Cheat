@@ -35,7 +35,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BepInEx|AnyCPU'">
     <OutputPath>bin\BepInEx\</OutputPath>
     <DefineConstants>TRACE;BEPINEX</DefineConstants>
-	<AssemblyName>CrabGame_Cheat_BepInEx</AssemblyName>
+    <AssemblyName>CrabGame_Cheat_BepInEx</AssemblyName>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,7 +46,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MelonLoader|AnyCPU'">
     <OutputPath>bin\MelonLoader\</OutputPath>
     <DefineConstants>TRACE;MELONLOADER</DefineConstants>
-	<AssemblyName>CrabGame_Cheat_MelonLoader</AssemblyName>
+    <AssemblyName>CrabGame_Cheat_MelonLoader</AssemblyName>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -72,7 +72,6 @@
     <Compile Include="JNNJMods Cheat Essentials\Utils\KeyCodeFormatter.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\NativeWinAlert.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\ReflectionExtensions.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Utils\Timer.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\WinConsole.cs" />
     <Compile Include="Cheat.cs" />
     <Compile Include="Loader\BepInExLoader.cs" />

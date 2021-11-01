@@ -68,7 +68,7 @@ namespace JNNJMods.CrabGameCheat
             gui.Update();
 
             //Hide and Show ClickGUI
-            if (Input.GetKeyDown(config.ClickGuiKeyBind))
+            if (Input.GetKeyDown(config.ClickGuiKeyBind) && !gui.keyBindSelection.Shown)
             {
                 gui.Shown = !gui.Shown;
             }

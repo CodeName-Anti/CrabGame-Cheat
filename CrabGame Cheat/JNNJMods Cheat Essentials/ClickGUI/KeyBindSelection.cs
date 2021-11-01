@@ -17,6 +17,9 @@ namespace JNNJMods.UI
 
         public bool Shown;
 
+        private bool displayReset;
+        private bool reset;
+
         private KeyCode key = KeyCode.None;
 
         public event KeySelectedCallback KeySelected = delegate { };
@@ -38,6 +41,17 @@ namespace JNNJMods.UI
 
         public void DrawSelection()
         {
+            if(reset)
+            {
+                reset = false;
+                Shown = false;
+                key = KeyCode.None;
+                ClickGUI.Instance.Show(false);
+
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+            }
+
             if(Shown)
             {
                 #region Key Detection
@@ -50,21 +64,23 @@ namespace JNNJMods.UI
 
                         KeyCode key = e.keyCode;
 
-                        if(key == KeyCode.Escape)
+                        switch(key)
                         {
-                            key = KeyCode.None;
+                            case KeyCode.Escape:
+                                key = KeyCode.None;
+                                displayReset = true;
+                                break;
                         }
 
                         KeySelected(this.key = key);
 
                         KeySelected = delegate { };
 
-                        JNNJMods.Utils.Timer.Run(() =>
+
+                        new System.Threading.Timer((obj) =>
                         {
-                            Shown = false;
-                            this.key = KeyCode.None;
-                            ClickGUI.Instance.Shown = true;
-                        }, 2);
+                            reset = true;
+                        }, null, 2000, System.Threading.Timeout.Infinite);
                     }
                 }
                 #endregion
@@ -76,9 +92,16 @@ namespace JNNJMods.UI
                 float y = (res.height - res.height / 2.5f) / 2f;
                 Rect rect = new Rect(x, y, res.width / 2.5f, res.height / 2.5f);
 
-                DrawColor(MakeColorTransparent(key != KeyCode.None ? SuccessfulColor : SelectionColor), rect);
+                Color color = key != KeyCode.None ? SuccessfulColor : SelectionColor;
 
-                string text = "Press Any Key to Bind..." + (key != KeyCode.None ? "\n" + KeyCodeFormatter.KeyNames[key] : "");
+                if(displayReset)
+                {
+                    color = SuccessfulColor;
+                }
+
+                DrawColor(MakeColorTransparent(color), rect);
+
+                string text = "Press Any Key to Bind..." + (key != KeyCode.None || displayReset ? "\n" + KeyCodeFormatter.KeyNames[key] : "");
 
                 DrawCenteredText(text , FontSize, TextColor);
             }
