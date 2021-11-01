@@ -10,4 +10,11 @@ Download [MelonLoader Installer](https://github.com/LavaGang/MelonLoader.Install
 ## Features
  - ClickGUI
  - ClickTP
- - ...and more to come
+ - Fly
+ - Mega Jump
+ - Mega Slap
+ - God
+ - Speed
+ - Rainbow Watermark (Most Important)
+ - Air Jump
+ - Spawner (Broken)
