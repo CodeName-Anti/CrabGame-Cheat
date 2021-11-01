@@ -206,10 +206,10 @@ namespace JNNJMods.UI
 
             if(keyBindSelection.Shown) return;
 
-            if(PlayerMovement.Instance != null && !Shown && !PauseUI.paused)
+            if(PlayerMovement.Instance != null && !Shown && !PauseUI.paused && !Cursor.visible)
             {
                 Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Locked;
             }
 
             if(Shown && Cursor.lockState != CursorLockMode.Confined)
