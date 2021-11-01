@@ -4,6 +4,7 @@ using JNNJMods.Render;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.CrabGameCheat.Modules;
 using System.Reflection;
+using System;
 
 namespace JNNJMods.CrabGameCheat
 {
@@ -13,15 +14,15 @@ namespace JNNJMods.CrabGameCheat
         public Config config;
         private ClickGUI gui;
         private RainbowColor rainbow;
-        private static string version;
+        public static string FormattedVersion;
 
         public void OnApplicationStart(HarmonyLib.Harmony harmony)
         {
             Instance = this;
 
-            version = Utilities.FormatAssemblyVersion(Assembly.GetExecutingAssembly(), true);
+            FormattedVersion = Utilities.FormatAssemblyVersion(Assembly.GetExecutingAssembly(), true);
 
-            CheatLog.Msg("Loaded CrabGame Cheat " + version + " by JNNJ!");
+            CheatLog.Msg("Loaded CrabGame Cheat " + FormattedVersion + " by JNNJ!");
 
             foreach (MethodBase b in harmony.GetPatchedMethods())
             {
@@ -58,6 +59,7 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnUpdate()
         {
+            UIChanger.OnUpdate();
             //Run Update on every module
             config.ExecuteForModules((ModuleBase m) =>
             {
@@ -92,7 +94,7 @@ namespace JNNJMods.CrabGameCheat
             if(!gui.Shown)
             {
 
-                string text = "CrabGame Cheat " + version +  " by JNNJ";
+                string text = "CrabGame Cheat " + FormattedVersion +  " by JNNJ";
                 int fontSize = 17;
 
                 Rect centeredRect = DrawingUtil.CenteredTextRect(text, 17);

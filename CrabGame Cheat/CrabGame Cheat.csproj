@@ -93,9 +93,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AntiCheat.cs" />
     <Compile Include="Util\CheatLog.cs" />
-    <Compile Include="Util\Config.cs" />
-    <Compile Include="Util\ConfigPaths.cs" />
+    <Compile Include="Util\Config\Config.cs" />
+    <Compile Include="Util\Config\ConfigPaths.cs" />
+    <Compile Include="Util\GameObjectExtensions.cs" />
     <Compile Include="Util\RainbowColor.cs" />
+    <Compile Include="Util\UIChanger.cs" />
     <Compile Include="Util\WelcomeScreen.cs" />
     <Compile Include="Util\Utilities.cs" />
     <Compile Include="WindowIDs.cs" />
