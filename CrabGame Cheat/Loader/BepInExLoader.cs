@@ -15,6 +15,8 @@ namespace JNNJMods.CrabGameCheat.Loader
     {
         public static BepInExLoader Instance { get; private set; }
 
+
+        public HarmonyLib.Harmony HarmonyInstance { get; private set; }
         public Cheat Cheat => cheat ?? (cheat = new Cheat());
         private Cheat cheat;
 
@@ -24,7 +26,10 @@ namespace JNNJMods.CrabGameCheat.Loader
             //Download Newtonsoft.Json
             DownloadLibrary();
 
-            Cheat.OnApplicationStart(new HarmonyLib.Harmony(Constants.GUID));
+            HarmonyInstance = new HarmonyLib.Harmony(Constants.GUID);
+            HarmonyInstance.PatchAll();
+
+            Cheat.OnApplicationStart(HarmonyInstance);
 
             CheatObject.CreateInstance(Cheat, this);
 
