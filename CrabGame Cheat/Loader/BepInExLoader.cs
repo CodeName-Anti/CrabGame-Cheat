@@ -6,9 +6,7 @@ using System.Reflection;
 using BepInEx;
 using BepInEx.IL2CPP;
 using JNNJMods.CrabGameCheat.Util;
-using UnhollowerRuntimeLib;
 using UnityEngine;
-using static JNNJMods.CrabGameCheat.Loader.BepInExLoader;
 
 namespace JNNJMods.CrabGameCheat.Loader
 {
