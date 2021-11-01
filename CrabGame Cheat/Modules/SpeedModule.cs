@@ -17,7 +17,9 @@ namespace JNNJMods.CrabGameCheat.Modules
             maxWalkSpeed,
             moveSpeed,
             maxRunSpeed,
-            maxSpeed;
+            maxSpeed,
+            maxSlopeAngle,
+            slowDownSpeed;
 
         public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.MAIN)
         {
@@ -59,12 +61,16 @@ namespace JNNJMods.CrabGameCheat.Modules
                 move.moveSpeed = moveSpeed * SpeedAmount;
                 move.maxRunSpeed = maxRunSpeed * SpeedAmount;
                 move.maxSpeed = maxSpeed * SpeedAmount;
+                move.maxSlopeAngle = maxSlopeAngle * SpeedAmount;
+                move.slowDownSpeed = slowDownSpeed * SpeedAmount;
             } else
             {
                 move.maxWalkSpeed = maxWalkSpeed;
                 move.moveSpeed = moveSpeed;
                 move.maxRunSpeed = maxRunSpeed;
                 move.maxSpeed = maxSpeed;
+                move.maxSlopeAngle = maxSlopeAngle;
+                move.slowDownSpeed = slowDownSpeed;
             }
         }
 
@@ -80,6 +86,8 @@ namespace JNNJMods.CrabGameCheat.Modules
                 moveSpeed = move.moveSpeed;
                 maxRunSpeed = move.maxRunSpeed;
                 maxSpeed = move.maxSpeed;
+                maxSlopeAngle = move.maxSlopeAngle;
+                slowDownSpeed = move.slowDownSpeed;
             }
 
 
