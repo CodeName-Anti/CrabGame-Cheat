@@ -2,7 +2,6 @@
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using JNNJMods.UI.Utils;
-using MelonLoader;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;

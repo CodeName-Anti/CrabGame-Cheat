@@ -1,4 +1,5 @@
 ﻿using JNNJMods.CrabGameCheat;
+using JNNJMods.CrabGameCheat.Util;
 using System;
 using System.IO;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace JNNJMods.Render
                 foreach(Type t in Assembly.GetExecutingAssembly().GetTypes())
                 {
                     if(t.FullName.ToLower().Contains("asset"))
-                        MelonLoader.MelonLogger.Msg(t.FullName);
+                        CheatLog.Msg(t.FullName);
                 }
 
                 Il2CppSystem.IO.MemoryStream stream = new Il2CppSystem.IO.MemoryStream(GetResourceBytes(typeof(Cheat).Namespace + ".Resources.chams.assets"));

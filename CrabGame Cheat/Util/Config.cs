@@ -47,7 +47,6 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 new ClickTPModule(gui),
                 new ESPModule(gui),
-                new SpawnerModule(gui),
                 new FlyModule(gui),
                 new AirJumpModule(gui),
                 new GodModeModule(gui),

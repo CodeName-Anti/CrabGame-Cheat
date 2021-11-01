@@ -1,22 +1,32 @@
 ﻿using JNNJMods.UI;
 using UnityEngine;
-using MelonLoader;
 using JNNJMods.Render;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.CrabGameCheat.Modules;
+using System.Reflection;
 
 namespace JNNJMods.CrabGameCheat
 {
-    public class Cheat : MelonMod
+    public class Cheat
     {
         public static Cheat Instance { get; private set; }
         public Config config;
         private ClickGUI gui;
         private RainbowColor rainbow;
+        private static string version;
 
-        public override void OnApplicationStart()
+        public void OnApplicationStart(HarmonyLib.Harmony harmony)
         {
             Instance = this;
+
+            version = Utilities.FormatAssemblyVersion(Assembly.GetExecutingAssembly(), true);
+
+            CheatLog.Msg("Loaded CrabGame Cheat " + version + " by JNNJ!");
+
+            foreach (MethodBase b in harmony.GetPatchedMethods())
+            {
+                CheatLog.Msg("Class: " + b.DeclaringType.FullName + " Method: " + b.Name);
+            }
 
             AntiCheat.StopAntiCheat();
 
@@ -41,12 +51,12 @@ namespace JNNJMods.CrabGameCheat
             rainbow = new RainbowColor();
         }
 
-        public override void OnApplicationLateStart()
+        public void OnApplicationLateStart()
         {
             WelcomeScreen.draw = true;
         }
 
-        public override void OnUpdate()
+        public void OnUpdate()
         {
             //Run Update on every module
             config.ExecuteForModules((ModuleBase m) =>
@@ -64,7 +74,7 @@ namespace JNNJMods.CrabGameCheat
             }
         }
 
-        public override void OnGUI()
+        public void OnGUI()
         {
             //Run OnGUI on every Module
             config.ExecuteForModules((ModuleBase m) =>
@@ -82,12 +92,7 @@ namespace JNNJMods.CrabGameCheat
             if(!gui.Shown)
             {
 
-                string text = "CrabGame Cheat " + Utilities.FormatAssemblyVersion(Assembly, true) +  " by JNNJ";
-
-#if DEBUG
-                text += " (DEBUG VERSION, DO NOT SHARE)";
-#endif
-
+                string text = "CrabGame Cheat " + version +  " by JNNJ";
                 int fontSize = 17;
 
                 Rect centeredRect = DrawingUtil.CenteredTextRect(text, 17);
