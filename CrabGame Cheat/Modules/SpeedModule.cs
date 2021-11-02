@@ -1,9 +1,11 @@
 ﻿using JNNJMods.UI.Elements;
 using JNNJMods.UI;
 using Newtonsoft.Json;
+using JNNJMods.CrabGameCheat.Util;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
+    [CheatModule]
     public class SpeedModule : MultiElementModuleBase
     {
 
@@ -21,7 +23,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             maxSlopeAngle,
             slowDownSpeed;
 
-        public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.MAIN)
+        public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.MOVEMENT)
         {
 
         }

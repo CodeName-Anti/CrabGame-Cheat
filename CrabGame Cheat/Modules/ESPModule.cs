@@ -1,4 +1,4 @@
-﻿using JNNJMods.Render;
+﻿using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using JNNJMods.UI.Utils;
@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
+    [CheatModule]
     public class ESPModule : SingleElementModule<ToggleInfo>
     {
         [JsonIgnore]
@@ -16,7 +17,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         [JsonIgnore]
         private ESP esp;
 
-        public ESPModule(ClickGUI gui) : base("ESP", gui, WindowIDs.MAIN) { }
+        public ESPModule(ClickGUI gui) : base("ESP", gui, WindowIDs.RENDER) { }
 
         public override void Init(ClickGUI gui, bool json = false)
         {

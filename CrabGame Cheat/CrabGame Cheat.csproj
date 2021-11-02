@@ -85,14 +85,17 @@
     <Compile Include="Modules\Base\ModuleBase.cs" />
     <Compile Include="Modules\Base\MultiElementModuleBase.cs" />
     <Compile Include="Modules\FlyModule.cs" />
-    <Compile Include="Modules\GlassBreakESPModule.cs" />
+    <Compile Include="Modules\GlassBreakerModule.cs" />
     <Compile Include="Modules\GodModeModule.cs" />
     <Compile Include="Modules\MegaJumpModule.cs" />
     <Compile Include="Modules\MegaSlapModule.cs" />
+    <Compile Include="Modules\NoFallModule.cs" />
     <Compile Include="Modules\SpeedModule.cs" />
+    <Compile Include="Patches\PlayerStatusPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AntiCheat.cs" />
     <Compile Include="Util\CheatLog.cs" />
+    <Compile Include="Util\Config\CheatModuleAttribute.cs" />
     <Compile Include="Util\Config\Config.cs" />
     <Compile Include="Util\Config\ConfigPaths.cs" />
     <Compile Include="Util\GameObjectExtensions.cs" />
@@ -985,8 +988,6 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Patches\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

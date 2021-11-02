@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Util
@@ -18,7 +17,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public void ExecuteForModules(Action<ModuleBase> action)
         {
-            foreach(ModuleBase module in Modules)
+            foreach (ModuleBase module in Modules)
             {
                 action.Invoke(module);
             }
@@ -29,32 +28,9 @@ namespace JNNJMods.CrabGameCheat.Util
             return Modules.OfType<T>().FirstOrDefault();
         }
 
-        public static Type[] GetModuleTypes()
-        {
-            return Assembly.GetExecutingAssembly().GetTypes().Where(t =>
-
-                t.IsSubclassOf(typeof(ModuleBase)) &&
-                !t.IsGenericType &&
-                !t.IsAbstract &&
-                t.IsClass
-
-            ).ToArray();
-        }
-
         private List<ModuleBase> GetModules(ClickGUI gui)
         {
-            List<ModuleBase> modules = new List<ModuleBase>
-            {
-                new ClickTPModule(gui),
-                new ESPModule(gui),
-                new FlyModule(gui),
-                new AirJumpModule(gui),
-                new GodModeModule(gui),
-                new SpeedModule(gui),
-                new GlassBreakESPModule(gui),
-                new MegaSlapModule(gui),
-                new MegaJumpModule(gui)
-            };
+            List<ModuleBase> modules = new List<ModuleBase>(CheatModuleAttribute.InstantiateAll(gui));
 
             return modules;
         }
@@ -111,7 +87,7 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 Config instance = JsonConvert.DeserializeObject<Config>(json);
 
-                if(instance.Modules.Count <= 0 || instance.Modules.Count != GetModuleTypes().Length)
+                if(instance.Modules.Count <= 0 || instance.Modules.Count != CheatModuleAttribute.GetAllModules().Length)
                 {
                     instance.Modules = instance.GetModules(gui);
                 }

@@ -1,13 +1,15 @@
 ﻿using JNNJMods.UI.Elements;
 using JNNJMods.UI;
 using UnityEngine;
+using JNNJMods.CrabGameCheat.Util;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
+    [CheatModule]
     public class AirJumpModule : SingleElementModule<ToggleInfo>
     {
 
-        public AirJumpModule(ClickGUI gui) : base("AirJump", gui, WindowIDs.MAIN)
+        public AirJumpModule(ClickGUI gui) : base("AirJump", gui, WindowIDs.MOVEMENT)
         {
 
         }
