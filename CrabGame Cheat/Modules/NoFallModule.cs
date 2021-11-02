@@ -6,16 +6,17 @@ using JNNJMods.UI.Elements;
 namespace JNNJMods.CrabGameCheat.Modules
 {
     [CheatModule]
-    public class GodModeModule : SingleElementModule<ToggleInfo>
+    public class NoFallModule : SingleElementModule<ToggleInfo>
     {
 
-        public GodModeModule(ClickGUI gui) : base("GodMode", gui, WindowIDs.PLAYER)
+        public NoFallModule(ClickGUI gui) : base("NoFall", gui, WindowIDs.PLAYER)
         {
+
         }
 
         public override ElementInfo CreateElement(int windowId)
         {
-            Element = new ToggleInfo(windowId, "GodMode", false, true);
+            Element = new ToggleInfo(windowId, Name, false, true);
 
             Element.ToggleChanged += Element_ToggleChanged;
 
@@ -24,8 +25,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private void Element_ToggleChanged(bool toggled)
         {
-            PlayerStatusPatch.GodMode = toggled;
+            PlayerStatusPatch.NoFall = toggled;
         }
-
     }
 }

@@ -32,9 +32,10 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
  - ClickTP
  - ESP
  - Fly
- - GlassBreak ESP
+ - GlassBreaker
  - GodMode
  - Mega Jump
  - Mega Slap
+ - NoFall
  - Speed
  - ...and more to come

@@ -2,6 +2,10 @@
 {
     public enum WindowIDs : int
     {
-        MAIN = 0
+        PLAYER = 1,
+        MOVEMENT = 2,
+        COMBAT = 3,
+        RENDER = 4,
+        OTHER = 5
     }
 }

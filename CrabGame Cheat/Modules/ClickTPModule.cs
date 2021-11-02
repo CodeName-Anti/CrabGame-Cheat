@@ -1,13 +1,15 @@
-﻿using JNNJMods.UI;
+﻿using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
+    [CheatModule]
     public class ClickTPModule : SingleElementModule<ToggleInfo>
     {
 
-        public ClickTPModule(ClickGUI gui) : base("ClickTP", gui, WindowIDs.MAIN)
+        public ClickTPModule(ClickGUI gui) : base("ClickTP", gui, WindowIDs.MOVEMENT)
         {
         }
 

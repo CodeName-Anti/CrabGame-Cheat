@@ -1,10 +1,11 @@
 ﻿using JNNJMods.UI.Elements;
 using JNNJMods.UI;
 using Newtonsoft.Json;
-using UnityEngine;
+using JNNJMods.CrabGameCheat.Util;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
+    [CheatModule]
     public class MegaSlapModule : SingleElementModule<ToggleInfo>
     {
 
@@ -16,7 +17,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             punchCooldown,
             maxDistance;
 
-        public MegaSlapModule(ClickGUI gui) : base("Mega Slap", gui, WindowIDs.MAIN)
+        public MegaSlapModule(ClickGUI gui) : base("Mega Slap", gui, WindowIDs.COMBAT)
         {
 
         }

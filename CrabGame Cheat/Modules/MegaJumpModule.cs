@@ -2,9 +2,11 @@
 using JNNJMods.UI;
 using System;
 using Newtonsoft.Json;
+using JNNJMods.CrabGameCheat.Util;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
+    [CheatModule]
     public class MegaJumpModule : SingleElementModule<ToggleInfo>
     {
 
@@ -14,7 +16,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         [JsonIgnore]
         private float jumpForce;
 
-        public MegaJumpModule(ClickGUI gui) : base("Mega Jump", gui, WindowIDs.MAIN)
+        public MegaJumpModule(ClickGUI gui) : base("Mega Jump", gui, WindowIDs.MOVEMENT)
         {
 
         }

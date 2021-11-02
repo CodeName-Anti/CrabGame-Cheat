@@ -1,12 +1,14 @@
 ﻿using JNNJMods.UI.Elements;
 using JNNJMods.UI;
+using JNNJMods.CrabGameCheat.Util;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
+    [CheatModule]
     public class FlyModule : SingleElementModule<ToggleInfo>
     {
 
-        public FlyModule(ClickGUI gui) : base("Fly", gui, WindowIDs.MAIN)
+        public FlyModule(ClickGUI gui) : base("Fly", gui, WindowIDs.MOVEMENT)
         {
 
         }

@@ -71,8 +71,6 @@ namespace JNNJMods.CrabGameCheat.Loader
 
             public static void CreateInstance(Cheat cheat, BepInExLoader loader)
             {
-                //ClassInjector.RegisterTypeInIl2Cpp<CheatObject>();
-
                 CheatObject obj = loader.AddComponent<CheatObject>();
 
                 DontDestroyOnLoad(obj.gameObject);

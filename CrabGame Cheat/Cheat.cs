@@ -36,8 +36,12 @@ namespace JNNJMods.CrabGameCheat
                 BlackOut = true
             };
 
-            //Add Main Window
-            gui.AddWindow((int)WindowIDs.MAIN, "JNNJ's CrabGame Cheat", 100, 100, 320, 700); //250
+            //Add Windows
+            gui.AddWindow((int)WindowIDs.PLAYER, "Player", 1100, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.MOVEMENT, "Movement", 745, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.COMBAT, "Combat", 400, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.RENDER, "Render", 70, 525, 320, 400);
+            gui.AddWindow((int)WindowIDs.OTHER, "Other", 70, 90, 320, 400);
 
             //Read Config
             config = Config.FromFile(ConfigPaths.ConfigFile, gui);
