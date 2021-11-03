@@ -1,5 +1,4 @@
-﻿using Il2CppSystem;
-using JNNJMods.Utils;
+﻿using JNNJMods.Utils;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Reflection;
@@ -24,10 +23,9 @@ namespace JNNJMods.CrabGameCheat.Util
 
                 using(var client = new WebClient())
                 {
+                    //Some random user agent because with others it responds with 403
                     client.Headers.Add("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0");
                     string json = client.DownloadString("https://api.github.com/repos/DasJNNJ/CrabGame-Cheat/releases");
-
-                    CheatLog.Msg(json);
 
                     JArray jArr = JArray.Parse(json);
 
@@ -36,15 +34,7 @@ namespace JNNJMods.CrabGameCheat.Util
                     System.Version git = new System.Version(stringVersion);
                     System.Version current = Assembly.GetExecutingAssembly().GetName().Version;
 
-                    //Compare versions
-
-                    /*if (resultGeneric < 0) relation = "less than";
-                    else if (resultGeneric > 0) relation = "greater than";
-                    else relation = "equal to";*/
-
                     int result = current.CompareTo(git);
-
-                    CheatLog.Msg(result);
 
                     if(result < 0)
                     {

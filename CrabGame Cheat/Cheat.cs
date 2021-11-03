@@ -64,7 +64,7 @@ namespace JNNJMods.CrabGameCheat
             }
 
             //Create RainbowColor for watermark
-            rainbow = new RainbowColor();
+            rainbow = new RainbowColor(.2f);
         }
 
         public void OnApplicationLateStart()
@@ -84,6 +84,16 @@ namespace JNNJMods.CrabGameCheat
 
             //Hook Update for ClickGUI
             gui.Update();
+            
+            /* Test Code for TileDrive GameMode
+             * if you are the Server Owner, it makes the next GameMode TileDrive
+            var tileDrive = GameModeManager.Instance.allGameModes.First(r => r.name == "Tile Drive");
+            GameLoop.Instance.gameModesAvailable.Clear();
+            GameLoop.Instance.gameModesAvailable.Add(tileDrive);
+
+            GameLoop.Instance.smallModes.Clear();
+            GameLoop.Instance.smallModes.Add(tileDrive);
+            */
 
             //Hide and Show ClickGUI
             if (Input.GetKeyDown(config.ClickGuiKeyBind) && !gui.keyBindSelection.Shown)

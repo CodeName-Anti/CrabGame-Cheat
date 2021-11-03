@@ -16,16 +16,15 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            Element = new ToggleInfo(windowId, Name, true, true);
-
-            Element.ToggleChanged += Element_ToggleChanged;
-
-            return Element;
+            return new ToggleInfo(windowId, Name, true, true);
         }
 
-        void Element_ToggleChanged(bool toggled)
+        public override void Update()
         {
-            ClientHandlePatch.NoFreeze = toggled;
+            if(InGame && Element.GetValue<bool>() && PersistentPlayerData.frozen)
+            {
+                PersistentPlayerData.frozen = false;
+            }
         }
 
     }
