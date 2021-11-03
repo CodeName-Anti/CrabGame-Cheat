@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JNNJMods.CrabGameCheat</RootNamespace>
-    <AssemblyName>CrabGame_Cheat</AssemblyName>
+    <AssemblyName>CrabCheat_BepInEx</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -20,9 +20,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;BEPINEX;MELONLOADER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IsMelonLoader>true</IsMelonLoader>
+    <IsBepInEx>true</IsBepInEx>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -65,7 +67,6 @@
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\SliderInfo.cs" />
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\ToggleInfo.cs" />
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\KeyBindSelection.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Essentials.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Render\Chams.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Render\DrawingUtil.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Render\ESP.cs" />
@@ -74,10 +75,11 @@
     <Compile Include="JNNJMods Cheat Essentials\Utils\ReflectionExtensions.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\WinConsole.cs" />
     <Compile Include="Cheat.cs" />
-    <Compile Include="Loader\BepInExLoader.cs" />
+    <Compile Include="Loader\BepInExLoad.cs" />
     <Compile Include="Loader\ICheatLoader.cs" />
-    <Compile Include="Loader\Melon.cs" />
+    <Compile Include="Loader\MelonLoad.cs" />
     <Compile Include="Modules\AirJumpModule.cs" />
+    <Compile Include="Modules\AntiBoundKillsModule.cs" />
     <Compile Include="Modules\ClickTPModule.cs" />
     <Compile Include="Modules\ESPModule.cs" />
     <Compile Include="Modules\Base\SingleElementModuleBase.cs" />
@@ -90,8 +92,16 @@
     <Compile Include="Modules\MegaJumpModule.cs" />
     <Compile Include="Modules\MegaSlapModule.cs" />
     <Compile Include="Modules\NoFallModule.cs" />
+    <Compile Include="Modules\NoFreezeModule.cs" />
+    <Compile Include="Modules\NoPushModule.cs" />
+    <Compile Include="Modules\OwnerHighlightModule.cs" />
     <Compile Include="Modules\SpeedModule.cs" />
+    <Compile Include="Modules\TilePainterModule.cs" />
+    <Compile Include="Patches\ClientHandlePatch.cs" />
+    <Compile Include="Patches\GameManagerPatch.cs" />
+    <Compile Include="Patches\PlayerMovementPatch.cs" />
     <Compile Include="Patches\PlayerStatusPatch.cs" />
+    <Compile Include="Patches\PromptPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AntiCheat.cs" />
     <Compile Include="Util\CheatLog.cs" />
@@ -104,9 +114,6 @@
     <Compile Include="Util\WelcomeScreen.cs" />
     <Compile Include="Util\Utilities.cs" />
     <Compile Include="WindowIDs.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\chams.assets" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -548,6 +555,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(IsMelonLoader)'=='true'">
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\MelonLoader\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="ACTk.Examples.Genuine.Runtime">
       <HintPath>..\Libraries\MelonLoader\ACTk.Examples.Genuine.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -628,11 +640,6 @@
       <HintPath>..\Libraries\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\MelonLoader\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Novell.Directory.Ldap">
       <HintPath>..\Libraries\MelonLoader\Novell.Directory.Ldap.dll</HintPath>
       <Private>False</Private>
@@ -659,11 +666,6 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\MelonLoader\System.Numerics.Vectors.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Reflection.Context" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.DurableInstancing" />
@@ -988,6 +990,5 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

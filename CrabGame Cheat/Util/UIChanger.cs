@@ -7,7 +7,7 @@ namespace JNNJMods.CrabGameCheat.Util
 {
     public class UIChanger
     {
-        private static bool init,
+        public static bool init,
             versionUIInit,
             aboutUIInit;
 

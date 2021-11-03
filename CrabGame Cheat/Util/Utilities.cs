@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.IO;
+using System.Net;
 using System.Reflection;
 
 namespace JNNJMods.CrabGameCheat.Util
@@ -42,5 +44,29 @@ namespace JNNJMods.CrabGameCheat.Util
 
             return version;
         }
+
+        public static byte[] GetResourceBytes(string embeddedResource)
+        {
+            using (Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(embeddedResource))
+            {
+                byte[] buffer = manifestResourceStream != null ? new byte[(int)manifestResourceStream.Length] :
+                    throw new Exception(embeddedResource + " is not found in Embedded Resources.");
+                manifestResourceStream.Read(buffer, 0, (int)manifestResourceStream.Length);
+                if (buffer.Length > 1000)
+                    return buffer;
+            }
+            return null;
+        }
+
+        public static string GetAssemblyLocation()
+        {
+            return GetAssemblyLocation(Assembly.GetExecutingAssembly());
+        }
+
+        public static string GetAssemblyLocation(Assembly assembly)
+        {
+            return Path.GetDirectoryName(assembly.Location);
+        }
+
     }
 }

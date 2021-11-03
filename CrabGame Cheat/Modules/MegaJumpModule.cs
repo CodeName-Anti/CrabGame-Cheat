@@ -42,16 +42,19 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame && !init)
+            if(InGame)
             {
-                init = true;
+                if(!init)
+                {
+                    init = true;
 
-                jumpForce = PlayerMovement.Instance.jumpForce;
-            }
+                    jumpForce = PlayerMovement.Instance.jumpForce;
+                }
 
-            if(InGame && Element.GetValue<bool>())
-            {
-                Element_ToggleChanged(true);
+                if(Element.GetValue<bool>())
+                {
+                    Element_ToggleChanged(true);
+                }
             }
         }
 

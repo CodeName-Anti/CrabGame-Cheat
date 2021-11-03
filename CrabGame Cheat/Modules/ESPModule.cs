@@ -1,4 +1,5 @@
 ﻿using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.Render;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using JNNJMods.UI.Utils;
@@ -12,10 +13,16 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class ESPModule : SingleElementModule<ToggleInfo>
     {
         [JsonIgnore]
-        private readonly Dictionary<GameObject, string> targets = new Dictionary<GameObject, string>();
+        private readonly Dictionary<GameObject, string> espTargets = new Dictionary<GameObject, string>();
+
+        [JsonIgnore]
+        private readonly List<Component> chamsTargets = new List<Component>();
 
         [JsonIgnore]
         private ESP esp;
+
+        [JsonIgnore]
+        private Chams chams;
 
         public ESPModule(ClickGUI gui) : base("ESP", gui, WindowIDs.RENDER) { }
 
@@ -23,6 +30,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             base.Init(gui, json);
             esp = new ESP(true, Color.green, false, Color.green, true, Color.green);
+            chams = new Chams();
         }
 
         public override ElementInfo CreateElement(int windowId)
@@ -32,21 +40,32 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void OnGUI()
         {
-            if(InGame && Element.GetValue<bool>())
+            if (!InGame) return;
+
+            if (!Element.GetValue<bool>())
+                return;
+
+            if(espTargets.Count != GameManager.Instance.activePlayers.Count - 1)
             {
+                CheatLog.Msg("Getting ESP-Targets!");
 
-                if(targets.Count != GameManager.Instance.activePlayers.Count)
+                espTargets.Clear();
+                chamsTargets.Clear();
+
+                foreach(PlayerManager manager in GameManager.Instance.activePlayers.values)
                 {
-                    targets.Clear();
-
-                    foreach(OnlinePlayerMovement script in Object.FindObjectsOfType<OnlinePlayerMovement>())
+                    if(manager.onlinePlayerMovement != null)
                     {
-                        targets.Add(script.gameObject, script.playerManager.username);
+                        chamsTargets.Add(manager.onlinePlayerMovement);
+                        espTargets.Add(manager.onlinePlayerMovement.gameObject, manager.username);
                     }
                 }
-
-                esp.Draw(targets);
+                chams.UnChamTargets();
+                chams.ChamTargets(chamsTargets.ToArray());
             }
+
+            esp.Draw(espTargets);
+            
         }
 
     }
