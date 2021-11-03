@@ -1,4 +1,6 @@
 ﻿using HarmonyLib;
+using JNNJMods.CrabGameCheat.Util;
+using Steamworks;
 using System.Collections.Generic;
 
 namespace JNNJMods.CrabGameCheat.Patches
@@ -7,24 +9,38 @@ namespace JNNJMods.CrabGameCheat.Patches
     public static class ClientHandlePatch
     {
         public static Dictionary<ulong, ulong> Spectators = new Dictionary<ulong, ulong>();
-        public static bool NoFreeze;
 
         [HarmonyPrefix]
         [HarmonyPatch("SpectatingWho")]
         public static bool Prefix(Packet packet)
         {
-            var spectator = packet.ReadUlong(true);
-            var target = packet.ReadUlong(true);
-            Spectators[spectator] = target;
+            var spectatorId = packet.ReadUlong(true);
+            var targetId = packet.ReadUlong(true);
+            Spectators[spectatorId] = targetId;
+
+
+            if(targetId == SteamClient.SteamId.Value)
+            {
+
+                string spectatorMessage;
+
+                PlayerManager spectator = GameManager.Instance.spectators[spectatorId];
+                PlayerManager target = GameManager.Instance.activePlayers[targetId];
+
+                if (targetId == SteamClient.SteamId.Value)
+                {
+                    spectatorMessage = "You are";
+                } else
+                    spectatorMessage = target.username + " is";
+
+                bool owner = SteamManager.Instance.lobbyOwnerSteamId == spectatorId;
+
+                spectatorMessage += " being spectated by " + (owner ? "<color=red>" : "") + spectator.username + (owner ? "</color>" : "");
+
+                CheatLog.LogChatBox(spectatorMessage);
+            }
+
             return true;
         }
-
-        [HarmonyPostfix]
-        [HarmonyPatch("FreezePlayers")]
-        public static void FreezePlayers(Packet packet)
-        {
-            PersistentPlayerData.frozen = false;
-        }
-
     }
 }

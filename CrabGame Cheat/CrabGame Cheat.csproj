@@ -96,7 +96,6 @@
     <Compile Include="Modules\NoPushModule.cs" />
     <Compile Include="Modules\OwnerHighlightModule.cs" />
     <Compile Include="Modules\SpeedModule.cs" />
-    <Compile Include="Modules\TilePainterModule.cs" />
     <Compile Include="Patches\ClientHandlePatch.cs" />
     <Compile Include="Patches\GameManagerPatch.cs" />
     <Compile Include="Patches\PlayerMovementPatch.cs" />

@@ -34,6 +34,8 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             if (!InGame) return;
 
+            if (Gui.Shown) return;
+
             if (Input.GetKeyDown(KeyCode.Mouse0) && Element.GetValue<bool>())
             {
                 Object.FindObjectOfType<PlayerMovement>().GetRb().position = FindTpPos();

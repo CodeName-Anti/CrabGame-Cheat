@@ -48,5 +48,10 @@ namespace JNNJMods.CrabGameCheat.Util
 
         }
 
+        public static void LogChatBox(object message)
+        {
+            Chatbox.Instance.AppendMessage(69420, message.ToString(), "<color=#5100ff>CrabGame Cheat</color>");
+        }
+
     }
 }
