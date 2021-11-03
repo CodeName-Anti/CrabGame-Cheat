@@ -29,6 +29,7 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
 ## Features
  - ClickGUI
  - AirJump
+ - AntiBoundKills
  - ClickTP
  - ESP
  - Fly
@@ -37,5 +38,9 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
  - Mega Jump
  - Mega Slap
  - NoFall
+ - NoFreeze
+ - NoPush
+ - OwnerHighlight
  - Speed
+ - TilePainter
  - ...and more to come
