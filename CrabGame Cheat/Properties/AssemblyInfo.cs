@@ -11,7 +11,7 @@ using MelonLoader;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 #if MELONLOADER
-[assembly: MelonInfo(typeof(Melon), "CrabGame Cheat", Constants.Version, "JNNJ")]
+[assembly: MelonInfo(typeof(MelonLoad), "CrabGame Cheat", Constants.Version, "JNNJ")]
 [assembly: MelonGame("Dani", "Crab Game")]
 #endif
 [assembly: AssemblyTitle("CrabGame Cheat")]

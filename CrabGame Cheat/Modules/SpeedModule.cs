@@ -8,7 +8,6 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class SpeedModule : MultiElementModuleBase
     {
-
         public float SpeedAmount { get; private set; }
 
         [JsonIgnore]
@@ -49,9 +48,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         void SpeedSlider_ValueChanged(object oldValue, object newValue)
         {
-
             SpeedAmount = (float)newValue;
-
         }
 
         void SpeedToggle_ToggleChanged(bool toggled)
@@ -78,23 +75,21 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame && !init)
-            {
-                init = true;
-
-                var move = PlayerMovement.Instance;
-
-                maxWalkSpeed = move.maxWalkSpeed;
-                moveSpeed = move.moveSpeed;
-                maxRunSpeed = move.maxRunSpeed;
-                maxSpeed = move.maxSpeed;
-                maxSlopeAngle = move.maxSlopeAngle;
-                slowDownSpeed = move.slowDownSpeed;
-            }
-
-
             if(InGame)
             {
+                if(!init)
+                {
+                    init = true;
+
+                    var move = PlayerMovement.Instance;
+
+                    maxWalkSpeed = move.maxWalkSpeed;
+                    moveSpeed = move.moveSpeed;
+                    maxRunSpeed = move.maxRunSpeed;
+                    maxSpeed = move.maxSpeed;
+                    maxSlopeAngle = move.maxSlopeAngle;
+                    slowDownSpeed = move.slowDownSpeed;
+                }
                 SpeedToggle_ToggleChanged(Elements[0].GetValue<bool>());
             }
         }

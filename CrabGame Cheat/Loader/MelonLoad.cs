@@ -3,7 +3,7 @@ using MelonLoader;
 
 namespace JNNJMods.CrabGameCheat.Loader
 {
-    public class Melon : MelonMod, ICheatLoader
+    public class MelonLoad : MelonMod, ICheatLoader
     {
         public Cheat Cheat
         { 
@@ -34,7 +34,6 @@ namespace JNNJMods.CrabGameCheat.Loader
         {
             Cheat.OnGUI();
         }
-
     }
 }
 #endif

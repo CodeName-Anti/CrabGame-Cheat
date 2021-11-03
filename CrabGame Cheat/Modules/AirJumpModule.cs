@@ -21,12 +21,13 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame)
+            if (InGame && Input.GetKeyDown(KeyCode.Space) && Element.GetValue<bool>())
             {
-                if (Input.GetKeyDown(KeyCode.Space) && Element.GetValue<bool>())
-                {
-                    PlayerMovement.Instance.PushPlayer(new Vector3(0.0f, 50f, 0.0f));
-                }
+                var velocity = PlayerMovement.Instance.GetRb().velocity;
+
+                velocity.y = 20f;
+
+                PlayerMovement.Instance.GetRb().velocity = velocity;
             }
         }
     }

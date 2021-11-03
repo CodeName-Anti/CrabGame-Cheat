@@ -1,5 +1,6 @@
 ﻿using JNNJMods.Utils;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using static JNNJMods.Render.DrawingUtil;
 
@@ -18,7 +19,6 @@ namespace JNNJMods.UI
         public bool Shown;
 
         private bool displayReset;
-        private bool reset;
 
         private KeyCode key = KeyCode.None;
 
@@ -39,20 +39,21 @@ namespace JNNJMods.UI
 
         }
 
+        private async void DelayedReset()
+        {
+            await Task.Delay(5000);
+
+            Shown = false;
+            key = KeyCode.None;
+            ClickGUI.Instance.Show(false);
+
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+
         public void DrawSelection()
         {
-            if(reset)
-            {
-                reset = false;
-                Shown = false;
-                key = KeyCode.None;
-                ClickGUI.Instance.Show(false);
-
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-            }
-
-            if(Shown)
+            if (Shown)
             {
                 #region Key Detection
                 Event e = Event.current;
@@ -76,11 +77,7 @@ namespace JNNJMods.UI
 
                         KeySelected = delegate { };
 
-
-                        new System.Threading.Timer((obj) =>
-                        {
-                            reset = true;
-                        }, null, 2000, System.Threading.Timeout.Infinite);
+                        DelayedReset();
                     }
                 }
                 #endregion

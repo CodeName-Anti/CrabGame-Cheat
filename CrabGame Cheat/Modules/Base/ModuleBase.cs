@@ -53,6 +53,13 @@ namespace JNNJMods.CrabGameCheat.Modules
             Init(gui);
         }
 
+        public ModuleBase(string name, ClickGUI gui)
+        {
+            Name = name;
+
+            Init(gui);
+        }
+
         public virtual void Update() { }
 
         public virtual void OnGUI() { }

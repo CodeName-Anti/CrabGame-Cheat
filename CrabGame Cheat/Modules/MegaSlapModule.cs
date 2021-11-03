@@ -36,6 +36,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             var punchPlayers = PlayerMovement.Instance.punchPlayers;
             if(toggled)
             {
+                punchPlayers.ready = true;
                 punchPlayers.punchCooldown = 0.0f;
                 punchPlayers.maxDistance = float.PositiveInfinity;
                 SetCamShake(false);
@@ -54,18 +55,21 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame && !init)
+            if(InGame)
             {
-                init = true;
-                var punchPlayers = PlayerMovement.Instance.punchPlayers;
+                if (!init)
+                {
+                    init = true;
+                    var punchPlayers = PlayerMovement.Instance.punchPlayers;
 
-                punchCooldown = punchPlayers.punchCooldown;
-                maxDistance = punchPlayers.maxDistance;
-            }
+                    punchCooldown = punchPlayers.punchCooldown;
+                    maxDistance = punchPlayers.maxDistance;
+                }
 
-            if(InGame && Element.GetValue<bool>())
-            {
-                Element_ToggleChanged(true);
+                if (Element.GetValue<bool>())
+                {
+                    Element_ToggleChanged(true);
+                }
             }
         }
     }

@@ -24,7 +24,7 @@ namespace JNNJMods.CrabGameCheat.Loader
         {
             Instance = this;
             //Download Newtonsoft.Json
-            DownloadLibrary();
+            LoadLibraries();
 
             HarmonyInstance = new HarmonyLib.Harmony(Constants.GUID);
             HarmonyInstance.PatchAll();
@@ -36,9 +36,14 @@ namespace JNNJMods.CrabGameCheat.Loader
             Cheat.OnApplicationLateStart();
         }
 
-        private void DownloadLibrary()
+        public void LoadLibraries()
         {
-            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            DownloadJsonLibrary();
+        }
+
+        private void DownloadJsonLibrary()
+        {
+            string path = Utilities.GetAssemblyLocation();
             string dllLoadPath = Path.Combine(path, "Newtonsoft.Json.dll");
             if (!File.Exists(dllLoadPath))
             {
@@ -56,12 +61,12 @@ namespace JNNJMods.CrabGameCheat.Loader
 
                 string dllFile = Path.Combine(zipPath, "Bin", "net45", "Newtonsoft.Json.dll");
 
-
                 File.Copy(dllFile, dllLoadPath);
 
                 Assembly.LoadFrom(dllLoadPath);
             }
         }
+
 
         public class CheatObject : MonoBehaviour
         {
