@@ -50,8 +50,7 @@ namespace JNNJMods.UI.Elements
         /// <returns>The set Element</returns>
         public object SetValue(object val)
         {
-            value = val;
-            return val;
+            return value = val;
         }
 
         /// <summary>

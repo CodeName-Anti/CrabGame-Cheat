@@ -1,5 +1,6 @@
 ﻿using JNNJMods.Utils;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Net;
 using System.Reflection;
 using UnityEngine;
@@ -21,26 +22,31 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 init = true;
 
-                using(var client = new WebClient())
+                try
                 {
-                    //Some random user agent because with others it responds with 403
-                    client.Headers.Add("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0");
-                    string json = client.DownloadString("https://api.github.com/repos/DasJNNJ/CrabGame-Cheat/releases");
-
-                    JArray jArr = JArray.Parse(json);
-
-                    string stringVersion = jArr[0].ToObject<JObject>().GetValue("tag_name").ToObject<string>();
-
-                    System.Version git = new System.Version(stringVersion);
-                    System.Version current = Assembly.GetExecutingAssembly().GetName().Version;
-
-                    int result = current.CompareTo(git);
-
-                    if(result < 0)
+                    using (var client = new WebClient())
                     {
-                        updateAvailable = true;
-                    }
+                        //Some random user agent because with others it responds with 403
+                        client.Headers.Add("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0");
+                        string json = client.DownloadString("https://api.github.com/repos/DasJNNJ/CrabGame-Cheat/releases");
 
+                        JArray jArr = JArray.Parse(json);
+
+                        string stringVersion = jArr[0].ToObject<JObject>().GetValue("tag_name").ToObject<string>();
+
+                        System.Version git = new System.Version(stringVersion);
+                        System.Version current = Assembly.GetExecutingAssembly().GetName().Version;
+
+                        int result = current.CompareTo(git);
+
+                        if (result < 0)
+                        {
+                            updateAvailable = true;
+                        }
+                    }
+                } catch(Exception)
+                {
+                    CheatLog.Warning("Couldn't fetch Updates from GitHub!");
                 }
             }
 

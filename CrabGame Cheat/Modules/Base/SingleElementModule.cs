@@ -7,13 +7,13 @@ namespace JNNJMods.CrabGameCheat.Modules
     public abstract class SingleElementModule<T> : SingleElementModuleBase where T : ElementInfo
     {
         [JsonIgnore]
-        protected new T Element
+        public new T Element
         {
             get
             {
                 return base.Element as T;
             }
-            set
+            protected set
             {
                 base.Element = value;
             }

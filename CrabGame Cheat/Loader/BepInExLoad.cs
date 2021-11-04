@@ -32,8 +32,6 @@ namespace JNNJMods.CrabGameCheat.Loader
             Cheat.OnApplicationStart(HarmonyInstance);
 
             CheatObject.CreateInstance(Cheat, this);
-
-            Cheat.OnApplicationLateStart();
         }
 
         public void LoadLibraries()
@@ -83,7 +81,12 @@ namespace JNNJMods.CrabGameCheat.Loader
 
                 obj.cheat = cheat;
             }
-
+            
+            void Start()
+            {
+                cheat.OnApplicationLateStart();
+            }
+            
             void Update()
             {
                 if(cheat != null)

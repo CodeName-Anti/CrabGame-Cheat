@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using JNNJMods.CrabGameCheat.Util;
-using Steamworks;
+using SteamworksNative;
 using System.Collections.Generic;
 
 namespace JNNJMods.CrabGameCheat.Patches
@@ -19,23 +19,13 @@ namespace JNNJMods.CrabGameCheat.Patches
             Spectators[spectatorId] = targetId;
 
 
-            if(targetId == SteamClient.SteamId.Value)
+            if(targetId == SteamUser.GetSteamID().m_SteamID)
             {
-
-                string spectatorMessage;
-
                 PlayerManager spectator = GameManager.Instance.spectators[spectatorId];
                 PlayerManager target = GameManager.Instance.activePlayers[targetId];
 
-                if (targetId == SteamClient.SteamId.Value)
-                {
-                    spectatorMessage = "You are";
-                } else
-                    spectatorMessage = target.username + " is";
-
-                bool owner = SteamManager.Instance.lobbyOwnerSteamId == spectatorId;
-
-                spectatorMessage += " being spectated by " + (owner ? "<color=red>" : "") + spectator.username + (owner ? "</color>" : "");
+                bool owner = SteamManager.Instance.lobbyOwnerSteamId.m_SteamID == spectatorId;
+                string spectatorMessage = "You are being spectated by " + (owner ? "<color=red>" : "") + spectator.username + (owner ? "</color>" : "");
 
                 CheatLog.LogChatBox(spectatorMessage);
             }

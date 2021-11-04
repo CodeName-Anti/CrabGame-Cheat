@@ -11,6 +11,9 @@ namespace JNNJMods.CrabGameCheat.Util
 {
     public class Config
     {
+
+        public static Config Instance { get; private set; }
+
         public List<ModuleBase> Modules { get; private set; }
 
         public KeyCode ClickGuiKeyBind = KeyCode.RightShift;
@@ -37,6 +40,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public Config(ClickGUI gui)
         {
+            Instance = this;
             Modules = GetModules(gui);
         }
 
@@ -92,7 +96,7 @@ namespace JNNJMods.CrabGameCheat.Util
                     instance.Modules = instance.GetModules(gui);
                 }
 
-                return instance;
+                return Instance = instance;
             } catch(Exception)
             {
                 return new Config(gui);
