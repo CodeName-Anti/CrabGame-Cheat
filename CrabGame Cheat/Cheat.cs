@@ -22,6 +22,8 @@ namespace JNNJMods.CrabGameCheat
 
         private string waterMarkText;
 
+        private MetricsCommunication metrics;
+
         public void OnApplicationStart(HarmonyLib.Harmony harmony)
         {
             Instance = this;
@@ -70,6 +72,9 @@ namespace JNNJMods.CrabGameCheat
         public void OnApplicationLateStart()
         {
             WelcomeScreen.draw = true;
+
+            metrics = new MetricsCommunication();
+            metrics.Start();
         }
 
         public void OnUpdate()
