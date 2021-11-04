@@ -214,13 +214,11 @@ namespace JNNJMods.UI
 
             if(Shown && Cursor.lockState != CursorLockMode.Confined)
             {
-                CheatLog.Msg("A");
                 Cursor.lockState = CursorLockMode.Confined;
             }
 
             if(Shown && !Cursor.visible)
             {
-                CheatLog.Msg("A1");
                 Cursor.visible = true;
             }
 

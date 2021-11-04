@@ -9,7 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     public abstract class MultiElementModuleBase : ModuleBase
     {
         [JsonIgnore]
-        public List<ElementInfo> Elements;
+        public List<ElementInfo> Elements { get; protected set; }
 
         public void SetKeyBinds()
         {

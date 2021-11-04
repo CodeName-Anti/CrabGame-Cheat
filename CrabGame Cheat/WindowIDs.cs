@@ -6,6 +6,7 @@
         MOVEMENT = 2,
         COMBAT = 3,
         RENDER = 4,
-        OTHER = 5
+        OTHER = 5,
+        SPECTATORLIST = 6
     }
 }

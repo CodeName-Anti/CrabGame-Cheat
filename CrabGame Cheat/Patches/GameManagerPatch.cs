@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using Steamworks;
+using SteamworksNative;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Patches
@@ -13,7 +13,7 @@ namespace JNNJMods.CrabGameCheat.Patches
         [HarmonyPrefix]
         public static bool PunchPlayer(ulong puncher, ulong punched, Vector3 dir)
         {
-            return !(NoPush && punched == SteamClient.SteamId.Value);
+            return !(NoPush && punched == SteamUser.GetSteamID().m_SteamID);
         }
 
     }
