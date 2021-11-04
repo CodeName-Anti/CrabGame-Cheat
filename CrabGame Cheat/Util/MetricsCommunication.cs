@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SteamworksNative;
 using System;
+using System.IO;
+using System.Net;
 
 namespace JNNJMods.CrabGameCheat.Util
 {
@@ -34,9 +36,7 @@ namespace JNNJMods.CrabGameCheat.Util
         {
             while (running)
             {
-                Thread.Sleep(2 * 60
-                    //* 1000
-                    );
+                Thread.Sleep(2 * 60 * 1000);
                 if (!Connected)
                 {
                     SendConnect();
@@ -60,7 +60,7 @@ namespace JNNJMods.CrabGameCheat.Util
                     ["steamID"] = SteamUser.GetSteamID().m_SteamID.ToString()
                 };
 
-                JObject response = SendGet(request, "init");
+                JObject response = SendPost(request, "init");
 
                 Connected = response.GetValue("success").ToObject<bool>();
 
@@ -94,7 +94,7 @@ namespace JNNJMods.CrabGameCheat.Util
                     ["status"] = status.ToString()
                 };
 
-                JObject response = SendGet(request, "heartbeat");
+                JObject response = SendPost(request, "heartbeat");
 
                 if (!response.GetValue("success").ToObject<bool>())
                 {
@@ -105,11 +105,11 @@ namespace JNNJMods.CrabGameCheat.Util
             }
         }
 
-        private static JObject SendGet(JObject json, string url)
+        private static JObject SendPost(JObject json, string url)
         {
             try
             {
-                return JObject.Parse(SendGet(json.ToString(Formatting.Indented), url));
+                return JObject.Parse(SendPost(json.ToString(Formatting.Indented), url));
 
             } catch(Exception e)
             {
@@ -123,26 +123,22 @@ namespace JNNJMods.CrabGameCheat.Util
             }
         }
 
-        private static string SendGet(string json, string url)
+        private static string SendPost(string json, string url)
         {
-            throw new NotImplementedException();
-            /*
-            var client = new RestClient(BaseUrl + url)
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(BaseUrl + url);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                Timeout = -1
-            };
+                streamWriter.Write(json);
+            }
 
-            var request = new RestRequest(Method.GET);
-            request.AddParameter("application/json", json, ParameterType.GetOrPost);
-
-            IRestResponse response = client.Execute(request);
-
-            CheatLog.Warning("[" + response.StatusCode + "]" + response.Content);
-
-            if (!response.IsSuccessful)
-                throw response.ErrorException;
-
-            return response.Content;*/
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                return streamReader.ReadToEnd();
+            }
         }
 
     }
