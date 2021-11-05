@@ -39,10 +39,7 @@ namespace JNNJMods.CrabGameCheat.Patches
 
         public static void SendHelpMessage()
         {
-            foreach(string cut in GetHelpMessage().Split('\n'))
-            {
-                CheatLog.LogChatBox(cut);
-            }
+            CheatLog.LogChatBox(GetHelpMessage());
         }
 
         private static void HideAndClearChat(Chatbox chat)

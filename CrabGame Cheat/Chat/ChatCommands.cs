@@ -74,11 +74,8 @@ namespace JNNJMods.CrabGameCheat.Chat
                 return;
             }
 
-            SendLocalMessage("Received args: \"" + args[0] + "\"");
-
             if (!ulong.TryParse(args[0], out ulong id))
             {
-                SendLocalMessage("\"" + message + "\"");
                 var active = GetPlayerByName(message, GameManager.Instance.activePlayers);
                 var spectator = GetPlayerByName(message, GameManager.Instance.spectators);
 
