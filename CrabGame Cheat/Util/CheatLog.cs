@@ -48,9 +48,13 @@ namespace JNNJMods.CrabGameCheat.Util
 
         }
 
-        public static void LogChatBox(object message)
+        public static void LogChatBox(object message, bool displayUsername = true)
         {
-            Chatbox.Instance.AppendMessage(69420, message.ToString(), "<color=#5100ff>CrabGame Cheat</color>");
+            Chatbox.Instance.messages.text += "\n" + (displayUsername ? "<color=#5100ff>CrabGame Cheat</color>:" : "") + $"{message}";
+            Chatbox.Instance.ShowChat();
+
+            Chatbox.Instance.CancelInvoke("HideChat");
+            Chatbox.Instance.Invoke("HideChat", 5f);
         }
 
     }
