@@ -15,6 +15,11 @@ namespace JNNJMods.CrabGameCheat.Loader
 
         private Cheat cheat;
 
+        public override void OnApplicationQuit()
+        {
+            Cheat.OnApplicationQuit();
+        }
+
         public override void OnApplicationStart()
         {
             Cheat.OnApplicationStart(HarmonyInstance);

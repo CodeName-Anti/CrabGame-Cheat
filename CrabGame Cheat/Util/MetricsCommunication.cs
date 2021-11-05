@@ -1,10 +1,10 @@
-﻿using Il2CppSystem.Threading;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SteamworksNative;
 using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace JNNJMods.CrabGameCheat.Util
 {
@@ -16,33 +16,25 @@ namespace JNNJMods.CrabGameCheat.Util
 
         private bool running;
 
-        private Thread heartbeatThread;
-
         public void Start()
         {
             running = true;
             SendConnect();
 
-            if(heartbeatThread == null)
-            {
-                heartbeatThread = new Thread((ThreadStart)HeartbeatThread);
-            }
-
-            heartbeatThread.Start();
-
+            HeartBeat();
         }
 
-        private void HeartbeatThread()
+        private async void HeartBeat()
         {
             while (running)
             {
-                Thread.Sleep(2 * 60 * 1000);
                 if (!Connected)
                 {
                     SendConnect();
                 }
 
                 SendHeartBeat();
+                await Task.Delay(2 * 60 * 1000);
             }
         }
 
@@ -110,10 +102,24 @@ namespace JNNJMods.CrabGameCheat.Util
             try
             {
                 return JObject.Parse(SendPost(json.ToString(Formatting.Indented), url));
-
             } catch(Exception e)
             {
-                CheatLog.Error("GET Request failed Error: " + e.ToString());
+                CheatLog.Error("POST Request failed Error: " + e.ToString());
+
+                if(e is WebException)
+                {
+                    WebException ex = e as WebException;
+
+                    if(ex.Message.Contains("Bad Request") || ex.Message.Contains("400"))
+                    {
+                        return new JObject
+                        {
+                            ["success"] = false,
+                            ["message"] = "HTTP request error!"
+                        };
+                    }
+
+                }
 
                 return new JObject
                 {
@@ -135,6 +141,7 @@ namespace JNNJMods.CrabGameCheat.Util
             }
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 return streamReader.ReadToEnd();

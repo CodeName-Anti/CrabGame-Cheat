@@ -203,7 +203,6 @@ namespace JNNJMods.UI
         /// </summary>
         public void Update()
         {
-
             if(keyBindSelection.Shown) return;
 
             if(PlayerMovement.Instance != null && !Shown && !PauseUI.paused && !Cursor.visible)
@@ -221,6 +220,9 @@ namespace JNNJMods.UI
             {
                 Cursor.visible = true;
             }
+
+            if (Chatbox.Instance != null && Chatbox.Instance.typing)
+                return;
 
             foreach(ElementInfo info in AllElements)
             {

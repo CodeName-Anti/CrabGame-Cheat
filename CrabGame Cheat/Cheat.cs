@@ -4,6 +4,7 @@ using JNNJMods.Render;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.CrabGameCheat.Modules;
 using System.Reflection;
+using UnityEngine.SceneManagement;
 using System;
 
 namespace JNNJMods.CrabGameCheat
@@ -67,6 +68,20 @@ namespace JNNJMods.CrabGameCheat
 
             //Create RainbowColor for watermark
             rainbow = new RainbowColor(.2f);
+            SceneManager.sceneLoaded = (UnityEngine.Events.UnityAction<Scene, LoadSceneMode>)OnSceneLoaded;
+        }
+
+        public void OnApplicationQuit()
+        {
+            metrics.Stop();
+        }
+
+        public void OnSceneLoaded(Scene scene, LoadSceneMode mod)
+        {
+            if(scene.name.Equals("Menu"))
+            {
+                UIChanger.Init = false;
+            }
         }
 
         public void OnApplicationLateStart()
