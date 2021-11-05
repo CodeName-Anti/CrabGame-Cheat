@@ -15,8 +15,8 @@ namespace JNNJMods.CrabGameCheat.Loader
     {
         public static BepInExLoader Instance { get; private set; }
 
-
         public HarmonyLib.Harmony HarmonyInstance { get; private set; }
+        
         public Cheat Cheat => cheat ?? (cheat = new Cheat());
         private Cheat cheat;
 
@@ -82,6 +82,11 @@ namespace JNNJMods.CrabGameCheat.Loader
                 obj.cheat = cheat;
             }
             
+            void OnApplicationQuit()
+            {
+                cheat.OnApplicationQuit();
+            }
+
             void Start()
             {
                 cheat.OnApplicationLateStart();

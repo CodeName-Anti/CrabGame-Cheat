@@ -7,7 +7,23 @@ namespace JNNJMods.CrabGameCheat.Util
 {
     public class UIChanger
     {
-        public static bool init,
+        public static bool Init
+        {
+            get
+            {
+                return init;
+            }
+            set
+            {
+                init = value;
+                versionUIInit = value;
+                aboutUIInit = value;
+            }
+        }
+
+
+        private static bool
+            init,
             versionUIInit,
             aboutUIInit;
 
@@ -36,17 +52,14 @@ namespace JNNJMods.CrabGameCheat.Util
 
                     GameObject creditsWindow = ui.gameObject.GetChildren().Where(obj => obj.name.Contains("Credits")).First();
 
-                    GameObject tab0 = creditsWindow.gameObject.GetChildren().Where(obj => obj.name.Contains("Tab")).First();
+                    GameObject tab0 = creditsWindow.GetChildren().Where(obj => obj.name.Contains("Tab")).First();
 
-                    GameObject content = tab0.GetChildren().First().gameObject.GetChildren().Where(obj => obj.name.Contains("Content")).First().gameObject;
+                    GameObject content = tab0.GetChildren().First().GetChildren().Where(obj => obj.name.Contains("Content")).First();
 
                     TextMeshProUGUI textMesh = content.GetChildren().Where(obj => obj.name.Contains("Text")).First().GetComponent<TextMeshProUGUI>();
 
-                    textMesh.text = "<size=150%>Crab Game <size=100%>is a game made by me (Dani lol), " +
-                        "definitely not based on any cool and popular korean " +
-                        "shows haha. anyway imagine you subscribed to me on " +
-                        "youtube thatd be crazy haha unless? :flushed: <br>" +
-                        "<br>" +
+                    textMesh.text +=
+                        "<br><br>" +
                         "<size=150%>CrabGame Cheat </size>is a Cheat made by JNNJ.";
 
                     CheatLog.Msg("Credits Changed");
@@ -62,5 +75,11 @@ namespace JNNJMods.CrabGameCheat.Util
                 CheatLog.Msg("UI Updated!");
             }
         }
+
+        private static void DiscordButton_onClick()
+        {
+            Application.OpenURL("https://discord.gg/UUhXmhPWfq");
+        }
+
     }
 }

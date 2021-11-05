@@ -5,7 +5,6 @@ using JNNJMods.UI.Elements;
 using Newtonsoft.Json;
 using SteamworksNative;
 using System.Collections.Generic;
-using UnhollowerRuntimeLib;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
@@ -34,7 +33,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return new ToggleInfo(windowId, Name, true, false);
+            return new ToggleInfo(windowId, Name, false, false);
         }
 
         public override void OnGUI()
@@ -43,6 +42,9 @@ namespace JNNJMods.CrabGameCheat.Modules
                 return;
 
             if (!Element.GetValue<bool>())
+                return;
+
+            if (Gui.Shown)
                 return;
 
             //Draw Spectator List
@@ -56,16 +58,14 @@ namespace JNNJMods.CrabGameCheat.Modules
             //spectator, target
             foreach (KeyValuePair<ulong, ulong> entry in ClientHandlePatch.Spectators)
             {
+                //Is target local Player?
                 if(entry.Value == SteamUser.GetSteamID().m_SteamID)
                 {
                     PlayerManager spectator = GameManager.Instance.spectators[entry.Key];
-                    PlayerManager target = GameManager.Instance.activePlayers[entry.Value];
 
-                    if(SteamUser.GetSteamID().m_SteamID == entry.Value)
-                    {
-                        bool owner = entry.Key == SteamManager.Instance.lobbyOwnerSteamId.m_SteamID;
-                        GUILayout.Label(new GUIContent(owner ? ChatboxPatch.MakeColored(spectator.username, "red") : spectator.username), labelOptions);
-                    }
+                    //Draw owner username red
+                    bool owner = entry.Key == SteamManager.Instance.lobbyOwnerSteamId.m_SteamID;
+                    GUILayout.Label(new GUIContent(owner ? ChatboxPatch.MakeColored(spectator.username, "red") : spectator.username), labelOptions);
                 }
             }
             
