@@ -10,9 +10,15 @@ namespace JNNJMods.CrabGameCheat.Chat
     public static class ChatCommands
     {
 
+        #region Chat
         private static void SendLocalMessage(object message)
         {
             CheatLog.LogChatBox(message);
+        }
+
+        private static string MakeColored(string message, string color)
+        {
+            return ChatboxPatch.MakeColored(message, color);
         }
 
         private static string GetHelpMessage()
@@ -29,6 +35,7 @@ namespace JNNJMods.CrabGameCheat.Chat
         {
             SendLocalMessage("<color=red>Please enter a valid User!</color>");
         }
+        #endregion
 
         private static Tuple<ulong, PlayerManager> GetPlayerByName(string name, Il2CppSystem.Collections.Generic.Dictionary<ulong, PlayerManager> players)
         {
@@ -44,7 +51,8 @@ namespace JNNJMods.CrabGameCheat.Chat
             return null;
         }
 
-        [ChatCommand("Toggle")]
+        #region Commands
+        [ChatCommand("Toggle", "Toggle a module.")]
         public static void Toggle(string message, string[] args)
         {
             foreach(ModuleBase mod in Config.Instance.Modules)
@@ -59,10 +67,12 @@ namespace JNNJMods.CrabGameCheat.Chat
 
                         string toggleText = ChatboxPatch.MakeColored(toggled ? "Enabled" : "Disabled", toggled ? "green" : "red");
 
-                        CheatLog.LogChatBox(mod.Name + " is now " + toggleText);
+                        SendLocalMessage(mod.Name + " is now " + toggleText);
+                        return;
                     }
                 }
             }
+            SendLocalMessage("No module to toggle found!");
         }
 
         [ChatCommand("Profile", "Opens the SteamProfile of an User.")]
@@ -100,5 +110,7 @@ namespace JNNJMods.CrabGameCheat.Chat
 
             SteamFriends.ActivateGameOverlayToUser("steamid", cId);
         }
+
+        #endregion
     }
 }

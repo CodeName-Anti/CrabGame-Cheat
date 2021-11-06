@@ -1,7 +1,6 @@
 ﻿using JNNJMods.UI.Elements;
 using JNNJMods.UI;
 using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.CrabGameCheat.Patches;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -16,7 +15,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return new ToggleInfo(windowId, Name, true, true);
+            return new ToggleInfo(windowId, Name, false, true);
         }
 
         public override void Update()
