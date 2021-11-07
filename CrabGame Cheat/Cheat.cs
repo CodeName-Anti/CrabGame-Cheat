@@ -49,6 +49,7 @@ namespace JNNJMods.CrabGameCheat
             };
 
             //Add Windows
+            gui.AddWindow((int)WindowIDs.ITEM_SPAWNER, "Item Spawner", 1445, 90, 320, 700);
             gui.AddWindow((int)WindowIDs.PLAYER, "Player", 1100, 90, 320, 400);
             gui.AddWindow((int)WindowIDs.MOVEMENT, "Movement", 745, 90, 320, 500);
             gui.AddWindow((int)WindowIDs.COMBAT, "Combat", 400, 90, 320, 400);
@@ -78,6 +79,13 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mod)
         {
+            var killBounds = UnityEngine.Object.FindObjectOfType<KillPlayerOutOfBounds>();
+
+            if(killBounds != null)
+            {
+                config.GetModule<AntiBoundKillsModule>().killHeight = killBounds.killHeight;
+            }
+
             if(scene.name.Equals("Menu"))
             {
                 UIChanger.Init = false;

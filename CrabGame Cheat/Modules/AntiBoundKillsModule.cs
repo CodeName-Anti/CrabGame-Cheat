@@ -8,6 +8,9 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class AntiBoundKillsModule : SingleElementModule<ToggleInfo>
     {
+
+        public float killHeight;
+
         public AntiBoundKillsModule(ClickGUI gui) : base("AntiBound Kills", gui, WindowIDs.PLAYER)
         {
 
@@ -24,13 +27,14 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
                 var pos = PlayerMovement.Instance.GetRb().position;
 
-                if (pos.y < -90)
+                if (pos.y < (killHeight + 2))
                 {
                     //Makes you slide to the sides
                     PlayerMovement.Instance.GetRb().velocity = Vector3.Exclude(Vector3.up, PlayerMovement.Instance.GetRb().velocity);
 
-                    pos.y = -90;
+                    pos.y = killHeight + 2;
 
+                    //Float above KillBounds
                     PlayerMovement.Instance.GetRb().position = pos;
                 }
             }

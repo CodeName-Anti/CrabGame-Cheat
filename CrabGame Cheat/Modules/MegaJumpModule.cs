@@ -1,6 +1,5 @@
 ﻿using JNNJMods.UI.Elements;
 using JNNJMods.UI;
-using System;
 using Newtonsoft.Json;
 using JNNJMods.CrabGameCheat.Util;
 

@@ -16,8 +16,9 @@ namespace JNNJMods.CrabGameCheat.Patches
         {
             var spectatorId = packet.ReadUlong(true);
             var targetId = packet.ReadUlong(true);
-            Spectators[spectatorId] = targetId;
 
+            packet.Reset();
+            Spectators[spectatorId] = targetId;
 
             if(targetId == SteamUser.GetSteamID().m_SteamID)
             {

@@ -5,14 +5,14 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
 
 **Also join my Discord Server:** https://discord.gg/UUhXmhPWfq
 
-## Installation BepInEx(RECOMMENDED)
+## Installation BepInEx (RECOMMENDED)
  1. Download the [lastest BepInEx Build](https://builds.bepis.io/projects/bepinex_be), the file name should start with "BepInEx_UnityIL2CPP".
  2. Dowload [CrabGame_Cheat_BepInEx.dll](https://github.com/DasJNNJ/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_BepInEx.dll)
  3. Extract the Zip archive in your Crab Game Installation Folder(Steam -> Right Click Crab Game -> Manage -> Browse local Files).
- 4. Start the Game and then close it once you are in the MainMenu.
+ 4. Start the Game and then close it once you are in the Main Menu.
  5. Create a new Folder in "/BepInEx/plugins" and name it "CrabGame Cheat", then copy the [CrabGame_Cheat_BepInEx.dll](https://github.com/DasJNNJ/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_BepInEx.dll) into it.
 
-## Installation MelonLoader(NOT RECOMMENDED)
+## Installation MelonLoader (NOT RECOMMENDED & WON'T WORK ALWAYS)
 
  1. Download [MelonLoader Installer](https://github.com/LavaGang/MelonLoader.Installer/releases/latest/download/MelonLoader.Installer.exe) and install it for CrabGame.
  2. Then copy [CrabGame_Cheat_MelonLoader.dll](https://github.com/DasJNNJ/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_MelonLoader.dll) in the "Mods" folder contained in the CrabGame Installation directory.
@@ -44,4 +44,9 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
  - NoPush
  - OwnerHighlight
  - Speed
+ - Give Weapons
  - ...and more to come
+
+## DISCLAIMER
+
+This cheat is only for testing purposes. We do not encourage hacking when you're not allowed, and will not bear liability for your actions.

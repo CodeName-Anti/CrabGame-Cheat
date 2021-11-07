@@ -13,9 +13,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         private bool init;
 
         [JsonIgnore]
-        private float
-            punchCooldown,
-            maxDistance;
+        private float maxDistance;
 
         public MegaSlapModule(ClickGUI gui) : base("Mega Slap", gui, WindowIDs.COMBAT)
         {
@@ -37,12 +35,10 @@ namespace JNNJMods.CrabGameCheat.Modules
             if(toggled)
             {
                 punchPlayers.ready = true;
-                punchPlayers.punchCooldown = 0.0f;
                 punchPlayers.maxDistance = float.PositiveInfinity;
                 SetCamShake(false);
             } else
             {
-                punchPlayers.punchCooldown = punchCooldown;
                 punchPlayers.maxDistance = maxDistance;
                 SetCamShake(true);
             }
@@ -62,7 +58,6 @@ namespace JNNJMods.CrabGameCheat.Modules
                     init = true;
                     var punchPlayers = PlayerMovement.Instance.punchPlayers;
 
-                    punchCooldown = punchPlayers.punchCooldown;
                     maxDistance = punchPlayers.maxDistance;
                 }
 

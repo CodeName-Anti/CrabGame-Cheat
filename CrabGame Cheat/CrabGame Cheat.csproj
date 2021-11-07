@@ -91,6 +91,7 @@
     <Compile Include="Modules\FlyModule.cs" />
     <Compile Include="Modules\GlassBreakerModule.cs" />
     <Compile Include="Modules\GodModeModule.cs" />
+    <Compile Include="Modules\ItemSpawnerModule.cs" />
     <Compile Include="Modules\MegaJumpModule.cs" />
     <Compile Include="Modules\MegaSlapModule.cs" />
     <Compile Include="Modules\NoFallModule.cs" />
