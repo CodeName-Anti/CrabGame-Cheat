@@ -9,9 +9,6 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class OwnerHighlightModule : SingleElementModule<ToggleInfo>
     {
-
-        private Chams chams;
-
         public OwnerHighlightModule(ClickGUI gui) : base("Owner Highlight", gui, WindowIDs.RENDER)
         {
         }
@@ -19,7 +16,6 @@ namespace JNNJMods.CrabGameCheat.Modules
         public override void Init(ClickGUI gui, bool json = false)
         {
             base.Init(gui, json);
-            chams = new Chams();
         }
 
         public override ElementInfo CreateElement(int windowId)
@@ -43,9 +39,13 @@ namespace JNNJMods.CrabGameCheat.Modules
             if(InGame)
             {
                 if (toggled)
-                    chams.ChamTargets(new Component[] { FindOwner() }, new Color(1F, 0.5333F, 0F));
+                {
+                    OutlineRenderer.OutlinePlayer(FindOwner(), new Color(1F, 0.5333F, 0F), 7);
+                }
                 else
-                    chams.UnChamTargets();
+                {
+                    OutlineRenderer.UnOutlinePlayer(FindOwner());
+                }
             }
         }
 

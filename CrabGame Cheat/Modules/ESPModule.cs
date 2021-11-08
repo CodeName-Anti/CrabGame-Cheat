@@ -16,13 +16,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         private readonly Dictionary<GameObject, string> espTargets = new Dictionary<GameObject, string>();
 
         [JsonIgnore]
-        private readonly List<Component> chamsTargets = new List<Component>();
-
-        [JsonIgnore]
         private ESP esp;
-
-        [JsonIgnore]
-        private Chams chams;
 
         public ESPModule(ClickGUI gui) : base("ESP", gui, WindowIDs.RENDER) { }
 
@@ -30,7 +24,6 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             base.Init(gui, json);
             esp = new ESP(true, Color.green, false, Color.green, true, Color.green);
-            chams = new Chams();
         }
 
         public override ElementInfo CreateElement(int windowId)
@@ -49,19 +42,24 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
                 CheatLog.Msg("Getting ESP-Targets!");
 
+                foreach(GameObject obj in espTargets.Keys)
+                {
+                    OutlineRenderer.UnOutlinePlayer(obj.GetComponent<PlayerManager>());
+                }
+
                 espTargets.Clear();
-                chamsTargets.Clear();
 
                 foreach(PlayerManager manager in GameManager.Instance.activePlayers.values)
                 {
                     if(manager.onlinePlayerMovement != null)
                     {
-                        chamsTargets.Add(manager.onlinePlayerMovement);
+                        var outline = manager.gameObject.AddComponent<Outline>();
+
+                        OutlineRenderer.OutlinePlayer(manager, Color.red, 7);
+
                         espTargets.Add(manager.onlinePlayerMovement.gameObject, manager.username);
                     }
                 }
-                chams.UnChamTargets();
-                chams.ChamTargets(chamsTargets.ToArray());
             }
 
             esp.Draw(espTargets);

@@ -69,9 +69,9 @@
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\SliderInfo.cs" />
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\ToggleInfo.cs" />
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\KeyBindSelection.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Render\Chams.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Render\DrawingUtil.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Render\ESP.cs" />
+    <Compile Include="JNNJMods Cheat Essentials\Render\OutlineRenderer.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\KeyCodeFormatter.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\NativeWinAlert.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\ReflectionExtensions.cs" />
@@ -103,7 +103,6 @@
     <Compile Include="Patches\ChatboxPatch.cs" />
     <Compile Include="Patches\ClientHandlePatch.cs" />
     <Compile Include="Patches\GameManagerPatch.cs" />
-    <Compile Include="Patches\PlayerMovementPatch.cs" />
     <Compile Include="Patches\PlayerStatusPatch.cs" />
     <Compile Include="Patches\PromptPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

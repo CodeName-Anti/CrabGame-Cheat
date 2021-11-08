@@ -104,7 +104,7 @@ namespace JNNJMods.Render
 
             tex.SetPixel(1, 1, color);
 
-            GUI.Box(new Rect(0, 0, Screen.width + 100, Screen.height + 100), tex);
+            GUI.Box(new Rect(-10, -10, Screen.width + 100, Screen.height + 100), tex);
         }
     }
 }

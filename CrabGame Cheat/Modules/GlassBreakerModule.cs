@@ -24,9 +24,10 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private void Element_ButtonPress()
         {
-            foreach (GlassBreak glassBreak in GlassManager.Instance.pieces)
+            foreach (GlassBreak glass in GlassManager.Instance.pieces)
             {
-                glassBreak.BreakGlass();
+                if (glass == null) continue;
+                glass.BreakGlass();
             }
         }
     }
