@@ -1,6 +1,7 @@
 ﻿using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
+using SteamworksNative;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -27,7 +28,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             foreach (GlassBreak glass in GlassManager.Instance.pieces)
             {
                 if (glass == null) continue;
-                glass.BreakGlass();
+                glass.AllInteract(SteamUser.GetSteamID().m_SteamID);
             }
         }
     }

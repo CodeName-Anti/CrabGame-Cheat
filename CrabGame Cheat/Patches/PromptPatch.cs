@@ -6,11 +6,13 @@ namespace JNNJMods.CrabGameCheat.Patches
     public static class PromptPatch
     {
 
-        [HarmonyPatch("NewPrompt")]
+        [HarmonyPatch(nameof(Prompt.NewPrompt))]
         [HarmonyPrefix]
-        public static bool NewPrompt(ref Prompt __instance, string header, string content)
+        public static bool NewPrompt(ref Prompt __instance, string ONNBLMCNDNG, string NPCJLAFLHNF)
         {
-            if(header.Equals("Rip") && content.Equals("Server owner left the game and closed the server"))
+            string header = ONNBLMCNDNG;
+            string content = NPCJLAFLHNF;
+            if (header.Equals("Rip") && content.Equals("Server owner left the game and closed the server"))
             {
                 __instance.NewPrompt("Pussy detected", "The owner is a pussy and left the Server because of you. Good work! - CrabGame Cheat");
 

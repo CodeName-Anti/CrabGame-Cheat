@@ -2,6 +2,7 @@
 using JNNJMods.UI;
 using Newtonsoft.Json;
 using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.CrabGameCheat.Translators;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -34,9 +35,9 @@ namespace JNNJMods.CrabGameCheat.Modules
             if (!InGame) Element.SetValue(false);
 
             if (toggled)
-                PlayerMovement.Instance.jumpForce = jumpForce * 2f;
+                Instances.PlayerMovement.SetJumpForce(jumpForce * 2f);
             else
-                PlayerMovement.Instance.jumpForce = jumpForce;
+                Instances.PlayerMovement.SetJumpForce(jumpForce);
         }
 
         public override void Update()
@@ -47,7 +48,7 @@ namespace JNNJMods.CrabGameCheat.Modules
                 {
                     init = true;
 
-                    jumpForce = PlayerMovement.Instance.jumpForce;
+                    jumpForce = Instances.PlayerMovement.GetJumpForce();
                 }
 
                 if(Element.GetValue<bool>())

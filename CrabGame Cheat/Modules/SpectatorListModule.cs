@@ -64,7 +64,7 @@ namespace JNNJMods.CrabGameCheat.Modules
                     PlayerManager spectator = GameManager.Instance.spectators[entry.Key];
 
                     //Draw owner username red
-                    bool owner = entry.Key == SteamManager.Instance.lobbyOwnerSteamId.m_SteamID;
+                    bool owner = entry.Key == SteamManager.Instance.originalLobbyOwnerId.m_SteamID;
                     GUILayout.Label(new GUIContent(owner ? ChatboxPatch.MakeColored(spectator.username, "red") : spectator.username), labelOptions);
                 }
             }

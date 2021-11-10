@@ -9,11 +9,11 @@ namespace JNNJMods.CrabGameCheat.Patches
     {
         public static bool NoPush;
 
-        [HarmonyPatch("PunchPlayer")]
         [HarmonyPrefix]
-        public static bool PunchPlayer(ulong puncher, ulong punched, Vector3 dir)
+        [HarmonyPatch(nameof(GameManager.PunchPlayer))]
+        public static bool PunchPlayer(ulong NBJFFFOCIFF, ulong BPPACELKHNO, Vector3 JMPOCAKFDAH)
         {
-            return !(NoPush && punched == SteamUser.GetSteamID().m_SteamID);
+            return !(NoPush && BPPACELKHNO == SteamUser.GetSteamID().m_SteamID);
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using JNNJMods.UI.Elements;
 using JNNJMods.UI;
 using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.CrabGameCheat.Translators;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -24,11 +25,11 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
                 if(Element.GetValue<bool>())
                 {
-                    PlayerMovement.Instance.underWater = true;
-                    PlayerMovement.Instance.swimSpeed = 4666f;
+                    Instances.PlayerMovement.underWater = true;
+                    Instances.PlayerMovement.SetSwimSpeed(4666f);
                 }
                 else
-                    PlayerMovement.Instance.underWater = false;
+                    Instances.PlayerMovement.underWater = false;
             }
         }
     }

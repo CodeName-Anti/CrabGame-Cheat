@@ -93,7 +93,6 @@
     <Compile Include="Modules\GodModeModule.cs" />
     <Compile Include="Modules\ItemSpawnerModule.cs" />
     <Compile Include="Modules\MegaJumpModule.cs" />
-    <Compile Include="Modules\MegaSlapModule.cs" />
     <Compile Include="Modules\NoFallModule.cs" />
     <Compile Include="Modules\NoFreezeModule.cs" />
     <Compile Include="Modules\NoPushModule.cs" />
@@ -106,6 +105,8 @@
     <Compile Include="Patches\PlayerStatusPatch.cs" />
     <Compile Include="Patches\PromptPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Translators\Instances.cs" />
+    <Compile Include="Translators\TranslationsExtensions.cs" />
     <Compile Include="Util\AntiCheat.cs" />
     <Compile Include="Util\CheatLog.cs" />
     <Compile Include="Util\Config\CheatModuleAttribute.cs" />

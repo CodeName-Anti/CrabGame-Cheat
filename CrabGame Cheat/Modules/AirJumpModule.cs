@@ -2,6 +2,7 @@
 using JNNJMods.UI;
 using UnityEngine;
 using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.CrabGameCheat.Translators;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -23,11 +24,11 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             if (InGame && Input.GetKeyDown(KeyCode.Space) && Element.GetValue<bool>())
             {
-                var velocity = PlayerMovement.Instance.GetRb().velocity;
+                var velocity = Instances.PlayerMovement.GetRb().velocity;
 
                 velocity.y = 20f;
 
-                PlayerMovement.Instance.GetRb().velocity = velocity;
+                Instances.PlayerMovement.GetRb().velocity = velocity;
             }
         }
     }

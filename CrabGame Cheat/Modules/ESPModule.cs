@@ -1,9 +1,11 @@
-﻿using JNNJMods.CrabGameCheat.Util;
+﻿using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.Render;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using JNNJMods.UI.Utils;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +30,58 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return new ToggleInfo(windowId, "ESP", false, true);
+            Element = new ToggleInfo(windowId, "ESP", false, true);
+
+            Element.ToggleChanged += Element_ToggleChanged;
+
+            return Element;
+        }
+
+        private void Element_ToggleChanged(bool toggled)
+        {
+            SetEsp(toggled);
+            
+        }
+
+        private void SetEsp(bool toggled)
+        {
+            if(toggled)
+            {
+                if (!InGame) return;
+                if (espTargets.Count != GameManager.Instance.activePlayers.Count - 1)
+                {
+                    CheatLog.Msg("Getting ESP-Targets!");
+
+                    //Remove Outline
+                    foreach (GameObject obj in espTargets.Keys)
+                    {
+                        if (obj == null) continue;
+                        OutlineRenderer.UnOutlinePlayer(obj.GetComponent<PlayerManager>());
+                    }
+
+                    espTargets.Clear();
+
+                    foreach (PlayerManager manager in GameManager.Instance.activePlayers.values)
+                    {
+                        if (manager.GetOnlinePlayerMovement() != null)
+                        {
+                            OutlineRenderer.OutlinePlayer(manager, Color.red, 7);
+
+                            espTargets.Add(manager.GetOnlinePlayerMovement().gameObject, manager.username);
+                        }
+                    }
+                }
+            } 
+            else
+            {
+                foreach (GameObject obj in espTargets.Keys)
+                {
+                    if (obj == null) continue;
+                    OutlineRenderer.UnOutlinePlayer(obj.GetComponent<PlayerManager>());
+                }
+
+                espTargets.Clear();
+            }
         }
 
         public override void OnGUI()
@@ -38,29 +91,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             if (!Element.GetValue<bool>())
                 return;
 
-            if(espTargets.Count != GameManager.Instance.activePlayers.Count - 1)
-            {
-                CheatLog.Msg("Getting ESP-Targets!");
-
-                foreach(GameObject obj in espTargets.Keys)
-                {
-                    OutlineRenderer.UnOutlinePlayer(obj.GetComponent<PlayerManager>());
-                }
-
-                espTargets.Clear();
-
-                foreach(PlayerManager manager in GameManager.Instance.activePlayers.values)
-                {
-                    if(manager.onlinePlayerMovement != null)
-                    {
-                        var outline = manager.gameObject.AddComponent<Outline>();
-
-                        OutlineRenderer.OutlinePlayer(manager, Color.red, 7);
-
-                        espTargets.Add(manager.onlinePlayerMovement.gameObject, manager.username);
-                    }
-                }
-            }
+            SetEsp(Element.GetValue<bool>());
 
             esp.Draw(espTargets);
             

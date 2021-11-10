@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using JNNJMods.CrabGameCheat.Chat;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using System;
 using System.Collections.Generic;
@@ -45,15 +46,16 @@ namespace JNNJMods.CrabGameCheat.Patches
         private static void HideAndClearChat(Chatbox chat)
         {
             chat.ClearMessage();
-            chat.typing = false;
+            chat.GODCGGLPMAJ = false;
             chat.CancelInvoke("HideChat");
             chat.Invoke("HideChat", 5f);
         }
 
-        [HarmonyPatch("SendMessage")]
+        [HarmonyPatch(nameof(Chatbox.SendMessage))]
         [HarmonyPrefix]
-        public static bool SendMessage(ref Chatbox __instance, string message)
+        public static bool SendMessage(ref Chatbox __instance, string ABLKDBJILLJ)
         {
+            string message = ABLKDBJILLJ;
             //Get all Commands
             if (commands == null)
                 commands = ChatCommandAttribute.GetChatCommands();

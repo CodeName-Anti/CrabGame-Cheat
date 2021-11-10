@@ -1,4 +1,5 @@
-﻿using JNNJMods.UI;
+﻿using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.UI;
 using Newtonsoft.Json;
 
 namespace JNNJMods.CrabGameCheat.Modules
@@ -15,7 +16,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             get
             {
-                return PlayerMovement.Instance != null;
+                return Instances.PlayerMovement != null;
             }
         }
 

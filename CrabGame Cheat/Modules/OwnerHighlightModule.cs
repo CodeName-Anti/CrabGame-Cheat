@@ -53,9 +53,9 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             var players = GameManager.Instance.activePlayers;
 
-            if (players.ContainsKey(SteamManager.Instance.lobbyOwnerSteamId.m_SteamID))
+            if (players.ContainsKey(SteamManager.Instance.originalLobbyOwnerId.m_SteamID))
             {
-                return GameManager.Instance.activePlayers[SteamManager.Instance.lobbyOwnerSteamId.m_SteamID];
+                return GameManager.Instance.activePlayers[SteamManager.Instance.originalLobbyOwnerId.m_SteamID];
             }
             else
                 return null;

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using SteamworksNative;
 using System.Collections.Generic;
@@ -11,9 +12,11 @@ namespace JNNJMods.CrabGameCheat.Patches
         public static Dictionary<ulong, ulong> Spectators = new Dictionary<ulong, ulong>();
 
         [HarmonyPrefix]
-        [HarmonyPatch("SpectatingWho")]
-        public static bool Prefix(Packet packet)
+        [HarmonyPatch(nameof(ClientHandle.SpectatingWho))]
+        public static bool Prefix(BDMEEOHLNLM MPMMMKCCLHB)
         {
+            BDMEEOHLNLM packet = MPMMMKCCLHB;
+
             var spectatorId = packet.ReadUlong(true);
             var targetId = packet.ReadUlong(true);
 
@@ -25,7 +28,7 @@ namespace JNNJMods.CrabGameCheat.Patches
                 PlayerManager spectator = GameManager.Instance.spectators[spectatorId];
                 PlayerManager target = GameManager.Instance.activePlayers[targetId];
 
-                bool owner = SteamManager.Instance.lobbyOwnerSteamId.m_SteamID == spectatorId;
+                bool owner = SteamManager.Instance.originalLobbyOwnerId.m_SteamID == spectatorId;
                 string spectatorMessage = "You are being spectated by " + (owner ? "<color=red>" : "") + spectator.username + (owner ? "</color>" : "");
 
                 CheatLog.LogChatBox(spectatorMessage);

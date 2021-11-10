@@ -1,6 +1,7 @@
 ﻿using JNNJMods.UI.Elements;
 using JNNJMods.UI;
 using Newtonsoft.Json;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 
 namespace JNNJMods.CrabGameCheat.Modules
@@ -8,14 +9,9 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class SpeedModule : MultiElementModuleBase
     {
-        public float SpeedAmount { get; private set; }
+        private bool init = false;
 
-        [JsonIgnore]
-        private bool init;
-
-        [JsonIgnore]
         private float
-            maxWalkSpeed,
             moveSpeed,
             maxRunSpeed,
             maxSpeed,
@@ -35,62 +31,74 @@ namespace JNNJMods.CrabGameCheat.Modules
             speedToggle.ToggleChanged += SpeedToggle_ToggleChanged;
             Elements.Add(speedToggle);
 
-            SliderInfo speedSlider = new SliderInfo(ID, 1, 20);
-            speedSlider.ValueChanged += SpeedSlider_ValueChanged;
-            Elements.Add(speedSlider);
-
+            Elements.Add(new SliderInfo(ID, 1, 20));
 
             foreach (ElementInfo info in Elements)
             {
                 gui.AddElement(info);
             }
-        }
 
-        void SpeedSlider_ValueChanged(object oldValue, object newValue)
-        {
-            SpeedAmount = (float)newValue;
+            InitSpeeds();
         }
 
         void SpeedToggle_ToggleChanged(bool toggled)
         {
-            var move = PlayerMovement.Instance;
-            if(toggled)
+            InitSpeeds();
+
+            float SpeedAmount = Elements[1].GetValue<float>();
+
+            PlayerMovement move = Instances.PlayerMovement;
+            if (toggled)
             {
-                move.maxWalkSpeed = maxWalkSpeed * SpeedAmount;
-                move.moveSpeed = moveSpeed * SpeedAmount;
-                move.maxRunSpeed = maxRunSpeed * SpeedAmount;
-                move.maxSpeed = maxSpeed * SpeedAmount;
-                move.maxSlopeAngle = maxSlopeAngle * SpeedAmount;
-                move.slowDownSpeed = slowDownSpeed * SpeedAmount;
+                move.SetMoveSpeed(moveSpeed * SpeedAmount);
+                move.SetMaxRunSpeed(maxRunSpeed * SpeedAmount);
+                move.SetMaxSpeed(maxSpeed * SpeedAmount);
+                move.SetMaxSlopeAngle(maxSlopeAngle * SpeedAmount);
+                move.SetSlowDownSpeed(slowDownSpeed * SpeedAmount);
             } else
             {
-                move.maxWalkSpeed = maxWalkSpeed;
-                move.moveSpeed = moveSpeed;
-                move.maxRunSpeed = maxRunSpeed;
-                move.maxSpeed = maxSpeed;
-                move.maxSlopeAngle = maxSlopeAngle;
-                move.slowDownSpeed = slowDownSpeed;
+                move.SetMoveSpeed(moveSpeed);
+                move.SetMaxRunSpeed(maxRunSpeed);
+                move.SetMaxSpeed(maxSpeed);
+                move.SetMaxSlopeAngle(maxSlopeAngle);
+                move.SetSlowDownSpeed(slowDownSpeed);
+            }
+        }
+
+        private void InitSpeeds()
+        {
+            if (!init && InGame)
+            {
+                init = true;
+
+                var move = Instances.PlayerMovement;
+
+                moveSpeed = move.GetMoveSpeed();
+                maxRunSpeed = move.GetMaxRunSpeed();
+                maxSpeed = move.GetMaxSpeed();
+                maxSlopeAngle = move.GetMaxSlopeAngle();
+                slowDownSpeed = move.GetSlowDownSpeed();
+
+                CheatLog.Msg("move: " + moveSpeed);
+                CheatLog.Msg("maxRun: " + maxRunSpeed);
+                CheatLog.Msg("maxSpeed: " + maxSpeed);
+                CheatLog.Msg("maxSlopeAngle: " + maxSlopeAngle);
+                CheatLog.Msg("slowDownSpeed: " + slowDownSpeed);
             }
         }
 
         public override void Update()
         {
-            if(InGame)
+            if (!InGame)
+                return;
+
+            InitSpeeds();
+
+            var toggled = Elements[0].GetValue<bool>();
+            
+            if(toggled)
             {
-                if(!init)
-                {
-                    init = true;
-
-                    var move = PlayerMovement.Instance;
-
-                    maxWalkSpeed = move.maxWalkSpeed;
-                    moveSpeed = move.moveSpeed;
-                    maxRunSpeed = move.maxRunSpeed;
-                    maxSpeed = move.maxSpeed;
-                    maxSlopeAngle = move.maxSlopeAngle;
-                    slowDownSpeed = move.slowDownSpeed;
-                }
-                SpeedToggle_ToggleChanged(Elements[0].GetValue<bool>());
+                SpeedToggle_ToggleChanged(toggled);
             }
         }
 

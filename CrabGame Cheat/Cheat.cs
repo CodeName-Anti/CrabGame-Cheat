@@ -79,12 +79,7 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mod)
         {
-            var killBounds = UnityEngine.Object.FindObjectOfType<KillPlayerOutOfBounds>();
-
-            if(killBounds != null)
-            {
-                config.GetModule<AntiBoundKillsModule>().killHeight = killBounds.killHeight;
-            }
+            config.GetModule<AntiBoundKillsModule>().killHeight = -69420187;
 
             if(scene.name.Equals("Menu"))
             {
@@ -97,7 +92,10 @@ namespace JNNJMods.CrabGameCheat
             WelcomeScreen.draw = true;
 
             metrics = new MetricsCommunication();
-            metrics.Start();
+            try
+            {
+                metrics.Start();
+            } catch(Exception) { }
         }
 
         public void OnUpdate()

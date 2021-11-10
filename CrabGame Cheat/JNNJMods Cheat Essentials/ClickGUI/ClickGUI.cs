@@ -1,4 +1,4 @@
-using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.Render;
 using JNNJMods.UI.Elements;
 using System;
@@ -112,8 +112,8 @@ namespace JNNJMods.UI
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
 
-            if (PlayerInput.Instance != null)
-                PlayerInput.Instance.active = false;
+            if (Instances.PlayerInput != null)
+                Instances.PlayerInput.active = false;
 
         }
 
@@ -130,8 +130,8 @@ namespace JNNJMods.UI
                 Cursor.visible = prevVisible;
             }
 
-            if (PlayerInput.Instance != null)
-                PlayerInput.Instance.active = true;
+            if (Instances.PlayerInput != null)
+                Instances.PlayerInput.active = true;
 
         }
 
@@ -205,7 +205,7 @@ namespace JNNJMods.UI
         {
             if(keyBindSelection.Shown) return;
 
-            if(PlayerMovement.Instance != null && !Shown && !PauseUI.paused && !Cursor.visible)
+            if(Instances.PlayerInput != null && !Shown && !PauseUI.paused && !Cursor.visible)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
@@ -221,7 +221,7 @@ namespace JNNJMods.UI
                 Cursor.visible = true;
             }
 
-            if (Chatbox.Instance != null && Chatbox.Instance.typing)
+            if (Chatbox.Instance != null && Chatbox.Instance.GODCGGLPMAJ)
                 return;
 
             foreach(ElementInfo info in AllElements)

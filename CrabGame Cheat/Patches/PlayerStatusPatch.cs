@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Patches
 {
-    [HarmonyPatch(typeof(PlayerStatus), "DamagePlayer")]
+    [HarmonyPatch(typeof(PlayerStatus))]
     public static class PlayerStatusPatch
     {
 
@@ -12,9 +12,11 @@ namespace JNNJMods.CrabGameCheat.Patches
             NoFall;
 
         [HarmonyPrefix]
-        public static bool DamagePlayer(int dmg, Vector3 damageDir, ulong damageDoerId, int itemId)
+        [HarmonyPatch(nameof(PlayerStatus.DamagePlayer))]
+        public static bool DamagePlayer(int HCKPONNGGDO, Vector3 FBPHGLGCLBA, ulong NKLGABMFOHI, int EPJLKPEMLNP)
         {
-            if(NoFall && itemId == -2)
+            int itemId = EPJLKPEMLNP;
+            if (NoFall && itemId == -2)
             {
                 return false;
             }
