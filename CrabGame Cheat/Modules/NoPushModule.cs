@@ -9,7 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class NoPushModule : SingleElementModule<ToggleInfo>
     {
 
-        public NoPushModule(ClickGUI gui) : base("NoPush", gui, WindowIDs.MOVEMENT) 
+        public NoPushModule(ClickGUI gui) : base("NoPush", gui, WindowIDs.MOVEMENT)
         {
 
         }

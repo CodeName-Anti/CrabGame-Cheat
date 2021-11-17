@@ -1,38 +1,32 @@
-﻿using UnityEngine;
+﻿using UnhollowerRuntimeLib;
+using UnityEngine;
 
 namespace JNNJMods.Render
 {
     public static class OutlineRenderer
     {
-        public static void UnOutlinePlayer(PlayerManager manager)
+        public static void UnOutline(GameObject obj)
         {
-            var customization = manager.playerCustomization;
 
-            var sOutline = customization.sweater.GetComponent<Outline>();
-            var pOutline = customization.pants.GetComponent<Outline>();
+            var outline = obj.GetComponent<Outline>();
 
-            if(sOutline != null)
+            if(outline != null)
             {
-                Object.Destroy(sOutline);
+                Object.Destroy(outline);
             }
 
-            if(pOutline != null)
-            {
-                Object.Destroy(pOutline);
-            }
         }
 
-        public static void OutlinePlayer(PlayerManager manager, Color color, int width)
+        public static void Outline(GameObject obj, Color color, int width)
         {
-            var customization = manager.playerCustomization;
-
-            if(HasComponent<Outline>(customization.sweater) || HasComponent<Outline>(customization.pants))
+            if(HasComponent<Outline>(obj))
             {
-                UnOutlinePlayer(manager);
+                UnOutline(obj);
             }
 
-            SetOutline(customization.sweater.AddComponent<Outline>(), color, width);
-            SetOutline(customization.pants.AddComponent<Outline>(), color, width);
+            ClassInjector.RegisterTypeInIl2Cpp<Outline>();
+
+            SetOutline(obj.AddComponent<Outline>(), color, width);
         }
 
         public static bool HasComponent<T>(GameObject obj) where T : Component
@@ -42,8 +36,8 @@ namespace JNNJMods.Render
 
         private static void SetOutline(Outline outline, Color color, int width)
         {
-            outline.outlineColor = color;
-            outline.outlineWidth = width;
+            outline.OutlineColor = color;
+            outline.OutlineWidth = width;
         }
     }
 }

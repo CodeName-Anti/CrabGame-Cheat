@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Patches
 {
-    [HarmonyPatch(typeof(GameManager))]
+    [HarmonyPatch(typeof(MonoBehaviourPublicDi2UIObacspDi2UIObUnique))]
     public static class GameManagerPatch
     {
         public static bool NoPush;
 
         [HarmonyPrefix]
-        [HarmonyPatch(nameof(GameManager.PunchPlayer))]
-        public static bool PunchPlayer(ulong NBJFFFOCIFF, ulong BPPACELKHNO, Vector3 JMPOCAKFDAH)
+        [HarmonyPatch(nameof(MonoBehaviourPublicDi2UIObacspDi2UIObUnique.PunchPlayer))]
+        public static bool PunchPlayer(ulong param_1, ulong param_2, Vector3 param_3)
         {
-            return !(NoPush && BPPACELKHNO == SteamUser.GetSteamID().m_SteamID);
+            return !(NoPush && param_2 == SteamUser.GetSteamID().m_SteamID);
         }
 
     }

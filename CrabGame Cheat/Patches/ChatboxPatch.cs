@@ -11,7 +11,7 @@ using System.Text;
 namespace JNNJMods.CrabGameCheat.Patches
 {
 
-    [HarmonyPatch(typeof(Chatbox))]
+    [HarmonyPatch(typeof(MonoBehaviourPublicRaovTMinTemeColoonCoUnique))]
     public static class ChatboxPatch
     {
         public const string CommandPrefix = "/";
@@ -27,7 +27,7 @@ namespace JNNJMods.CrabGameCheat.Patches
         {
             StringBuilder b = new StringBuilder();
 
-            foreach(var attrib in commands.Keys)
+            foreach (var attrib in commands.Keys)
             {
                 b.Append(MakeColored(CommandPrefix + attrib.Command, "#00ffff"))
                     .Append(" - ")
@@ -43,27 +43,27 @@ namespace JNNJMods.CrabGameCheat.Patches
             CheatLog.LogChatBox(GetHelpMessage());
         }
 
-        private static void HideAndClearChat(Chatbox chat)
+        private static void HideAndClearChat(MonoBehaviourPublicRaovTMinTemeColoonCoUnique chat)
         {
             chat.ClearMessage();
-            chat.GODCGGLPMAJ = false;
+            chat.prop_Boolean_0 = false;
             chat.CancelInvoke("HideChat");
             chat.Invoke("HideChat", 5f);
         }
 
-        [HarmonyPatch(nameof(Chatbox.SendMessage))]
+        [HarmonyPatch(nameof(MonoBehaviourPublicRaovTMinTemeColoonCoUnique.SendMessage))]
         [HarmonyPrefix]
-        public static bool SendMessage(ref Chatbox __instance, string ABLKDBJILLJ)
+        public static bool SendMessage(ref MonoBehaviourPublicRaovTMinTemeColoonCoUnique __instance, string param_1)
         {
-            string message = ABLKDBJILLJ;
+            string message = param_1;
             //Get all Commands
             if (commands == null)
                 commands = ChatCommandAttribute.GetChatCommands();
 
             //Execute Commands
-            foreach(KeyValuePair<ChatCommandAttribute, MethodInfo> entry in commands)
+            foreach (KeyValuePair<ChatCommandAttribute, MethodInfo> entry in commands)
             {
-                if(message.StartsWith(CommandPrefix + entry.Key.Command, System.StringComparison.OrdinalIgnoreCase))
+                if (message.StartsWith(CommandPrefix + entry.Key.Command, System.StringComparison.OrdinalIgnoreCase))
                 {
                     string[] args = message.Split(' ');
 
@@ -74,7 +74,8 @@ namespace JNNJMods.CrabGameCheat.Patches
                     try
                     {
                         entry.Value.Invoke(null, new object[] { messageParam, args });
-                    } catch(Exception e)
+                    }
+                    catch (Exception e)
                     {
                         CheatLog.Error(e.ToString());
                     }

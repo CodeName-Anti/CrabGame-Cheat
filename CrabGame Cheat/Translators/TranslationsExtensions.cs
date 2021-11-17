@@ -4,39 +4,34 @@ namespace JNNJMods.CrabGameCheat.Translators
 {
     public static class TranslationsExtensions
     {
-        #region Packets
-        public static ulong ReadUlong(this BDMEEOHLNLM packet, bool moveCursor) => packet.ALIAAEIBADI(moveCursor);
-        public static bool ReadBool(this BDMEEOHLNLM packet, bool moveCursor) => packet.IFJOCHBPJAK(moveCursor);
-        public static void Reset(this BDMEEOHLNLM packet) => packet.CGHIBHOEOAJ();
-        #endregion
+        public static MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique GetOnlinePlayerMovement(this MonoBehaviourPublicCSstReshTrheObplBojuUnique manager) => manager.field_Private_MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique_0;
 
-        public static OnlinePlayerMovement GetOnlinePlayerMovement(this PlayerManager manager) => manager.KMCIOAANFIP;
-        public static void BreakGlass(this GlassBreak glass) => glass.HKMGMNICNIJ();
-
-        public static void ClearMessage(this Chatbox chat) => chat.DJDIJJKCCMB();
+        public static void ClearMessage(this MonoBehaviourPublicRaovTMinTemeColoonCoUnique chat) => chat.inputField.text = "";
 
         #region PlayerMovement
 
-        public static float GetSwimSpeed(this PlayerMovement movement) => movement.AIFHCHMENDJ;
-        public static void SetSwimSpeed(this PlayerMovement movement, float swimSpeed) => movement.AIFHCHMENDJ = swimSpeed;
+        public static float GetSwimSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement) => movement.field_Private_Single_12;
+        public static void SetSwimSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement, float swimSpeed) => movement.field_Private_Single_12 = swimSpeed;
+        /*
 
-        public static float GetJumpForce(this PlayerMovement movement) => movement.COEPGCLOCJI;
-        public static void SetJumpForce(this PlayerMovement movement, float jumpForce) => movement.COEPGCLOCJI = jumpForce;
+        public static float GetJumpForce(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement) => movement.COEPGCLOCJI;
+        public static void SetJumpForce(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement, float jumpForce) => movement.COEPGCLOCJI = jumpForce;
 
-        public static float GetMoveSpeed(this PlayerMovement movement) => movement.KMDAOPAKFHH.hiddenValue;
-        public static void SetMoveSpeed(this PlayerMovement movement, float moveSpeed) => movement.KMDAOPAKFHH = new ObscuredFloat(moveSpeed);
+        public static float GetMoveSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement) => movement.KMDAOPAKFHH.hiddenValue;
+        public static void SetMoveSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement, float moveSpeed) => movement.KMDAOPAKFHH = new ObscuredFloat(moveSpeed);
 
-        public static float GetMaxRunSpeed(this PlayerMovement movement) => movement.JCMODIFCEDL.hiddenValue;
-        public static void SetMaxRunSpeed(this PlayerMovement movement, float maxRunSpeed) => movement.JCMODIFCEDL = new ObscuredFloat(maxRunSpeed);
+        public static float GetMaxRunSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement) => movement.JCMODIFCEDL.hiddenValue;
+        public static void SetMaxRunSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement, float maxRunSpeed) => movement.JCMODIFCEDL = new ObscuredFloat(maxRunSpeed);
 
-        public static float GetMaxSpeed(this PlayerMovement movement) => movement.DJPDEFOLLIE.hiddenValue;
-        public static void SetMaxSpeed(this PlayerMovement movement, float maxSpeed) => movement.DJPDEFOLLIE = new ObscuredFloat(maxSpeed);
+        public static float GetMaxSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement) => movement.DJPDEFOLLIE.hiddenValue;
+        public static void SetMaxSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement, float maxSpeed) => movement.DJPDEFOLLIE = new ObscuredFloat(maxSpeed);
 
-        public static float GetMaxSlopeAngle(this PlayerMovement movement) => movement.FHJLLDBEICA;
-        public static void SetMaxSlopeAngle(this PlayerMovement movement, float maxSlopeAngle) => movement.FHJLLDBEICA = maxSlopeAngle;
+        public static float GetMaxSlopeAngle(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement) => movement.FHJLLDBEICA;
+        public static void SetMaxSlopeAngle(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement, float maxSlopeAngle) => movement.FHJLLDBEICA = maxSlopeAngle;
 
-        public static float GetSlowDownSpeed(this PlayerMovement movement) => movement.IHKGCEJCDNC;
-        public static void SetSlowDownSpeed(this PlayerMovement movement, float slowDownSpeed) => movement.IHKGCEJCDNC = slowDownSpeed;
+        public static float GetSlowDownSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement) => movement.IHKGCEJCDNC;
+        public static void SetSlowDownSpeed(this MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique movement, float slowDownSpeed) => movement.IHKGCEJCDNC = slowDownSpeed;
+        */
 
         #endregion
     }

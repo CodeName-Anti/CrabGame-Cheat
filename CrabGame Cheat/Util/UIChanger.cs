@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JNNJMods.CrabGameCheat.Translators;
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -32,23 +33,23 @@ namespace JNNJMods.CrabGameCheat.Util
             if (init)
                 return;
 
-            if(!versionUIInit)
+            if (!versionUIInit)
             {
                 try
                 {
-                    string gameVersion = VersionUI.Instance.versionText.text;
-                    VersionUI.Instance.versionText.text = "CrabGame Cheat " + Cheat.FormattedVersion + " by JNNJ Game Version " + gameVersion;
+                    string gameVersion = Instances.VersionUI.versionText.text;
+                    Instances.VersionUI.versionText.text = "CrabGame Cheat " + Cheat.FormattedVersion + " by JNNJ Game Version " + gameVersion;
                     versionUIInit = true;
                     CheatLog.Msg("Version Changed");
                 }
                 catch (Exception) { }
             }
 
-            if(!aboutUIInit)
+            if (!aboutUIInit)
             {
                 try
                 {
-                    MenuUI ui = MenuUI.Instance;
+                    var ui = Instances.MenuUI;
 
                     GameObject creditsWindow = ui.gameObject.GetChildren().Where(obj => obj.name.Contains("Credits")).First();
 
@@ -69,7 +70,7 @@ namespace JNNJMods.CrabGameCheat.Util
                 catch (Exception) { }
             }
 
-            if(versionUIInit && aboutUIInit)
+            if (versionUIInit && aboutUIInit)
             {
                 init = true;
                 CheatLog.Msg("UI Updated!");

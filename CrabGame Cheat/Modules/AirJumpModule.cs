@@ -1,8 +1,8 @@
-﻿using JNNJMods.UI.Elements;
-using JNNJMods.UI;
-using UnityEngine;
+﻿using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.UI;
+using JNNJMods.UI.Elements;
+using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {

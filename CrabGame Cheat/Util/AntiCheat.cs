@@ -1,36 +1,43 @@
-﻿using CodeStage.AntiCheat.Detectors;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Util
 {
     public static class AntiCheat
     {
-        public static void StopAntiCheat(bool dispose = true)
+        public static void StopAntiCheat()
         {
-            TimeCheatingDetector.StopDetection();
-            InjectionDetector.StopDetection();
-            WallHackDetector.StopDetection();
-            SpeedHackDetector.StopDetection();
-            ObscuredCheatingDetector.StopDetection();
+            var types = Assembly.GetAssembly(typeof(CodeStage.AntiCheat.Common.ACTk)).GetTypes().Where(t =>
+                    t.IsPublic);
 
-            if(dispose) DisposeAntiCheat();
+            foreach (Type t in types)
+            {
+                ExecutePublicStaticVoidMethods(t);
+            }
         }
 
-        public static void StartAntiCheat()
+        public static async void LateStopAntiCheat()
         {
-            TimeCheatingDetector.StartDetection();
-            InjectionDetector.StartDetection();
-            WallHackDetector.StartDetection();
-            SpeedHackDetector.StartDetection();
-            ObscuredCheatingDetector.StartDetection();
+            CheatLog.Msg("Killing GameObject in 30 seconds");
+            await Task.Delay(30 * 1000);
+            UnityEngine.Object.Destroy(GameObject.Find("Managers/MoreSoundEffects/Sfx/Definitely just sfx here lol"));
         }
 
-        public static void DisposeAntiCheat()
+        private static void ExecutePublicStaticVoidMethods(Type t)
         {
-            TimeCheatingDetector.Dispose();
-            InjectionDetector.Dispose();
-            WallHackDetector.Dispose();
-            SpeedHackDetector.Dispose();
-            ObscuredCheatingDetector.Dispose();
+            var methods = t.GetMethods().Where(m =>
+            m.IsStatic &&
+            m.IsPublic &&
+            m.Name.Contains("Stop"));
+
+            foreach(MethodInfo method in methods)
+            {
+                CheatLog.Msg("Killed Detector: " + method.Name);
+                method.Invoke(null, null);
+            }
         }
     }
 }

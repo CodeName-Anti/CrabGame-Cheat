@@ -1,19 +1,12 @@
-﻿using System.Resources;
+﻿using JNNJMods.CrabGameCheat;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
-using JNNJMods.CrabGameCheat;
-#if MELONLOADER
-using JNNJMods.CrabGameCheat.Loader;
-using MelonLoader;
-#endif
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-#if MELONLOADER
-[assembly: MelonInfo(typeof(MelonLoad), "CrabGame Cheat", Constants.Version, "JNNJ")]
-[assembly: MelonGame("Dani", "Crab Game")]
-#endif
+
 [assembly: AssemblyTitle("CrabGame Cheat")]
 [assembly: AssemblyDescription("A cheat for the Game \"Crab Game\"")]
 [assembly: AssemblyConfiguration("")]

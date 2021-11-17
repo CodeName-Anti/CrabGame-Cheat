@@ -1,7 +1,9 @@
-﻿using JNNJMods.CrabGameCheat.Util;
+﻿using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.Render;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
@@ -30,32 +32,52 @@ namespace JNNJMods.CrabGameCheat.Modules
         private void Element_ToggleChanged(bool toggled)
         {
 
-            if(!InGame && toggled)
+            if (!InGame && toggled)
             {
                 Element.SetValue(false);
                 return;
             }
 
-            if(InGame)
+            if (InGame)
             {
                 if (toggled)
                 {
-                    OutlineRenderer.OutlinePlayer(FindOwner(), new Color(1F, 0.5333F, 0F), 7);
+                    List<GameObject> outlines = new List<GameObject>();
+
+                    var customization = FindOwner().playerCustomization;
+
+                    outlines.Add(customization.sweater);
+                    outlines.Add(customization.pants);
+
+                    foreach(GameObject obj in outlines)
+                    {
+                        OutlineRenderer.Outline(obj, new Color(1F, 0.5333F, 0F), 7);
+                    }
                 }
                 else
                 {
-                    OutlineRenderer.UnOutlinePlayer(FindOwner());
+                    List<GameObject> outlines = new List<GameObject>();
+
+                    var customization = FindOwner().playerCustomization;
+
+                    outlines.Add(customization.sweater);
+                    outlines.Add(customization.pants);
+
+                    foreach (GameObject obj in outlines)
+                    {
+                        OutlineRenderer.UnOutline(obj);
+                    }
                 }
             }
         }
 
-        private static PlayerManager FindOwner()
+        private static MonoBehaviourPublicCSstReshTrheObplBojuUnique FindOwner()
         {
-            var players = GameManager.Instance.activePlayers;
+            var players = Instances.GameManager.activePlayers;
 
-            if (players.ContainsKey(SteamManager.Instance.originalLobbyOwnerId.m_SteamID))
+            if (players.ContainsKey(Instances.SteamManager.originalLobbyOwnerId.m_SteamID))
             {
-                return GameManager.Instance.activePlayers[SteamManager.Instance.originalLobbyOwnerId.m_SteamID];
+                return Instances.GameManager.activePlayers[Instances.SteamManager.originalLobbyOwnerId.m_SteamID];
             }
             else
                 return null;

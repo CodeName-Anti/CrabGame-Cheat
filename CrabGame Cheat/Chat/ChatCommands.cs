@@ -1,5 +1,6 @@
 ﻿using JNNJMods.CrabGameCheat.Modules;
 using JNNJMods.CrabGameCheat.Patches;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI.Elements;
 using SteamworksNative;
@@ -37,14 +38,14 @@ namespace JNNJMods.CrabGameCheat.Chat
         }
         #endregion
 
-        private static Tuple<ulong, PlayerManager> GetPlayerByName(string name, Il2CppSystem.Collections.Generic.Dictionary<ulong, PlayerManager> players)
+        private static Tuple<ulong, MonoBehaviourPublicCSstReshTrheObplBojuUnique> GetPlayerByName(string name, Il2CppSystem.Collections.Generic.Dictionary<ulong, MonoBehaviourPublicCSstReshTrheObplBojuUnique> players)
         {
 
             foreach(var entry in players)
             {
                 if(entry.Value.username.Equals(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    return new Tuple<ulong, PlayerManager>(entry.Key, entry.Value);
+                    return new Tuple<ulong, MonoBehaviourPublicCSstReshTrheObplBojuUnique>(entry.Key, entry.Value);
                 }
             }
 
@@ -86,8 +87,8 @@ namespace JNNJMods.CrabGameCheat.Chat
 
             if (!ulong.TryParse(args[0], out ulong id))
             {
-                var active = GetPlayerByName(message, GameManager.Instance.activePlayers);
-                var spectator = GetPlayerByName(message, GameManager.Instance.spectators);
+                var active = GetPlayerByName(message, Instances.GameManager.activePlayers);
+                var spectator = GetPlayerByName(message, Instances.GameManager.spectators);
 
                 if(active != null)
                 {

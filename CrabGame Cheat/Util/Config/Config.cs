@@ -63,7 +63,8 @@ namespace JNNJMods.CrabGameCheat.Util
             try
             {
                 return FromJson(File.ReadAllText(file), gui);
-            } catch(JsonException)
+            }
+            catch (JsonException)
             {
                 File.Delete(file);
                 return CreateFile(file, gui);
@@ -91,13 +92,14 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 Config instance = JsonConvert.DeserializeObject<Config>(json);
 
-                if(instance.Modules.Count <= 0 || instance.Modules.Count != CheatModuleAttribute.GetAllModules().Length)
+                if (instance.Modules.Count <= 0 || instance.Modules.Count != CheatModuleAttribute.GetAllModules().Length)
                 {
                     instance.Modules = instance.GetModules(gui);
                 }
 
                 return Instance = instance;
-            } catch(Exception)
+            }
+            catch (Exception)
             {
                 return new Config(gui);
             }

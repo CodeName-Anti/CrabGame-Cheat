@@ -1,5 +1,6 @@
 ﻿using CodeStage.AntiCheat.ObscuredTypes;
 using JNNJMods.CrabGameCheat.Patches;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
@@ -25,7 +26,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private void Element_ToggleChanged(bool toggled)
         {
-            PlayerStatus.Instance.currentHp = new ObscuredInt(100);
+            Instances.PlayerStatus.currentHp = new ObscuredInt(100);
             PlayerStatusPatch.GodMode = toggled;
         }
     }

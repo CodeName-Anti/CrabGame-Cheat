@@ -1,7 +1,7 @@
-﻿using JNNJMods.UI.Elements;
-using JNNJMods.UI;
+﻿using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.UI;
+using JNNJMods.UI.Elements;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -21,9 +21,9 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame)
+            if (InGame)
             {
-                if(Element.GetValue<bool>())
+                if (Element.GetValue<bool>())
                 {
                     Instances.PlayerMovement.underWater = true;
                     Instances.PlayerMovement.SetSwimSpeed(4666f);

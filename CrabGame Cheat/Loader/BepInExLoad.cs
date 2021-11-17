@@ -1,22 +1,21 @@
-﻿#if BEPINEX
+﻿using BepInEx;
+using BepInEx.IL2CPP;
+using JNNJMods.CrabGameCheat.Util;
 using System;
 using System.IO;
 using System.IO.Compression;
 using System.Reflection;
-using BepInEx;
-using BepInEx.IL2CPP;
-using JNNJMods.CrabGameCheat.Util;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Loader
 {
     [BepInPlugin(Constants.GUID, "CrabGame Cheat", Constants.Version)]
-    public class BepInExLoader : BasePlugin, ICheatLoader
+    public class BepInExLoader : BasePlugin
     {
         public static BepInExLoader Instance { get; private set; }
 
         public HarmonyLib.Harmony HarmonyInstance { get; private set; }
-        
+
         public Cheat Cheat => cheat ?? (cheat = new Cheat());
         private Cheat cheat;
 
@@ -68,6 +67,8 @@ namespace JNNJMods.CrabGameCheat.Loader
 
         public class CheatObject : MonoBehaviour
         {
+            public static CheatObject Instance { get; private set; }
+
             private Cheat cheat;
 
             public CheatObject(IntPtr ptr) : base(ptr) { }
@@ -81,7 +82,12 @@ namespace JNNJMods.CrabGameCheat.Loader
 
                 obj.cheat = cheat;
             }
-            
+
+            void Awake()
+            {
+                Instance = this;
+            }
+
             void OnApplicationQuit()
             {
                 cheat.OnApplicationQuit();
@@ -91,10 +97,10 @@ namespace JNNJMods.CrabGameCheat.Loader
             {
                 cheat.OnApplicationLateStart();
             }
-            
+
             void Update()
             {
-                if(cheat != null)
+                if (cheat != null)
                     cheat.OnUpdate();
             }
 
@@ -107,4 +113,3 @@ namespace JNNJMods.CrabGameCheat.Loader
 
     }
 }
-#endif

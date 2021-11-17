@@ -1,13 +1,11 @@
 ﻿using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
     public abstract class SingleElementModuleBase : ModuleBase
     {
-        [JsonIgnore]
         public ElementInfo Element { get; protected set; }
 
         public void SetKeyBind()

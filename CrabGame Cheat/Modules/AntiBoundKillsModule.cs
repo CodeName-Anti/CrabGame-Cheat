@@ -24,12 +24,12 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame && Element.GetValue<bool>())
+            if (InGame && Element.GetValue<bool>())
             {
 
-                if(killHeight == -69420187)
+                if (killHeight == -69420187)
                 {
-                    var killBounds = Object.FindObjectOfType<KillPlayerOutOfBounds>();
+                    var killBounds = Object.FindObjectOfType<MonoBehaviourPublicSikiUnique>();
 
                     if (killBounds != null)
                     {

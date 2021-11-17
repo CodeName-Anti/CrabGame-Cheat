@@ -13,7 +13,7 @@ namespace JNNJMods.Render
                 fontSize = fontSize,
                 alignment = TextAnchor.MiddleCenter,
             };
-            
+
             style.normal.textColor = textColor;
 
             return style;

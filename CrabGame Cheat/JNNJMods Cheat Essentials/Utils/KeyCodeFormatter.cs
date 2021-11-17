@@ -26,7 +26,7 @@ namespace JNNJMods.Utils
 
             foreach (KeyCode k in Enum.GetValues(typeof(KeyCode)))
             {
-                if(!keyNames.ContainsKey(k))
+                if (!keyNames.ContainsKey(k))
                     keyNames.Add(k, Enum.GetName(typeof(KeyCode), k));
             }
 

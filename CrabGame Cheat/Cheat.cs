@@ -1,11 +1,12 @@
-﻿using JNNJMods.UI;
-using UnityEngine;
-using JNNJMods.Render;
-using JNNJMods.CrabGameCheat.Util;
+﻿using HarmonyLib;
 using JNNJMods.CrabGameCheat.Modules;
-using System.Reflection;
-using UnityEngine.SceneManagement;
+using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.Render;
+using JNNJMods.UI;
 using System;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace JNNJMods.CrabGameCheat
 {
@@ -23,9 +24,9 @@ namespace JNNJMods.CrabGameCheat
 
         private string waterMarkText;
 
-        private MetricsCommunication metrics;
+        //private MetricsCommunication metrics;
 
-        public void OnApplicationStart(HarmonyLib.Harmony harmony)
+        public void OnApplicationStart(Harmony harmony)
         {
             Instance = this;
 
@@ -49,7 +50,6 @@ namespace JNNJMods.CrabGameCheat
             };
 
             //Add Windows
-            gui.AddWindow((int)WindowIDs.ITEM_SPAWNER, "Item Spawner", 1445, 90, 320, 700);
             gui.AddWindow((int)WindowIDs.PLAYER, "Player", 1100, 90, 320, 400);
             gui.AddWindow((int)WindowIDs.MOVEMENT, "Movement", 745, 90, 320, 500);
             gui.AddWindow((int)WindowIDs.COMBAT, "Combat", 400, 90, 320, 400);
@@ -60,7 +60,8 @@ namespace JNNJMods.CrabGameCheat
             try
             {
                 config = Config.FromFile(ConfigPaths.ConfigFile, gui);
-            } catch(Exception) { }
+            }
+            catch (Exception) { }
 
             if (config == null)
             {
@@ -74,14 +75,16 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnApplicationQuit()
         {
-            metrics.Stop();
+            //metrics.Stop();
         }
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mod)
         {
+            //reset KillBounds
             config.GetModule<AntiBoundKillsModule>().killHeight = -69420187;
 
-            if(scene.name.Equals("Menu"))
+            //Redo UIChanger
+            if (scene.name.Equals("Menu"))
             {
                 UIChanger.Init = false;
             }
@@ -89,17 +92,21 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnApplicationLateStart()
         {
+            //Destroy AntiCheat GameObject
+            AntiCheat.LateStopAntiCheat();
             WelcomeScreen.draw = true;
 
-            metrics = new MetricsCommunication();
+            /*metrics = new MetricsCommunication();
             try
             {
                 metrics.Start();
-            } catch(Exception) { }
+            }
+            catch (Exception) { }*/
         }
 
         public void OnUpdate()
         {
+            //Hook UIChanger
             UIChanger.OnUpdate();
 
             //Run Update on every module
@@ -110,16 +117,6 @@ namespace JNNJMods.CrabGameCheat
 
             //Hook Update for ClickGUI
             gui.Update();
-            
-            /* Test Code for TileDrive GameMode
-             * if you are the Server Owner, it makes the next GameMode TileDrive
-            var tileDrive = GameModeManager.Instance.allGameModes.First(r => r.name == "Tile Drive");
-            GameLoop.Instance.gameModesAvailable.Clear();
-            GameLoop.Instance.gameModesAvailable.Add(tileDrive);
-
-            GameLoop.Instance.smallModes.Clear();
-            GameLoop.Instance.smallModes.Add(tileDrive);
-            */
 
             //Hide and Show ClickGUI
             if (Input.GetKeyDown(config.ClickGuiKeyBind) && !gui.keyBindSelection.Shown)
@@ -137,7 +134,7 @@ namespace JNNJMods.CrabGameCheat
             });
 
             //Hook OnGUI for WelcomeScreen
-            if(WelcomeScreen.draw)
+            if (WelcomeScreen.draw)
                 WelcomeScreen.OnGUI();
 
             //Draw ClickGUI
@@ -145,9 +142,9 @@ namespace JNNJMods.CrabGameCheat
 
             //Draw WaterMark
             int fontSize = 17;
-            
+
             DrawingUtil.DrawText(waterMarkText, DrawingUtil.CenteredTextRect(waterMarkText, fontSize).x, 10, fontSize, rainbow.GetColor());
-            
+
         }
     }
 }

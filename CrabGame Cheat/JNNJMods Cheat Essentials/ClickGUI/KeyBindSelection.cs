@@ -1,5 +1,4 @@
 ﻿using JNNJMods.Utils;
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using static JNNJMods.Render.DrawingUtil;
@@ -41,7 +40,7 @@ namespace JNNJMods.UI
 
         private async void DelayedReset()
         {
-            await Task.Delay(5000);
+            await Task.Delay(3000);
 
             Shown = false;
             key = KeyCode.None;
@@ -60,12 +59,12 @@ namespace JNNJMods.UI
 
                 if (e != null && e.isKey && key == KeyCode.None)
                 {
-                    if(Input.GetKeyDown(e.keyCode))
+                    if (Input.GetKeyDown(e.keyCode))
                     {
 
                         KeyCode key = e.keyCode;
 
-                        switch(key)
+                        switch (key)
                         {
                             case KeyCode.Escape:
                                 key = KeyCode.None;
@@ -91,7 +90,7 @@ namespace JNNJMods.UI
 
                 Color color = key != KeyCode.None ? SuccessfulColor : SelectionColor;
 
-                if(displayReset)
+                if (displayReset)
                 {
                     color = SuccessfulColor;
                 }
@@ -100,7 +99,7 @@ namespace JNNJMods.UI
 
                 string text = "Press Any Key to Bind..." + (key != KeyCode.None || displayReset ? "\n" + KeyCodeFormatter.KeyNames[key] : "");
 
-                DrawCenteredText(text , FontSize, TextColor);
+                DrawCenteredText(text, FontSize, TextColor);
             }
         }
 

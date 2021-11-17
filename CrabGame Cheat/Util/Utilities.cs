@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -7,6 +8,19 @@ namespace JNNJMods.CrabGameCheat.Util
 {
     public static class Utilities
     {
+
+        public static Il2CppSystem.Collections.Generic.List<T> ToIL2CPP<T>(this List<T> sysList)
+        {
+            var cppList = new Il2CppSystem.Collections.Generic.List<T>();
+
+            foreach (var elem in sysList)
+            {
+                cppList.Add(elem);
+            }
+
+            return cppList;
+        }
+
         /// <summary>
         /// Downloads a File from an URL
         /// </summary>

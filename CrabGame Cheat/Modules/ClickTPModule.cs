@@ -2,6 +2,8 @@
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
+using System.Reflection;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
@@ -9,9 +11,15 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class ClickTPModule : SingleElementModule<ToggleInfo>
     {
-
         public ClickTPModule(ClickGUI gui) : base("ClickTP", gui, WindowIDs.MOVEMENT)
         {
+
+
+        }
+
+        public override void Init(ClickGUI gui, bool json = false)
+        {
+            base.Init(gui, json);
         }
 
         public override ElementInfo CreateElement(int windowId)
@@ -39,7 +47,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
             if (Input.GetKeyDown(KeyCode.Mouse0) && Element.GetValue<bool>())
             {
-                Object.FindObjectOfType<PlayerMovement>().GetRb().position = FindTpPos();
+                Object.FindObjectOfType<MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique>().GetRb().position = FindTpPos();
             }
         }
 

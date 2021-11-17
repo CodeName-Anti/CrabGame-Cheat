@@ -19,11 +19,11 @@ namespace JNNJMods.CrabGameCheat.Util
         private static ModuleBase[] instances;
         public static ModuleBase[] InstantiateAll(ClickGUI gui, Assembly assembly)
         {
-            if(instances == null)
+            if (instances == null)
             {
                 List<ModuleBase> instances = new List<ModuleBase>();
 
-                foreach(Type t in GetAllModules(assembly))
+                foreach (Type t in GetAllModules(assembly))
                 {
                     instances.Add(Activator.CreateInstance(t, new object[] { gui }) as ModuleBase);
                 }

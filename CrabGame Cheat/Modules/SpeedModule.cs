@@ -1,17 +1,14 @@
-﻿using JNNJMods.UI.Elements;
-using JNNJMods.UI;
-using Newtonsoft.Json;
-using JNNJMods.CrabGameCheat.Translators;
+﻿/*using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.UI;
+using JNNJMods.UI.Elements;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
     [CheatModule]
     public class SpeedModule : MultiElementModuleBase
     {
-        private bool init = false;
-
-        private float
+        private readonly float
             moveSpeed,
             maxRunSpeed,
             maxSpeed,
@@ -37,17 +34,13 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
                 gui.AddElement(info);
             }
-
-            InitSpeeds();
         }
 
         void SpeedToggle_ToggleChanged(bool toggled)
         {
-            InitSpeeds();
-
             float SpeedAmount = Elements[1].GetValue<float>();
 
-            PlayerMovement move = Instances.PlayerMovement;
+            var move = Instances.PlayerMovement;
             if (toggled)
             {
                 move.SetMoveSpeed(moveSpeed * SpeedAmount);
@@ -55,7 +48,8 @@ namespace JNNJMods.CrabGameCheat.Modules
                 move.SetMaxSpeed(maxSpeed * SpeedAmount);
                 move.SetMaxSlopeAngle(maxSlopeAngle * SpeedAmount);
                 move.SetSlowDownSpeed(slowDownSpeed * SpeedAmount);
-            } else
+            }
+            else
             {
                 move.SetMoveSpeed(moveSpeed);
                 move.SetMaxRunSpeed(maxRunSpeed);
@@ -65,42 +59,14 @@ namespace JNNJMods.CrabGameCheat.Modules
             }
         }
 
-        private void InitSpeeds()
-        {
-            if (!init && InGame)
-            {
-                init = true;
-
-                var move = Instances.PlayerMovement;
-
-                moveSpeed = move.GetMoveSpeed();
-                maxRunSpeed = move.GetMaxRunSpeed();
-                maxSpeed = move.GetMaxSpeed();
-                maxSlopeAngle = move.GetMaxSlopeAngle();
-                slowDownSpeed = move.GetSlowDownSpeed();
-
-                CheatLog.Msg("move: " + moveSpeed);
-                CheatLog.Msg("maxRun: " + maxRunSpeed);
-                CheatLog.Msg("maxSpeed: " + maxSpeed);
-                CheatLog.Msg("maxSlopeAngle: " + maxSlopeAngle);
-                CheatLog.Msg("slowDownSpeed: " + slowDownSpeed);
-            }
-        }
-
         public override void Update()
         {
             if (!InGame)
                 return;
 
-            InitSpeeds();
-
-            var toggled = Elements[0].GetValue<bool>();
-            
-            if(toggled)
-            {
-                SpeedToggle_ToggleChanged(toggled);
-            }
+            SpeedToggle_ToggleChanged(Elements[0].GetValue<bool>());
         }
 
     }
 }
+*/

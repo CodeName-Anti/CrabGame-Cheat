@@ -1,8 +1,8 @@
-﻿using JNNJMods.UI.Elements;
-using JNNJMods.UI;
-using Newtonsoft.Json;
-using JNNJMods.CrabGameCheat.Util;
+﻿/*
 using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.UI;
+using JNNJMods.UI.Elements;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -10,10 +10,8 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class MegaJumpModule : SingleElementModule<ToggleInfo>
     {
 
-        [JsonIgnore]
         private bool init;
 
-        [JsonIgnore]
         private float jumpForce;
 
         public MegaJumpModule(ClickGUI gui) : base("Mega Jump", gui, WindowIDs.MOVEMENT)
@@ -42,16 +40,16 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame)
+            if (InGame)
             {
-                if(!init)
+                if (!init)
                 {
                     init = true;
 
                     jumpForce = Instances.PlayerMovement.GetJumpForce();
                 }
 
-                if(Element.GetValue<bool>())
+                if (Element.GetValue<bool>())
                 {
                     Element_ToggleChanged(true);
                 }
@@ -60,3 +58,4 @@ namespace JNNJMods.CrabGameCheat.Modules
 
     }
 }
+*/

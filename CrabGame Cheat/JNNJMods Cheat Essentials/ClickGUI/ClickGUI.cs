@@ -1,7 +1,6 @@
 using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.Render;
 using JNNJMods.UI.Elements;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +29,7 @@ namespace JNNJMods.UI
                 return shown;
             }
 
-            set 
+            set
             {
                 if (value)
                     Show(true);
@@ -61,7 +60,7 @@ namespace JNNJMods.UI
             {
                 List<ElementInfo> infos = new List<ElementInfo>();
 
-                foreach(ElementManager em in elementMap.Values)
+                foreach (ElementManager em in elementMap.Values)
                 {
                     infos.AddRange(em.Elements);
                 }
@@ -103,7 +102,7 @@ namespace JNNJMods.UI
         public void Show(bool setPrevs = true)
         {
             shown = true;
-            if(setPrevs)
+            if (setPrevs)
             {
                 prevLockMode = Cursor.lockState;
                 prevVisible = Cursor.visible;
@@ -124,7 +123,7 @@ namespace JNNJMods.UI
         {
             shown = false;
 
-            if(setPrevs)
+            if (setPrevs)
             {
                 Cursor.lockState = prevLockMode;
                 Cursor.visible = prevVisible;
@@ -173,7 +172,7 @@ namespace JNNJMods.UI
             keyBindSelection.DrawSelection();
             if (Shown)
             {
-                if(BlackOut)
+                if (BlackOut)
                 {
                     DrawingUtil.DrawFullScreenColor(new Color(0, 0, 0, 0.7f));
                 }
@@ -203,32 +202,32 @@ namespace JNNJMods.UI
         /// </summary>
         public void Update()
         {
-            if(keyBindSelection.Shown) return;
+            if (keyBindSelection.Shown) return;
 
-            if(Instances.PlayerInput != null && !Shown && !PauseUI.paused && !Cursor.visible)
+            if (Instances.PlayerInput != null && !Shown && !MonoBehaviourPublicTrpaGasemaGaBopaUnique.paused && !Cursor.visible)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
-            if(Shown && Cursor.lockState != CursorLockMode.Confined)
+            if (Shown && Cursor.lockState != CursorLockMode.Confined)
             {
                 Cursor.lockState = CursorLockMode.Confined;
             }
 
-            if(Shown && !Cursor.visible)
+            if (Shown && !Cursor.visible)
             {
                 Cursor.visible = true;
             }
 
-            if (Chatbox.Instance != null && Chatbox.Instance.GODCGGLPMAJ)
+            if (Instances.ChatBox != null && Instances.ChatBox.prop_Boolean_0)
                 return;
 
-            foreach(ElementInfo info in AllElements)
+            foreach (ElementInfo info in AllElements)
             {
-                if(info.KeyBindable && info.KeyBind != KeyCode.None)
+                if (info.KeyBindable && info.KeyBind != KeyCode.None)
                 {
-                    if(Input.GetKeyDown(info.KeyBind))
+                    if (Input.GetKeyDown(info.KeyBind))
                     {
                         info.Activate();
                     }

@@ -1,6 +1,6 @@
-﻿using JNNJMods.UI.Elements;
+﻿using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
-using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.UI.Elements;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -20,9 +20,9 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame && Element.GetValue<bool>() && PersistentPlayerData.frozen)
+            if (InGame && Element.GetValue<bool>() && MonoBehaviourPublicBofrObInUnique.frozen)
             {
-                PersistentPlayerData.frozen = false;
+                MonoBehaviourPublicBofrObInUnique.frozen = false;
             }
         }
 

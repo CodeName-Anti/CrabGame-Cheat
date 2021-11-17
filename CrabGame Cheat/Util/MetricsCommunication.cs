@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JNNJMods.CrabGameCheat.Translators;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SteamworksNative;
 using System;
@@ -45,7 +46,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         private void SendConnect()
         {
-            if(!Connected)
+            if (!Connected)
             {
                 JObject request = new JObject
                 {
@@ -73,12 +74,12 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public void SendHeartBeat()
         {
-            SendHeartBeat(GameManager.Instance == null ? 0 : 1);
+            SendHeartBeat(Instances.GameManager == null ? 0 : 1);
         }
 
         public void SendHeartBeat(int status)
         {
-            if(Connected)
+            if (Connected)
             {
                 JObject request = new JObject
                 {
@@ -102,15 +103,16 @@ namespace JNNJMods.CrabGameCheat.Util
             try
             {
                 return JObject.Parse(SendPost(json.ToString(Formatting.Indented), url));
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 CheatLog.Error("POST Request failed Error: " + e.ToString());
 
-                if(e is WebException)
+                if (e is WebException)
                 {
                     WebException ex = e as WebException;
 
-                    if(ex.Message.Contains("Bad Request") || ex.Message.Contains("400"))
+                    if (ex.Message.Contains("Bad Request") || ex.Message.Contains("400"))
                     {
                         return new JObject
                         {

@@ -1,12 +1,10 @@
 ﻿using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using Newtonsoft.Json;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
     public abstract class SingleElementModule<T> : SingleElementModuleBase where T : ElementInfo
     {
-        [JsonIgnore]
         public new T Element
         {
             get

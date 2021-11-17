@@ -18,7 +18,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public static void OnGUI()
         {
-            if(!init)
+            if (!init)
             {
                 init = true;
 
@@ -34,8 +34,8 @@ namespace JNNJMods.CrabGameCheat.Util
 
                         string stringVersion = jArr[0].ToObject<JObject>().GetValue("tag_name").ToObject<string>();
 
-                        System.Version git = new System.Version(stringVersion);
-                        System.Version current = Assembly.GetExecutingAssembly().GetName().Version;
+                        Version git = new Version(stringVersion);
+                        Version current = Assembly.GetExecutingAssembly().GetName().Version;
 
                         int result = current.CompareTo(git);
 
@@ -44,7 +44,8 @@ namespace JNNJMods.CrabGameCheat.Util
                             updateAvailable = true;
                         }
                     }
-                } catch(Exception)
+                }
+                catch (Exception)
                 {
                     CheatLog.Warning("Couldn't fetch Updates from GitHub!");
                 }

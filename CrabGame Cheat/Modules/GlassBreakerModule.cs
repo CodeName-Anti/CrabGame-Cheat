@@ -25,9 +25,10 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private void Element_ButtonPress()
         {
-            foreach (GlassBreak glass in GlassManager.Instance.pieces)
+            foreach (var glass in MonoBehaviourPublicObpiInObUnique.Instance.pieces)
             {
                 if (glass == null) continue;
+                glass.LocalInteract();
                 glass.AllInteract(SteamUser.GetSteamID().m_SteamID);
             }
         }

@@ -1,6 +1,5 @@
 ﻿using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,16 +7,15 @@ namespace JNNJMods.CrabGameCheat.Modules
 {
     public abstract class MultiElementModuleBase : ModuleBase
     {
-        [JsonIgnore]
         public List<ElementInfo> Elements { get; protected set; }
 
         public void SetKeyBinds()
         {
             int i = 0;
-            foreach(ElementInfo info in Elements)
+            foreach (ElementInfo info in Elements)
             {
 
-                if(info.KeyBindable)
+                if (info.KeyBindable)
                 {
                     info.KeyBind = KeyBinds[i];
                     i++;
@@ -32,9 +30,9 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
                 List<KeyCode> keys = new List<KeyCode>();
 
-                foreach(ElementInfo info in Elements)
+                foreach (ElementInfo info in Elements)
                 {
-                    if(info.KeyBindable)
+                    if (info.KeyBindable)
                     {
                         keys.Add(info.KeyBind);
                     }
