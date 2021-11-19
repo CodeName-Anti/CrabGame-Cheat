@@ -106,7 +106,7 @@ namespace JNNJMods.CrabGameCheat.Util
             }
             catch (Exception e)
             {
-                CheatLog.Error("POST Request failed Error: " + e.ToString());
+                CheatLog.Warning("POST Request failed(THIS IS NOT AN ERROR) Code: " + e.ToString());
 
                 if (e is WebException)
                 {

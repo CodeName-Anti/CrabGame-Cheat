@@ -3,7 +3,7 @@ using JNNJMods.UI;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
-    public abstract class ModuleBase
+    public class ModuleBase
     {
         protected ClickGUI Gui { get; private set; }
 

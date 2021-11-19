@@ -20,10 +20,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public void ExecuteForModules(Action<ModuleBase> action)
         {
-            foreach (ModuleBase module in Modules)
-            {
-                action.Invoke(module);
-            }
+            Modules.ForEach(m => action.Invoke(m));
         }
 
         public T GetModule<T>() where T : ModuleBase

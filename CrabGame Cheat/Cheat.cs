@@ -5,6 +5,7 @@ using JNNJMods.Render;
 using JNNJMods.UI;
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,7 @@ namespace JNNJMods.CrabGameCheat
         public static Cheat Instance { get; private set; }
 
         public Config config;
+        private bool saveConfig = true;
 
         private ClickGUI gui;
 
@@ -73,8 +75,24 @@ namespace JNNJMods.CrabGameCheat
             SceneManager.sceneLoaded = (UnityEngine.Events.UnityAction<Scene, LoadSceneMode>)OnSceneLoaded;
         }
 
+        private async void ConfigTimer()
+        {
+            while(saveConfig)
+            {
+                await Task.Delay(5 * 60 * 1000);
+                try
+                {
+                    config.WriteToFile(ConfigPaths.ConfigFile);
+                } catch(Exception)
+                {
+                }
+            }
+        }
+
         public void OnApplicationQuit()
         {
+            saveConfig = false;
+            config.WriteToFile(ConfigPaths.ConfigFile);
             //metrics.Stop();
         }
 
@@ -96,7 +114,8 @@ namespace JNNJMods.CrabGameCheat
             AntiCheat.LateStopAntiCheat();
             WelcomeScreen.draw = true;
 
-            /*metrics = new MetricsCommunication();
+            /* Metrics disable due to the website being taken down
+             metrics = new MetricsCommunication();
             try
             {
                 metrics.Start();
