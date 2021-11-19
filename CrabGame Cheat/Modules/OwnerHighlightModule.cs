@@ -40,11 +40,17 @@ namespace JNNJMods.CrabGameCheat.Modules
 
             if (InGame)
             {
+
+                var owner = FindOwner();
+
+                if (owner == null)
+                    return;
+
                 if (toggled)
                 {
                     List<GameObject> outlines = new List<GameObject>();
 
-                    var customization = FindOwner().playerCustomization;
+                    var customization = owner.playerCustomization;
 
                     outlines.Add(customization.sweater);
                     outlines.Add(customization.pants);
@@ -58,7 +64,7 @@ namespace JNNJMods.CrabGameCheat.Modules
                 {
                     List<GameObject> outlines = new List<GameObject>();
 
-                    var customization = FindOwner().playerCustomization;
+                    var customization = owner.playerCustomization;
 
                     outlines.Add(customization.sweater);
                     outlines.Add(customization.pants);

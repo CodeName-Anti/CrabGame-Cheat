@@ -1,5 +1,4 @@
-﻿/*
-using JNNJMods.CrabGameCheat.Translators;
+﻿using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
@@ -58,4 +57,3 @@ namespace JNNJMods.CrabGameCheat.Modules
 
     }
 }
-*/

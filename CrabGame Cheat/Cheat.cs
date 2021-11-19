@@ -50,11 +50,11 @@ namespace JNNJMods.CrabGameCheat
             };
 
             //Add Windows
-            gui.AddWindow((int)WindowIDs.PLAYER, "Player", 1100, 90, 320, 400);
-            gui.AddWindow((int)WindowIDs.MOVEMENT, "Movement", 745, 90, 320, 500);
-            gui.AddWindow((int)WindowIDs.COMBAT, "Combat", 400, 90, 320, 400);
-            gui.AddWindow((int)WindowIDs.RENDER, "Render", 70, 525, 320, 400);
-            gui.AddWindow((int)WindowIDs.OTHER, "Other", 70, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.OTHER, "Other", 70, 90, 320, 100);
+            gui.AddWindow((int)WindowIDs.MOVEMENT, "Movement", 400, 90, 320, 450);
+            gui.AddWindow((int)WindowIDs.PLAYER, "Player", 745, 90, 320, 200);
+            gui.AddWindow((int)WindowIDs.RENDER, "Render", 1100, 90, 320, 160);
+
 
             //Read Config
             try
@@ -78,7 +78,7 @@ namespace JNNJMods.CrabGameCheat
             //metrics.Stop();
         }
 
-        public void OnSceneLoaded(Scene scene, LoadSceneMode mod)
+        public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             //reset KillBounds
             config.GetModule<AntiBoundKillsModule>().killHeight = -69420187;
@@ -119,6 +119,11 @@ namespace JNNJMods.CrabGameCheat
             gui.Update();
 
             //Hide and Show ClickGUI
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                gui.Shown = false;
+            }
+
             if (Input.GetKeyDown(config.ClickGuiKeyBind) && !gui.keyBindSelection.Shown)
             {
                 gui.Shown = !gui.Shown;

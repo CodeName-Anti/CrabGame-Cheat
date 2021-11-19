@@ -1,4 +1,5 @@
-﻿/*using JNNJMods.CrabGameCheat.Translators;
+﻿using CodeStage.AntiCheat.ObscuredTypes;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
@@ -8,12 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class SpeedModule : MultiElementModuleBase
     {
-        private readonly float
-            moveSpeed,
-            maxRunSpeed,
-            maxSpeed,
-            maxSlopeAngle,
-            slowDownSpeed;
+        public float SpeedAmount { get; private set; }
 
         public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.MOVEMENT)
         {
@@ -28,7 +24,10 @@ namespace JNNJMods.CrabGameCheat.Modules
             speedToggle.ToggleChanged += SpeedToggle_ToggleChanged;
             Elements.Add(speedToggle);
 
-            Elements.Add(new SliderInfo(ID, 1, 20));
+            SliderInfo speedSlider = new SliderInfo(ID, 1, 20);
+            speedSlider.ValueChanged += SpeedSlider_ValueChanged;
+
+            Elements.Add(speedSlider);
 
             foreach (ElementInfo info in Elements)
             {
@@ -36,27 +35,24 @@ namespace JNNJMods.CrabGameCheat.Modules
             }
         }
 
+        private void SpeedSlider_ValueChanged(object oldValue, object newValue)
+        {
+            SpeedAmount = (float)newValue;
+        }
+
         void SpeedToggle_ToggleChanged(bool toggled)
         {
-            float SpeedAmount = Elements[1].GetValue<float>();
-
             var move = Instances.PlayerMovement;
             if (toggled)
             {
-                move.SetMoveSpeed(moveSpeed * SpeedAmount);
-                move.SetMaxRunSpeed(maxRunSpeed * SpeedAmount);
-                move.SetMaxSpeed(maxSpeed * SpeedAmount);
-                move.SetMaxSlopeAngle(maxSlopeAngle * SpeedAmount);
-                move.SetSlowDownSpeed(slowDownSpeed * SpeedAmount);
-            }
-            else
+                move.SetMaxRunSpeed(13 * SpeedAmount);
+                move.SetMaxSpeed(6.5f * SpeedAmount);
+            } else
             {
-                move.SetMoveSpeed(moveSpeed);
-                move.SetMaxRunSpeed(maxRunSpeed);
-                move.SetMaxSpeed(maxSpeed);
-                move.SetMaxSlopeAngle(maxSlopeAngle);
-                move.SetSlowDownSpeed(slowDownSpeed);
+                move.SetMaxRunSpeed(13);
+                move.SetMaxSpeed(6.5f);
             }
+            
         }
 
         public override void Update()
@@ -69,4 +65,3 @@ namespace JNNJMods.CrabGameCheat.Modules
 
     }
 }
-*/
