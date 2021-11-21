@@ -75,7 +75,7 @@ namespace JNNJMods.CrabGameCheat
             SceneManager.sceneLoaded = (UnityEngine.Events.UnityAction<Scene, LoadSceneMode>)OnSceneLoaded;
         }
 
-        private async void ConfigTimer()
+        private async void ConfigSaver()
         {
             while(saveConfig)
             {
@@ -113,6 +113,8 @@ namespace JNNJMods.CrabGameCheat
             //Destroy AntiCheat GameObject
             AntiCheat.LateStopAntiCheat();
             WelcomeScreen.draw = true;
+
+            ConfigSaver();
 
             /* Metrics disable due to the website being taken down
              metrics = new MetricsCommunication();
