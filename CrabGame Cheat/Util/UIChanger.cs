@@ -37,8 +37,8 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 try
                 {
-                    string gameVersion = Instances.VersionUI.versionText.text;
-                    Instances.VersionUI.versionText.text = "CrabGame Cheat " + Cheat.FormattedVersion + " by JNNJ Game Version " + gameVersion;
+                    string gameVersion = VersionUI.Instance.versionText.text;
+                    VersionUI.Instance.versionText.text = "CrabGame Cheat " + Cheat.FormattedVersion + " by JNNJ Game Version " + gameVersion;
                     versionUIInit = true;
                     CheatLog.Msg("Version Changed");
                 }
@@ -49,7 +49,7 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 try
                 {
-                    var ui = Instances.MenuUI;
+                    var ui = MenuUI.Instance;
 
                     GameObject creditsWindow = ui.gameObject.GetChildren().Where(obj => obj.name.Contains("Credits")).First();
 

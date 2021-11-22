@@ -26,7 +26,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private void Element_ToggleChanged(bool toggled)
         {
-            Instances.PlayerStatus.currentHp = new ObscuredInt(100);
+            PlayerStatus.Instance.currentHp = new ObscuredInt(100);
             PlayerStatusPatch.GodMode = toggled;
         }
     }

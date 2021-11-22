@@ -56,7 +56,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             if (toggled)
             {
                 if (!InGame) return;
-                if (espTargets.Count != Instances.GameManager.activePlayers.Count - 1)
+                if (espTargets.Count != GameManager.Instance.activePlayers.Count - 1)
                 {
                     CheatLog.Msg("Getting ESP-Targets!");
 
@@ -70,7 +70,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
                     espTargets.Clear();
 
-                    foreach (var manager in Instances.GameManager.activePlayers.values)
+                    foreach (var manager in GameManager.Instance.activePlayers.values)
                     {
                         if (manager.GetOnlinePlayerMovement() != null)
                         {

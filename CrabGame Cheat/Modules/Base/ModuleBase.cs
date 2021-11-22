@@ -1,19 +1,23 @@
 ﻿using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.UI;
+using Newtonsoft.Json;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
     public class ModuleBase
     {
+        [JsonIgnore]
         protected ClickGUI Gui { get; private set; }
 
         public WindowIDs WindowId { get; protected set; }
 
+        [JsonIgnore]
         protected bool InGame => Instances.PlayerMovement != null;
 
         /// <summary>
         /// Value of <see cref="WindowId"/> presented as an <see cref="int"/>.
         /// </summary>
+        [JsonIgnore]
         protected int ID
         {
             get

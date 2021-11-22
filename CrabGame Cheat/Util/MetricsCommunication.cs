@@ -74,7 +74,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public void SendHeartBeat()
         {
-            SendHeartBeat(Instances.GameManager == null ? 0 : 1);
+            SendHeartBeat(GameManager.Instance == null ? 0 : 1);
         }
 
         public void SendHeartBeat(int status)

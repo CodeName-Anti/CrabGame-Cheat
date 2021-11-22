@@ -92,7 +92,8 @@ namespace JNNJMods.CrabGameCheat.Util
                 if (instance.Modules.Count <= 0 || instance.Modules.Count != CheatModuleAttribute.GetAllModules().Length)
                 {
                     instance.Modules = instance.GetModules(gui);
-                }
+                } else
+                    instance.ExecuteForModules(m => m.Init(gui, true));
 
                 return Instance = instance;
             }

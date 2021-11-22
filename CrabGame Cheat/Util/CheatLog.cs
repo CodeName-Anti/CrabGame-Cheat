@@ -33,7 +33,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public static void LogChatBox(object message, bool displayUsername = true)
         {
-            var chat = Instances.ChatBox;
+            var chat = ChatBox.Instance;
 
             chat.messages.text += "\n" + (displayUsername ? "<color=#5100ff>CrabGame Cheat</color>:" : "") + $"{message}";
             //Show chat

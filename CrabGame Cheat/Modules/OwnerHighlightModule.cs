@@ -79,11 +79,11 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private static MonoBehaviourPublicCSstReshTrheObplBojuUnique FindOwner()
         {
-            var players = Instances.GameManager.activePlayers;
+            var players = GameManager.Instance.activePlayers;
 
-            if (players.ContainsKey(Instances.SteamManager.originalLobbyOwnerId.m_SteamID))
+            if (players.ContainsKey(SteamManager.Instance.originalLobbyOwnerId.m_SteamID))
             {
-                return Instances.GameManager.activePlayers[Instances.SteamManager.originalLobbyOwnerId.m_SteamID];
+                return GameManager.Instance.activePlayers[SteamManager.Instance.originalLobbyOwnerId.m_SteamID];
             }
             else
                 return null;

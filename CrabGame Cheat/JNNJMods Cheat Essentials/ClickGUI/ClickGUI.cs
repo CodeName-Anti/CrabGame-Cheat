@@ -111,8 +111,8 @@ namespace JNNJMods.UI
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
 
-            if (Instances.PlayerInput != null)
-                Instances.PlayerInput.active = false;
+            if (PlayerInput.Instance != null)
+                PlayerInput.Instance.active = false;
 
         }
 
@@ -129,8 +129,8 @@ namespace JNNJMods.UI
                 Cursor.visible = prevVisible;
             }
 
-            if (Instances.PlayerInput != null)
-                Instances.PlayerInput.active = true;
+            if (PlayerInput.Instance != null)
+                PlayerInput.Instance.active = true;
 
         }
 
@@ -204,7 +204,7 @@ namespace JNNJMods.UI
         {
             if (keyBindSelection.Shown) return;
 
-            if (Instances.PlayerInput != null && !Shown && !MonoBehaviourPublicTrpaGasemaGaBopaUnique.paused && !Cursor.visible)
+            if (PlayerInput.Instance != null && !Shown && !MonoBehaviourPublicTrpaGasemaGaBopaUnique.paused && !Cursor.visible)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
@@ -220,7 +220,7 @@ namespace JNNJMods.UI
                 Cursor.visible = true;
             }
 
-            if (Instances.ChatBox != null && Instances.ChatBox.prop_Boolean_0)
+            if (ChatBox.Instance != null && ChatBox.Instance.prop_Boolean_0)
                 return;
 
             foreach (ElementInfo info in AllElements)

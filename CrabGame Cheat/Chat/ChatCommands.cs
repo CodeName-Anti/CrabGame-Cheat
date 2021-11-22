@@ -87,8 +87,8 @@ namespace JNNJMods.CrabGameCheat.Chat
 
             if (!ulong.TryParse(args[0], out ulong id))
             {
-                var active = GetPlayerByName(message, Instances.GameManager.activePlayers);
-                var spectator = GetPlayerByName(message, Instances.GameManager.spectators);
+                var active = GetPlayerByName(message, GameManager.Instance.activePlayers);
+                var spectator = GetPlayerByName(message, GameManager.Instance.spectators);
 
                 if(active != null)
                 {
