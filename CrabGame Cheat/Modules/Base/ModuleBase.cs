@@ -9,13 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public WindowIDs WindowId { get; protected set; }
 
-        protected bool InGame
-        {
-            get
-            {
-                return Instances.PlayerMovement != null;
-            }
-        }
+        protected bool InGame => Instances.PlayerMovement != null;
 
         /// <summary>
         /// Value of <see cref="WindowId"/> presented as an <see cref="int"/>.

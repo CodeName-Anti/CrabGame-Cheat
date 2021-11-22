@@ -25,11 +25,11 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
                 if (Element.GetValue<bool>())
                 {
-                    Instances.PlayerMovement.underWater = true;
+                    Instances.PlayerMovement.isUnderWater = true;
                     Instances.PlayerMovement.SetSwimSpeed(4666f);
                 }
                 else
-                    Instances.PlayerMovement.underWater = false;
+                    Instances.PlayerMovement.isUnderWater = false;
             }
         }
     }

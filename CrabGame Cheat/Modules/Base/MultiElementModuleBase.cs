@@ -46,6 +46,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             base.Init(gui, json);
             Elements = new List<ElementInfo>();
+            SetKeyBinds();
         }
 
         public MultiElementModuleBase(string name, ClickGUI gui, WindowIDs windowId) : base(name, gui, windowId)
