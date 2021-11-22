@@ -55,10 +55,11 @@ namespace JNNJMods.CrabGameCheat
             };
 
             //Add Windows
-            gui.AddWindow((int)WindowIDs.OTHER, "Other", 70, 90, 320, 100);
-            gui.AddWindow((int)WindowIDs.MOVEMENT, "Movement", 400, 90, 320, 450);
-            gui.AddWindow((int)WindowIDs.PLAYER, "Player", 745, 90, 320, 200);
-            gui.AddWindow((int)WindowIDs.RENDER, "Render", 1100, 90, 320, 160);
+            gui.AddWindow((int)WindowIDs.OTHER, "Other", 70, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.COMBAT, "Combat", 400, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.MOVEMENT, "Movement", 730, 90, 320, 500);
+            gui.AddWindow((int)WindowIDs.PLAYER, "Player", 1060, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.RENDER, "Render", 70, 525, 320, 400);
 
 
             //Read Config

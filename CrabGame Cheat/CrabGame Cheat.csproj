@@ -37,6 +37,7 @@
     <Compile Include="Chat\ChatCommandAttribute.cs" />
     <Compile Include="Chat\ChatCommands.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="JNNJMods Cheat Essentials\AimCheats\Aimbot.cs" />
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\ClickGUI.cs" />
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\ButtonInfo.cs" />
     <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\CustomInfo.cs" />
@@ -51,11 +52,13 @@
     <Compile Include="JNNJMods Cheat Essentials\Render\Outline.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Render\OutlineRenderer.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\KeyCodeFormatter.cs" />
+    <Compile Include="JNNJMods Cheat Essentials\Utils\MouseOperations.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\NativeWinAlert.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\ReflectionExtensions.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\WinConsole.cs" />
     <Compile Include="Cheat.cs" />
     <Compile Include="Loader\BepInExLoad.cs" />
+    <Compile Include="Modules\AimModule.cs" />
     <Compile Include="Modules\AirJumpModule.cs" />
     <Compile Include="Modules\AntiBoundKillsModule.cs" />
     <Compile Include="Modules\ClickTPModule.cs" />

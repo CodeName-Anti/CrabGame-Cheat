@@ -4,7 +4,7 @@ namespace JNNJMods.CrabGameCheat.Translators
 {
     public static class TranslationsExtensions
     {
-        public static MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique GetOnlinePlayerMovement(this MonoBehaviourPublicCSstReshTrheObplBojuUnique manager) => manager.field_Private_MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique_0;
+        public static OnlinePlayerMovement GetOnlinePlayerMovement(this PlayerManager manager) => manager.field_Private_MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique_0;
 
         public static void ClearMessage(this MonoBehaviourPublicRaovTMinTemeColoonCoUnique chat) => chat.inputField.text = "";
 
