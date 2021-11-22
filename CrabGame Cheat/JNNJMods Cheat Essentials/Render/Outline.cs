@@ -82,9 +82,7 @@ namespace JNNJMods.Render
 
         private bool needsUpdate;
 
-#if CPP
         public Outline(IntPtr handle) : base(handle) { }
-#endif
 
         void Awake()
         {

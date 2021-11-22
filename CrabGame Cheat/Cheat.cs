@@ -6,6 +6,7 @@ using JNNJMods.UI;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,6 +32,8 @@ namespace JNNJMods.CrabGameCheat
         public void OnApplicationStart(Harmony harmony)
         {
             Instance = this;
+
+            ClassInjector.RegisterTypeInIl2Cpp<Outline>();
 
             FormattedVersion = Utilities.FormatAssemblyVersion(Assembly.GetExecutingAssembly(), true);
 

@@ -19,23 +19,25 @@ namespace JNNJMods.UI.Elements
         /// <summary>
         /// Defines if the Window is draggable.
         /// </summary>
-        public bool draggable = true;
+        public bool Draggable = true;
 
         /// <summary>
         /// Position of the Window.
         /// </summary>
-        public Rect windowRect;
+        public Rect WindowRect;
 
         /// <summary>
         /// Style of the Window.
         /// </summary>
         /// 
-        public GUIStyle windowStyle;
+        public GUIStyle WindowStyle;
 
         /// <summary>
         /// Defines if the Window can be dragged of Screen.
         /// </summary>
-        public bool allowOffscreen;
+        public bool AllowOffscreen;
+
+        public bool Visible = true;
 
         public float
             x, y,
@@ -62,7 +64,7 @@ namespace JNNJMods.UI.Elements
             controlDist = _controlDist;
             this.text = text;
             Elements = new List<ElementInfo>();
-            windowRect = new Rect(x, y, width, height);
+            WindowRect = new Rect(x, y, width, height);
             WindowId = windowId;
             x = 0;
             y = 0;

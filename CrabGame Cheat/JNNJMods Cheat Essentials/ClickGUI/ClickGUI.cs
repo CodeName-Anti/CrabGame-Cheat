@@ -182,17 +182,20 @@ namespace JNNJMods.UI
 
             foreach (ElementManager manager in elementMap.Values)
             {
-                if (manager.windowStyle == null || manager.windowStyle == GUIStyle.none)
+                if (!manager.Visible)
+                    continue;
+
+                if (manager.WindowStyle == null || manager.WindowStyle == GUIStyle.none)
                 {
-                    manager.windowStyle = GUI.skin.window;
+                    manager.WindowStyle = GUI.skin.window;
                 }
 
-                manager.windowRect = GUI.Window(manager.WindowId, manager.windowRect, (GUI.WindowFunction)DrawWindow, manager.text, manager.windowStyle);
+                manager.WindowRect = GUI.Window(manager.WindowId, manager.WindowRect, (GUI.WindowFunction)DrawWindow, manager.text, manager.WindowStyle);
 
-                if (!manager.allowOffscreen)
+                if (!manager.AllowOffscreen)
                 {
-                    manager.windowRect.x = Mathf.Clamp(manager.windowRect.x, 0, Screen.currentResolution.width - manager.windowRect.width);
-                    manager.windowRect.y = Mathf.Clamp(manager.windowRect.y, 0, Screen.currentResolution.height - manager.windowRect.height);
+                    manager.WindowRect.x = Mathf.Clamp(manager.WindowRect.x, 0, Screen.currentResolution.width - manager.WindowRect.width);
+                    manager.WindowRect.y = Mathf.Clamp(manager.WindowRect.y, 0, Screen.currentResolution.height - manager.WindowRect.height);
                 }
             }
         }
@@ -248,7 +251,7 @@ namespace JNNJMods.UI
                 info.Render();
             }
 
-            if (manager.draggable)
+            if (manager.Draggable)
             {
                 GUI.DragWindow(new Rect(0, 0, 10000, 20));
             }
