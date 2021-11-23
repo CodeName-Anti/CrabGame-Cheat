@@ -35,7 +35,6 @@ namespace JNNJMods.CrabGameCheat.Util
 
             foreach(MethodInfo method in methods)
             {
-                CheatLog.Msg("Killed Detector: " + method.Name);
                 method.Invoke(null, null);
             }
         }

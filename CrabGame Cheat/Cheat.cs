@@ -143,11 +143,6 @@ namespace JNNJMods.CrabGameCheat
             //Hook Update for ClickGUI
             gui.Update();
 
-            if(Input.GetKeyDown(KeyCode.X))
-            {
-                OnApplicationQuit();
-            }
-
             //Hide and Show ClickGUI
             if(Input.GetKeyDown(KeyCode.Escape))
             {

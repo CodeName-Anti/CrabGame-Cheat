@@ -24,25 +24,23 @@ namespace JNNJMods.CrabGameCheat.Util
 
                 try
                 {
-                    using (var client = new WebClient())
+                    using var client = new WebClient();
+                    //Some random user agent because with others it responds with 403
+                    client.Headers.Add("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0");
+                    string json = client.DownloadString("https://api.github.com/repos/DasJNNJ/CrabGame-Cheat/releases");
+
+                    JArray jArr = JArray.Parse(json);
+
+                    string stringVersion = jArr[0].ToObject<JObject>().GetValue("tag_name").ToObject<string>();
+
+                    Version git = new(stringVersion);
+                    Version current = Assembly.GetExecutingAssembly().GetName().Version;
+
+                    int result = current.CompareTo(git);
+
+                    if (result < 0)
                     {
-                        //Some random user agent because with others it responds with 403
-                        client.Headers.Add("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0");
-                        string json = client.DownloadString("https://api.github.com/repos/DasJNNJ/CrabGame-Cheat/releases");
-
-                        JArray jArr = JArray.Parse(json);
-
-                        string stringVersion = jArr[0].ToObject<JObject>().GetValue("tag_name").ToObject<string>();
-
-                        Version git = new Version(stringVersion);
-                        Version current = Assembly.GetExecutingAssembly().GetName().Version;
-
-                        int result = current.CompareTo(git);
-
-                        if (result < 0)
-                        {
-                            updateAvailable = true;
-                        }
+                        updateAvailable = true;
                     }
                 }
                 catch (Exception)
@@ -77,7 +75,7 @@ namespace JNNJMods.CrabGameCheat.Util
             Resolution res = Screen.currentResolution;
             float x = (res.width - res.width / divider) / 2f;
             float y = (res.height - res.height / divider) / 2f;
-            Rect rect = new Rect(x, y, res.width / divider, res.height / divider);
+            Rect rect = new(x, y, res.width / divider, res.height / divider);
 
             //Draw middle rect
             DrawColor(new Color(0, 1, 0, 0.6f), rect);

@@ -21,7 +21,7 @@ namespace JNNJMods.Render
 
         public static GUIStyle GetTextStyle(int fontSize)
         {
-            return GetTextStyle(fontSize, Color.clear);
+            return GetTextStyle(fontSize, Color.white);
         }
 
         public static Rect CenteredTextRect(string text, int fontSize)
@@ -36,7 +36,7 @@ namespace JNNJMods.Render
                 textWidth, textHeight);
         }
 
-        private static Rect CalcTextSize(float x, float y, GUIStyle style, string text)
+        public static Rect CalcTextSize(float x, float y, GUIStyle style, string text)
         {
             Vector2 size = style.CalcSize(new GUIContent(text));
             float textWidth = size.x * 2;
