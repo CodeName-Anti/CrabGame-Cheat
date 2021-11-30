@@ -4,8 +4,6 @@
 # CrabGame Cheat
 A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by [DaniDev](https://www.youtube.com/c/DaniDev).
 
-**Also join my Discord Server:** https://discord.gg/UUhXmhPWfq
-
 ## Installation BepInEx (RECOMMENDED)
  1. Download the [lastest BepInEx Build](https://builds.bepis.io/projects/bepinex_be), the file name should start with "BepInEx_UnityIL2CPP".
  2. Dowload [CrabGame_Cheat_BepInEx.dll](https://github.com/DasJNNJ/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_BepInEx.dll)
