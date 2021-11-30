@@ -8,7 +8,7 @@ using static JNNJMods.Render.DrawingUtil;
 
 namespace JNNJMods.CrabGameCheat.Util
 {
-    public class WelcomeScreen
+    public static class WelcomeScreen
     {
         private static bool
             init,

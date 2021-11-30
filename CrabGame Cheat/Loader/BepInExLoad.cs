@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.IL2CPP;
+using HarmonyLib;
 using JNNJMods.CrabGameCheat.Util;
 using System;
 using System.IO;
@@ -14,9 +15,9 @@ namespace JNNJMods.CrabGameCheat.Loader
     {
         public static BepInExLoader Instance { get; private set; }
 
-        public HarmonyLib.Harmony HarmonyInstance { get; private set; }
+        public Harmony HarmonyInstance { get; private set; }
 
-        public Cheat Cheat => cheat ?? (cheat = new Cheat());
+        public Cheat Cheat => cheat ??= new Cheat();
         private Cheat cheat;
 
         public override void Load()
@@ -25,7 +26,7 @@ namespace JNNJMods.CrabGameCheat.Loader
             //Download Newtonsoft.Json
             LoadLibraries();
 
-            HarmonyInstance = new HarmonyLib.Harmony(Constants.GUID);
+            HarmonyInstance = new Harmony(Constants.GUID);
             HarmonyInstance.PatchAll();
 
             Cheat.OnApplicationStart(HarmonyInstance);
@@ -100,14 +101,12 @@ namespace JNNJMods.CrabGameCheat.Loader
 
             void Update()
             {
-                if (cheat != null)
-                    cheat.OnUpdate();
+                cheat.OnUpdate();
             }
 
             void OnGUI()
             {
-                if (cheat != null)
-                    cheat.OnGUI();
+                cheat.OnGUI();
             }
         }
 

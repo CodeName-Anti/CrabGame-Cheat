@@ -1,4 +1,6 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
+﻿using HarmonyLib;
+using JNNJMods.CrabGameCheat.Loader;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.UI;
 using Newtonsoft.Json;
 
@@ -6,6 +8,9 @@ namespace JNNJMods.CrabGameCheat.Modules
 {
     public class ModuleBase
     {
+        [JsonIgnore]
+        protected Harmony HarmonyInstance => BepInExLoader.Instance.HarmonyInstance;
+
         [JsonIgnore]
         protected ClickGUI Gui { get; private set; }
 

@@ -75,6 +75,7 @@
     <Compile Include="Modules\NoFreezeModule.cs" />
     <Compile Include="Modules\NoPushModule.cs" />
     <Compile Include="Modules\OwnerHighlightModule.cs" />
+    <Compile Include="Modules\QuestModule.cs" />
     <Compile Include="Modules\SpeedModule.cs" />
     <Compile Include="Patches\ChatboxPatch.cs" />
     <Compile Include="Patches\GameManagerPatch.cs" />

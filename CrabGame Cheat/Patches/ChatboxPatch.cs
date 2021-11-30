@@ -11,7 +11,7 @@ using System.Text;
 namespace JNNJMods.CrabGameCheat.Patches
 {
 
-    [HarmonyPatch(typeof(MonoBehaviourPublicRaovTMinTemeColoonCoUnique))]
+    [HarmonyPatch(typeof(ChatBox))]
     public static class ChatboxPatch
     {
         public const string CommandPrefix = "/";
@@ -25,7 +25,7 @@ namespace JNNJMods.CrabGameCheat.Patches
 
         public static string GetHelpMessage()
         {
-            StringBuilder b = new StringBuilder();
+            StringBuilder b = new();
 
             foreach (var attrib in commands.Keys)
             {
@@ -43,7 +43,7 @@ namespace JNNJMods.CrabGameCheat.Patches
             CheatLog.LogChatBox(GetHelpMessage());
         }
 
-        private static void HideAndClearChat(MonoBehaviourPublicRaovTMinTemeColoonCoUnique chat)
+        private static void HideAndClearChat(ChatBox chat)
         {
             chat.ClearMessage();
             chat.prop_Boolean_0 = false;
@@ -51,9 +51,9 @@ namespace JNNJMods.CrabGameCheat.Patches
             chat.Invoke("HideChat", 5f);
         }
 
-        [HarmonyPatch(nameof(MonoBehaviourPublicRaovTMinTemeColoonCoUnique.SendMessage))]
+        [HarmonyPatch(nameof(ChatBox.SendMessage))]
         [HarmonyPrefix]
-        public static bool SendMessage(ref MonoBehaviourPublicRaovTMinTemeColoonCoUnique __instance, string param_1)
+        public static bool SendMessage(ref ChatBox __instance, string param_1)
         {
             string message = param_1;
             //Get all Commands

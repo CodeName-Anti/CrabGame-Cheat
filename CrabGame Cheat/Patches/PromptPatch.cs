@@ -2,13 +2,12 @@
 
 namespace JNNJMods.CrabGameCheat.Patches
 {
-    [HarmonyPatch(typeof(MonoBehaviourPublicGaprLi1ObGaprInUnique))]
+    [HarmonyPatch(typeof(Prompt))]
     public static class PromptPatch
     {
-
-        [HarmonyPatch(nameof(MonoBehaviourPublicGaprLi1ObGaprInUnique.NewPrompt))]
+        [HarmonyPatch(nameof(Prompt.NewPrompt))]
         [HarmonyPrefix]
-        public static bool NewPrompt(ref MonoBehaviourPublicGaprLi1ObGaprInUnique __instance, string param_1, string param_2)
+        public static bool NewPrompt(ref Prompt __instance, string param_1, string param_2)
         {
             string header = param_1;
             string content = param_2;
