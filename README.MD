@@ -1,5 +1,6 @@
 
 
+
 # CrabGame Cheat
 A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by [DaniDev](https://www.youtube.com/c/DaniDev).
 
@@ -29,7 +30,9 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
 
 ## Features
  - ClickGUI
+ - KeyBinds
  - ChatCommands
+ - AimBot
  - AirJump
  - AntiBoundKills
  - ClickTP
@@ -38,13 +41,13 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
  - GlassBreaker
  - GodMode
  - Mega Jump
- - Mega Slap
  - NoFall
  - NoFreeze
  - NoPush
  - OwnerHighlight
+ - Reset Quest cooldown
+ - Complete Quest
  - Speed
- - Give Weapons
  - ...and more to come
 
 ## DISCLAIMER
