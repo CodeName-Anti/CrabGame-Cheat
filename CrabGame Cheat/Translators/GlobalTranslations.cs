@@ -13,7 +13,4 @@ global using QuestManager = MonoBehaviourPublicLi1QudaDi2InquQuacUnique;
 
 namespace JNNJMods.CrabGameCheat.Translators
 {
-    public static class ClassTranslations
-    {
-    }
 }

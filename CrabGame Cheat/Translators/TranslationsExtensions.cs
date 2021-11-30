@@ -6,10 +6,9 @@ namespace JNNJMods.CrabGameCheat.Translators
     {
         public static OnlinePlayerMovement GetOnlinePlayerMovement(this PlayerManager manager) => manager.field_Private_MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique_0;
 
-        public static void ClearMessage(this MonoBehaviourPublicRaovTMinTemeColoonCoUnique chat) => chat.inputField.text = "";
+        public static void ClearMessage(this ChatBox chat) => chat.inputField.text = "";
 
         #region PlayerMovement
-
         public static float GetSwimSpeed(this PlayerMovement movement) => movement.field_Private_Single_12;
         public static void SetSwimSpeed(this PlayerMovement movement, float swimSpeed) => movement.field_Private_Single_12 = swimSpeed;
 
@@ -30,7 +29,6 @@ namespace JNNJMods.CrabGameCheat.Translators
 
         public static float GetSlowDownSpeed(this PlayerMovement movement) => movement.field_Private_Single_23;
         public static void SetSlowDownSpeed(this PlayerMovement movement, float slowDownSpeed) => movement.field_Private_Single_23 = slowDownSpeed;
-
         #endregion
     }
 }

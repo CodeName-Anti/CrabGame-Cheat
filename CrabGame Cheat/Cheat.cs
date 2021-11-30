@@ -27,14 +27,14 @@ namespace JNNJMods.CrabGameCheat
 
         private string waterMarkText;
 
-        //private MetricsCommunication metrics;
-
         public void OnApplicationStart(Harmony harmony)
         {
             Instance = this;
 
+            //Load Outline for ESP
             ClassInjector.RegisterTypeInIl2Cpp<Outline>();
 
+            //Preformat Version, for performance improvements
             FormattedVersion = Utilities.FormatAssemblyVersion(Assembly.GetExecutingAssembly(), true);
 
             waterMarkText = "CrabGame Cheat " + FormattedVersion + " by JNNJ";
@@ -61,7 +61,6 @@ namespace JNNJMods.CrabGameCheat
             gui.AddWindow((int)WindowIDs.PLAYER, "Player", 1060, 90, 320, 400);
             gui.AddWindow((int)WindowIDs.RENDER, "Render", 70, 525, 320, 400);
 
-
             //Read Config
             try
             {
@@ -76,9 +75,13 @@ namespace JNNJMods.CrabGameCheat
 
             //Create RainbowColor for watermark
             rainbow = new RainbowColor(.2f);
+
             SceneManager.sceneLoaded = (UnityEngine.Events.UnityAction<Scene, LoadSceneMode>)OnSceneLoaded;
         }
 
+        /// <summary>
+        /// Saves Config every 5 minutes.
+        /// </summary>
         private async void ConfigSaver()
         {
             while(saveConfig)
@@ -97,7 +100,6 @@ namespace JNNJMods.CrabGameCheat
         {
             saveConfig = false;
             config.WriteToFile(ConfigPaths.ConfigFile);
-            //metrics.Stop();
         }
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -119,14 +121,6 @@ namespace JNNJMods.CrabGameCheat
             WelcomeScreen.draw = true;
 
             ConfigSaver();
-
-            /* Metrics disable due to the website being taken down
-             metrics = new MetricsCommunication();
-            try
-            {
-                metrics.Start();
-            }
-            catch (Exception) { }*/
         }
 
         public void OnUpdate()
@@ -170,11 +164,10 @@ namespace JNNJMods.CrabGameCheat
             //Draw ClickGUI
             gui.DrawWindows();
 
-            //Draw WaterMark
             int fontSize = 17;
 
+            //Draw WaterMark
             DrawingUtil.DrawText(waterMarkText, DrawingUtil.CenteredTextRect(waterMarkText, fontSize).x, 10, fontSize, rainbow.GetColor());
-
         }
     }
 }

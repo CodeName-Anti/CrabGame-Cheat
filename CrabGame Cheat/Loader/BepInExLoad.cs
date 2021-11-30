@@ -23,11 +23,19 @@ namespace JNNJMods.CrabGameCheat.Loader
         public override void Load()
         {
             Instance = this;
+
             //Download Newtonsoft.Json
             LoadLibraries();
 
-            HarmonyInstance = new Harmony(Constants.GUID);
-            HarmonyInstance.PatchAll();
+            //Initialize Harmony
+            try
+            {
+                HarmonyInstance = new Harmony(Constants.GUID);
+                HarmonyInstance.PatchAll();
+            } catch(Exception)
+            {
+
+            }
 
             Cheat.OnApplicationStart(HarmonyInstance);
 
@@ -39,6 +47,9 @@ namespace JNNJMods.CrabGameCheat.Loader
             DownloadJsonLibrary();
         }
 
+        /// <summary>
+        /// Downloads Newtonsoft Json.
+        /// </summary>
         private void DownloadJsonLibrary()
         {
             string path = Utilities.GetAssemblyLocation();
@@ -74,6 +85,11 @@ namespace JNNJMods.CrabGameCheat.Loader
 
             public CheatObject(IntPtr ptr) : base(ptr) { }
 
+            /// <summary>
+            /// Creates an instance of CheatObject and calls the <see cref="JNNJMods.CrabGameCheat.Cheat"/>.
+            /// </summary>
+            /// <param name="cheat"></param>
+            /// <param name="loader"></param>
             public static void CreateInstance(Cheat cheat, BepInExLoader loader)
             {
                 CheatObject obj = loader.AddComponent<CheatObject>();

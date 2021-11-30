@@ -21,7 +21,7 @@ namespace JNNJMods.CrabGameCheat.Util
         {
             if (instances == null)
             {
-                List<ModuleBase> instances = new List<ModuleBase>();
+                List<ModuleBase> instances = new();
 
                 foreach (Type t in GetAllModules(assembly))
                 {

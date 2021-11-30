@@ -11,6 +11,7 @@ namespace JNNJMods.CrabGameCheat.Util
     public static class Utilities
     {
 
+        //Converts a System list to Il2CPP
         public static Il2CppSystem.Collections.Generic.List<T> ToIL2CPP<T>(this List<T> sysList)
         {
             var cppList = new Il2CppSystem.Collections.Generic.List<T>();
@@ -36,6 +37,12 @@ namespace JNNJMods.CrabGameCheat.Util
             }
         }
 
+        /// <summary>
+        /// Formats the version of an Assembly.
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="pretty"></param>
+        /// <returns></returns>
         public static string FormatAssemblyVersion(Assembly assembly, bool pretty = false)
         {
             if (assembly == null)
@@ -61,6 +68,12 @@ namespace JNNJMods.CrabGameCheat.Util
             return version;
         }
 
+        /// <summary>
+        /// Gets bytes from an embedded resource.
+        /// </summary>
+        /// <param name="embeddedResource"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static byte[] GetResourceBytes(string embeddedResource)
         {
             using (Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(embeddedResource))

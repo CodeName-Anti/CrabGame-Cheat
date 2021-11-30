@@ -51,6 +51,12 @@ namespace JNNJMods.CrabGameCheat.Patches
             chat.Invoke("HideChat", 5f);
         }
 
+        /// <summary>
+        /// SendMessage Patch for intercepting chat messages.
+        /// </summary>
+        /// <param name="__instance"></param>
+        /// <param name="param_1"></param>
+        /// <returns></returns>
         [HarmonyPatch(nameof(ChatBox.SendMessage))]
         [HarmonyPrefix]
         public static bool SendMessage(ref ChatBox __instance, string param_1)

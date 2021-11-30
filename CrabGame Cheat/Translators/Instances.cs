@@ -1,5 +1,4 @@
-﻿
-namespace JNNJMods.CrabGameCheat.Translators
+﻿namespace JNNJMods.CrabGameCheat.Translators
 {
     public static class Instances
     {

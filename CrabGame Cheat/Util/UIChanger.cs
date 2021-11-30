@@ -22,7 +22,6 @@ namespace JNNJMods.CrabGameCheat.Util
             }
         }
 
-
         private static bool
             init,
             versionUIInit,
@@ -33,6 +32,7 @@ namespace JNNJMods.CrabGameCheat.Util
             if (init)
                 return;
 
+            //Change the VersionUI
             if (!versionUIInit)
             {
                 try
@@ -45,6 +45,7 @@ namespace JNNJMods.CrabGameCheat.Util
                 catch (Exception) { }
             }
 
+            //Change the AboutUI
             if (!aboutUIInit)
             {
                 try
@@ -75,11 +76,6 @@ namespace JNNJMods.CrabGameCheat.Util
                 init = true;
                 CheatLog.Msg("UI Updated!");
             }
-        }
-
-        private static void DiscordButton_onClick()
-        {
-            Application.OpenURL("https://discord.gg/UUhXmhPWfq");
         }
 
     }

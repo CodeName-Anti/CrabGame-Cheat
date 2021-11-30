@@ -33,6 +33,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
                     string stringVersion = jArr[0].ToObject<JObject>().GetValue("tag_name").ToObject<string>();
 
+                    //Compare GitHub and Local Version
                     Version git = new(stringVersion);
                     Version current = Assembly.GetExecutingAssembly().GetName().Version;
 

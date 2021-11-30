@@ -32,6 +32,9 @@ namespace JNNJMods.CrabGameCheat.Chat
             SendLocalMessage(GetHelpMessage());
         }
 
+        /// <summary>
+        /// Send the invalid steam user message.
+        /// </summary>
         private static void InvalidSteamUser()
         {
             SendLocalMessage("<color=red>Please enter a valid User!</color>");
@@ -56,6 +59,7 @@ namespace JNNJMods.CrabGameCheat.Chat
         [ChatCommand("Toggle", "Toggle a module.")]
         public static void Toggle(string message, string[] args)
         {
+            //Loop trough all modules to find toggleables
             foreach(ModuleBase mod in Config.Instance.Modules)
             {
                 if(mod is SingleElementModule<ToggleInfo>)

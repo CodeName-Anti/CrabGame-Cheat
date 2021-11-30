@@ -11,7 +11,7 @@ namespace JNNJMods.CrabGameCheat.Util
 {
     public class Config
     {
-
+        [JsonIgnore]
         public static Config Instance { get; private set; }
 
         public List<ModuleBase> Modules { get; private set; }
@@ -41,6 +41,10 @@ namespace JNNJMods.CrabGameCheat.Util
             Modules = GetModules(gui);
         }
 
+        /// <summary>
+        /// Writes the Config to a File.
+        /// </summary>
+        /// <param name="file"></param>
         public void WriteToFile(string file)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(file));
@@ -48,6 +52,12 @@ namespace JNNJMods.CrabGameCheat.Util
             File.WriteAllText(file, ToJson());
         }
 
+        /// <summary>
+        /// Reads the Config from a File.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="gui"></param>
+        /// <returns></returns>
         public static Config FromFile(string file, ClickGUI gui)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(file));
@@ -78,11 +88,21 @@ namespace JNNJMods.CrabGameCheat.Util
             return config;
         }
 
+        /// <summary>
+        /// Converts the current Instance to json.
+        /// </summary>
+        /// <returns></returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
+        /// <summary>
+        /// Reads the Config from a json string.
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="gui"></param>
+        /// <returns></returns>
         public static Config FromJson(string json, ClickGUI gui)
         {
             try
