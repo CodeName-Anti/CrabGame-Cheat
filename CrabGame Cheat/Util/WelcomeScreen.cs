@@ -27,7 +27,7 @@ namespace JNNJMods.CrabGameCheat.Util
                     using var client = new WebClient();
                     //Some random user agent because with others it responds with 403
                     client.Headers.Add("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0");
-                    string json = client.DownloadString("https://api.github.com/repos/DasJNNJ/CrabGame-Cheat/releases");
+                    string json = client.DownloadString("https://api.github.com/repos/CodeName-Anti/CrabGame-Cheat/releases");
 
                     JArray jArr = JArray.Parse(json);
 
