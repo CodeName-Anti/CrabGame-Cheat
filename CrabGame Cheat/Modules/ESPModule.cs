@@ -95,9 +95,11 @@ namespace JNNJMods.CrabGameCheat.Modules
             }
         }
 
-        private void ExecutePlayer(MonoBehaviourPublicCSstReshTrheObplBojuUnique manager, Action<GameObject> ac)
+        private void ExecutePlayer(PlayerManager manager, Action<GameObject> ac)
         {
-            List<GameObject> outlines = new List<GameObject>();
+            if (manager == null) return;
+
+            List<GameObject> outlines = new();
 
             var customization = manager.playerCustomization;
 
@@ -114,10 +116,12 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             if (!InGame) return;
 
-            if (!Element.GetValue<bool>())
+            bool toggled = Element.GetValue<bool>();
+
+            if (!toggled)
                 return;
 
-            SetEsp(Element.GetValue<bool>());
+            SetEsp(toggled);
 
             esp.Draw(espTargets);
 

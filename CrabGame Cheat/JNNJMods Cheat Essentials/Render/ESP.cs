@@ -19,7 +19,7 @@ namespace JNNJMods.UI.Utils
         public Color StringColor = Color.green;
         public int StringFontSize = 25;
 
-        private static readonly Material LineMaterial = new Material(Shader.Find("Hidden/Internal-Colored"));
+        private static readonly Material LineMaterial = new(Shader.Find("Hidden/Internal-Colored"));
 
         public ESP()
         {
@@ -66,12 +66,15 @@ namespace JNNJMods.UI.Utils
         public void Draw(GameObject[] targets, string[] names)
         {
             Rect rect = default;
-            if (targets == null)
-            {
+
+            if (targets == null || names == null)
                 return;
-            }
+
             for (int i = 0; i < targets.Length; i++)
             {
+                if (targets[i] == null)
+                    continue;
+
                 Vector3 vector = targets[i].transform.position;
                 Vector3 vector2 = vector;
                 vector2.y += 1.8f;
@@ -90,7 +93,7 @@ namespace JNNJMods.UI.Utils
 
                 if (String)
                 {
-                    Vector2 txtPos = new Vector2(rect.x, rect.y - 40);
+                    Vector2 txtPos = new(rect.x, rect.y - 40);
 
                     DrawString(txtPos, names[i], StringColor, StringFontSize, false);
                 }
@@ -164,10 +167,10 @@ namespace JNNJMods.UI.Utils
         /// <param name="thickness"></param>
         private static void DrawRectangle(Rect rect, Color color, int thickness)
         {
-            Vector3 vector = new Vector3(rect.x, rect.y, 0f);
-            Vector3 vector2 = new Vector3(rect.x + rect.width, rect.y, 0f);
-            Vector3 vector3 = new Vector3(rect.x + rect.width, rect.y + rect.height, 0f);
-            Vector3 vector4 = new Vector3(rect.x, rect.y + rect.height, 0f);
+            Vector3 vector = new(rect.x, rect.y, 0f);
+            Vector3 vector2 = new(rect.x + rect.width, rect.y, 0f);
+            Vector3 vector3 = new(rect.x + rect.width, rect.y + rect.height, 0f);
+            Vector3 vector4 = new(rect.x, rect.y + rect.height, 0f);
             DrawLine(vector, vector2, color, thickness);
             DrawLine(vector2, vector3, color, thickness);
             DrawLine(vector3, vector4, color, thickness);
