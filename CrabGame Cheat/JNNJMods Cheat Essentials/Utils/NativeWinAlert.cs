@@ -9,13 +9,18 @@ namespace JNNJMods.Utils
         [DllImport("user32.dll")]
         private static extern IntPtr GetActiveWindow();
 
-        public static IntPtr GetWindowHandle()
+        private static IntPtr GetWindowHandle()
         {
             return GetActiveWindow();
         }
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern int MessageBox(IntPtr hwnd, string lpText, string lpCaption, uint uType);
+        public static extern int MessageBox(IntPtr hwnd, string lpText, string lpCaption, uint uType);
+
+        public static int MessageBox(string text, string caption, uint type)
+        {
+            return MessageBox(GetWindowHandle(), text, caption, type);
+        }
 
         /// <summary>
         /// Shows Error alert box with OK button.

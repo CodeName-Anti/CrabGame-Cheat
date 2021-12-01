@@ -31,10 +31,8 @@ namespace JNNJMods.CrabGameCheat.Util
         /// <param name="url">Download URL</param>
         public static void DownloadFile(string fileName, string url)
         {
-            using (var client = new WebClient())
-            {
-                client.DownloadFile(url, fileName);
-            }
+            using var client = new WebClient();
+            client.DownloadFile(url, fileName);
         }
 
         /// <summary>

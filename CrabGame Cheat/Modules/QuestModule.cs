@@ -41,6 +41,10 @@ namespace JNNJMods.CrabGameCheat.Modules
         private void CompleteDaily()
         {
             QuestManager.Instance.CompleteQuest();
+
+            SaveManager.Instance.state.AddQuestProgress(187);
+
+            SaveManager.Instance.Save();
         }
     }
 }

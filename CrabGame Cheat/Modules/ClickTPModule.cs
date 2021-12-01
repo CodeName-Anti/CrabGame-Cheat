@@ -2,8 +2,6 @@
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using System.Reflection;
-using UnhollowerRuntimeLib;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
@@ -30,7 +28,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         private static Vector3 FindTpPos()
         {
             Transform playerCam = Instances.PlayerMovement.playerCam;
-            if (Physics.Raycast(playerCam.position, playerCam.forward, out RaycastHit raycastHit, 5000f))
+            if (Physics.Raycast(playerCam.position, playerCam.forward, out RaycastHit raycastHit, 5000f, Instances.PlayerMovement.whatIsGround))
             {
                 Vector3 b = Vector3.one;
 

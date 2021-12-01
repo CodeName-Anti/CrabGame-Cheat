@@ -20,11 +20,12 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             base.Init(gui, json);
 
-            ToggleInfo speedToggle = new ToggleInfo(ID, Name, false, true);
+            ToggleInfo speedToggle = new(ID, Name, false, true);
             speedToggle.ToggleChanged += SpeedToggle_ToggleChanged;
             Elements.Add(speedToggle);
 
-            SliderInfo speedSlider = new SliderInfo(ID, 1, 20);
+            // haha funny number
+            SliderInfo speedSlider = new(ID, 1, 69);
             speedSlider.ValueChanged += SpeedSlider_ValueChanged;
 
             Elements.Add(speedSlider);
