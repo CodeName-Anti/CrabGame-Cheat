@@ -7,7 +7,6 @@ namespace JNNJMods.Render
     {
         public static void UnOutline(GameObject obj)
         {
-            ClassInjector.RegisterTypeInIl2Cpp<Outline>();
             var outline = obj.GetComponent<Outline>();
 
             if(outline != null)
@@ -19,8 +18,6 @@ namespace JNNJMods.Render
 
         public static void Outline(GameObject obj, Color color, int width)
         {
-            
-
             if(HasComponent<Outline>(obj))
             {
                 UnOutline(obj);

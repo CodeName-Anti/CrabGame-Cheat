@@ -1,4 +1,5 @@
-﻿using JNNJMods.Utils;
+﻿using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.Utils;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Net;
@@ -22,32 +23,7 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 init = true;
 
-                try
-                {
-                    using var client = new WebClient();
-                    //Some random user agent because with others it responds with 403
-                    client.Headers.Add("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0");
-                    string json = client.DownloadString("https://api.github.com/repos/CodeName-Anti/CrabGame-Cheat/releases");
-
-                    JArray jArr = JArray.Parse(json);
-
-                    string stringVersion = jArr[0].ToObject<JObject>().GetValue("tag_name").ToObject<string>();
-
-                    //Compare GitHub and Local Version
-                    Version git = new(stringVersion);
-                    Version current = Assembly.GetExecutingAssembly().GetName().Version;
-
-                    int result = current.CompareTo(git);
-
-                    if (result < 0)
-                    {
-                        updateAvailable = true;
-                    }
-                }
-                catch (Exception)
-                {
-                    CheatLog.Warning("Couldn't fetch Updates from GitHub!");
-                }
+                updateAvailable = AutoUpdate.UpdateAvailable;
             }
 
             Event e = Event.current;

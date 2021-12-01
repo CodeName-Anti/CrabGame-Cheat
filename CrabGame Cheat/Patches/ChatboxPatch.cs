@@ -61,45 +61,51 @@ namespace JNNJMods.CrabGameCheat.Patches
         [HarmonyPrefix]
         public static bool SendMessage(ref ChatBox __instance, string param_1)
         {
-            string message = param_1;
-            //Get all Commands
-            if (commands == null)
-                commands = ChatCommandAttribute.GetChatCommands();
-
-            //Execute Commands
-            foreach (KeyValuePair<ChatCommandAttribute, MethodInfo> entry in commands)
+            try
             {
-                if (message.StartsWith(CommandPrefix + entry.Key.Command, System.StringComparison.OrdinalIgnoreCase))
+                string message = param_1;
+                //Get all Commands
+                if (commands == null)
+                    commands = ChatCommandAttribute.GetChatCommands();
+
+                //Execute Commands
+                foreach (KeyValuePair<ChatCommandAttribute, MethodInfo> entry in commands)
                 {
-                    string[] args = message.Split(' ');
-
-                    string messageParam = message.Replace(args[0] + " ", "");
-
-                    args = args.Where(arg => !arg.Equals(args[0])).ToArray();
-
-                    try
+                    if (message.StartsWith(CommandPrefix + entry.Key.Command, System.StringComparison.OrdinalIgnoreCase))
                     {
-                        entry.Value.Invoke(null, new object[] { messageParam, args });
-                    }
-                    catch (Exception e)
-                    {
-                        CheatLog.Error(e.ToString());
-                    }
+                        string[] args = message.Split(' ');
 
+                        string messageParam = message.Replace(args[0] + " ", "");
+
+                        args = args.Where(arg => !arg.Equals(args[0])).ToArray();
+
+                        try
+                        {
+                            entry.Value.Invoke(null, new object[] { messageParam, args });
+                        }
+                        catch (Exception e)
+                        {
+                            CheatLog.Error(e.ToString());
+                        }
+
+                        HideAndClearChat(__instance);
+
+                        return false;
+                    }
+                }
+
+                //Send help message if no Command has been found
+                if (message.StartsWith(CommandPrefix))
+                {
+                    SendHelpMessage();
                     HideAndClearChat(__instance);
-
                     return false;
                 }
-            }
-
-            //Send help message if no Command has been found
-            if (message.StartsWith(CommandPrefix))
+            } catch(Exception e)
             {
-                SendHelpMessage();
-                HideAndClearChat(__instance);
-                return false;
+                CheatLog.Error("Chat Commands Error: " + e.ToString());
             }
-
+            
             return true;
         }
     }
