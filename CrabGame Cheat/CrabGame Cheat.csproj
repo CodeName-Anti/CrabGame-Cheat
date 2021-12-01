@@ -86,6 +86,7 @@
     <Compile Include="Translators\Instances.cs" />
     <Compile Include="Translators\TranslationsExtensions.cs" />
     <Compile Include="Util\AntiCheat.cs" />
+    <Compile Include="Util\AutoUpdate.cs" />
     <Compile Include="Util\CheatLog.cs" />
     <Compile Include="Util\Config\CheatModuleAttribute.cs" />
     <Compile Include="Util\Config\Config.cs" />

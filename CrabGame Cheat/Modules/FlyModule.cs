@@ -1,4 +1,5 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
+﻿using CodeStage.AntiCheat.ObscuredTypes;
+using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
@@ -25,11 +26,11 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
                 if (Element.GetValue<bool>())
                 {
-                    Instances.PlayerMovement.isUnderwater = true;
+                    Instances.PlayerMovement.isUnderwater = new ObscuredBool(true);
                     Instances.PlayerMovement.SetSwimSpeed(4666f);
                 }
                 else
-                    Instances.PlayerMovement.isUnderwater = false;
+                    Instances.PlayerMovement.isUnderwater = new ObscuredBool(false);
             }
         }
     }
