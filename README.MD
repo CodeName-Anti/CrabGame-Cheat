@@ -6,7 +6,7 @@ A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_
  2. Dowload [CrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat_BepInEx.dll)
  3. Extract the Zip archive in your Crab Game Installation Folder(Steam -> Right Click Crab Game -> Manage -> Browse local Files).
  4. Start the Game and then close it once you are in the Main Menu.
- 5. Create a new Folder in "/BepInEx/plugins" and name it "CrabGame Cheat", then copy the [CrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_BepInEx.dll) into it.
+ 5. Create a new Folder in "/BepInEx/plugins" and name it "CrabGame Cheat", then copy the [CrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat_BepInEx.dll) into it.
 
 ## Features
  - ClickGUI
