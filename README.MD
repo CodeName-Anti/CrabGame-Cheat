@@ -21,7 +21,6 @@ This software is for testing/educational purposes only. We do not encourage usin
 ## Features
  - ClickGUI
  - KeyBinds
- - ChatCommands
  - AimBot
  - AirJump
  - AntiBoundKills
