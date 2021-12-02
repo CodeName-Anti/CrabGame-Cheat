@@ -1,5 +1,9 @@
+
+
 # CrabGame Cheat
-[![Github All Releases](https://img.shields.io/github/downloads/CodeName-Anti/CrabGame-Cheat/total.svg)]() [![Github Latest Release](https://shields.io/github/v/release/CodeName-Anti/CrabGame-Cheat.svg)]()
+[![Github All Releases](https://shields.io/github/downloads/CodeName-Anti/CrabGame-Cheat/total)]()
+[![Github Latest Release](https://shields.io/github/v/release/CodeName-Anti/CrabGame-Cheat)]()
+[![Github Total Lines](https://img.shields.io/tokei/lines/github/CodeName-Anti/CrabGame-Cheat)]()
 
 A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by [DaniDev](https://www.youtube.com/c/DaniDev).
 
