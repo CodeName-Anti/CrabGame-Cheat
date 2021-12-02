@@ -1,11 +1,12 @@
 
-
 # CrabGame Cheat
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O5O178FHD)
+
 [![Github All Releases](https://shields.io/github/downloads/CodeName-Anti/CrabGame-Cheat/total)]()
 [![Github Latest Release](https://shields.io/github/v/release/CodeName-Anti/CrabGame-Cheat)]()
 [![Github Total Lines](https://img.shields.io/tokei/lines/github/CodeName-Anti/CrabGame-Cheat)]()
 
-A Cheat for the Game [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by [DaniDev](https://www.youtube.com/c/DaniDev).
+A Cheat for the [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by [DaniDev](https://www.youtube.com/c/DaniDev).
 
 ## DISCLAIMER
 This software is for testing/educational purposes only. We do not encourage using it when you're not allowed, and will not bear liability for your actions.
