@@ -41,8 +41,7 @@ namespace JNNJMods.Utils
 
         public static MousePoint GetCursorPosition()
         {
-            MousePoint currentMousePoint;
-            var gotPoint = GetCursorPos(out currentMousePoint);
+            var gotPoint = GetCursorPos(out MousePoint currentMousePoint);
             if (!gotPoint) { currentMousePoint = new MousePoint(0, 0); }
             return currentMousePoint;
         }

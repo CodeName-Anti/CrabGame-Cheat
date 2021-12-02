@@ -17,7 +17,7 @@ namespace JNNJMods.Render
 {
     public class Outline : MonoBehaviour
     {
-        private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
+        private static HashSet<Mesh> registeredMeshes = new();
 
         public enum Mode
         {

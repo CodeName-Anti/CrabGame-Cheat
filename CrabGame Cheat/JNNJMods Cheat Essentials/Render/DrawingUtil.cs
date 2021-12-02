@@ -7,7 +7,7 @@ namespace JNNJMods.Render
 
         public static GUIStyle GetTextStyle(int fontSize, Color textColor)
         {
-            GUIStyle style = new GUIStyle(GUI.skin.label)
+            GUIStyle style = new(GUI.skin.label)
             {
                 font = Resources.GetBuiltinResource<Font>("Arial.ttf"),
                 fontSize = fontSize,
