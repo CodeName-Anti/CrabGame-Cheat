@@ -2,7 +2,6 @@
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -22,7 +21,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if (InGame && Input.GetKeyDown(KeyCode.Space) && Element.GetValue<bool>())
+            if (InGame && Utilities.GetKey(SaveManager.Instance.state.jump) && Element.GetValue<bool>())
             {
                 var velocity = Instances.PlayerMovement.GetRb().velocity;
 

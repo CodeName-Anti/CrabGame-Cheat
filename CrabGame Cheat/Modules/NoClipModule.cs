@@ -19,22 +19,18 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             return new ToggleInfo(windowId, Name, false, true);
         }
+		
 
-		private static bool GetKey(int key)
-        {
-			return Input.GetKey((KeyCode)key);
-        }
-
-        public override void FixedUpdate()
+		public override void FixedUpdate()
         {
 			if(InGame && Element.GetValue<bool>())
             {
 				PlayerSave save = SaveManager.Instance.state;
-				if (!GetKey(save.jump) ||
-					!GetKey(save.forward) ||
-					!GetKey(save.backwards) ||
-					!GetKey(save.left) ||
-					!GetKey(save.right))
+				if (!Utilities.GetKey(save.jump) ||
+					!Utilities.GetKey(save.forward) ||
+					!Utilities.GetKey(save.backwards) ||
+					!Utilities.GetKey(save.left) ||
+					!Utilities.GetKey(save.right))
 				{
 					Rigidbody rb1 = Instances.PlayerMovement.GetRb();
 					rb1.AddForce(Vector3.up * 65);
@@ -49,27 +45,27 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
 				PlayerSave save = SaveManager.Instance.state;
 				Instances.PlayerMovement.GetRb().velocity = new Vector3(0f, 0f, 0f);
-				float speed = Input.GetKey(KeyCode.LeftControl) ? 0.5f : (GetKey(save.sprint) ? 1f : 0.5f);
+				float speed = Input.GetKey(KeyCode.LeftControl) ? 0.5f : (Utilities.GetKey(save.sprint) ? 1f : 0.5f);
 
-				if (GetKey(save.jump))
+				if (Utilities.GetKey(save.jump))
 				{
 					PlayerStatus.Instance.transform.position = new Vector3(PlayerStatus.Instance.transform.position.x, PlayerStatus.Instance.transform.position.y + speed, PlayerStatus.Instance.transform.position.z);
 				}
 
 				Vector3 playerTransformPosVec = PlayerStatus.Instance.transform.position;
-				if (GetKey(save.forward))
+				if (Utilities.GetKey(save.forward))
 				{
 					PlayerStatus.Instance.transform.position = new Vector3(playerTransformPosVec.x + Camera.main.transform.forward.x * Camera.main.transform.up.y * speed, playerTransformPosVec.y + Camera.main.transform.forward.y * speed, playerTransformPosVec.z + Camera.main.transform.forward.z * Camera.main.transform.up.y * speed);
 				}
-				if (GetKey(save.backwards))
+				if (Utilities.GetKey(save.backwards))
 				{
 					PlayerStatus.Instance.transform.position = new Vector3(playerTransformPosVec.x - Camera.main.transform.forward.x * Camera.main.transform.up.y * speed, playerTransformPosVec.y - Camera.main.transform.forward.y * speed, playerTransformPosVec.z - Camera.main.transform.forward.z * Camera.main.transform.up.y * speed);
 				}
-				if (GetKey(save.right))
+				if (Utilities.GetKey(save.right))
 				{
 					PlayerStatus.Instance.transform.position = new Vector3(playerTransformPosVec.x + Camera.main.transform.right.x * speed, playerTransformPosVec.y, playerTransformPosVec.z + Camera.main.transform.right.z * speed);
 				}
-				if (GetKey(save.left))
+				if (Utilities.GetKey(save.left))
 				{
 					PlayerStatus.Instance.transform.position = new Vector3(playerTransformPosVec.x - Camera.main.transform.right.x * speed, playerTransformPosVec.y, playerTransformPosVec.z - Camera.main.transform.right.z * speed);
 				}

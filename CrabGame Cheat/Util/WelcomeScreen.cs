@@ -1,9 +1,4 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
-using JNNJMods.Utils;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Net;
-using System.Reflection;
+﻿using JNNJMods.Utils;
 using UnityEngine;
 using static JNNJMods.Render.DrawingUtil;
 
@@ -39,7 +34,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
             DrawWelcome();
         }
-
+        
         static void DrawWelcome()
         {
             if (!draw) return;

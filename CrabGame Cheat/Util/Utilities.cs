@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Util
 {
     public static class Utilities
     {
+
+        public static bool GetKey(int key)
+        {
+            return Input.GetKey((KeyCode)key);
+        }
 
         /// <summary>
         /// Converts a System list to Il2CPP
