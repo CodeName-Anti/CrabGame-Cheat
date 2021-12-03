@@ -68,7 +68,15 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if(InGame && !Gui.Shown && PlayerInput.Instance.active && !PauseUI.paused && !Cursor.visible)
+            if(InGame &&
+                !Gui.Shown &&
+                PlayerInput.Instance.active &&
+                !PauseUI.paused &&
+                !Cursor.visible &&
+                Application.isFocused &&
+                Elements[0].GetValue<bool>()
+                )
+
                 aim.Aim(GetHeads());
         }
 

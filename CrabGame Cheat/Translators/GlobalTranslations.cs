@@ -7,7 +7,7 @@ global using SteamManager = MonoBehaviourPublicObInUIgaStCSBoStcuCSUnique;
 global using GameManager = MonoBehaviourPublicDi2UIObacspDi2UIObUnique;
 global using PlayerManager = MonoBehaviourPublicCSstReshTrheObplBojuUnique;
 global using OnlinePlayerMovement = MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique;
-global using PauseUI = MonoBehaviourPublicTrpaGasemaGaBopaUnique;
+global using PauseUI = MonoBehaviourPublicTrpaGasemaGainBoGapaUnique;
 global using Prompt = MonoBehaviourPublicGaprLi1ObGaprInUnique;
 global using QuestManager = MonoBehaviourPublicLi1QudaDi2InquQuacUnique;
 

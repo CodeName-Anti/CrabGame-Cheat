@@ -207,7 +207,7 @@ namespace JNNJMods.UI
         {
             if (keyBindSelection.Shown) return;
 
-            if (PlayerInput.Instance != null && !Shown && !MonoBehaviourPublicTrpaGasemaGaBopaUnique.paused && !Cursor.visible)
+            if (PlayerInput.Instance != null && !Shown && !PauseUI.paused && !Cursor.visible)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
