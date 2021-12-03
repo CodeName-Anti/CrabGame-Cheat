@@ -129,10 +129,7 @@ namespace JNNJMods.CrabGameCheat
             UIChanger.OnUpdate();
 
             //Run Update on every module
-            config.ExecuteForModules((ModuleBase m) =>
-            {
-                m.Update();
-            });
+            config.ExecuteForModules(m => m.Update());
 
             //Hook Update for ClickGUI
             gui.Update();
@@ -149,13 +146,15 @@ namespace JNNJMods.CrabGameCheat
             }
         }
 
+        public void FixedUpdate()
+        {
+            config.ExecuteForModules(m => m.FixedUpdate());
+        }
+
         public void OnGUI()
         {
             //Run OnGUI on every Module
-            config.ExecuteForModules((ModuleBase m) =>
-            {
-                m.OnGUI();
-            });
+            config.ExecuteForModules(m => m.OnGUI());
 
             //Hook OnGUI for WelcomeScreen
             if (WelcomeScreen.draw)

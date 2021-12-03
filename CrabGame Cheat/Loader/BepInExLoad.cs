@@ -124,6 +124,12 @@ namespace JNNJMods.CrabGameCheat.Loader
             {
                 cheat.OnGUI();
             }
+
+            void FixedUpdate()
+            {
+                cheat.FixedUpdate();
+            }
+
         }
 
     }

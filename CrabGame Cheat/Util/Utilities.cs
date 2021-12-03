@@ -1,8 +1,6 @@
-﻿using HarmonyLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 
@@ -11,7 +9,12 @@ namespace JNNJMods.CrabGameCheat.Util
     public static class Utilities
     {
 
-        //Converts a System list to Il2CPP
+        /// <summary>
+        /// Converts a System list to Il2CPP
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sysList"></param>
+        /// <returns></returns>
         public static Il2CppSystem.Collections.Generic.List<T> ToIL2CPP<T>(this List<T> sysList)
         {
             var cppList = new Il2CppSystem.Collections.Generic.List<T>();
