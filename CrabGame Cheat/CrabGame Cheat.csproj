@@ -65,7 +65,7 @@
     <Compile Include="Modules\Base\SingleElementModule.cs" />
     <Compile Include="Modules\Base\ModuleBase.cs" />
     <Compile Include="Modules\Base\MultiElementModuleBase.cs" />
-    <Compile Include="Modules\FlyModule.cs" />
+    <Compile Include="Modules\NoClipModule.cs" />
     <Compile Include="Modules\GlassBreakerModule.cs" />
     <Compile Include="Modules\GodModeModule.cs" />
     <Compile Include="Modules\MegaJumpModule.cs" />

@@ -58,7 +58,7 @@ namespace JNNJMods.UI
         {
             get
             {
-                List<ElementInfo> infos = new List<ElementInfo>();
+                List<ElementInfo> infos = new();
 
                 foreach (ElementManager em in elementMap.Values)
                 {
@@ -111,8 +111,7 @@ namespace JNNJMods.UI
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
 
-            if (PlayerInput.Instance != null)
-                PlayerInput.Instance.active = false;
+            PauseUI.paused = true;
 
         }
 
@@ -129,9 +128,7 @@ namespace JNNJMods.UI
                 Cursor.visible = prevVisible;
             }
 
-            if (PlayerInput.Instance != null)
-                PlayerInput.Instance.active = true;
-
+            PauseUI.paused = false;
         }
 
         /// <summary>

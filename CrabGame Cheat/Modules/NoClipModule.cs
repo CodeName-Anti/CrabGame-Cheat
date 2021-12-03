@@ -1,25 +1,23 @@
-﻿using CodeStage.AntiCheat.ObscuredTypes;
-using JNNJMods.CrabGameCheat.Translators;
+﻿using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using System;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
     [CheatModule]
-    public class FlyModule : SingleElementModule<ToggleInfo>
+    public class NoClipModule : SingleElementModule<ToggleInfo>
     {
 
-        public FlyModule(ClickGUI gui) : base("Fly", gui, WindowIDs.MOVEMENT)
+        public NoClipModule(ClickGUI gui) : base("NoClip", gui, WindowIDs.MOVEMENT)
         {
 
         }
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return new ToggleInfo(windowId, "Fly", false, true);
+            return new ToggleInfo(windowId, Name, false, true);
         }
 
 		private static bool GetKey(int key)
