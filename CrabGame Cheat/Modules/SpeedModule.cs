@@ -1,5 +1,4 @@
-﻿using CodeStage.AntiCheat.ObscuredTypes;
-using JNNJMods.CrabGameCheat.Translators;
+﻿using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
@@ -24,7 +23,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             speedToggle.ToggleChanged += SpeedToggle_ToggleChanged;
             Elements.Add(speedToggle);
 
-            SliderInfo speedSlider = new(ID, 1, 187);
+            SliderInfo speedSlider = new(ID, 1, 40);
             speedSlider.ValueChanged += SpeedSlider_ValueChanged;
 
             Elements.Add(speedSlider);

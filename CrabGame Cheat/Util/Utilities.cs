@@ -9,6 +9,10 @@ namespace JNNJMods.CrabGameCheat.Util
 {
     public static class Utilities
     {
+        public static bool GetKeyDown(int key)
+        {
+            return Input.GetKeyDown((KeyCode)key);
+        }
 
         public static bool GetKey(int key)
         {

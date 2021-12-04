@@ -125,6 +125,17 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnUpdate()
         {
+            //Hide and Show ClickGUI
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                gui.Shown = false;
+            }
+
+            if (Input.GetKeyDown(config.ClickGuiKeyBind) && !gui.keyBindSelection.Shown)
+            {
+                gui.Shown = !gui.Shown;
+            }
+
             //Hook UIChanger
             UIChanger.OnUpdate();
 
@@ -134,16 +145,6 @@ namespace JNNJMods.CrabGameCheat
             //Hook Update for ClickGUI
             gui.Update();
 
-            //Hide and Show ClickGUI
-            if(Input.GetKeyDown(KeyCode.Escape))
-            {
-                gui.Shown = false;
-            }
-
-            if (Input.GetKeyDown(config.ClickGuiKeyBind) && !gui.keyBindSelection.Shown)
-            {
-                gui.Shown = !gui.Shown;
-            }
         }
 
         public void FixedUpdate()
@@ -153,15 +154,15 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnGUI()
         {
+            //Draw ClickGUI
+            gui.DrawWindows();
+
             //Run OnGUI on every Module
             config.ExecuteForModules(m => m.OnGUI());
 
             //Hook OnGUI for WelcomeScreen
             if (WelcomeScreen.draw)
                 WelcomeScreen.OnGUI();
-
-            //Draw ClickGUI
-            gui.DrawWindows();
 
             int fontSize = 17;
 

@@ -27,10 +27,10 @@ namespace JNNJMods.CrabGameCheat.Modules
                 mask = LayerMask.GetMask("Default", "Player", "Ground")
             };
 
-            ToggleInfo aimBot = new(ID, "AimBot");
+            ToggleInfo aimBot = new(ID, "AimBot", false, true);
             aimBot.ToggleChanged += Aimbot_ToggleChanged;
 
-            ToggleInfo triggerBot = new(ID, "TriggerBot");
+            ToggleInfo triggerBot = new(ID, "TriggerBot", false, true);
             triggerBot.ToggleChanged += TriggerBot_ToggleChanged;
 
             Elements.Add(aimBot);
