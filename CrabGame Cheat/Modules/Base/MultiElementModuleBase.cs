@@ -1,46 +1,41 @@
-﻿using JNNJMods.UI;
+﻿using JNNJMods.CrabGameCheat.Util.KeyBinds;
+using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
     public abstract class MultiElementModuleBase : ModuleBase
     {
-        [JsonIgnore]
         public List<ElementInfo> Elements { get; protected set; }
 
-        [JsonIgnore]
-        public List<KeyCode> KeyBinds
+        public override void SetKeyBinds(KeyBind keybind)
         {
-            get
+            if(Elements == null || Elements.Count == 0)
+                return;
+
+            var keyBindable = Elements.Where(e => e.KeyBindable);
+
+            if (keyBindable.Count() == 0)
+                return;
+
+            if (keyBindable.Count() != keybind.Keys.Length)
+                return;
+
+            int i = 0;
+            foreach(ElementInfo info in keyBindable)
             {
-                List<KeyCode> keys = new List<KeyCode>();
+                info.KeyBind = keybind.Keys[i];
 
-                foreach (ElementInfo info in Elements)
-                {
-                    if (info.KeyBindable)
-                    {
-                        keys.Add(info.KeyBind);
-                    }
-                }
-
-                return keys;
+                i++;
             }
-            set
-            {
-                int i = 0;
-                foreach (ElementInfo info in Elements)
-                {
+        }
 
-                    if (info.KeyBindable)
-                    {
-                        info.KeyBind = value[i];
-                        i++;
-                    }
-                }
-            }
+        public override KeyCode[] GetKeyBinds()
+        {
+            return Elements.Where(e => e.KeyBindable).Select(e => e.KeyBind).ToArray();
         }
 
         public override void Init(ClickGUI gui, bool json = false)

@@ -41,15 +41,18 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         void SpeedToggle_ToggleChanged(bool toggled)
         {
-            var move = Instances.PlayerMovement;
-            if (toggled)
+            if(InGame)
             {
-                move.SetMaxRunSpeed(13 * SpeedAmount);
-                move.SetMaxSpeed(6.5f * SpeedAmount);
-            } else
-            {
-                move.SetMaxRunSpeed(13);
-                move.SetMaxSpeed(6.5f);
+                var move = Instances.PlayerMovement;
+                if (toggled)
+                {
+                    move.SetMaxRunSpeed(13 * SpeedAmount);
+                    move.SetMaxSpeed(6.5f * SpeedAmount);
+                } else
+                {
+                    move.SetMaxRunSpeed(13);
+                    move.SetMaxSpeed(6.5f);
+                }
             }
             
         }

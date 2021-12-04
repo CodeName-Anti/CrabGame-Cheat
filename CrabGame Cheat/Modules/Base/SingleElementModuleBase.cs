@@ -1,4 +1,5 @@
-﻿using JNNJMods.UI;
+﻿using JNNJMods.CrabGameCheat.Util.KeyBinds;
+using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -10,24 +11,6 @@ namespace JNNJMods.CrabGameCheat.Modules
         [JsonIgnore]
         public ElementInfo Element { get; protected set; }
 
-        public void SetKeyBind()
-        {
-            Element.KeyBind = KeyBind;
-        }
-
-        [JsonIgnore]
-        public KeyCode KeyBind
-        {
-            get
-            {
-                return Element.KeyBind;
-            }
-            set
-            {
-                if (Element.KeyBindable)
-                    Element.KeyBind = value;
-            }
-        }
 
         public SingleElementModuleBase(string name, ClickGUI gui, WindowIDs windowId) : base(name, gui, windowId)
         {
@@ -38,7 +21,17 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             base.Init(gui, json);
             gui.AddElement(Element = CreateElement(ID));
-            SetKeyBind();
+        }
+
+        public override void SetKeyBinds(KeyBind keybind)
+        {
+            if(keybind.Keys.Length > 0)
+                Element.KeyBind = keybind.Keys[0];
+        }
+
+        public override KeyCode[] GetKeyBinds()
+        {
+            return new KeyCode[] { Element.KeyBind };
         }
 
         /// <summary>

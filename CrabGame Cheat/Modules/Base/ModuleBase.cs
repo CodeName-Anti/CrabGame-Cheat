@@ -1,8 +1,10 @@
 ﻿using HarmonyLib;
 using JNNJMods.CrabGameCheat.Loader;
 using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.CrabGameCheat.Util.KeyBinds;
 using JNNJMods.UI;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -60,6 +62,11 @@ namespace JNNJMods.CrabGameCheat.Modules
             Init(gui);
         }
 
+        public virtual void SetKeyBinds(KeyBind keybind) { }
+
+        public virtual KeyCode[] GetKeyBinds() { return new KeyCode[0]; }
+
+        
         public virtual void Update() { }
 
         public virtual void FixedUpdate() { }

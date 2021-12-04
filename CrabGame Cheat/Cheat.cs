@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using JNNJMods.CrabGameCheat.Modules;
 using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.CrabGameCheat.Util.KeyBinds;
 using JNNJMods.Render;
 using JNNJMods.UI;
 using System;
@@ -64,17 +65,7 @@ namespace JNNJMods.CrabGameCheat
 
             ClickGUI.Instance.GetWindow((int)WindowIDs.LobbyOwner).Visible = false;
 
-            //Read Config
-            try
-            {
-                config = Config.FromFile(ConfigPaths.ConfigFile, gui);
-            }
-            catch (Exception) { }
-
-            if (config == null)
-            {
-                config = new Config(gui);
-            }
+            config = new Config(gui);
 
             //Create RainbowColor for watermark
             rainbow = new RainbowColor(.2f);
@@ -83,16 +74,16 @@ namespace JNNJMods.CrabGameCheat
         }
 
         /// <summary>
-        /// Saves Config every 5 minutes.
+        /// Saves Config every 2 minutes.
         /// </summary>
-        private async void ConfigSaver()
+        private async void KeyBindSaver()
         {
             while(saveConfig)
             {
-                await Task.Delay(5 * 60 * 1000);
+                await Task.Delay(2 * 60 * 1000);
                 try
                 {
-                    config.WriteToFile(ConfigPaths.ConfigFile);
+                    KeyBindManager.Instance.WriteToFile(ConfigPaths.KeyBindFile);
                 } catch(Exception)
                 {
                 }
@@ -102,7 +93,7 @@ namespace JNNJMods.CrabGameCheat
         public void OnApplicationQuit()
         {
             saveConfig = false;
-            config.WriteToFile(ConfigPaths.ConfigFile);
+            KeyBindManager.Instance.WriteToFile(ConfigPaths.KeyBindFile);
         }
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -123,7 +114,9 @@ namespace JNNJMods.CrabGameCheat
             AntiCheat.LateStopAntiCheat();
             WelcomeScreen.draw = true;
 
-            ConfigSaver();
+            KeyBindManager.ReadFromFile(ConfigPaths.KeyBindFile);
+
+            KeyBindSaver();
         }
 
         public void OnUpdate()
