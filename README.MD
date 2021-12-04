@@ -6,7 +6,7 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/CodeName-Anti/CrabGame-Cheat/total?color=%23FF8C00&style=flat-square)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/CodeName-Anti/CrabGame-Cheat?style=flat-square)
 
-A Cheat for the [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by [DaniDev](https://www.youtube.com/c/DaniDev).
+A Cheat for [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by [DaniDev](https://www.youtube.com/c/DaniDev).
 
 ## DISCLAIMER
 This software is for testing/educational purposes only. We do not encourage using it when you're not allowed, and will not bear liability for your actions.
