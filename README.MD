@@ -39,6 +39,7 @@ This software is for testing/educational purposes only. We do not encourage usin
  - AntiBoundKills
  - ClickTP
  - ESP
+ - ForceStart(LobbyOwner only)
  - Fly
  - GlassBreaker
  - GodMode
