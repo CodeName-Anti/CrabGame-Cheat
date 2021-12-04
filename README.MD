@@ -1,4 +1,5 @@
 
+
 # CrabGame Cheat
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O5O178FHD)
 
@@ -10,7 +11,20 @@ A Cheat for the [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/
 ## DISCLAIMER
 This software is for testing/educational purposes only. We do not encourage using it when you're not allowed, and will not bear liability for your actions.
 
-## Installation
+## Installing/Updating with the Installer
+
+### Installing
+ 1. Download the [CrabGame Cheat Installer](%28https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_Installer.exe).
+ 2. Open the Installer.
+ 3. Press the Install Button
+
+### Updating
+1. Download the [CrabGame Cheat Installer](%28https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_Installer.exe) if you haven't already.
+ 2. Open the Installer.
+ 3. Press the Update Button.
+
+
+## Manual Installation
  1. Download the [lastest BepInEx Build](https://builds.bepis.io/projects/bepinex_be), the file name should start with "BepInEx_UnityIL2CPP".
  2. Dowload [CrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat_BepInEx.dll)
  3. Extract the Zip archive in your Crab Game Installation Folder(Steam -> Right Click Crab Game -> Manage -> Browse local Files).
