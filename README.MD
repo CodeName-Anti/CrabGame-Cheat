@@ -14,12 +14,12 @@ This software is for testing/educational purposes only. We do not encourage usin
 ## Installing/Updating with the Installer
 
 ### Installing
- 1. Download the [CrabGame Cheat Installer](%28https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_Installer.exe).
+ 1. Download the [CrabGame Cheat Installer](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_Installer.exe).
  2. Open the Installer.
  3. Press the Install Button
 
 ### Updating
-1. Download the [CrabGame Cheat Installer](%28https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_Installer.exe) if you haven't already.
+1. Download the [CrabGame Cheat Installer](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_Installer.exe) if you haven't already.
  2. Open the Installer.
  3. Press the Update Button.
 
