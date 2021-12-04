@@ -25,9 +25,16 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private void Element_ButtonPress()
         {
+
+            if (GameManager.Instance != null && GameManager.Instance.gameMode.freezeTimer.field_Private_Single_0 < 18)
+                return;
+
             foreach (var glass in MonoBehaviourPublicObpiInObUnique.Instance.pieces)
             {
                 if (glass == null) continue;
+
+                if (glass.gameObject.name.Contains("Solid")) continue;
+
                 glass.LocalInteract();
                 glass.AllInteract(SteamUser.GetSteamID().m_SteamID);
             }
