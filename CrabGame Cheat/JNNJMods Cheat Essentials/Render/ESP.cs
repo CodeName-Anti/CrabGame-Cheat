@@ -19,15 +19,9 @@ namespace JNNJMods.UI.Utils
         public Color StringColor = Color.green;
         public int StringFontSize = 25;
 
-        private static readonly Material LineMaterial = new(Shader.Find("Hidden/Internal-Colored"));
+        public static Texture2D lineTex;
 
-        public ESP()
-        {
-            LineMaterial.hideFlags = HideFlags.HideAndDontSave;
-            LineMaterial.shader.hideFlags = HideFlags.HideAndDontSave;
-        }
-
-        public ESP(Color lineColor, Color boxColor, Color stringColor) : this()
+        public ESP(Color lineColor, Color boxColor, Color stringColor)
         {
             LineColor = lineColor;
             BoxColor = boxColor;
@@ -96,7 +90,7 @@ namespace JNNJMods.UI.Utils
 
             if (Line)
             {
-                DrawLine(new Vector3(Screen.width / 2f, Screen.height / 2f), new Vector3(rect.center.x, rect.center.y), LineColor);
+                DrawLine(new Vector3(Screen.width / 2f, Screen.height / 2f), new Vector3(rect.center.x, rect.center.y), LineColor, 2);
             }
         }
 
@@ -137,14 +131,27 @@ namespace JNNJMods.UI.Utils
         /// <param name="end"></param>
         /// <param name="color"></param>
         /// <param name="thickness"></param>
-        private static void DrawLine(Vector3 start, Vector3 end, Color color)
+        private static void DrawLine(Vector2 pointA, Vector2 pointB, Color color, float width)
         {
-            LineMaterial.SetPass(0);
-            GL.Begin(1);
-            GL.Color(color);
-            GL.Vertex3(start.x, start.y, start.z);
-            GL.Vertex3(end.x, end.y, end.z);
-            GL.End();
+            Matrix4x4 matrix = GUI.matrix;
+            if (!lineTex)
+            {
+                lineTex = new Texture2D(1, 1);
+                lineTex.SetPixel(1, 1, color);
+
+                lineTex.wrapMode = TextureWrapMode.Repeat;
+                lineTex.Apply();
+
+            }
+            float num = Vector3.Angle(pointB - pointA, Vector2.right);
+            if (pointA.y > pointB.y)
+            {
+                num = -num;
+            }
+            GUIUtility.ScaleAroundPivot(new Vector2((pointB - pointA).magnitude, width), new Vector2(pointA.x, pointA.y + 0.5f));
+            GUIUtility.RotateAroundPivot(num, pointA);
+            GUI.DrawTexture(new Rect(pointA.x, pointA.y, 1f, 1f), lineTex);
+            GUI.matrix = matrix;
         }
 
         /// <summary>
@@ -159,10 +166,10 @@ namespace JNNJMods.UI.Utils
             Vector3 vector2 = new(rect.x + rect.width, rect.y, 0f);
             Vector3 vector3 = new(rect.x + rect.width, rect.y + rect.height, 0f);
             Vector3 vector4 = new(rect.x, rect.y + rect.height, 0f);
-            DrawLine(vector, vector2, color);
-            DrawLine(vector2, vector3, color);
-            DrawLine(vector3, vector4, color);
-            DrawLine(vector4, vector, color);
+            DrawLine(vector, vector2, color, 2);
+            DrawLine(vector2, vector3, color, 2);
+            DrawLine(vector3, vector4, color, 2);
+            DrawLine(vector4, vector, color, 2);
         }
     }
 }
