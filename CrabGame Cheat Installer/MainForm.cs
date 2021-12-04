@@ -86,7 +86,7 @@ namespace CrabGame_Cheat_Installer
                 return;
             }
 
-            InstallButton.Enabled = !IsInstalled();
+            InstallButton.Enabled = !IsCheatInstalled();
 
             if (!InstallButton.Enabled)
             {
@@ -165,19 +165,21 @@ namespace CrabGame_Cheat_Installer
             ZipFile.ExtractToDirectory(zipFile, path);
         }
 
-        private bool IsInstalled()
-        {
-            return File.Exists(pluginFile);
-        }
+        private bool IsCheatInstalled() => File.Exists(pluginFile);
+
+        private bool IsBepInExInstalled() => Directory.Exists(Path.Combine(path, "BepInEx"));
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            if (!IsInstalled())
+            if (!IsBepInExInstalled())
             {
                 InstallBepInEx();
             }
 
-            DownloadCheat();
+            if(!IsCheatInstalled())
+            {
+                DownloadCheat();
+            }
 
             ChangeButton();
         }
