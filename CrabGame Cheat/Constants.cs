@@ -4,7 +4,7 @@
     {
         // Assembly and Plugin related
         public const string
-            Version = "1.6.7.10",
+            Version = "1.6.8.0",
             GUID = "de.jnnj.crabgamecheat";
 
         // GitHub related
