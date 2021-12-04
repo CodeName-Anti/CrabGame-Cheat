@@ -14,7 +14,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         [JsonIgnore]
         private Aimbot aim;
 
-        public AimModule(ClickGUI gui) : base("Aim", gui, WindowIDs.COMBAT)
+        public AimModule(ClickGUI gui) : base("Aim", gui, WindowIDs.Combat)
         {
         }
 

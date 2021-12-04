@@ -9,7 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class NoFallModule : SingleElementModule<ToggleInfo>
     {
 
-        public NoFallModule(ClickGUI gui) : base("NoFall", gui, WindowIDs.PLAYER)
+        public NoFallModule(ClickGUI gui) : base("NoFall", gui, WindowIDs.Player)
         {
 
         }

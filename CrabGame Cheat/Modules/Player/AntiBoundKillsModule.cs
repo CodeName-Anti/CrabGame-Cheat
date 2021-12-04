@@ -12,7 +12,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public float killHeight = -69420187;
 
-        public AntiBoundKillsModule(ClickGUI gui) : base("AntiBound Kills", gui, WindowIDs.PLAYER)
+        public AntiBoundKillsModule(ClickGUI gui) : base("AntiBound Kills", gui, WindowIDs.Player)
         {
 
         }

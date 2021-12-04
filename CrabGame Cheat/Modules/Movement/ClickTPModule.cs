@@ -9,7 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class ClickTPModule : SingleElementModule<ToggleInfo>
     {
-        public ClickTPModule(ClickGUI gui) : base("ClickTP", gui, WindowIDs.MOVEMENT)
+        public ClickTPModule(ClickGUI gui) : base("ClickTP", gui, WindowIDs.Movement)
         {
 
 

@@ -45,7 +45,7 @@ namespace JNNJMods.CrabGameCheat
             {
                 CheatLog.Msg("Class: " + b.DeclaringType.FullName + " Method: " + b.Name);
             }
-
+            
             AntiCheat.StopAntiCheat();
 
             //Create ClickGUI
@@ -55,11 +55,14 @@ namespace JNNJMods.CrabGameCheat
             };
 
             //Add Windows
-            gui.AddWindow((int)WindowIDs.OTHER, "Other", 70, 90, 320, 400);
-            gui.AddWindow((int)WindowIDs.COMBAT, "Combat", 400, 90, 320, 400);
-            gui.AddWindow((int)WindowIDs.MOVEMENT, "Movement", 730, 90, 320, 500);
-            gui.AddWindow((int)WindowIDs.PLAYER, "Player", 1060, 90, 320, 400);
-            gui.AddWindow((int)WindowIDs.RENDER, "Render", 70, 525, 320, 400);
+            gui.AddWindow((int)WindowIDs.Other, "Other", 70, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.Combat, "Combat", 400, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.Movement, "Movement", 730, 90, 320, 500);
+            gui.AddWindow((int)WindowIDs.Player, "Player", 1060, 90, 320, 400);
+            gui.AddWindow((int)WindowIDs.Render, "Render", 70, 525, 320, 400);
+            gui.AddWindow((int)WindowIDs.LobbyOwner, "Owner related", 400, 525, 320, 400);
+
+            ClickGUI.Instance.GetWindow((int)WindowIDs.LobbyOwner).Visible = false;
 
             //Read Config
             try

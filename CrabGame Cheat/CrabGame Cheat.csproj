@@ -55,28 +55,30 @@
     <Compile Include="JNNJMods Cheat Essentials\Utils\WinConsole.cs" />
     <Compile Include="Cheat.cs" />
     <Compile Include="Loader\BepInExLoad.cs" />
-    <Compile Include="Modules\AimModule.cs" />
-    <Compile Include="Modules\AirJumpModule.cs" />
-    <Compile Include="Modules\AntiBoundKillsModule.cs" />
-    <Compile Include="Modules\ClickTPModule.cs" />
-    <Compile Include="Modules\ESPModule.cs" />
+    <Compile Include="Modules\Combat\AimModule.cs" />
+    <Compile Include="Modules\LobbyOwner\ForceStartModule.cs" />
+    <Compile Include="Modules\Movement\AirJumpModule.cs" />
+    <Compile Include="Modules\Player\AntiBoundKillsModule.cs" />
+    <Compile Include="Modules\Movement\ClickTPModule.cs" />
+    <Compile Include="Modules\Render\ESPModule.cs" />
     <Compile Include="Modules\Base\SingleElementModuleBase.cs" />
     <Compile Include="Modules\Base\SingleElementModule.cs" />
     <Compile Include="Modules\Base\ModuleBase.cs" />
     <Compile Include="Modules\Base\MultiElementModuleBase.cs" />
-    <Compile Include="Modules\NoClipModule.cs" />
-    <Compile Include="Modules\GlassBreakerModule.cs" />
-    <Compile Include="Modules\GodModeModule.cs" />
-    <Compile Include="Modules\MegaJumpModule.cs" />
-    <Compile Include="Modules\NoFallModule.cs" />
-    <Compile Include="Modules\NoFreezeModule.cs" />
-    <Compile Include="Modules\NoPushModule.cs" />
-    <Compile Include="Modules\OwnerHighlightModule.cs" />
-    <Compile Include="Modules\QuestModule.cs" />
-    <Compile Include="Modules\SpeedModule.cs" />
+    <Compile Include="Modules\Movement\NoClipModule.cs" />
+    <Compile Include="Modules\Other\GlassBreakerModule.cs" />
+    <Compile Include="Modules\Player\GodModeModule.cs" />
+    <Compile Include="Modules\Movement\MegaJumpModule.cs" />
+    <Compile Include="Modules\Player\NoFallModule.cs" />
+    <Compile Include="Modules\Movement\NoFreezeModule.cs" />
+    <Compile Include="Modules\Movement\NoPushModule.cs" />
+    <Compile Include="Modules\Render\OwnerHighlightModule.cs" />
+    <Compile Include="Modules\Other\QuestModule.cs" />
+    <Compile Include="Modules\Movement\SpeedModule.cs" />
     <Compile Include="Patches\GameManagerPatch.cs" />
     <Compile Include="Patches\PlayerStatusPatch.cs" />
     <Compile Include="Patches\PromptPatch.cs" />
+    <Compile Include="Patches\SteamManagerPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Translators\GlobalTranslations.cs" />
     <Compile Include="Translators\Instances.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Util\Config\Config.cs" />
     <Compile Include="Util\Config\ConfigPaths.cs" />
     <Compile Include="Util\GameObjectExtensions.cs" />
+    <Compile Include="Util\HarmonyMethodFinder.cs" />
     <Compile Include="Util\RainbowColor.cs" />
     <Compile Include="Util\UIChanger.cs" />
     <Compile Include="Util\WelcomeScreen.cs" />
@@ -467,5 +470,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

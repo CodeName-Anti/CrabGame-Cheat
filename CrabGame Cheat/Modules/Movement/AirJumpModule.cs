@@ -10,7 +10,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class AirJumpModule : SingleElementModule<ToggleInfo>
     {
 
-        public AirJumpModule(ClickGUI gui) : base("AirJump", gui, WindowIDs.MOVEMENT)
+        public AirJumpModule(ClickGUI gui) : base("AirJump", gui, WindowIDs.Movement)
         {
 
         }

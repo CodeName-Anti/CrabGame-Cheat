@@ -11,7 +11,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class OwnerHighlightModule : SingleElementModule<ToggleInfo>
     {
-        public OwnerHighlightModule(ClickGUI gui) : base("Owner Highlight", gui, WindowIDs.RENDER)
+        public OwnerHighlightModule(ClickGUI gui) : base("Owner Highlight", gui, WindowIDs.Render)
         {
         }
 
@@ -61,7 +61,7 @@ namespace JNNJMods.CrabGameCheat.Modules
                 }
                 else
                 {
-                    List<GameObject> outlines = new List<GameObject>();
+                    List<GameObject> outlines = new();
 
                     var customization = owner.playerCustomization;
 

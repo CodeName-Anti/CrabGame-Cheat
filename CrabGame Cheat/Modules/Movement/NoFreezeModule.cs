@@ -8,7 +8,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class NoFreezeModule : SingleElementModule<ToggleInfo>
     {
 
-        public NoFreezeModule(ClickGUI gui) : base("NoFreeze", gui, WindowIDs.MOVEMENT)
+        public NoFreezeModule(ClickGUI gui) : base("NoFreeze", gui, WindowIDs.Movement)
         {
 
         }

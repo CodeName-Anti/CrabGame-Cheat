@@ -9,7 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     {
         private static PlayerSave Save => SaveManager.Instance.state;
 
-        public QuestModule(ClickGUI gui) : base("Quest", gui, WindowIDs.OTHER)
+        public QuestModule(ClickGUI gui) : base("Quest", gui, WindowIDs.Other)
         {
         }
 

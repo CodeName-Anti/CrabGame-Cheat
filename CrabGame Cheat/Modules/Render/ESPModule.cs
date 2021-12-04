@@ -28,7 +28,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private ESP esp;
 
-        public ESPModule(ClickGUI gui) : base("ESP", gui, WindowIDs.RENDER) { }
+        public ESPModule(ClickGUI gui) : base("ESP", gui, WindowIDs.Render) { }
 
         public override void Init(ClickGUI gui, bool json = false)
         {

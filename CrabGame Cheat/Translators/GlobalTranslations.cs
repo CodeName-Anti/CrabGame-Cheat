@@ -10,6 +10,7 @@ global using OnlinePlayerMovement = MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUniqu
 global using PauseUI = MonoBehaviourPublicTrpaGasemaGainBoGapaUnique;
 global using Prompt = MonoBehaviourPublicGaprLi1ObGaprInUnique;
 global using QuestManager = MonoBehaviourPublicLi1QudaDi2InquQuacUnique;
+global using GameLoop = MonoBehaviourPublicObInLi1GagasmLi1GaUnique;
 
 namespace JNNJMods.CrabGameCheat.Translators
 {

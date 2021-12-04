@@ -9,7 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class GodModeModule : SingleElementModule<ToggleInfo>
     {
-        public GodModeModule(ClickGUI gui) : base("GodMode", gui, WindowIDs.PLAYER)
+        public GodModeModule(ClickGUI gui) : base("GodMode", gui, WindowIDs.Player)
         {
         }
 

@@ -9,7 +9,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class GlassBreakerModule : SingleElementModule<ButtonInfo>
     {
 
-        public GlassBreakerModule(ClickGUI gui) : base("GlassBreaker", gui, WindowIDs.OTHER)
+        public GlassBreakerModule(ClickGUI gui) : base("GlassBreaker", gui, WindowIDs.Other)
         {
 
         }

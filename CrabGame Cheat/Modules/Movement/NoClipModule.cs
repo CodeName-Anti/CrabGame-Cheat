@@ -10,7 +10,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     public class NoClipModule : SingleElementModule<ToggleInfo>
     {
 
-        public NoClipModule(ClickGUI gui) : base("NoClip", gui, WindowIDs.MOVEMENT)
+        public NoClipModule(ClickGUI gui) : base("NoClip", gui, WindowIDs.Movement)
         {
 
         }

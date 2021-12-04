@@ -13,7 +13,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private float jumpForce;
 
-        public MegaJumpModule(ClickGUI gui) : base("Mega Jump", gui, WindowIDs.MOVEMENT)
+        public MegaJumpModule(ClickGUI gui) : base("Mega Jump", gui, WindowIDs.Movement)
         {
 
         }

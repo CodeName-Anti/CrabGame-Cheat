@@ -10,7 +10,7 @@ namespace JNNJMods.CrabGameCheat.Modules
     {
         public float SpeedAmount { get; private set; }
 
-        public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.MOVEMENT)
+        public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.Movement)
         {
 
         }
