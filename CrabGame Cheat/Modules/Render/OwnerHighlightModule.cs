@@ -72,7 +72,7 @@ namespace JNNJMods.CrabGameCheat.Modules
                 if (owner == null)
                     owner = FindOwner();
 
-                if (!owner.TryGetComponent<Outline>(out _))
+                if (owner.GetComponent<Outline>() == null)
                 {
                     Element_ToggleChanged(true);
                 }

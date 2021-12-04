@@ -56,6 +56,7 @@
     <Compile Include="Cheat.cs" />
     <Compile Include="Loader\BepInExLoad.cs" />
     <Compile Include="Modules\Combat\AimModule.cs" />
+    <Compile Include="Modules\Combat\InfinityPunchModule.cs" />
     <Compile Include="Modules\LobbyOwner\ForceStartModule.cs" />
     <Compile Include="Modules\Movement\AirJumpModule.cs" />
     <Compile Include="Modules\Player\AntiBoundKillsModule.cs" />
