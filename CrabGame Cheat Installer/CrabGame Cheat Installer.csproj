@@ -41,7 +41,7 @@
       <HintPath>..\packages\Costura.Fody.5.7.0\lib\netstandard1.0\Costura.dll</HintPath>
     </Reference>
     <Reference Include="FlatUI">
-      <HintPath>..\..\..\..\Downloads\FlatUI.dll</HintPath>
+      <HintPath>.\FlatUI.dll</HintPath>
     </Reference>
     <Reference Include="Gameloop.Vdf, Version=0.6.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Gameloop.Vdf.0.6.1\lib\net45\Gameloop.Vdf.dll</HintPath>
