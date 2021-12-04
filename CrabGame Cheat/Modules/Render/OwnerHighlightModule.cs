@@ -11,6 +11,8 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class OwnerHighlightModule : SingleElementModule<ToggleInfo>
     {
+        private PlayerManager owner;
+
         public OwnerHighlightModule(ClickGUI gui) : base("Owner Highlight", gui, WindowIDs.Render)
         {
         }
@@ -40,35 +42,22 @@ namespace JNNJMods.CrabGameCheat.Modules
 
             if (InGame)
             {
-                var owner = FindOwner();
+                if(owner == null)
+                    owner = FindOwner();
 
                 if (owner == null)
                     return;
 
                 if (toggled)
                 {
-                    List<GameObject> outlines = new();
-
-                    var customization = owner.playerCustomization;
-
-                    outlines.Add(customization.sweater);
-                    outlines.Add(customization.pants);
-
-                    foreach(GameObject obj in outlines)
+                    foreach(GameObject obj in GetOutlines(owner))
                     {
                         OutlineRenderer.Outline(obj, new Color(1F, 0.5333F, 0F), 7);
                     }
                 }
                 else
                 {
-                    List<GameObject> outlines = new();
-
-                    var customization = owner.playerCustomization;
-
-                    outlines.Add(customization.sweater);
-                    outlines.Add(customization.pants);
-
-                    foreach (GameObject obj in outlines)
+                    foreach (GameObject obj in GetOutlines(owner))
                     {
                         OutlineRenderer.UnOutline(obj);
                     }
@@ -76,16 +65,42 @@ namespace JNNJMods.CrabGameCheat.Modules
             }
         }
 
-        private static MonoBehaviourPublicCSstReshTrheObplBojuUnique FindOwner()
+        public override void FixedUpdate()
+        {
+            if(InGame && Element.GetValue<bool>())
+            {
+                if (owner == null)
+                    owner = FindOwner();
+
+                if (!owner.TryGetComponent<Outline>(out _))
+                {
+                    Element_ToggleChanged(true);
+                }
+            }
+        }
+
+        private List<GameObject> GetOutlines(PlayerManager manager)
+        {
+            var customization = manager.playerCustomization;
+            List<GameObject> outlines = new();
+
+            outlines.Add(customization.sweater);
+            outlines.Add(customization.pants);
+
+            return outlines;
+        }
+
+        private static PlayerManager FindOwner()
         {
             var players = GameManager.Instance.activePlayers;
 
-            if (players.ContainsKey(SteamManager.Instance.originalLobbyOwnerId.m_SteamID))
+            foreach(var player in players.Values)
             {
-                return GameManager.Instance.activePlayers[SteamManager.Instance.originalLobbyOwnerId.m_SteamID];
+                if (player.steamProfile.m_SteamID == SteamManager.Instance.originalLobbyOwnerId.m_SteamID)
+                    return player;
             }
-            else
-                return null;
+            
+            return null;
         }
 
     }

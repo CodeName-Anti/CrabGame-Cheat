@@ -63,50 +63,54 @@ namespace JNNJMods.UI.Utils
             Draw(objs.Keys.ToArray(), objs.Values.ToArray());
         }
 
-        public void Draw(GameObject[] targets, string[] names)
+        public void DrawSingle(GameObject target, string name = null)
         {
             Rect rect = default;
+            Vector3 vector = target.transform.position;
+            Vector3 vector2 = vector;
+            vector2.y += 1.8f;
+            vector = Camera.main.WorldToScreenPoint(vector);
+            vector2 = Camera.main.WorldToScreenPoint(vector2);
+            if (vector.z > 0f && vector2.z > 0f)
+            {
+                Vector3 vector3 = GUIUtility.ScreenToGUIPoint(vector);
+                vector3.y = Screen.height - vector3.y;
+                Vector3 vector4 = GUIUtility.ScreenToGUIPoint(vector2);
+                vector4.y = Screen.height - vector4.y;
+                float num = Math.Abs(vector3.y - vector4.y) / 2.2f;
+                float num2 = num / 2f;
+                rect = new Rect(new Vector2(vector4.x - num2, vector4.y), new Vector2(num, vector3.y - vector4.y));
+            }
 
+            if (String)
+            {
+                Vector2 txtPos = new(rect.x, rect.y - 40);
+
+                DrawString(txtPos, name ?? target.name, StringColor, StringFontSize, false);
+            }
+
+            if (Box)
+            {
+                DrawRectangle(rect, BoxColor);
+            }
+
+            if (Line)
+            {
+                DrawLine(new Vector3(Screen.width / 2f, Screen.height / 2f), new Vector3(rect.center.x, rect.center.y), LineColor);
+            }
+        }
+
+        public void Draw(GameObject[] targets, string[] names)
+        {
             if (targets == null || names == null)
                 return;
 
-            for (int i = 0; i < targets.Length; i++)
+            for(int i = 0; i < targets.Length; i++)
             {
                 if (targets[i] == null)
                     continue;
 
-                Vector3 vector = targets[i].transform.position;
-                Vector3 vector2 = vector;
-                vector2.y += 1.8f;
-                vector = Camera.main.WorldToScreenPoint(vector);
-                vector2 = Camera.main.WorldToScreenPoint(vector2);
-                if (vector.z > 0f && vector2.z > 0f)
-                {
-                    Vector3 vector3 = GUIUtility.ScreenToGUIPoint(vector);
-                    vector3.y = Screen.height - vector3.y;
-                    Vector3 vector4 = GUIUtility.ScreenToGUIPoint(vector2);
-                    vector4.y = Screen.height - vector4.y;
-                    float num = Math.Abs(vector3.y - vector4.y) / 2.2f;
-                    float num2 = num / 2f;
-                    rect = new Rect(new Vector2(vector4.x - num2, vector4.y), new Vector2(num, vector3.y - vector4.y));
-                }
-
-                if (String)
-                {
-                    Vector2 txtPos = new(rect.x, rect.y - 40);
-
-                    DrawString(txtPos, names[i], StringColor, StringFontSize, false);
-                }
-
-                if (Box)
-                {
-                    DrawRectangle(rect, BoxColor, 4);
-                }
-
-                if (Line)
-                {
-                    DrawLine(new Vector3(Screen.width / 2f, Screen.height / 2f), new Vector3(rect.center.x, rect.center.y), LineColor, 1);
-                }
+                DrawSingle(targets[i], names[i]);
             }
         }
 
@@ -133,29 +137,13 @@ namespace JNNJMods.UI.Utils
         /// <param name="end"></param>
         /// <param name="color"></param>
         /// <param name="thickness"></param>
-        private static void DrawLine(Vector3 start, Vector3 end, Color color, int thickness)
+        private static void DrawLine(Vector3 start, Vector3 end, Color color)
         {
             LineMaterial.SetPass(0);
-            if (thickness == 0)
-            {
-                return;
-            }
-            if (thickness == 1)
-            {
-                GL.Begin(1);
-                GL.Color(color);
-                GL.Vertex3(start.x, start.y, start.z);
-                GL.Vertex3(end.x, end.y, end.z);
-                GL.End();
-                return;
-            }
-            thickness /= 2;
-            GL.Begin(7);
+            GL.Begin(1);
             GL.Color(color);
-            GL.Vertex3(start.x - thickness, start.y - thickness, start.z - thickness);
-            GL.Vertex3(start.x + thickness, start.y + thickness, start.z + thickness);
-            GL.Vertex3(end.x + thickness, end.y + thickness, end.z + thickness);
-            GL.Vertex3(end.x - thickness, end.y - thickness, end.z - thickness);
+            GL.Vertex3(start.x, start.y, start.z);
+            GL.Vertex3(end.x, end.y, end.z);
             GL.End();
         }
 
@@ -165,16 +153,16 @@ namespace JNNJMods.UI.Utils
         /// <param name="rect"></param>
         /// <param name="color"></param>
         /// <param name="thickness"></param>
-        private static void DrawRectangle(Rect rect, Color color, int thickness)
+        private static void DrawRectangle(Rect rect, Color color)
         {
             Vector3 vector = new(rect.x, rect.y, 0f);
             Vector3 vector2 = new(rect.x + rect.width, rect.y, 0f);
             Vector3 vector3 = new(rect.x + rect.width, rect.y + rect.height, 0f);
             Vector3 vector4 = new(rect.x, rect.y + rect.height, 0f);
-            DrawLine(vector, vector2, color, thickness);
-            DrawLine(vector2, vector3, color, thickness);
-            DrawLine(vector3, vector4, color, thickness);
-            DrawLine(vector4, vector, color, thickness);
+            DrawLine(vector, vector2, color);
+            DrawLine(vector2, vector3, color);
+            DrawLine(vector3, vector4, color);
+            DrawLine(vector4, vector, color);
         }
     }
 }

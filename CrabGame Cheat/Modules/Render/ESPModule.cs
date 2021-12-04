@@ -1,11 +1,8 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.Render;
+﻿using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using JNNJMods.UI.Utils;
-using System;
-using System.Collections.Generic;
+using SteamworksNative;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
@@ -13,19 +10,6 @@ namespace JNNJMods.CrabGameCheat.Modules
     [CheatModule]
     public class ESPModule : SingleElementModule<ToggleInfo>
     {
-
-        private static readonly Action<GameObject>
-            Outline = delegate (GameObject obj)
-            {
-                OutlineRenderer.Outline(obj, Color.red, 7);
-            },
-            UnOutline = delegate (GameObject obj)
-            {
-                OutlineRenderer.UnOutline(obj);
-            };
-
-        private readonly Dictionary<GameObject, string> espTargets = new Dictionary<GameObject, string>();
-
         private ESP esp;
 
         public ESPModule(ClickGUI gui) : base("ESP", gui, WindowIDs.Render) { }
@@ -47,84 +31,23 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private void Element_ToggleChanged(bool toggled)
         {
-            SetEsp(toggled);
-
-        }
-
-        private void SetEsp(bool toggled)
-        {
-            if (toggled)
-            {
-                if (!InGame) return;
-                if (espTargets.Count != GameManager.Instance.activePlayers.Count - 1)
-                {
-                    CheatLog.Msg("Getting ESP-Targets!");
-
-                    //Remove Outline
-                    foreach (GameObject obj in espTargets.Keys)
-                    {
-                        if (obj == null) continue;
-
-                        ExecutePlayer(obj.GetComponent<MonoBehaviourPublicCSstReshTrheObplBojuUnique>(), Outline);
-                    }
-
-                    espTargets.Clear();
-
-                    foreach (var manager in GameManager.Instance.activePlayers.values)
-                    {
-                        if (manager.GetOnlinePlayerMovement() != null)
-                        {
-                            ExecutePlayer(manager, UnOutline);
-
-                            espTargets.Add(manager.GetOnlinePlayerMovement().gameObject, manager.username);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (GameObject obj in espTargets.Keys)
-                {
-                    if (obj == null) continue;
-
-                    ExecutePlayer(obj.GetComponent<MonoBehaviourPublicCSstReshTrheObplBojuUnique>(), UnOutline);
-
-                }
-
-                espTargets.Clear();
-            }
-        }
-
-        private void ExecutePlayer(PlayerManager manager, Action<GameObject> ac)
-        {
-            if (manager == null) return;
-
-            List<GameObject> outlines = new();
-
-            var customization = manager.playerCustomization;
-
-            outlines.Add(customization.sweater);
-            outlines.Add(customization.pants);
-
-            foreach (GameObject obj in outlines)
-            {
-                ac.Invoke(obj);
-            }
         }
 
         public override void OnGUI()
         {
-            if (!InGame) return;
+            if(Element.GetValue<bool>() && InGame)
+            {
+                foreach(var player in GameManager.Instance.activePlayers.Values)
+                {
+                    if (player.steamProfile.m_SteamID == SteamUser.GetSteamID().m_SteamID)
+                        continue;
 
-            bool toggled = Element.GetValue<bool>();
+                    if (player.dead)
+                        continue;
 
-            if (!toggled)
-                return;
-
-            SetEsp(toggled);
-
-            esp.Draw(espTargets);
-
+                    esp.DrawSingle(player.gameObject, player.username);
+                }
+            }
         }
 
     }

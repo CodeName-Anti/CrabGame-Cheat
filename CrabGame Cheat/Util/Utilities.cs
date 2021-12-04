@@ -19,6 +19,18 @@ namespace JNNJMods.CrabGameCheat.Util
             return Input.GetKey((KeyCode)key);
         }
 
+        public static Dictionary<TKey, TValue> ToSystem<TKey, TValue>(this Il2CppSystem.Collections.Generic.Dictionary<TKey, TValue> cppDic)
+        {
+            Dictionary<TKey, TValue> sysDic = new();
+            
+            foreach(var entry in cppDic)
+            {
+                sysDic.Add(entry.key, entry.value);
+            }
+
+            return sysDic;
+        }
+
         /// <summary>
         /// Converts a System list to Il2CPP
         /// </summary>
