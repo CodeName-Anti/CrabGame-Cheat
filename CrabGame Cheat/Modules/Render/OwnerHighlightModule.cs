@@ -52,6 +52,7 @@ namespace JNNJMods.CrabGameCheat.Modules
                 {
                     foreach(GameObject obj in GetOutlines(owner))
                     {
+                        if (obj == null) continue;
                         OutlineRenderer.Outline(obj, new Color(1F, 0.5333F, 0F), 7);
                     }
                 }
@@ -59,6 +60,7 @@ namespace JNNJMods.CrabGameCheat.Modules
                 {
                     foreach (GameObject obj in GetOutlines(owner))
                     {
+                        if (obj == null) continue;
                         OutlineRenderer.UnOutline(obj);
                     }
                 }
@@ -81,11 +83,14 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private List<GameObject> GetOutlines(PlayerManager manager)
         {
-            var customization = manager.playerCustomization;
             List<GameObject> outlines = new();
 
-            outlines.Add(customization.sweater);
-            outlines.Add(customization.pants);
+            if(manager != null)
+            {
+                var customization = manager.playerCustomization;
+                outlines.Add(customization.sweater);
+                outlines.Add(customization.pants);
+            }
 
             return outlines;
         }

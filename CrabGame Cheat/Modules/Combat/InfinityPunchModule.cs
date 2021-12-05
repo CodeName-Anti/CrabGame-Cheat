@@ -26,7 +26,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             CurrentSettings.Instance.UpdateSave();
         }
 
-        public override void Update()
+        public override void FixedUpdate()
         {
             if(InGame && Element.GetValue<bool>())
             {
