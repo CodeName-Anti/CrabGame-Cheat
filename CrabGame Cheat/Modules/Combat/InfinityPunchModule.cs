@@ -1,4 +1,5 @@
-﻿using JNNJMods.CrabGameCheat.Util;
+﻿using JNNJMods.CrabGameCheat.Translators;
+using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 
@@ -30,13 +31,11 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             if(InGame && Element.GetValue<bool>())
             {
-                PunchPlayers[] punchPlayers = UnityEngine.Object.FindObjectsOfType<PunchPlayers>();
-
-                foreach (PunchPlayers punch in punchPlayers)
-                {
-                    punch.field_Private_Boolean_0 = true;
-                    punch.field_Private_Single_0 = 3.1f;
-                }
+                var punch = Instances.PlayerMovement.punchPlayers;
+                
+                punch.field_Private_Boolean_0 = true;
+                punch.field_Private_Single_0 = 3.1f;
+                
             }
         }
 
