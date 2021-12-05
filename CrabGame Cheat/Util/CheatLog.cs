@@ -1,8 +1,5 @@
 ﻿using BepInEx.Logging;
 using JNNJMods.CrabGameCheat.Loader;
-using JNNJMods.CrabGameCheat.Patches;
-using JNNJMods.CrabGameCheat.Translators;
-
 namespace JNNJMods.CrabGameCheat.Util
 {
     public class CheatLog

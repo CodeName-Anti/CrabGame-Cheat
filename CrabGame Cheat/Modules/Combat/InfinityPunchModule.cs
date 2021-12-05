@@ -24,7 +24,6 @@ namespace JNNJMods.CrabGameCheat.Modules
         private void InfinityPunch_Toggled(bool toggled)
         {
             CurrentSettings.Instance.UpdateCamShake(!toggled);
-            CurrentSettings.Instance.UpdateSave();
         }
 
         public override void FixedUpdate()

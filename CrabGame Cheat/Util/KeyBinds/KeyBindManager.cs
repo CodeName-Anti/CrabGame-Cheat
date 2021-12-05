@@ -40,8 +40,6 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
             }
         }
 
-        
-
         public void WriteToFile(string file)
         {
             GetKeyBinds();

@@ -4,7 +4,6 @@ using JNNJMods.CrabGameCheat.Util.KeyBinds;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using System;
-using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -52,17 +51,13 @@ namespace JNNJMods.CrabGameCheat.Modules
 
             try
             {
-
-                CheatLog.Error(keybind.ModuleData[0].ToString());
-
                 SpeedAmount = float.Parse(keybind.ModuleData[0].ToString());
 
                 if(SpeedAmount < 0)
                     SpeedAmount = 1;
 
-            } catch(Exception e)
+            } catch(Exception)
             {
-                CheatLog.Error(e.ToString());
                 //Data invalid
             }
         }
