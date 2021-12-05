@@ -1,9 +1,8 @@
 ﻿using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using System;
 
-namespace JNNJMods.CrabGameCheat.Modules.Combat
+namespace JNNJMods.CrabGameCheat.Modules
 {
     [CheatModule]
     public class InfinityPunchModule : SingleElementModule<ToggleInfo>

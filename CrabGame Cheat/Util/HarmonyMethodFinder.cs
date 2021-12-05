@@ -14,17 +14,17 @@ namespace JNNJMods.CrabGameCheat.Util
             return mBase.GetParameters().Select(param => param.ParameterType).ToArray();
         }
 
-        public static void RegisterPatch(Type t, Type[] parameters)
+        public static void RegisterPatch(Type t, Type[] parameters, MethodInfo customPatch = null)
         {
             Harmony harmony = BepInExLoader.Instance.HarmonyInstance;
 
             MethodInfo prefix = typeof(HarmonyMethodFinder).GetMethod(nameof(HarmonyMethodFinder.Patch));
 
-            foreach (MethodInfo info in typeof(SteamManager).GetMethods())
+            foreach (MethodInfo info in t.GetMethods())
             {                
                 if (info.GetParams() == parameters)
                 {
-                    harmony.Patch(info, new HarmonyMethod(prefix));
+                    harmony.Patch(info, new HarmonyMethod(customPatch ?? prefix));
                 }
 
             }
