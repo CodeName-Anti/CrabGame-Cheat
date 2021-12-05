@@ -33,9 +33,12 @@ namespace JNNJMods.CrabGameCheat.Modules
             }
         }
 
-        public override KeyCode[] GetKeyBinds()
+        public override KeyBind GetKeyBinds()
         {
-            return Elements.Where(e => e.KeyBindable).Select(e => e.KeyBind).ToArray();
+            return new KeyBind()
+            {
+                Keys = Elements.Where(e => e.KeyBindable).Select(e => e.KeyBind).ToArray()
+            };
         }
 
         public override void Init(ClickGUI gui, bool json = false)

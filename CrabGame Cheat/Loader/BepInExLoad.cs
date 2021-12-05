@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Reflection;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Loader
@@ -39,7 +40,7 @@ namespace JNNJMods.CrabGameCheat.Loader
 
             Cheat.OnApplicationStart(HarmonyInstance);
 
-            CheatObject.CreateInstance(Cheat, this);
+            CheatObject.CreateInstance(Cheat);
         }
 
         public void LoadLibraries()
@@ -90,14 +91,16 @@ namespace JNNJMods.CrabGameCheat.Loader
             /// </summary>
             /// <param name="cheat"></param>
             /// <param name="loader"></param>
-            public static void CreateInstance(Cheat cheat, BepInExLoader loader)
+            public static void CreateInstance(Cheat cheat)
             {
-                CheatObject obj = loader.AddComponent<CheatObject>();
 
-                DontDestroyOnLoad(obj.gameObject);
+                ClassInjector.RegisterTypeInIl2Cpp<CheatObject>();
+
+                GameObject obj = new("JNNJs CrabGame Cheat");
+                DontDestroyOnLoad(obj);
                 obj.hideFlags |= HideFlags.HideAndDontSave;
 
-                obj.cheat = cheat;
+                obj.AddComponent<CheatObject>().cheat = cheat;
             }
 
             void Awake()

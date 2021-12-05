@@ -64,7 +64,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public virtual void SetKeyBinds(KeyBind keybind) { }
 
-        public virtual KeyCode[] GetKeyBinds() { return new KeyCode[0]; }
+        public virtual KeyBind GetKeyBinds() { return new KeyBind(); }
 
         
         public virtual void Update() { }

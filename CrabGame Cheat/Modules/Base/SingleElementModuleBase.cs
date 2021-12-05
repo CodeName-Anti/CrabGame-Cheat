@@ -29,9 +29,12 @@ namespace JNNJMods.CrabGameCheat.Modules
                 Element.KeyBind = keybind.Keys[0];
         }
 
-        public override KeyCode[] GetKeyBinds()
+        public override KeyBind GetKeyBinds()
         {
-            return new KeyCode[] { Element.KeyBind };
+            return new KeyBind()
+            {
+                Keys = new[] { Element.KeyBind }
+            };
         }
 
         /// <summary>

@@ -19,10 +19,10 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
         {
             foreach (var module in Cheat.Instance.config.Modules)
             {
-                KeyBinds[module.Name] = new KeyBind(module.Name)
-                {
-                    Keys = module.GetKeyBinds()
-                };
+                var bind = module.GetKeyBinds();
+                bind.Key = module.Name;
+
+                KeyBinds[module.Name] = bind;
             }
         }
 
@@ -40,6 +40,8 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
             }
         }
 
+        
+
         public void WriteToFile(string file)
         {
             GetKeyBinds();
@@ -49,11 +51,13 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
 
         public static KeyBindManager ReadFromFile(string file)
         {
-            KeyBindManager manager;
+            KeyBindManager manager = null;
             try
             {
                 manager = JsonConvert.DeserializeObject<KeyBindManager>(File.ReadAllText(file));
-            } catch(Exception)
+            } catch(Exception) { }
+
+            if (manager == null)
             {
                 manager = new();
 

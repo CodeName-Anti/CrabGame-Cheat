@@ -1,14 +1,27 @@
 ﻿using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util;
+using JNNJMods.CrabGameCheat.Util.KeyBinds;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
+using System;
+using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
     [CheatModule]
     public class SpeedModule : MultiElementModuleBase
     {
-        public float SpeedAmount { get; private set; }
+        public float SpeedAmount
+        {
+            get
+            {
+                return Elements[1].GetValue<float>();
+            }
+            set
+            {
+                Elements[1].SetValue(value);
+            }
+        }
 
         public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.Movement)
         {
@@ -24,7 +37,6 @@ namespace JNNJMods.CrabGameCheat.Modules
             Elements.Add(speedToggle);
 
             SliderInfo speedSlider = new(ID, 1, 40);
-            speedSlider.ValueChanged += SpeedSlider_ValueChanged;
 
             Elements.Add(speedSlider);
 
@@ -34,9 +46,34 @@ namespace JNNJMods.CrabGameCheat.Modules
             }
         }
 
-        private void SpeedSlider_ValueChanged(object oldValue, object newValue)
+        public override void SetKeyBinds(KeyBind keybind)
         {
-            SpeedAmount = (float)newValue;
+            base.SetKeyBinds(keybind);
+
+            try
+            {
+
+                CheatLog.Error(keybind.ModuleData[0].ToString());
+
+                SpeedAmount = float.Parse(keybind.ModuleData[0].ToString());
+
+                if(SpeedAmount < 0)
+                    SpeedAmount = 1;
+
+            } catch(Exception e)
+            {
+                CheatLog.Error(e.ToString());
+                //Data invalid
+            }
+        }
+
+        public override KeyBind GetKeyBinds()
+        {
+            var bind = base.GetKeyBinds();
+
+            bind.ModuleData = new object[] { SpeedAmount };
+
+            return bind;
         }
 
         void SpeedToggle_ToggleChanged(bool toggled)
