@@ -45,17 +45,20 @@ namespace JNNJMods.AimCheats
             return false;
         }
 
+        public void Trigger()
+        {
+            if (!TriggerBot)
+                return;
+
+            if (IsOnEnemy())
+            {
+                Shoot();
+            }
+        }
+
         // Update is called once per frame
         public void Aim(GameObject[] targets, bool randomize = false)
         {
-            if (TriggerBot && IsOnEnemy())
-            {
-                if (TriggerBot)
-                {
-                    Shoot();
-                }
-            }
-
             if (!Enabled)
                 return;
 

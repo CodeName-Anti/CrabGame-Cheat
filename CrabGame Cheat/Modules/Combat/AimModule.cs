@@ -3,6 +3,7 @@ using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using Newtonsoft.Json;
+using SteamworksNative;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,24 +61,42 @@ namespace JNNJMods.CrabGameCheat.Modules
 
             foreach(PlayerManager manager in GameManager.Instance.activePlayers.Values)
             {
+                if (manager.dead || manager.steamProfile.m_SteamID == SteamUser.GetSteamID().m_SteamID)
+                    continue;
                 heads.Add(manager.head.gameObject);
             }
 
             return heads.ToArray();
         }
 
+        private bool AimbotValid()
+        {
+            return
+                // Should be InGame and alive
+                InGame &&
+                // GUI should be hidden
+                !Gui.Shown &&
+                // PlayerInput should be active
+                PlayerInput.Instance.active &&
+                // Game shouldn't be pause
+                !PauseUI.paused &&
+                // Cursor shouldn't be visible
+                !Cursor.visible &&
+                // Application should be focused
+                Application.isFocused;
+        }
+
         public override void Update()
         {
-            if(InGame &&
-                !Gui.Shown &&
-                PlayerInput.Instance.active &&
-                !PauseUI.paused &&
-                !Cursor.visible &&
-                Application.isFocused &&
-                Elements[0].GetValue<bool>()
-                )
+            if (AimbotValid())
+            {
+                if(Elements[0].GetValue<bool>())
+                    aim.Aim(GetHeads());
+                
+                if(Elements[1].GetValue<bool>())
+                    aim.Trigger();
+            }
 
-                aim.Aim(GetHeads());
         }
 
     }

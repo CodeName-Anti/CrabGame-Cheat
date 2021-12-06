@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.formSkin1 = new FlatUI.FormSkin();
-            this.InstallButton = new FlatUI.FlatButton();
-            this.flatClose1 = new FlatUI.FlatClose();
             this.flatMini1 = new FlatUI.FlatMini();
+            this.flatClose1 = new FlatUI.FlatClose();
+            this.InstallButton = new FlatUI.FlatButton();
             this.formSkin1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,32 @@
             this.formSkin1.TabIndex = 0;
             this.formSkin1.Text = "CrabGame Cheat Installer";
             // 
+            // flatMini1
+            // 
+            this.flatMini1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatMini1.BackColor = System.Drawing.Color.White;
+            this.flatMini1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.flatMini1.Font = new System.Drawing.Font("Marlett", 12F);
+            this.flatMini1.Location = new System.Drawing.Point(253, 12);
+            this.flatMini1.Name = "flatMini1";
+            this.flatMini1.Size = new System.Drawing.Size(18, 18);
+            this.flatMini1.TabIndex = 2;
+            this.flatMini1.Text = "flatMini1";
+            this.flatMini1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            // 
+            // flatClose1
+            // 
+            this.flatClose1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatClose1.BackColor = System.Drawing.Color.White;
+            this.flatClose1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.flatClose1.Font = new System.Drawing.Font("Marlett", 10F);
+            this.flatClose1.Location = new System.Drawing.Point(277, 12);
+            this.flatClose1.Name = "flatClose1";
+            this.flatClose1.Size = new System.Drawing.Size(18, 18);
+            this.flatClose1.TabIndex = 1;
+            this.flatClose1.Text = "flatClose1";
+            this.flatClose1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            // 
             // InstallButton
             // 
             this.InstallButton.BackColor = System.Drawing.Color.Transparent;
@@ -69,32 +95,6 @@
             this.InstallButton.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.InstallButton.UseCustomColor = false;
             this.InstallButton.Click += new System.EventHandler(this.InstallButton_Click);
-            // 
-            // flatClose1
-            // 
-            this.flatClose1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flatClose1.BackColor = System.Drawing.Color.White;
-            this.flatClose1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.flatClose1.Font = new System.Drawing.Font("Marlett", 10F);
-            this.flatClose1.Location = new System.Drawing.Point(286, 3);
-            this.flatClose1.Name = "flatClose1";
-            this.flatClose1.Size = new System.Drawing.Size(18, 18);
-            this.flatClose1.TabIndex = 1;
-            this.flatClose1.Text = "flatClose1";
-            this.flatClose1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            // 
-            // flatMini1
-            // 
-            this.flatMini1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flatMini1.BackColor = System.Drawing.Color.White;
-            this.flatMini1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
-            this.flatMini1.Font = new System.Drawing.Font("Marlett", 12F);
-            this.flatMini1.Location = new System.Drawing.Point(262, 0);
-            this.flatMini1.Name = "flatMini1";
-            this.flatMini1.Size = new System.Drawing.Size(18, 18);
-            this.flatMini1.TabIndex = 2;
-            this.flatMini1.Text = "flatMini1";
-            this.flatMini1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             // 
             // MainForm
             // 

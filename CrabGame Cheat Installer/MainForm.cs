@@ -1,6 +1,4 @@
-﻿using CrabGame_Cheat_Installer.Utils;
-using Newtonsoft.Json.Linq;
-using Ookii.Dialogs.WinForms;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Data;
 using System.IO;
@@ -20,7 +18,7 @@ namespace CrabGame_Cheat_Installer
             RepoOwner = "CodeName-Anti",
             DownloadURL = $"https://github.com/{RepoOwner}/{Repository}/releases/latest/download/CrabCheat_BepInEx.dll",
             ReleasesAPI = $"https://api.github.com/repos/{RepoOwner}/{Repository}/releases",
-            BepInExURL = "https://builds.bepis.io/projects/bepinex_be/521/BepInEx_UnityIL2CPP_x64_8e9f1f3_6.0.0-be.521.zip";
+            BepInExURL = "https://builds.bepis.io/projects/bepinex_be/522/BepInEx_UnityIL2CPP_x64_a1cd9be_6.0.0-be.522.zip";
 
         private string
             _path,
@@ -32,7 +30,7 @@ namespace CrabGame_Cheat_Installer
             {
                 if(string.IsNullOrEmpty(_path))
                 {
-                    _path = FindGameLocation();
+                    _path = FileUtilities.FindGameLocation();
                 }
 
                 return _path;
@@ -74,7 +72,6 @@ namespace CrabGame_Cheat_Installer
             InitializeComponent();
 
             ChangeButton();
-
         }
 
         private void ChangeButton()
@@ -96,33 +93,14 @@ namespace CrabGame_Cheat_Installer
                 InstallButton.Text = "Install";
         }
 
-        private static string FindGameLocation()
-        {
-            string location = SteamUtils.GetAppLocation(1782210, "Crab Game");
-
-            if(string.IsNullOrEmpty(location))
-            {
-                VistaFolderBrowserDialog dialog = new()
-                {
-                    Description = "Select Crab Game folder",
-                    ShowNewFolderButton = false
-                };
-
-                if(dialog.ShowDialog() == DialogResult.OK)
-                {
-                    location = dialog.SelectedPath;
-                }
-
-            }
-
-            return location;
-        }
-
         private bool UpdateAvailable()
         {
             try
             {
                 string plugin = pluginFile;
+
+                if (!File.Exists(plugin))
+                    return false;
 
                 using var client = new WebClient();
                 // Some random user agent because with others it responds with 403
@@ -158,11 +136,24 @@ namespace CrabGame_Cheat_Installer
 
         private void InstallBepInEx()
         {
-            string zipFile = Path.GetTempFileName();
+            // File variables
+            string
+                tempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()),
+                zipExtract = Path.Combine(tempFolder, "Extracted"),
+                zipFile = Path.Combine(tempFolder + "BepInEx.zip");
 
+            // Create TempFolders
+            Directory.CreateDirectory(tempFolder);
+            Directory.CreateDirectory(zipExtract);
+
+            // Download BepInEx
             DownloadFile(BepInExURL, zipFile);
 
-            ZipFile.ExtractToDirectory(zipFile, path);
+            // Extract BepInEx
+            ZipFile.ExtractToDirectory(zipFile, zipExtract);
+
+            // Copy BepInEx to Game Folder
+            FileUtilities.CopyDir(zipExtract, path);
         }
 
         private bool IsCheatInstalled() => File.Exists(pluginFile);
@@ -176,9 +167,14 @@ namespace CrabGame_Cheat_Installer
                 InstallBepInEx();
             }
 
-            if(!IsCheatInstalled())
+            var updateAvailable = UpdateAvailable();
+
+            if (updateAvailable || !IsCheatInstalled())
             {
                 DownloadCheat();
+
+                MessageBox.Show(null, "Cheat " +( updateAvailable ? "Updated" : "Installed") + " sucessfully!",
+                    "Installed", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             ChangeButton();

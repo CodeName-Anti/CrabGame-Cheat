@@ -93,13 +93,15 @@ namespace JNNJMods.CrabGameCheat.Loader
             /// <param name="loader"></param>
             public static void CreateInstance(Cheat cheat)
             {
-
+                // Register MonoBehaviour in IL2CPP
                 ClassInjector.RegisterTypeInIl2Cpp<CheatObject>();
 
+                // Create GameObject
                 GameObject obj = new("JNNJs CrabGame Cheat");
                 DontDestroyOnLoad(obj);
                 obj.hideFlags |= HideFlags.HideAndDontSave;
 
+                // Add CheatObject Component
                 obj.AddComponent<CheatObject>().cheat = cheat;
             }
 
