@@ -76,7 +76,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
             DrawCenteredText(
                 "Welcome to JNNJ's CrabGame Cheat!" +
-                (updateAvailable ? "\n<b>There's an update available!</b>" : "") + "\n" +
+                (updateAvailable ? "\n<color=red><b>There's an update available!</b></color>" : "") + "\n" +
                 "To open the ClickGUI press \"" + KeyCodeFormatter.KeyNames[Cheat.Instance.config.ClickGuiKeyBind] + "\"!", 40, Color.white);
         }
 
