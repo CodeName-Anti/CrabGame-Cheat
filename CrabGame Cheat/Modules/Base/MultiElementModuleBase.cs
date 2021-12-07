@@ -3,7 +3,6 @@ using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -16,28 +15,39 @@ namespace JNNJMods.CrabGameCheat.Modules
             if(Elements == null || Elements.Count == 0)
                 return;
 
-            var keyBindable = Elements.Where(e => e.KeyBindable);
-
-            if (keyBindable.Count() == 0)
-                return;
-
-            if (keyBindable.Count() != keybind.Keys.Length)
-                return;
-
-            int i = 0;
-            foreach(ElementInfo info in keyBindable)
+            int keybindIndex = 0;
+            int toggleIndex = 0;
+            foreach(ElementInfo info in Elements)
             {
-                info.KeyBind = keybind.Keys[i];
+                if(typeof(ToggleInfo).IsAssignableFrom(info.GetType()))
+                {
+                    (info as ToggleInfo).SetToggled(keybind.Toggled[toggleIndex]);
 
-                i++;
+                    toggleIndex++;
+                }
+
+                if (Elements[keybindIndex].KeyBindable)
+                {
+                    info.KeyBind = keybind.Keys[keybindIndex];
+                    keybindIndex++;
+                }
             }
         }
 
         public override KeyBind GetKeyBinds()
         {
+            var bindable = Elements.Where(e => e.KeyBindable);
             return new KeyBind()
             {
-                Keys = Elements.Where(e => e.KeyBindable).Select(e => e.KeyBind).ToArray()
+                Keys = bindable.Select(e => e.KeyBind).ToArray(),
+                Toggled =
+                    Elements.
+                    // Get all toggles
+                    Where(e => typeof(ToggleInfo).IsAssignableFrom(e.GetType())).
+                    // Get Toggled Value
+                    Select(e => ((ToggleInfo)e).GetValue<bool>()).
+                    // To Array
+                    ToArray()
             };
         }
 

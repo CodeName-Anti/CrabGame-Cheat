@@ -35,8 +35,13 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
                 if(!KeyBinds.ContainsKey(module.Name) || KeyBinds[module.Name] == null)
                     KeyBinds.Add(module.Name, new KeyBind(module.Name));
 
-
-                module.SetKeyBinds(KeyBinds[module.Name]);
+                try
+                {
+                    module.SetKeyBinds(KeyBinds[module.Name]);
+                } catch(Exception)
+                {
+                    KeyBinds[module.Name] = module.GetKeyBinds();
+                }
             }
         }
 

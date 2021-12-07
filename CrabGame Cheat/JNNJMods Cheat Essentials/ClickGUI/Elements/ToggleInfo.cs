@@ -46,18 +46,22 @@ namespace JNNJMods.UI.Elements
             SetValue(startState);
         }
 
+        public void SetToggled(bool toggled)
+        {
+            SetValue(toggled);
+            ToggleChanged.Invoke((bool)value);
+        }
+
         public bool Toggle()
         {
-            bool toggled = (bool)SetValue(!(bool)value);
-            ToggleChanged.Invoke((bool)value);
+            Activate();
 
-            return toggled;
+            return GetValue<bool>();
         }
 
         public override void Activate()
         {
-            SetValue(!GetValue<bool>());
-            ToggleChanged.Invoke((bool)value);
+            SetToggled(!GetValue<bool>());
         }
 
         protected override object RenderElement(Rect rect, GUIStyle style)

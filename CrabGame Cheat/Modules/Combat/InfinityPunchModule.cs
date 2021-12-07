@@ -14,7 +14,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            var infPunch = new ToggleInfo(windowId, Name);
+            var infPunch = new ToggleInfo(windowId, Name, false, true);
 
             infPunch.ToggleChanged += InfinityPunch_Toggled;
 

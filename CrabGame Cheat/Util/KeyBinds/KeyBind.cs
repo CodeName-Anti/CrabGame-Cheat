@@ -8,6 +8,8 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
 
         public KeyCode[] Keys { get; set; }
 
+        public bool[] Toggled { get; set; }
+
         public object[] ModuleData { get; set; }
 
         public KeyBind(string key) : this()
