@@ -158,7 +158,7 @@ namespace CrabGame_Cheat_Installer
 
         private bool IsCheatInstalled() => File.Exists(pluginFile);
 
-        private bool IsBepInExInstalled() => Directory.Exists(Path.Combine(path, "BepInEx"));
+        private bool IsBepInExInstalled() => File.Exists(Path.Combine(path, "BepInEx", "Core", "BepInEx.IL2CPP.dll"));
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
