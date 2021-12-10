@@ -9,6 +9,21 @@ namespace JNNJMods.CrabGameCheat.Util
 {
     public static class Utilities
     {
+        public static string Format(this Type[] types)
+        {
+            if(types.Length == 0)
+                return string.Empty;
+            
+            string formatted = "";
+
+            foreach (var type in types)
+            {
+                formatted += type.FullName + ", ";
+            }
+
+            return formatted.Substring(0, formatted.Length - 2);
+        }
+
         public static bool GetKeyDown(int key)
         {
             return Input.GetKeyDown((KeyCode)key);

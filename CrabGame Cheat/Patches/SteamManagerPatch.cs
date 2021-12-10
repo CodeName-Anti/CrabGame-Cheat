@@ -1,5 +1,8 @@
 ﻿using HarmonyLib;
+using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
+using SteamworksNative;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace JNNJMods.CrabGameCheat.Patches
@@ -8,16 +11,17 @@ namespace JNNJMods.CrabGameCheat.Patches
     public static class SteamManagerPatch
     {
 
-        [HarmonyPatch(nameof(SteamManager.Method_Private_Void_LobbyEnter_t_PDM_3))]
+        [HarmonyFind(typeof(SteamManager), typeof(LobbyEnter_t))]
         [HarmonyPrefix]
-        public static void LobbyCreated()
+        public static void LobbyCreated(MethodBase __originalMethod)
         {
+            CheatLog.Error($"Hello from: {__originalMethod.Name}");
             Wait();
         }
 
         private static async void Wait()
         {
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             ClickGUI.Instance.GetWindow((int)WindowIDs.LobbyOwner).Visible = SteamManager.Instance.IsLobbyOwner();
         }
 

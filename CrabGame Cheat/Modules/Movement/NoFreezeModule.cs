@@ -20,9 +20,9 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void Update()
         {
-            if (InGame && Element.GetValue<bool>() && MonoBehaviourPublicBofrObInUnique.frozen)
+            if (InGame && Element.GetValue<bool>() && PersistentPlayerData.frozen)
             {
-                MonoBehaviourPublicBofrObInUnique.frozen = false;
+                PersistentPlayerData.frozen = false;
             }
         }
 

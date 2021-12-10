@@ -42,6 +42,8 @@ namespace JNNJMods.CrabGameCheat
 
             CheatLog.Msg("Loaded CrabGame Cheat " + FormattedVersion + " by JNNJ!");
 
+            HarmonyFindAttribute.InitPatches();
+
             foreach (MethodBase b in harmony.GetPatchedMethods())
             {
                 CheatLog.Msg("Class: " + b.DeclaringType.FullName + " Method: " + b.Name);
@@ -122,7 +124,7 @@ namespace JNNJMods.CrabGameCheat
         public void OnUpdate()
         {
             //Hide and Show ClickGUI
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && gui.Shown)
             {
                 gui.Shown = false;
             }

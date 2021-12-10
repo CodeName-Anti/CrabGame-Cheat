@@ -90,9 +90,10 @@
     <Compile Include="Util\Config\CheatModuleAttribute.cs" />
     <Compile Include="Util\Config\Config.cs" />
     <Compile Include="Util\Config\ConfigPaths.cs" />
+    <Compile Include="Util\Harmony\HarmonyFindAttribute.cs" />
     <Compile Include="Util\KeyBinds\KeyBind.cs" />
     <Compile Include="Util\GameObjectExtensions.cs" />
-    <Compile Include="Util\HarmonyMethodFinder.cs" />
+    <Compile Include="Util\Harmony\HarmonyMethodFinder.cs" />
     <Compile Include="Util\KeyBinds\KeyBindManager.cs" />
     <Compile Include="Util\RainbowColor.cs" />
     <Compile Include="Util\UIChanger.cs" />
