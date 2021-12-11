@@ -9,8 +9,8 @@ A Cheat for [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by
 
 Click [here](https://youtu.be/19Igp2FsL6w) for the Showcase Video.
 
-## DISCLAIMER
-This software is for testing/educational purposes only. We do not encourage using it when you're not allowed, and will not bear liability for your actions.
+## **DISCLAIMER**
+**This software is for testing/educational purposes only. We do not encourage using it when you're not allowed, and will not bear liability for your actions.**
 
 ## Installing/Updating with the Installer
 
@@ -28,7 +28,7 @@ This software is for testing/educational purposes only. We do not encourage usin
 ## Manual Installation
  1. Download the [lastest BepInEx Build](https://builds.bepis.io/projects/bepinex_be), the file name should start with "BepInEx_UnityIL2CPP".
     ![img.png](images/BepInEx_Build_Location_Screenshot.png)
- 2. Download [imagesCrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat_BepInEx.dll)
+ 2. Download [CrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat_BepInEx.dll)
  3. Extract the Zip archive in your Crab Game Installation Folder(Steam -> Right Click Crab Game -> Manage -> Browse local Files).  
  ![img_2.png](images/Game_Files_Directory_Screenshot.png)
  4. **Start the Game** and then **close it** once you are in the Main Menu.
@@ -44,32 +44,34 @@ This software is for testing/educational purposes only. We do not encourage usin
  - **AirJump**
    - No longer limited to one jump until landed.
  - **AntiBoundKills**
-   - Going out of bounds does not kill self.
+   - Going out of bounds does not kill self. (usually means just floating above water, lava, etc.)
  - **ClickTP**
    - Teleport self object to click destination. (Caution teleporting long distances causes other player objects to be launched) 
  - **ESP**
-   - View spiderweb of all player object locations.
+   - View tracers and names of all player object locations.
  - **ForceStart(LobbyOwner only)**
    - Instantly start the lobbies game without minimum ready ups.
  - **NoClip**
    - Allows no clipping of the self player object and simulates flying. (Caution flying in the beginning of the round at high speeds can cause other player objects to be launched.) 
  - **GlassBreaker**
-   - Allows correct path to be seen by self on glass/ice jumping games. (Caution activating before the start of the round can cause ALL glass to break for self.)
+   - Allows correct path to be seen by self on glass/ice jumping games. (Caution activating before the start of the round can cause **ALL** glass to break for self.)
  - **GodMode**
-   - No Damage can be taken, object's don't cause knockback you like bats, snowballs. (Caution can still die by boundaries.)
+   - No Damage can be taken, object's don't cause knockback you like bats, snowballs. (Caution can still die by boundaries and snow balls in Dodgeball.)
  - **Mega Jump**
    - Allows much more generous jump height.
  - NoFall
  - NoFreeze
  - NoPush
  - **OwnerHighlight**
-   - Highlights Lobby owner in orange silhouette. (Cation may need to toggle at the start of new rounds.) 
+   - Highlights Lobby owner in an orange Outline.
  - Reset Quest cooldown
- - Complete Quest
+ - **Complete Quest**
+   - Completes the current Daily Quest. (Can only be used once per day.)
  - **Speed**
    - Increases self player movement speed. Use the slider to control the multiplier.
  - Infinity Punch
- - TriggerBot
+ - **TriggerBot**
+   - Automatically shoot/hit when aiming at an enemy player.
  - ...and more to come
 
 ## Build setup

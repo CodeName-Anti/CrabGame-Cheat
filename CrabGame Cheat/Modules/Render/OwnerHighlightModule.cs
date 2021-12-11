@@ -47,24 +47,26 @@ namespace JNNJMods.CrabGameCheat.Modules
 
                 if (owner == null)
                     return;
-
-                if (toggled)
+                
+                foreach(GameObject obj in GetOutlines(owner))
                 {
-                    foreach(GameObject obj in GetOutlines(owner))
-                    {
-                        if (obj == null) continue;
+                    if (obj == null) continue;
+                    if(toggled)
                         OutlineRenderer.Outline(obj, new Color(1F, 0.5333F, 0F), 7);
-                    }
-                }
-                else
-                {
-                    foreach (GameObject obj in GetOutlines(owner))
-                    {
-                        if (obj == null) continue;
+                    else
                         OutlineRenderer.UnOutline(obj);
-                    }
                 }
+
             }
+        }
+
+        public void FixOutline()
+        {
+            // Remove outline
+            Element_ToggleChanged(false);
+
+            // Add new outline
+            Element_ToggleChanged(true);
         }
 
         public override void FixedUpdate()
@@ -76,7 +78,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
                 if (owner.GetComponent<Outline>() == null)
                 {
-                    Element_ToggleChanged(true);
+                    FixOutline();
                 }
             }
         }
