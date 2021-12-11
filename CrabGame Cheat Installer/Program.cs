@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CrabGame_Cheat_Installer
@@ -16,7 +13,10 @@ namespace CrabGame_Cheat_Installer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            new MainForm().Show();
+
+            Application.Run();
         }
     }
 }

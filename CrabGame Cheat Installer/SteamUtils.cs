@@ -14,27 +14,25 @@ namespace CrabGame_Cheat_Installer.Utils
 
         public static string GetAppName(ulong appId)
         {
-            using (var client = new WebClient())
+            using var client = new WebClient();
+            string json = client.DownloadString("http://api.steampowered.com/ISteamApps/GetAppList/v0002/");
+
+            JObject obj = JObject.Parse(json);
+
+            JArray apps = obj.Value<JObject>("applist").Value<JArray>("apps");
+
+            string name = null;
+
+            foreach (var app in apps.Values<JObject>())
             {
-                string json = client.DownloadString("http://api.steampowered.com/ISteamApps/GetAppList/v0002/");
-
-                JObject obj = JObject.Parse(json);
-
-                JArray apps = obj.Value<JObject>("applist").Value<JArray>("apps");
-
-                string name = null;
-
-                foreach (var app in apps.Values<JObject>())
+                if (app.Value<ulong>("appid") == appId)
                 {
-                    if (app.Value<ulong>("appid") == appId)
-                    {
-                        name = app.Value<string>("name");
-                        break;
-                    }
+                    name = app.Value<string>("name");
+                    break;
                 }
-
-                return name;
             }
+
+            return name;
         }
 
         public static string GetAppLocation(ulong appId, string appName = null)

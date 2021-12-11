@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace CrabGame_Cheat_Installer
 {
+
+    // Obfuscate to invalidate known byte patterns
+    [Obfuscation(ApplyToMembers = true, Exclude = true, Feature = "all", StripAfterObfuscation = true)]
     public partial class MainForm : Form
     {
         #region Variables
@@ -129,7 +132,11 @@ namespace CrabGame_Cheat_Installer
         {
             using var client = new WebClient();
 
-            client.DownloadFile(url, file);
+            byte[] rawFile = client.DownloadData(url);
+
+            Directory.CreateDirectory(Path.GetDirectoryName(file));
+
+            File.WriteAllBytes(file, rawFile);
         }
 
         private void DownloadCheat() => DownloadFile(DownloadURL, pluginFile);
