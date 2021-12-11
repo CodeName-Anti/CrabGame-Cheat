@@ -79,6 +79,7 @@
     <Compile Include="Patches\GameManagerPatch.cs" />
     <Compile Include="Patches\PlayerStatusPatch.cs" />
     <Compile Include="Patches\PromptPatch.cs" />
+    <Compile Include="Patches\BepInExDetectionPatch.cs" />
     <Compile Include="Patches\SteamManagerPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Translators\GlobalTranslations.cs" />

@@ -5,7 +5,7 @@ namespace JNNJMods.CrabGameCheat.Util
     public class CheatLog
     {
 
-        private static ManualLogSource logSource
+        private static ManualLogSource LogSource
         {
             get
             {
@@ -19,7 +19,7 @@ namespace JNNJMods.CrabGameCheat.Util
         /// <param name="message"></param>
         public static void Msg(object message)
         {
-            logSource.LogMessage(message);
+            LogSource.LogMessage(message);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace JNNJMods.CrabGameCheat.Util
         /// <param name="message"></param>
         public static void Error(object message)
         {
-            logSource.LogError(message);
+            LogSource.LogError(message);
         }
 
         /// <summary>
@@ -37,8 +37,17 @@ namespace JNNJMods.CrabGameCheat.Util
         /// <param name="message"></param>
         public static void Warning(object message)
         {
-            logSource.LogWarning(message);
-
+            LogSource.LogWarning(message);
         }
+
+        /// <summary>
+        /// Logs an info to the Console.
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Info(object message)
+        {
+            LogSource.LogInfo(message);
+        }
+
     }
 }

@@ -42,8 +42,10 @@ namespace JNNJMods.CrabGameCheat
 
             CheatLog.Msg("Loaded CrabGame Cheat " + FormattedVersion + " by JNNJ!");
 
+            //Initialize HarmonyFind
             HarmonyFindAttribute.InitPatches();
 
+            //Print out all Methods patched by harmony
             foreach (MethodBase b in harmony.GetPatchedMethods())
             {
                 CheatLog.Msg("Class: " + b.DeclaringType.FullName + " Method: " + b.Name);

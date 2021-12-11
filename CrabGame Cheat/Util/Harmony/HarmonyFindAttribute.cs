@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using SteamworksNative;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +23,8 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public static void InitPatches()
         {
-            if(Init)
+
+            if (Init)
                 return;
             
             Dictionary<MethodInfo, HarmonyFindAttribute[]> attributes = Assembly
