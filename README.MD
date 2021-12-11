@@ -27,10 +27,10 @@ This software is for testing/educational purposes only. We do not encourage usin
 
 ## Manual Installation
  1. Download the [lastest BepInEx Build](https://builds.bepis.io/projects/bepinex_be), the file name should start with "BepInEx_UnityIL2CPP".
-    ![img.png](img.png)
+    ![img.png](BepInEx_Build_Location_Screenshot.png)
  2. Dowload [CrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat_BepInEx.dll)
  3. Extract the Zip archive in your Crab Game Installation Folder(Steam -> Right Click Crab Game -> Manage -> Browse local Files).
-    ![img_2.png](img_2.png)
+    ![img_2.png](Game_Files_Directory_Screenshot.png)
  4. **Start the Game** and then **close it** once you are in the Main Menu.
  5. Create a new Folder in "/BepInEx/plugins" (Will load after step 4) and name it "CrabGame Cheat", then copy the [CrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat_BepInEx.dll) into it.
 
