@@ -23,7 +23,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         private void ForceStartGame()
         {
-            if(InGame)
+            if (InGame)
                 GameLoop.Instance.StartGames();
         }
     }

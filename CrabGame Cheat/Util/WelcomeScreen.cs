@@ -34,7 +34,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
             DrawWelcome();
         }
-        
+
         static void DrawWelcome()
         {
             if (!draw) return;

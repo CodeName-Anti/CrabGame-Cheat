@@ -53,10 +53,11 @@ namespace JNNJMods.CrabGameCheat.Modules
             {
                 SpeedAmount = float.Parse(keybind.ModuleData[0].ToString());
 
-                if(SpeedAmount < 0)
+                if (SpeedAmount < 0)
                     SpeedAmount = 1;
 
-            } catch(Exception)
+            }
+            catch (Exception)
             {
                 //Data invalid
             }
@@ -73,20 +74,21 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         void SpeedToggle_ToggleChanged(bool toggled)
         {
-            if(InGame)
+            if (InGame)
             {
                 var move = Instances.PlayerMovement;
                 if (toggled)
                 {
                     move.SetMaxRunSpeed(13 * SpeedAmount);
                     move.SetMaxSpeed(6.5f * SpeedAmount);
-                } else
+                }
+                else
                 {
                     move.SetMaxRunSpeed(13);
                     move.SetMaxSpeed(6.5f);
                 }
             }
-            
+
         }
 
         public override void Update()

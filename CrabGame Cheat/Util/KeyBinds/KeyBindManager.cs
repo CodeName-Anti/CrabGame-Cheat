@@ -13,7 +13,7 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
         public Dictionary<string, KeyBind> KeyBinds { get; private set; } = new();
 
         public KeyBindManager() => Instance = this;
-        
+
 
         private void GetKeyBinds()
         {
@@ -32,13 +32,14 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
             {
                 if (module == null) continue;
 
-                if(!KeyBinds.ContainsKey(module.Name) || KeyBinds[module.Name] == null)
+                if (!KeyBinds.ContainsKey(module.Name) || KeyBinds[module.Name] == null)
                     KeyBinds.Add(module.Name, new KeyBind(module.Name));
 
                 try
                 {
                     module.SetKeyBinds(KeyBinds[module.Name]);
-                } catch(Exception)
+                }
+                catch (Exception)
                 {
                     KeyBinds[module.Name] = module.GetKeyBinds();
                 }
@@ -58,7 +59,8 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
             try
             {
                 manager = JsonConvert.DeserializeObject<KeyBindManager>(File.ReadAllText(file));
-            } catch(Exception) { }
+            }
+            catch (Exception) { }
 
             if (manager == null)
             {
@@ -69,7 +71,7 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
 
             Instance = manager;
             manager.SetKeyBinds();
-            
+
             return manager;
         }
     }

@@ -1,5 +1,4 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
-using System;
+﻿using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;

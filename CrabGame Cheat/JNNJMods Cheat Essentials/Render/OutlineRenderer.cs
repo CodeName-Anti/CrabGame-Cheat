@@ -1,5 +1,4 @@
-﻿using UnhollowerRuntimeLib;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace JNNJMods.Render
 {
@@ -9,7 +8,7 @@ namespace JNNJMods.Render
         {
             var outline = obj.GetComponent<Outline>();
 
-            if(outline != null)
+            if (outline != null)
             {
                 Object.Destroy(outline);
             }
@@ -18,7 +17,7 @@ namespace JNNJMods.Render
 
         public static void Outline(GameObject obj, Color color, int width)
         {
-            if(HasComponent<Outline>(obj))
+            if (HasComponent<Outline>(obj))
             {
                 UnOutline(obj);
             }

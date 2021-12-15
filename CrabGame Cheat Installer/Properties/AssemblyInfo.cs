@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("CrabGame Cheat Installer")]
-[assembly: AssemblyDescription("An Install for CrabGame-Cheat by JNNJ")]
+[assembly: AssemblyDescription("An Installer for CrabGame-Cheat by JNNJ")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("JNNJ")]
 [assembly: AssemblyProduct("CrabGame Cheat Installer")]

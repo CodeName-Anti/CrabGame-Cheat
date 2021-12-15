@@ -11,9 +11,9 @@ namespace JNNJMods.CrabGameCheat.Util
     {
         public static string Format(this Type[] types)
         {
-            if(types.Length == 0)
+            if (types.Length == 0)
                 return string.Empty;
-            
+
             string formatted = "";
 
             foreach (var type in types)
@@ -37,8 +37,8 @@ namespace JNNJMods.CrabGameCheat.Util
         public static Dictionary<TKey, TValue> ToSystem<TKey, TValue>(this Il2CppSystem.Collections.Generic.Dictionary<TKey, TValue> cppDic)
         {
             Dictionary<TKey, TValue> sysDic = new();
-            
-            foreach(var entry in cppDic)
+
+            foreach (var entry in cppDic)
             {
                 sysDic.Add(entry.key, entry.value);
             }

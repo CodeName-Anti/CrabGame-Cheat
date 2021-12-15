@@ -13,11 +13,11 @@ namespace JNNJMods.CrabGameCheat.Util
             if (params1.Length != params2.Length)
                 return false;
 
-            for(int i = 0; i < params1.Length; i++)
+            for (int i = 0; i < params1.Length; i++)
             {
-                if(params1[i] != params2[i])
+                if (params1[i] != params2[i])
                     return false;
-                
+
             }
 
             return true;

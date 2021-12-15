@@ -26,7 +26,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
             if (Init)
                 return;
-            
+
             Dictionary<MethodInfo, HarmonyFindAttribute[]> attributes = Assembly
                 .GetExecutingAssembly()
                 .GetTypes()
@@ -35,10 +35,10 @@ namespace JNNJMods.CrabGameCheat.Util
                 .ToDictionary(m => m, m => m.GetCustomAttributes<HarmonyFindAttribute>().ToArray());
 
             // Loop through all Methods
-            foreach(var entry in attributes)
+            foreach (var entry in attributes)
             {
                 // Loop through all Attributes of Method
-                foreach(var attrib in entry.Value)
+                foreach (var attrib in entry.Value)
                 {
                     PatchMethod(entry.Key, attrib);
                 }

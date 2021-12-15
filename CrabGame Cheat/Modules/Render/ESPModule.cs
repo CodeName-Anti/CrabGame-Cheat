@@ -35,9 +35,9 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void OnGUI()
         {
-            if(Element.GetValue<bool>() && InGame)
+            if (Element.GetValue<bool>() && InGame)
             {
-                foreach(var player in GameManager.Instance.activePlayers.Values)
+                foreach (var player in GameManager.Instance.activePlayers.Values)
                 {
                     if (player.steamProfile.m_SteamID == SteamUser.GetSteamID().m_SteamID)
                         continue;

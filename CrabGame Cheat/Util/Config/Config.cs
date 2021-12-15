@@ -17,12 +17,13 @@ namespace JNNJMods.CrabGameCheat.Util
 
         public void ExecuteForModules(Action<ModuleBase> action)
         {
-            foreach(ModuleBase module in Modules)
+            foreach (ModuleBase module in Modules)
             {
                 try
                 {
                     action(module);
-                } catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     CheatLog.Error("Exception in Module \"" + module.Name + "\": " + ex.ToString());
                 }

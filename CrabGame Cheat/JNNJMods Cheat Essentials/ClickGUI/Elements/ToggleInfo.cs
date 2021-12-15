@@ -25,7 +25,7 @@ namespace JNNJMods.UI.Elements
             StringBuilder builder = new StringBuilder();
             builder.Append(text).Append(" (");
 
-            if(color)
+            if (color)
                 builder.Append(state ? "<color=green>ON" : "<color=red>OFF").Append("</color>");
             else
                 builder.Append(state ? "ON" : "OFF");

@@ -72,7 +72,7 @@ namespace JNNJMods.UI.Elements
             WindowId = windowId;
             KeyBindable = keyBindable;
         }
-        
+
         /// <summary>
         /// Renders the Element
         /// </summary>
@@ -84,7 +84,7 @@ namespace JNNJMods.UI.Elements
 
         protected void RunStyleCheck(GUIStyle fallback)
         {
-            if(style == null)
+            if (style == null)
             {
                 style = fallback;
             }
@@ -103,7 +103,7 @@ namespace JNNJMods.UI.Elements
 
             rect = manager.NextControlRect(index);
 
-            if(KeyBindable)
+            if (KeyBindable)
             {
                 float offset = rect.width / 5f;
 
@@ -127,7 +127,7 @@ namespace JNNJMods.UI.Elements
             object oldValue = value;
             object newValue = RenderElement(rect, style);
 
-            if(oldValue != newValue)
+            if (oldValue != newValue)
             {
                 ValueChanged(oldValue, newValue);
             }

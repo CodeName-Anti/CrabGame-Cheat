@@ -27,9 +27,9 @@ namespace JNNJMods.CrabGameCheat.Modules
             Elements.Add(completeDaily);
             Elements.Add(resetDailyCooldown);
 
-            foreach (ElementInfo info in Elements) 
+            foreach (ElementInfo info in Elements)
                 gui.AddElement(info);
-            
+
         }
 
         private void ResetDailyCooldown()

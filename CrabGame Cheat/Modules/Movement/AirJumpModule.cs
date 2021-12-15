@@ -2,7 +2,6 @@
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
-using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {

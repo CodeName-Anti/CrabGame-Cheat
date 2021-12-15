@@ -12,14 +12,14 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void SetKeyBinds(KeyBind keybind)
         {
-            if(Elements == null || Elements.Count == 0)
+            if (Elements == null || Elements.Count == 0)
                 return;
 
             int keybindIndex = 0;
             int toggleIndex = 0;
-            foreach(ElementInfo info in Elements)
+            foreach (ElementInfo info in Elements)
             {
-                if(typeof(ToggleInfo).IsAssignableFrom(info.GetType()))
+                if (typeof(ToggleInfo).IsAssignableFrom(info.GetType()))
                 {
                     (info as ToggleInfo).SetToggled(keybind.Toggled[toggleIndex]);
 

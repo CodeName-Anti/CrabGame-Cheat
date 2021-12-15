@@ -12,7 +12,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         static AutoUpdate()
         {
-            if(!init)
+            if (!init)
             {
                 try
                 {
@@ -37,7 +37,8 @@ namespace JNNJMods.CrabGameCheat.Util
                     }
 
                     init = true;
-                } catch(Exception)
+                }
+                catch (Exception)
                 {
                     CheatLog.Warning("Couldn't fetch Updates from GitHub!");
                 }

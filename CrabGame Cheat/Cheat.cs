@@ -50,7 +50,7 @@ namespace JNNJMods.CrabGameCheat
             {
                 CheatLog.Msg("Class: " + b.DeclaringType.FullName + " Method: " + b.Name);
             }
-            
+
             AntiCheat.StopAntiCheat();
 
             //Create ClickGUI
@@ -82,13 +82,14 @@ namespace JNNJMods.CrabGameCheat
         /// </summary>
         private async void KeyBindSaver()
         {
-            while(saveConfig)
+            while (saveConfig)
             {
                 await Task.Delay(2 * 60 * 1000);
                 try
                 {
                     KeyBindManager.Instance.WriteToFile(ConfigPaths.KeyBindFile);
-                } catch(Exception)
+                }
+                catch (Exception)
                 {
                 }
             }

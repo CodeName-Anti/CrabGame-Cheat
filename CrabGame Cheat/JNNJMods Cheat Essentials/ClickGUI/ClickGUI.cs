@@ -1,4 +1,3 @@
-using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.Render;
 using JNNJMods.UI.Elements;
 using System.Collections.Generic;

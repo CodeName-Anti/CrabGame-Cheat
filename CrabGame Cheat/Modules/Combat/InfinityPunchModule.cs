@@ -28,13 +28,13 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void FixedUpdate()
         {
-            if(InGame && Element.GetValue<bool>())
+            if (InGame && Element.GetValue<bool>())
             {
                 var punch = Instances.PlayerMovement.punchPlayers;
-                
+
                 punch.field_Private_Boolean_0 = true;
                 punch.field_Private_Single_0 = 3.1f;
-                
+
             }
         }
 

@@ -12,7 +12,7 @@ namespace CrabGame_Cheat_Installer
 {
 
     // Obfuscate to invalidate known byte patterns
-    [Obfuscation(ApplyToMembers = true, Exclude = true, Feature = "all", StripAfterObfuscation = true)]
+    [Obfuscation(ApplyToMembers = true, Exclude = false, Feature = "all", StripAfterObfuscation = true)]
     public partial class MainForm : Form
     {
         #region Variables

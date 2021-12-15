@@ -32,15 +32,35 @@ namespace JNNJMods.CrabGameCheat.Loader
             try
             {
                 HarmonyInstance = new Harmony(Constants.GUID);
-                HarmonyInstance.PatchAll();
-            } catch(Exception)
-            {
 
+                CustomPatchAll();
+            }
+            catch (Exception ex)
+            {
+                CheatLog.Error("Harmony patching error: " + ex.ToString());
             }
 
             Cheat.OnApplicationStart(HarmonyInstance);
 
+            // Create instance of CheatObject.
             CheatObject.CreateInstance(Cheat);
+        }
+
+        private void CustomPatchAll()
+        {
+            // Get all types from current assembly.
+            AccessTools.GetTypesFromAssembly(Assembly.GetExecutingAssembly()).Do(type =>
+            {
+                try
+                {
+                    // Patch type.
+                    new PatchClassProcessor(HarmonyInstance, type).Patch();
+                }
+                catch (Exception ex)
+                {
+                    CheatLog.Error($"Failed to patch \"{type.FullName}\": {ex}!");
+                }
+            });
         }
 
         public void LoadLibraries()
@@ -53,30 +73,38 @@ namespace JNNJMods.CrabGameCheat.Loader
         /// </summary>
         private void DownloadJsonLibrary()
         {
+            // Paths
             string path = Utilities.GetAssemblyLocation();
             string dllLoadPath = Path.Combine(path, "Newtonsoft.Json.dll");
+
+
             if (!File.Exists(dllLoadPath))
             {
+                // Temp Paths
                 string tempPath = Path.Combine(Path.GetTempPath(), "CrabGame Cheat " + Guid.NewGuid().ToString());
                 string zipPath = Path.Combine(tempPath, "Unzipped");
 
                 string zip = Path.Combine(tempPath, "Json.zip");
 
+                // Create zipPath
                 Directory.CreateDirectory(zipPath);
 
+                // Download Newtonsoft.Json.
                 Utilities.DownloadFile(zip,
                     "https://github.com/JamesNK/Newtonsoft.Json/releases/download/13.0.1/Json130r1.zip");
 
+                // Extract the zip.
                 ZipFile.ExtractToDirectory(zip, zipPath);
 
                 string dllFile = Path.Combine(zipPath, "Bin", "net45", "Newtonsoft.Json.dll");
 
+                // Copy Newtonsoft.Json to plugins folder, to not download it every start.
                 File.Copy(dllFile, dllLoadPath);
 
+                // Load Newtonsoft.Json
                 Assembly.LoadFrom(dllLoadPath);
             }
         }
-
 
         public class CheatObject : MonoBehaviour
         {

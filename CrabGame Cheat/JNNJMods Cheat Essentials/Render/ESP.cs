@@ -99,7 +99,7 @@ namespace JNNJMods.UI.Utils
             if (targets == null || names == null)
                 return;
 
-            for(int i = 0; i < targets.Length; i++)
+            for (int i = 0; i < targets.Length; i++)
             {
                 if (targets[i] == null)
                     continue;

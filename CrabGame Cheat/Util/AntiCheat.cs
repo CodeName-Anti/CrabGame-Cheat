@@ -36,7 +36,7 @@ namespace JNNJMods.CrabGameCheat.Util
             m.IsPublic &&
             m.Name.Contains("Stop"));
 
-            foreach(MethodInfo method in methods)
+            foreach (MethodInfo method in methods)
             {
                 method.Invoke(null, null);
             }

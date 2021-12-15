@@ -2,7 +2,6 @@
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -25,7 +24,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void SetKeyBinds(KeyBind keybind)
         {
-            if(keybind.Keys.Length > 0)
+            if (keybind.Keys.Length > 0)
                 Element.KeyBind = keybind.Keys[0];
         }
 

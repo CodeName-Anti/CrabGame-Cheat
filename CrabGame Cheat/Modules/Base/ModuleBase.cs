@@ -4,7 +4,6 @@ using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util.KeyBinds;
 using JNNJMods.UI;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -66,7 +65,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public virtual KeyBind GetKeyBinds() { return new KeyBind(); }
 
-        
+
         public virtual void Update() { }
 
         public virtual void FixedUpdate() { }

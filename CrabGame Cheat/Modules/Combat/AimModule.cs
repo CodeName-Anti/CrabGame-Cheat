@@ -37,7 +37,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             Elements.Add(aimBot);
             Elements.Add(triggerBot);
 
-            foreach(ElementInfo info in Elements)
+            foreach (ElementInfo info in Elements)
             {
                 gui.AddElement(info);
             }
@@ -59,7 +59,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             List<GameObject> heads = new();
 
-            foreach(PlayerManager manager in GameManager.Instance.activePlayers.Values)
+            foreach (PlayerManager manager in GameManager.Instance.activePlayers.Values)
             {
                 if (manager.dead || manager.steamProfile.m_SteamID == SteamUser.GetSteamID().m_SteamID)
                     continue;
@@ -90,10 +90,10 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             if (AimbotValid())
             {
-                if(Elements[0].GetValue<bool>())
+                if (Elements[0].GetValue<bool>())
                     aim.Aim(GetHeads());
-                
-                if(Elements[1].GetValue<bool>())
+
+                if (Elements[1].GetValue<bool>())
                     aim.Trigger();
             }
 

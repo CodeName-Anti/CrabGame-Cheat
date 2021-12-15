@@ -4,18 +4,16 @@ using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.UI;
 using SteamworksNative;
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace JNNJMods.CrabGameCheat.Patches
 {
-    [HarmonyPatch(typeof(SteamManager))]
     public static class SteamManagerPatch
     {
 
         [HarmonyFind(typeof(SteamManager), typeof(LobbyEnter_t))]
         [HarmonyPrefix]
-        public static void LobbyCreated(MethodBase __originalMethod)
+        public static void LobbyCreated()
         {
             Wait();
         }
@@ -27,7 +25,8 @@ namespace JNNJMods.CrabGameCheat.Patches
             try
             {
                 Config.Instance.GetModule<OwnerHighlightModule>().FixOutline();
-            } catch(Exception)
+            }
+            catch (Exception)
             {
                 // Ignored, OwnerHighlight has less priority than the Lobby Owner window.
             }

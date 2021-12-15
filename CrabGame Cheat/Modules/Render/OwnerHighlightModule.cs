@@ -1,5 +1,4 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
-using JNNJMods.CrabGameCheat.Util;
+﻿using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.Render;
 using JNNJMods.UI;
 using JNNJMods.UI.Elements;
@@ -42,16 +41,16 @@ namespace JNNJMods.CrabGameCheat.Modules
 
             if (InGame)
             {
-                if(owner == null)
+                if (owner == null)
                     owner = FindOwner();
 
                 if (owner == null)
                     return;
-                
-                foreach(GameObject obj in GetOutlines(owner))
+
+                foreach (GameObject obj in GetOutlines(owner))
                 {
                     if (obj == null) continue;
-                    if(toggled)
+                    if (toggled)
                         OutlineRenderer.Outline(obj, new Color(1F, 0.5333F, 0F), 7);
                     else
                         OutlineRenderer.UnOutline(obj);
@@ -71,7 +70,7 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override void FixedUpdate()
         {
-            if(InGame && Element.GetValue<bool>())
+            if (InGame && Element.GetValue<bool>())
             {
                 if (owner == null)
                     owner = FindOwner();
@@ -87,7 +86,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             List<GameObject> outlines = new();
 
-            if(manager != null)
+            if (manager != null)
             {
                 var customization = manager.playerCustomization;
                 outlines.Add(customization.sweater);
@@ -101,12 +100,12 @@ namespace JNNJMods.CrabGameCheat.Modules
         {
             var players = GameManager.Instance.activePlayers;
 
-            foreach(var player in players.Values)
+            foreach (var player in players.Values)
             {
                 if (player.steamProfile.m_SteamID == SteamManager.Instance.originalLobbyOwnerId.m_SteamID)
                     return player;
             }
-            
+
             return null;
         }
 
