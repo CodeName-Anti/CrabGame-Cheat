@@ -31,34 +31,44 @@ namespace JNNJMods.CrabGameCheat.Util
             if (init)
                 return;
 
-            //Change the VersionUI
+            // Change the VersionUI
             if (!versionUIInit)
             {
                 try
                 {
-                    string gameVersion = VersionUI.Instance.versionText.text;
-                    VersionUI.Instance.versionText.text = "CrabGame Cheat " + Cheat.FormattedVersion + " by JNNJ Game Version " + gameVersion;
+                    // Find TextMeshPro
+                    var versionText = VersionUI.Instance.versionText;
+
+                    // Get current version
+                    string gameVersion = versionText.text;
+
+                    versionText.text = $"CrabGame Cheat {Cheat.FormattedVersion} by JNNJ Game Version {gameVersion}";
                     versionUIInit = true;
                     CheatLog.Msg("Version Changed");
                 }
                 catch (Exception) { }
             }
 
-            //Change the AboutUI
+            // Change the AboutUI
             if (!aboutUIInit)
             {
                 try
                 {
                     var ui = MenuUI.Instance;
 
+                    // Find CreditsWindow
                     GameObject creditsWindow = ui.gameObject.GetChildren().Where(obj => obj.name.Contains("Credits")).First();
 
+                    // Find tab0
                     GameObject tab0 = creditsWindow.GetChildren().Where(obj => obj.name.Contains("Tab")).First();
 
+                    // Find Content
                     GameObject content = tab0.GetChildren().First().GetChildren().Where(obj => obj.name.Contains("Content")).First();
 
+                    // Find TextMeshPro
                     TextMeshProUGUI textMesh = content.GetChildren().Where(obj => obj.name.Contains("Text")).First().GetComponent<TextMeshProUGUI>();
 
+                    // Add Custom Text
                     textMesh.text +=
                         "<br><br>" +
                         "<size=150%>CrabGame Cheat </size>is a Cheat made by JNNJ.";

@@ -19,7 +19,10 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
         {
             foreach (var module in Cheat.Instance.config.Modules)
             {
+                // Get KeyBind from Module
                 var bind = module.GetKeyBinds();
+
+                // Make sure correct Name is set
                 bind.Key = module.Name;
 
                 KeyBinds[module.Name] = bind;
@@ -32,6 +35,7 @@ namespace JNNJMods.CrabGameCheat.Util.KeyBinds
             {
                 if (module == null) continue;
 
+                // Add new KeyBind if it doesn't exist already
                 if (!KeyBinds.ContainsKey(module.Name) || KeyBinds[module.Name] == null)
                     KeyBinds.Add(module.Name, new KeyBind(module.Name));
 

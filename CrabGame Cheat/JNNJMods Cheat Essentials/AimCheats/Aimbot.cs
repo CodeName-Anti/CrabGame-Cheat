@@ -18,6 +18,7 @@ namespace JNNJMods.AimCheats
 
         private bool IsOnEnemy()
         {
+            // RayCast to see if Collider is player
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 9999f, mask))
             {
                 return IsEnemy(hit);
@@ -38,6 +39,7 @@ namespace JNNJMods.AimCheats
 
         private bool IsVisable(Vector3 toCheck)
         {
+            // Raycast to enemy position, to see if the enemy is visible
             if (Physics.Linecast(Camera.main.transform.position, toCheck, out RaycastHit hit, mask))
             {
                 return IsEnemy(hit);
@@ -65,7 +67,7 @@ namespace JNNJMods.AimCheats
             float minDist = 99999;
             Vector2 AimTarget = Vector2.zero;
 
-            //Randomize aim targets
+            // Randomize aim targets
             if (randomize)
             {
                 targets = targets.OrderBy(m => Random.RandomRangeInt(0, 99999)).ToArray();
@@ -79,7 +81,9 @@ namespace JNNJMods.AimCheats
                 if (shit.z > -8)
                 {
                     float dist = System.Math.Abs(Vector2.Distance(new Vector2(shit.x, Screen.height - shit.y), new Vector2((Screen.width / 2), (Screen.height / 2))));
-                    if (FOV == -1 || dist < FOV) //in fov
+
+                    // In fov
+                    if (FOV == -1 || dist < FOV) 
                     {
                         if (dist < minDist)
                         {
@@ -95,12 +99,13 @@ namespace JNNJMods.AimCheats
                 double DistX = AimTarget.x - Screen.width / 2.0f;
                 double DistY = AimTarget.y - Screen.height / 2.0f + YOffset;
 
-                //aimsmooth
+                // Aimsmooth
                 DistX /= Smooth;
                 DistY /= Smooth;
 
                 if (Enabled)
                 {
+                    // Send Mouse Event for moving mouse
                     MouseOperations.mouse_event(0x0001, (int)DistX, (int)DistY, 0, 0);
                 }
             }

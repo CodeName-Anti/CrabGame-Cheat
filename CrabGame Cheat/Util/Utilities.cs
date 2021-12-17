@@ -11,6 +11,7 @@ namespace JNNJMods.CrabGameCheat.Util
     {
         public static string Format(this Type[] types)
         {
+            // Return Empty string if no types are in array
             if (types.Length == 0)
                 return string.Empty;
 
@@ -21,6 +22,7 @@ namespace JNNJMods.CrabGameCheat.Util
                 formatted += type.FullName + ", ";
             }
 
+            // Remove last 2 characters
             return formatted.Substring(0, formatted.Length - 2);
         }
 
@@ -97,7 +99,7 @@ namespace JNNJMods.CrabGameCheat.Util
                     break;
             }
 
-            //Readd a single ".0" to make it look nicer
+            // Readd a single ".0" to make it look nicer
             if (pretty && !version.Contains("."))
             {
                 version += ".0";

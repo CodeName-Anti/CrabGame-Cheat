@@ -28,6 +28,7 @@ namespace JNNJMods.Render
         {
             GUIStyle style = GetTextStyle(fontSize);
 
+            // Calculate text size with matching Rect
             Vector2 size = style.CalcSize(new GUIContent(text));
             float textWidth = size.x * 2;
             float textHeight = size.y * 2;
@@ -84,8 +85,10 @@ namespace JNNJMods.Render
         /// <param name="rect"></param>
         public static void DrawColor(Color color, Rect rect)
         {
-            Texture2D tex = new Texture2D(1, 1);
+            // Create new Texture
+            Texture2D tex = new(1, 1);
 
+            // Set Color of Texture
             tex.SetPixel(1, 1, color);
 
             tex.wrapMode = TextureWrapMode.Repeat;
@@ -100,11 +103,7 @@ namespace JNNJMods.Render
         /// <param name="color"></param>
         public static void DrawFullScreenColor(Color color)
         {
-            Texture2D tex = new Texture2D(1, 1);
-
-            tex.SetPixel(1, 1, color);
-
-            GUI.Box(new Rect(-10, -10, Screen.width + 100, Screen.height + 100), tex);
+            DrawColor(color, new Rect(-10, -10, Screen.width + 100, Screen.height + 100));
         }
     }
 }

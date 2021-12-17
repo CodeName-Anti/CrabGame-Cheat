@@ -11,6 +11,8 @@ namespace JNNJMods.CrabGameCheat.Patches
         {
             string header = param_1;
             string content = param_2;
+
+            // Change Owner left message.
             if (header.Equals("Rip") && content.Equals("Server owner left the game and closed the server"))
             {
                 __instance.NewPrompt("Pussy detected", "The owner is a pussy and left the Server because of you. Good work! - CrabGame Cheat");

@@ -18,11 +18,13 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 init = true;
 
+                // Check for Updates
                 updateAvailable = AutoUpdate.UpdateAvailable;
             }
 
             Event e = Event.current;
 
+            // Check if any key is pressed
             if (e != null && e.isKey)
             {
                 if (Input.GetKeyDown(e.keyCode))
@@ -39,17 +41,17 @@ namespace JNNJMods.CrabGameCheat.Util
         {
             if (!draw) return;
 
-            //Black out
+            // Black out
             DrawFullScreenColor(TransparentBlack);
 
-            //Position Calculation
+            // Position Calculation
             float divider = 2f;
             Resolution res = Screen.currentResolution;
             float x = (res.width - res.width / divider) / 2f;
             float y = (res.height - res.height / divider) / 2f;
             Rect rect = new(x, y, res.width / divider, res.height / divider);
 
-            //Draw middle rect
+            // Draw middle rect
             DrawColor(new Color(0, 1, 0, 0.6f), rect);
 
             #region WaterMark

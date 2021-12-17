@@ -27,6 +27,7 @@ namespace JNNJMods.CrabGameCheat.Util
             if (Init)
                 return;
 
+            // Find all Methods annotated with HarmonyFindAttribute
             Dictionary<MethodInfo, HarmonyFindAttribute[]> attributes = Assembly
                 .GetExecutingAssembly()
                 .GetTypes()

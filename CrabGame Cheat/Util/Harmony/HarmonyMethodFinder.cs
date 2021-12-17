@@ -10,14 +10,15 @@ namespace JNNJMods.CrabGameCheat.Util
     {
         private static bool ParamsEqual(Type[] params1, Type[] params2)
         {
+            // Check if lenght is equal
             if (params1.Length != params2.Length)
                 return false;
 
+            // Check if values are equal
             for (int i = 0; i < params1.Length; i++)
             {
                 if (params1[i] != params2[i])
                     return false;
-
             }
 
             return true;
@@ -25,6 +26,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         private static Type[] GetParams(this MethodBase mBase)
         {
+            // Get ParameterTypes from Method
             return mBase.GetParameters().Select(param => param.ParameterType).ToArray();
         }
 
@@ -40,10 +42,6 @@ namespace JNNJMods.CrabGameCheat.Util
                     HarmonyMethod patchMethod = customPatch ?? new HarmonyMethod(typeof(HarmonyMethodFinder).GetMethod(nameof(HarmonyMethodFinder.Patch), flags));
 
                     harmony.Patch(foundMethod, patchMethod);
-
-                    /*harmony.Patch(foundMethod,
-                        patchType == HarmonyPatchType.Prefix ? patchMethod : null,
-                        patchType == HarmonyPatchType.Postfix ? patchMethod : null);*/
                 }
 
             }

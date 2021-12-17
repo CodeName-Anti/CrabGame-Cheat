@@ -11,7 +11,7 @@ namespace JNNJMods.CrabGameCheat.Util
         public static void StopAntiCheat()
         {
 
-            //Find all Detectors and disable them.
+            // Find all Detectors and disable them.
             var types = Assembly.GetAssembly(typeof(CodeStage.AntiCheat.Common.ACTk)).GetTypes().Where(t =>
                     t.IsPublic);
 
@@ -30,7 +30,7 @@ namespace JNNJMods.CrabGameCheat.Util
 
         private static void ExecutePublicStaticVoidMethods(Type t)
         {
-            //Find StopDetection Method.
+            // Find StopDetection Method.
             var methods = t.GetMethods().Where(m =>
             m.IsStatic &&
             m.IsPublic &&

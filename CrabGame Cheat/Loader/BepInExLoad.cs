@@ -25,10 +25,10 @@ namespace JNNJMods.CrabGameCheat.Loader
         {
             Instance = this;
 
-            //Download Newtonsoft.Json
-            LoadLibraries();
+            // Download Newtonsoft.Json
+            DownloadJsonLibrary();
 
-            //Initialize Harmony
+            // Initialize Harmony
             try
             {
                 HarmonyInstance = new Harmony(Constants.GUID);
@@ -53,7 +53,7 @@ namespace JNNJMods.CrabGameCheat.Loader
             {
                 try
                 {
-                    // Patch type.
+                    // Patch type
                     new PatchClassProcessor(HarmonyInstance, type).Patch();
                 }
                 catch (Exception ex)
@@ -61,11 +61,6 @@ namespace JNNJMods.CrabGameCheat.Loader
                     CheatLog.Error($"Failed to patch \"{type.FullName}\": {ex}!");
                 }
             });
-        }
-
-        public void LoadLibraries()
-        {
-            DownloadJsonLibrary();
         }
 
         /// <summary>

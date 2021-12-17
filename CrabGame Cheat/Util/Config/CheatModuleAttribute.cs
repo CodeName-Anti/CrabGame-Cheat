@@ -23,8 +23,10 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 List<ModuleBase> instances = new();
 
+                // Get all Modules
                 foreach (Type t in GetAllModules(assembly))
                 {
+                    // Instantiate Module
                     instances.Add(Activator.CreateInstance(t, new object[] { gui }) as ModuleBase);
                 }
 

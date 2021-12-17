@@ -32,7 +32,7 @@ namespace JNNJMods.CrabGameCheat
         {
             Instance = this;
 
-            //Load Outline for ESP
+            // Load Outline for ESP
             ClassInjector.RegisterTypeInIl2Cpp<Outline>();
 
             //Preformat Version, for performance improvements
@@ -42,24 +42,24 @@ namespace JNNJMods.CrabGameCheat
 
             CheatLog.Msg("Loaded CrabGame Cheat " + FormattedVersion + " by JNNJ!");
 
-            //Initialize HarmonyFind
+            // Initialize HarmonyFind
             HarmonyFindAttribute.InitPatches();
 
-            //Print out all Methods patched by harmony
-            foreach (MethodBase b in harmony.GetPatchedMethods())
+            // Print out all Methods patched by harmony
+            foreach (var method in harmony.GetPatchedMethods())
             {
-                CheatLog.Msg("Class: " + b.DeclaringType.FullName + " Method: " + b.Name);
+                CheatLog.Msg($"Patched: {method.DeclaringType.FullName}.{method.Name}");
             }
 
             AntiCheat.StopAntiCheat();
 
-            //Create ClickGUI
+            // Create ClickGUI
             gui = new ClickGUI(10, 40, 10)
             {
                 BlackOut = true
             };
 
-            //Add Windows
+            // Add Windows
             gui.AddWindow((int)WindowIDs.Other, "Other", 70, 90, 320, 400);
             gui.AddWindow((int)WindowIDs.Combat, "Combat", 400, 90, 320, 400);
             gui.AddWindow((int)WindowIDs.Movement, "Movement", 730, 90, 320, 500);
@@ -71,22 +71,25 @@ namespace JNNJMods.CrabGameCheat
 
             config = new Config(gui);
 
-            //Create RainbowColor for watermark
+            // Create RainbowColor for watermark
             rainbow = new RainbowColor(.2f);
 
-            SceneManager.sceneLoaded = (UnityEngine.Events.UnityAction<Scene, LoadSceneMode>)OnSceneLoaded;
+            // Add SceneLoaded Listener
+            SceneManager.sceneLoaded += (UnityEngine.Events.UnityAction<Scene, LoadSceneMode>)OnSceneLoaded;
         }
 
         /// <summary>
-        /// Saves Config every 2 minutes.
+        /// Saves KeyBinds every 2 minutes.
         /// </summary>
         private async void KeyBindSaver()
         {
             while (saveConfig)
             {
-                await Task.Delay(2 * 60 * 1000);
+                // Delay for 2 minutes
+                await Task.Delay(120000);
                 try
                 {
+                    // Save KeyBinds
                     KeyBindManager.Instance.WriteToFile(ConfigPaths.KeyBindFile);
                 }
                 catch (Exception)
@@ -97,16 +100,18 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnApplicationQuit()
         {
+            // Disable KeyBindSave Loop
             saveConfig = false;
+            // Save KeyBinds
             KeyBindManager.Instance.WriteToFile(ConfigPaths.KeyBindFile);
         }
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            //reset KillBounds
+            // Reset KillBounds
             config.GetModule<AntiBoundKillsModule>().killHeight = -69420187;
 
-            //Redo UIChanger
+            // Redo UIChanger
             if (scene.name.Equals("Menu"))
             {
                 UIChanger.Init = false;
@@ -115,7 +120,7 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnApplicationLateStart()
         {
-            //Destroy AntiCheat GameObject
+            // Destroy AntiCheat GameObject
             AntiCheat.LateStopAntiCheat();
             WelcomeScreen.draw = true;
 
@@ -126,7 +131,7 @@ namespace JNNJMods.CrabGameCheat
 
         public void OnUpdate()
         {
-            //Hide and Show ClickGUI
+            // Hide and Show ClickGUI
             if (Input.GetKeyDown(KeyCode.Escape) && gui.Shown)
             {
                 gui.Shown = false;
@@ -137,37 +142,38 @@ namespace JNNJMods.CrabGameCheat
                 gui.Shown = !gui.Shown;
             }
 
-            //Hook UIChanger
+            // Change UI
             UIChanger.OnUpdate();
 
-            //Run Update on every module
+            // Run Update on every module
             config.ExecuteForModules(m => m.Update());
 
-            //Hook Update for ClickGUI
+            // Run Update for ClickGUI
             gui.Update();
 
         }
 
         public void FixedUpdate()
         {
+            // Run FixedUpdate on every module
             config.ExecuteForModules(m => m.FixedUpdate());
         }
 
         public void OnGUI()
         {
-            //Draw ClickGUI
+            // Draw ClickGUI
             gui.DrawWindows();
 
-            //Run OnGUI on every Module
+            // Run OnGUI on every Module
             config.ExecuteForModules(m => m.OnGUI());
 
-            //Hook OnGUI for WelcomeScreen
+            // Run OnGUI for WelcomeScreen
             if (WelcomeScreen.draw)
                 WelcomeScreen.OnGUI();
 
+            // Draw WaterMark
             int fontSize = 17;
 
-            //Draw WaterMark
             DrawingUtil.DrawText(waterMarkText, DrawingUtil.CenteredTextRect(waterMarkText, fontSize).x, 10, fontSize, rainbow.GetColor());
         }
     }
