@@ -52,7 +52,6 @@
     <Compile Include="JNNJMods Cheat Essentials\Utils\MouseOperations.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\NativeWinAlert.cs" />
     <Compile Include="JNNJMods Cheat Essentials\Utils\ReflectionExtensions.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Utils\WinConsole.cs" />
     <Compile Include="Cheat.cs" />
     <Compile Include="Loader\BepInExLoad.cs" />
     <Compile Include="Modules\Combat\AimModule.cs" />

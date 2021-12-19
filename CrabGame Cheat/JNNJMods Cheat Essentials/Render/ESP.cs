@@ -59,6 +59,9 @@ namespace JNNJMods.UI.Utils
 
         public void DrawSingle(GameObject target, string name = null)
         {
+            if (Event.current.type != EventType.Repaint)
+                return;
+
             Rect rect = default;
             Vector3 vector = target.transform.position;
             Vector3 vector2 = vector;
@@ -99,6 +102,9 @@ namespace JNNJMods.UI.Utils
             if (targets == null || names == null)
                 return;
 
+            if (Event.current.type != EventType.Repaint)
+                return;
+
             for (int i = 0; i < targets.Length; i++)
             {
                 if (targets[i] == null)
@@ -112,15 +118,18 @@ namespace JNNJMods.UI.Utils
 
         private static void DrawString(Vector2 position, string label, Color textColor, int fontSize, bool centered = true)
         {
+            if (Event.current.type != EventType.Repaint)
+                return;
+
             if (StringStyle == null)
             {
                 StringStyle = GUI.skin.label;
                 StringStyle.fontSize = fontSize;
                 StringStyle.normal.textColor = textColor;
             }
-            var content = new GUIContent(label);
-            var size = StringStyle.CalcSize(content);
-            var upperLeft = centered ? position - size / 2f : position;
+            GUIContent content = new GUIContent(label);
+            Vector2 size = StringStyle.CalcSize(content);
+            Vector2 upperLeft = centered ? position - size / 2f : position;
             GUI.Label(new Rect(upperLeft, size), content, StringStyle);
         }
 
@@ -133,6 +142,9 @@ namespace JNNJMods.UI.Utils
         /// <param name="thickness"></param>
         private static void DrawLine(Vector2 pointA, Vector2 pointB, Color color, float width)
         {
+            if (Event.current.type != EventType.Repaint)
+                return;
+
             Matrix4x4 matrix = GUI.matrix;
             if (!lineTex)
             {
@@ -162,6 +174,9 @@ namespace JNNJMods.UI.Utils
         /// <param name="thickness"></param>
         private static void DrawRectangle(Rect rect, Color color)
         {
+            if (Event.current.type != EventType.Repaint)
+                return;
+
             Vector3 vector = new(rect.x, rect.y, 0f);
             Vector3 vector2 = new(rect.x + rect.width, rect.y, 0f);
             Vector3 vector3 = new(rect.x + rect.width, rect.y + rect.height, 0f);

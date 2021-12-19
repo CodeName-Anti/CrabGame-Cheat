@@ -16,7 +16,7 @@ namespace JNNJMods.CrabGameCheat.Util
             {
                 try
                 {
-                    using var client = new WebClient();
+                    using WebClient client = new();
                     // Some random user agent because with others it responds with 403
                     client.Headers.Add("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0");
                     string json = client.DownloadString(Constants.ReleasesAPI);

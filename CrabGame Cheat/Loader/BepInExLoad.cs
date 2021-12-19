@@ -18,7 +18,7 @@ namespace JNNJMods.CrabGameCheat.Loader
 
         public Harmony HarmonyInstance { get; private set; }
 
-        public Cheat Cheat => cheat ??= new Cheat();
+        public Cheat Cheat { get; private set; }
         private Cheat cheat;
 
         public override void Load()
@@ -40,10 +40,18 @@ namespace JNNJMods.CrabGameCheat.Loader
                 CheatLog.Error("Harmony patching error: " + ex.ToString());
             }
 
-            Cheat.OnApplicationStart(HarmonyInstance);
+            // Register Cheat in IL2CPP
+            ClassInjector.RegisterTypeInIl2Cpp<Cheat>();
 
-            // Create instance of CheatObject.
-            CheatObject.CreateInstance(Cheat);
+            // Create GameObject
+            GameObject obj = new("JNNJs CrabGame Cheat");
+            UnityEngine.Object.DontDestroyOnLoad(obj);
+            obj.hideFlags |= HideFlags.HideAndDontSave;
+
+            // Add CheatObject Component
+            cheat = obj.AddComponent<Cheat>();
+
+            cheat.OnLoad(HarmonyInstance);
         }
 
         private void CustomPatchAll()
@@ -99,65 +107,6 @@ namespace JNNJMods.CrabGameCheat.Loader
                 // Load Newtonsoft.Json
                 Assembly.LoadFrom(dllLoadPath);
             }
-        }
-
-        public class CheatObject : MonoBehaviour
-        {
-            public static CheatObject Instance { get; private set; }
-
-            private Cheat cheat;
-
-            public CheatObject(IntPtr ptr) : base(ptr) { }
-
-            /// <summary>
-            /// Creates an instance of CheatObject and calls the <see cref="JNNJMods.CrabGameCheat.Cheat"/>.
-            /// </summary>
-            /// <param name="cheat"></param>
-            /// <param name="loader"></param>
-            public static void CreateInstance(Cheat cheat)
-            {
-                // Register MonoBehaviour in IL2CPP
-                ClassInjector.RegisterTypeInIl2Cpp<CheatObject>();
-
-                // Create GameObject
-                GameObject obj = new("JNNJs CrabGame Cheat");
-                DontDestroyOnLoad(obj);
-                obj.hideFlags |= HideFlags.HideAndDontSave;
-
-                // Add CheatObject Component
-                obj.AddComponent<CheatObject>().cheat = cheat;
-            }
-
-            void Awake()
-            {
-                Instance = this;
-            }
-
-            void OnApplicationQuit()
-            {
-                cheat.OnApplicationQuit();
-            }
-
-            void Start()
-            {
-                cheat.OnApplicationLateStart();
-            }
-
-            void Update()
-            {
-                cheat.OnUpdate();
-            }
-
-            void OnGUI()
-            {
-                cheat.OnGUI();
-            }
-
-            void FixedUpdate()
-            {
-                cheat.FixedUpdate();
-            }
-
         }
 
     }

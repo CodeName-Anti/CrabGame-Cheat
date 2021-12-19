@@ -58,7 +58,7 @@ namespace JNNJMods.CrabGameCheat.Util
         {
             var cppList = new Il2CppSystem.Collections.Generic.List<T>();
 
-            foreach (var elem in sysList)
+            foreach (T elem in sysList)
             {
                 cppList.Add(elem);
             }
@@ -73,7 +73,7 @@ namespace JNNJMods.CrabGameCheat.Util
         /// <param name="url">Download URL</param>
         public static void DownloadFile(string fileName, string url)
         {
-            using var client = new WebClient();
+            using WebClient client = new WebClient();
             client.DownloadFile(url, fileName);
         }
 

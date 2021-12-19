@@ -29,7 +29,7 @@ namespace JNNJMods.Render
 
         public Mode OutlineMode
         {
-            get { return outlineMode; }
+            get => outlineMode;
             set
             {
                 outlineMode = value;
@@ -39,7 +39,7 @@ namespace JNNJMods.Render
 
         public Color OutlineColor
         {
-            get { return outlineColor; }
+            get => outlineColor;
             set
             {
                 outlineColor = value;
@@ -49,7 +49,7 @@ namespace JNNJMods.Render
 
         public float OutlineWidth
         {
-            get { return outlineWidth; }
+            get => outlineWidth;
             set
             {
                 outlineWidth = value;
@@ -83,7 +83,7 @@ namespace JNNJMods.Render
 
         public Outline(IntPtr handle) : base(handle) { }
 
-        void Awake()
+        private void Awake()
         {
 
             // Cache renderers
@@ -103,13 +103,13 @@ namespace JNNJMods.Render
             needsUpdate = true;
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            foreach (var renderer in renderers)
+            foreach (Renderer renderer in renderers)
             {
 
                 // Append outline shaders
-                var materials = renderer.sharedMaterials.ToList();
+                List<Material> materials = renderer.sharedMaterials.ToList();
 
                 materials.Add(outlineMaskMaterial);
                 materials.Add(outlineFillMaterial);
@@ -118,7 +118,7 @@ namespace JNNJMods.Render
             }
         }
 
-        void OnValidate()
+        private void OnValidate()
         {
 
             // Update material properties
@@ -138,7 +138,7 @@ namespace JNNJMods.Render
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (needsUpdate)
             {
@@ -148,13 +148,13 @@ namespace JNNJMods.Render
             }
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
-            foreach (var renderer in renderers)
+            foreach (Renderer renderer in renderers)
             {
 
                 // Remove outline shaders
-                var materials = renderer.sharedMaterials.ToList();
+                List<Material> materials = renderer.sharedMaterials.ToList();
 
                 materials.Remove(outlineMaskMaterial);
                 materials.Remove(outlineFillMaterial);
@@ -163,7 +163,7 @@ namespace JNNJMods.Render
             }
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
 
             // Destroy material instances
@@ -171,13 +171,13 @@ namespace JNNJMods.Render
             Destroy(outlineFillMaterial);
         }
 
-        void Bake()
+        private void Bake()
         {
 
             // Generate smooth normals for each mesh
-            var bakedMeshes = new HashSet<Mesh>();
+            HashSet<Mesh> bakedMeshes = new HashSet<Mesh>();
 
-            foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
+            foreach (MeshFilter meshFilter in GetComponentsInChildren<MeshFilter>())
             {
 
                 // Skip duplicates
@@ -187,18 +187,18 @@ namespace JNNJMods.Render
                 }
 
                 // Serialize smooth normals
-                var smoothNormals = SmoothNormals(meshFilter.sharedMesh);
+                List<Vector3> smoothNormals = SmoothNormals(meshFilter.sharedMesh);
 
                 bakeKeys.Add(meshFilter.sharedMesh);
                 bakeValues.Add(new ListVector3() { data = smoothNormals });
             }
         }
 
-        void LoadSmoothNormals()
+        private void LoadSmoothNormals()
         {
 
             // Retrieve or generate smooth normals
-            foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
+            foreach (MeshFilter meshFilter in GetComponentsInChildren<MeshFilter>())
             {
 
                 // Skip if smooth normals have already been adopted
@@ -208,15 +208,15 @@ namespace JNNJMods.Render
                 }
 
                 // Retrieve or generate smooth normals
-                var index = bakeKeys.IndexOf(meshFilter.sharedMesh);
-                var smoothNormals = (index >= 0) ? bakeValues[index].data : SmoothNormals(meshFilter.sharedMesh);
+                int index = bakeKeys.IndexOf(meshFilter.sharedMesh);
+                List<Vector3> smoothNormals = (index >= 0) ? bakeValues[index].data : SmoothNormals(meshFilter.sharedMesh);
 
                 // Store smooth normals in UV3
                 meshFilter.sharedMesh.SetUVs(3, smoothNormals.ToIL2CPP());
             }
 
             // Clear UV3 on skinned mesh renderers
-            foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
+            foreach (SkinnedMeshRenderer skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
             {
                 if (registeredMeshes.Add(skinnedMeshRenderer.sharedMesh))
                 {
@@ -225,17 +225,17 @@ namespace JNNJMods.Render
             }
         }
 
-        List<Vector3> SmoothNormals(Mesh mesh)
+        private List<Vector3> SmoothNormals(Mesh mesh)
         {
 
             // Group vertices by location
-            var groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index)).GroupBy(pair => pair.Key);
+            IEnumerable<IGrouping<Vector3, KeyValuePair<Vector3, int>>> groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index)).GroupBy(pair => pair.Key);
 
             // Copy normals to a new list
-            var smoothNormals = new List<Vector3>(mesh.normals);
+            List<Vector3> smoothNormals = new List<Vector3>(mesh.normals);
 
             // Average normals for grouped vertices
-            foreach (var group in groups)
+            foreach (IGrouping<Vector3, KeyValuePair<Vector3, int>> group in groups)
             {
 
                 // Skip single vertices
@@ -245,9 +245,9 @@ namespace JNNJMods.Render
                 }
 
                 // Calculate the average normal
-                var smoothNormal = Vector3.zero;
+                Vector3 smoothNormal = Vector3.zero;
 
-                foreach (var pair in group)
+                foreach (KeyValuePair<Vector3, int> pair in group)
                 {
                     smoothNormal += mesh.normals[pair.Value];
                 }
@@ -255,7 +255,7 @@ namespace JNNJMods.Render
                 smoothNormal.Normalize();
 
                 // Assign smooth normal to each vertex
-                foreach (var pair in group)
+                foreach (KeyValuePair<Vector3, int> pair in group)
                 {
                     smoothNormals[pair.Value] = smoothNormal;
                 }
@@ -264,7 +264,7 @@ namespace JNNJMods.Render
             return smoothNormals;
         }
 
-        void UpdateMaterialProperties()
+        private void UpdateMaterialProperties()
         {
 
             // Apply properties according to mode

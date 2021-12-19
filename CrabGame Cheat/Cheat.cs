@@ -6,6 +6,7 @@ using JNNJMods.Render;
 using JNNJMods.UI;
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnhollowerRuntimeLib;
 using UnityEngine;
@@ -13,7 +14,7 @@ using UnityEngine.SceneManagement;
 
 namespace JNNJMods.CrabGameCheat
 {
-    public class Cheat
+    public class Cheat : MonoBehaviour
     {
         public static Cheat Instance { get; private set; }
 
@@ -28,7 +29,9 @@ namespace JNNJMods.CrabGameCheat
 
         private string waterMarkText;
 
-        public void OnApplicationStart(Harmony harmony)
+        public Cheat(IntPtr handle) : base(handle) { }
+
+        public void OnLoad(Harmony harmony)
         {
             Instance = this;
 
@@ -98,7 +101,7 @@ namespace JNNJMods.CrabGameCheat
             }
         }
 
-        public void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             // Disable KeyBindSave Loop
             saveConfig = false;
@@ -118,7 +121,7 @@ namespace JNNJMods.CrabGameCheat
             }
         }
 
-        public void OnApplicationLateStart()
+        private void Start()
         {
             // Destroy AntiCheat GameObject
             AntiCheat.LateStopAntiCheat();
@@ -129,7 +132,8 @@ namespace JNNJMods.CrabGameCheat
             KeyBindSaver();
         }
 
-        public void OnUpdate()
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void Update()
         {
             // Hide and Show ClickGUI
             if (Input.GetKeyDown(KeyCode.Escape) && gui.Shown)
@@ -153,13 +157,15 @@ namespace JNNJMods.CrabGameCheat
 
         }
 
-        public void FixedUpdate()
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void FixedUpdate()
         {
             // Run FixedUpdate on every module
             config.ExecuteForModules(m => m.FixedUpdate());
         }
 
-        public void OnGUI()
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void OnGUI()
         {
             // Draw ClickGUI
             gui.DrawWindows();

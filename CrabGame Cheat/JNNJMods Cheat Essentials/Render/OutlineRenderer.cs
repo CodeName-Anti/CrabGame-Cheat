@@ -6,7 +6,7 @@ namespace JNNJMods.Render
     {
         public static void UnOutline(GameObject obj)
         {
-            var outline = obj.GetComponent<Outline>();
+            Outline outline = obj.GetComponent<Outline>();
 
             if (outline != null)
             {

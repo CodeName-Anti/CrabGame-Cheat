@@ -12,14 +12,8 @@ namespace JNNJMods.CrabGameCheat.Modules
     {
         public float SpeedAmount
         {
-            get
-            {
-                return Elements[1].GetValue<float>();
-            }
-            set
-            {
-                Elements[1].SetValue(value);
-            }
+            get => Elements[1].GetValue<float>();
+            set => Elements[1].SetValue(value);
         }
 
         public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.Movement)
@@ -72,7 +66,7 @@ namespace JNNJMods.CrabGameCheat.Modules
             return bind;
         }
 
-        void SpeedToggle_ToggleChanged(bool toggled)
+        private void SpeedToggle_ToggleChanged(bool toggled)
         {
             if (InGame)
             {

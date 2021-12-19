@@ -4,6 +4,7 @@ using JNNJMods.CrabGameCheat.Translators;
 using JNNJMods.CrabGameCheat.Util.KeyBinds;
 using JNNJMods.UI;
 using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
 
 namespace JNNJMods.CrabGameCheat.Modules
 {
@@ -24,13 +25,7 @@ namespace JNNJMods.CrabGameCheat.Modules
         /// Value of <see cref="WindowId"/> presented as an <see cref="int"/>.
         /// </summary>
         [JsonIgnore]
-        protected int ID
-        {
-            get
-            {
-                return (int)WindowId;
-            }
-        }
+        protected int ID => (int)WindowId;
 
         public string Name { get; protected set; }
 
@@ -65,11 +60,13 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public virtual KeyBind GetKeyBinds() { return new KeyBind(); }
 
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual void Update() { }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual void FixedUpdate() { }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual void OnGUI() { }
 
     }

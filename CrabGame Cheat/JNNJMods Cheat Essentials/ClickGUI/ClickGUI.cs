@@ -23,10 +23,7 @@ namespace JNNJMods.UI
         /// </summary>
         public bool Shown
         {
-            get
-            {
-                return shown;
-            }
+            get => shown;
 
             set
             {
@@ -238,7 +235,7 @@ namespace JNNJMods.UI
         /// Draws the Elements of the Window.
         /// </summary>
         /// <param name="id"></param>
-        void DrawWindow(int id)
+        private void DrawWindow(int id)
         {
             ElementManager manager = elementMap[id];
 

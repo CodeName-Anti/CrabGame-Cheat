@@ -5,13 +5,7 @@ namespace JNNJMods.CrabGameCheat.Util
     public class CheatLog
     {
 
-        private static ManualLogSource LogSource
-        {
-            get
-            {
-                return BepInExLoader.Instance.Log;
-            }
-        }
+        private static ManualLogSource LogSource => BepInExLoader.Instance.Log;
 
         /// <summary>
         /// Logs a message to the Console

@@ -9,14 +9,8 @@ namespace JNNJMods.CrabGameCheat.Modules
         [JsonIgnore]
         public new T Element
         {
-            get
-            {
-                return base.Element as T;
-            }
-            protected set
-            {
-                base.Element = value;
-            }
+            get => base.Element as T;
+            protected set => base.Element = value;
         }
 
         public SingleElementModule(string name, ClickGUI gui, WindowIDs windowId) : base(name, gui, windowId)

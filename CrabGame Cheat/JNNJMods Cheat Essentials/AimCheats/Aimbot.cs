@@ -77,13 +77,13 @@ namespace JNNJMods.AimCheats
             {
                 if (!IsVisable(obj.transform.position)) continue;
 
-                var shit = Camera.main.WorldToScreenPoint(obj.transform.position);
+                Vector3 shit = Camera.main.WorldToScreenPoint(obj.transform.position);
                 if (shit.z > -8)
                 {
                     float dist = System.Math.Abs(Vector2.Distance(new Vector2(shit.x, Screen.height - shit.y), new Vector2((Screen.width / 2), (Screen.height / 2))));
 
                     // In fov
-                    if (FOV == -1 || dist < FOV) 
+                    if (FOV == -1 || dist < FOV)
                     {
                         if (dist < minDist)
                         {

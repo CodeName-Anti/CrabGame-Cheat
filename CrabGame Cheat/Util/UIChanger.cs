@@ -9,10 +9,7 @@ namespace JNNJMods.CrabGameCheat.Util
     {
         public static bool Init
         {
-            get
-            {
-                return init;
-            }
+            get => init;
             set
             {
                 init = value;
