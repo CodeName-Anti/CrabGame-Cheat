@@ -31,7 +31,7 @@ namespace CrabGame_Cheat_Installer
         {
             get
             {
-                if(string.IsNullOrEmpty(_path))
+                if (string.IsNullOrEmpty(_path))
                 {
                     _path = FileUtilities.FindGameLocation();
                 }
@@ -45,7 +45,7 @@ namespace CrabGame_Cheat_Installer
             get
             {
 
-                if(string.IsNullOrEmpty(_pluginFile))
+                if (string.IsNullOrEmpty(_pluginFile))
                 {
                     string folder = Path.Combine(path, "BepInEx", "plugins");
 
@@ -122,7 +122,8 @@ namespace CrabGame_Cheat_Installer
                 int result = current.CompareTo(git);
 
                 return result < 0;
-            } catch(Exception)
+            }
+            catch (Exception)
             {
                 return false;
             }
@@ -139,7 +140,10 @@ namespace CrabGame_Cheat_Installer
             File.WriteAllBytes(file, rawFile);
         }
 
-        private void DownloadCheat() => DownloadFile(DownloadURL, pluginFile);
+        private void DownloadCheat()
+        {
+            DownloadFile(DownloadURL, pluginFile);
+        }
 
         private void InstallBepInEx()
         {
@@ -163,9 +167,15 @@ namespace CrabGame_Cheat_Installer
             FileUtilities.CopyDir(zipExtract, path);
         }
 
-        private bool IsCheatInstalled() => File.Exists(pluginFile);
+        private bool IsCheatInstalled()
+        {
+            return File.Exists(pluginFile);
+        }
 
-        private bool IsBepInExInstalled() => File.Exists(Path.Combine(path, "BepInEx", "Core", "BepInEx.IL2CPP.dll"));
+        private bool IsBepInExInstalled()
+        {
+            return File.Exists(Path.Combine(path, "BepInEx", "Core", "BepInEx.IL2CPP.dll"));
+        }
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
@@ -180,7 +190,7 @@ namespace CrabGame_Cheat_Installer
             {
                 DownloadCheat();
 
-                MessageBox.Show(null, "Cheat " +( updateAvailable ? "Updated" : "Installed") + " sucessfully!",
+                MessageBox.Show(null, "Cheat " + (updateAvailable ? "Updated" : "Installed") + " sucessfully!",
                     "Installed", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
