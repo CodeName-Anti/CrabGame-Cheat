@@ -9,6 +9,8 @@ A Cheat for [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by
 
 Click [here](https://youtu.be/19Igp2FsL6w) for the Showcase Video.
 
+*This video isn't on YouTube anymore because my channel got deleted for "Spam, fraudulent or misleading commercial content is not allowed on YouTube."*
+
 ## **DISCLAIMER**
 **This software is for testing/educational purposes only. We do not encourage using it when you're not allowed, and will not bear liability for your actions.**
 
