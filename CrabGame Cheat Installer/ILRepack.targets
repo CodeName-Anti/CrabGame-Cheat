@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    
+    <Target Name="ILRepacker" AfterTargets="Build">
+        <!-- Actual merged assemblies -->
+        <ItemGroup>
+            <InputAssemblies Include="$(OutputPath)$(AssemblyName).exe" />
+            <InputAssemblies Include="..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll" />
+            <InputAssemblies Include="..\packages\Gameloop.Vdf.0.6.1\lib\net45\Gameloop.Vdf.dll" />
+            <InputAssemblies Include="FlatUI.dll" />
+        </ItemGroup>
+        
+        <!-- Required references for ILRepack -->
+        
+        <ILRepack
+          Parallel="true"
+          Internalize="true"
+          DebugInfo="false"
+          InputAssemblies="@(InputAssemblies)"
+          TargetKind="WinExe"
+          OutputFile="$(OutputPath)$(AssemblyName).exe" 
+        />
+    </Target>
+    
+</Project>

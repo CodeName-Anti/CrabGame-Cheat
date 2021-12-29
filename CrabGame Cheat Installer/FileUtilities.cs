@@ -1,5 +1,4 @@
-﻿using CrabGame_Cheat_Installer.Utils;
-using Ookii.Dialogs.WinForms;
+﻿using Ookii.Dialogs.WinForms;
 using System.IO;
 using System.Windows.Forms;
 

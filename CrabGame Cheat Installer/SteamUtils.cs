@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace CrabGame_Cheat_Installer.Utils
+namespace CrabGame_Cheat_Installer
 {
     internal static class SteamUtils
     {

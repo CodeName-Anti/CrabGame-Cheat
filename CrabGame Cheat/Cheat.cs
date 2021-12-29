@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+﻿using JNNJMods.CrabGameCheat.Loader;
 using JNNJMods.CrabGameCheat.Modules;
 using JNNJMods.CrabGameCheat.Util;
 using JNNJMods.CrabGameCheat.Util.KeyBinds;
@@ -31,7 +31,7 @@ namespace JNNJMods.CrabGameCheat
 
         public Cheat(IntPtr handle) : base(handle) { }
 
-        public void OnLoad(Harmony harmony)
+        public void OnLoad()
         {
             Instance = this;
 
@@ -49,7 +49,7 @@ namespace JNNJMods.CrabGameCheat
             HarmonyFindAttribute.InitPatches();
 
             // Print out all Methods patched by harmony
-            foreach (var method in harmony.GetPatchedMethods())
+            foreach (var method in BepInExLoader.Instance.HarmonyInstance.GetPatchedMethods())
             {
                 CheatLog.Msg($"Patched: {method.DeclaringType.FullName}.{method.Name}");
             }
@@ -74,11 +74,40 @@ namespace JNNJMods.CrabGameCheat
 
             config = new Config(gui);
 
-            // Create RainbowColor for watermark
-            rainbow = new RainbowColor(.2f);
+            try
+            {
+                // Create RainbowColor for watermark
+                rainbow = new RainbowColor(.2f);
 
-            // Add SceneLoaded Listener
-            SceneManager.sceneLoaded += (UnityEngine.Events.UnityAction<Scene, LoadSceneMode>)OnSceneLoaded;
+                // Add SceneLoaded Listener
+                SceneManager.sceneLoaded += (UnityEngine.Events.UnityAction<Scene, LoadSceneMode>)OnSceneLoaded;
+            }
+            catch (Exception)
+            {
+                // Ignored, not very high priority
+            }
+
+            LogLoadedMessage();
+        }
+
+        private static void LogLoadedMessage()
+        {
+            string loaded = $"Loaded CrabGame Cheat {FormattedVersion} by JNNJ!";
+            string githubURL = $"GitHub URL: https://github.com/{Constants.Owner}/{Constants.Repository}";
+
+            int lenght = (loaded.Length > githubURL.Length ? loaded.Length : githubURL.Length) + 1;
+
+            string placeHolder = "";
+
+            for (int i = 0; i < lenght; i++)
+                placeHolder += '=';
+
+            CheatLog.Error(placeHolder);
+
+            CheatLog.Msg(loaded);
+            CheatLog.Msg(githubURL);
+
+            CheatLog.Error(placeHolder);
         }
 
         /// <summary>
@@ -154,7 +183,6 @@ namespace JNNJMods.CrabGameCheat
 
             // Run Update for ClickGUI
             gui.Update();
-
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -180,7 +208,16 @@ namespace JNNJMods.CrabGameCheat
             // Draw WaterMark
             int fontSize = 17;
 
-            DrawingUtil.DrawText(waterMarkText, DrawingUtil.CenteredTextRect(waterMarkText, fontSize).x, 10, fontSize, rainbow.GetColor());
+            DrawingUtil.DrawText(waterMarkText,
+                // X
+                DrawingUtil.CenteredTextRect(waterMarkText, fontSize).x,
+                // Y
+                10,
+                // FontSize
+                fontSize,
+                // Color
+                rainbow != null ? rainbow.GetColor() : Color.red
+                );
         }
     }
 }

@@ -19,7 +19,16 @@ namespace JNNJMods.CrabGameCheat.Modules
 
         public override ElementInfo CreateElement(int windowId)
         {
-            return new ToggleInfo(windowId, Name, false, true);
+            var antiBoundsKill = new ToggleInfo(windowId, Name, false, true);
+
+            antiBoundsKill.ToggleChanged += AntiBoundsKill_ToggleChanged;
+
+            return antiBoundsKill;
+        }
+
+        private void AntiBoundsKill_ToggleChanged(bool toggled)
+        {
+            killHeight = -69420187;
         }
 
         public override void Update()
