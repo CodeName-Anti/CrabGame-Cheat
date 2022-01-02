@@ -60,6 +60,7 @@
     <Compile Include="Modules\Combat\InfinityPunchModule.cs" />
     <Compile Include="Modules\LobbyOwner\ForceStartModule.cs" />
     <Compile Include="Modules\Movement\AirJumpModule.cs" />
+    <Compile Include="Modules\Other\TriggerDropModule.cs" />
     <Compile Include="Modules\Player\AntiBoundKillsModule.cs" />
     <Compile Include="Modules\Movement\ClickTPModule.cs" />
     <Compile Include="Modules\Render\ESPModule.cs" />
