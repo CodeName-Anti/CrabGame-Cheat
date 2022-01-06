@@ -200,21 +200,29 @@ namespace JNNJMods.UI
         {
             if (keyBindSelection.Shown) return;
 
+            #region ===[Cursor]===
             if (PlayerInput.Instance != null && !Shown && !PauseUI.paused && !Cursor.visible)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
-            if (Shown && Cursor.lockState != CursorLockMode.Confined)
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-            }
-
+            // If cursor is not visible
             if (Shown && !Cursor.visible)
             {
+                // Save cursor state
+                prevVisible = Cursor.visible;
                 Cursor.visible = true;
             }
+
+            // If cursor lockstate is not confined
+            if (Shown && Cursor.lockState != CursorLockMode.Confined)
+            {
+                // Save cursor state
+                prevLockMode = Cursor.lockState;
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            #endregion
 
             if (ChatBox.Instance != null && ChatBox.Instance.prop_Boolean_0)
                 return;

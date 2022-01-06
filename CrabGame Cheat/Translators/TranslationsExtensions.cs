@@ -8,7 +8,7 @@ namespace JNNJMods.CrabGameCheat.Translators
 
         public static void ClearMessage(this ChatBox chat) => chat.inputField.text = "";
 
-        #region PlayerMovement
+        #region ===[PlayerMovement]===
         public static float GetSwimSpeed(this PlayerMovement movement) => movement.field_Private_Single_12;
         public static void SetSwimSpeed(this PlayerMovement movement, float swimSpeed) => movement.field_Private_Single_12 = swimSpeed;
 

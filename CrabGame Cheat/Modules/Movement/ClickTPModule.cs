@@ -28,13 +28,19 @@ namespace JNNJMods.CrabGameCheat.Modules
         private static Vector3 FindTpPos()
         {
             Transform playerCam = Instances.PlayerMovement.playerCam;
-            if (Physics.Raycast(playerCam.position, playerCam.forward, out RaycastHit raycastHit, 5000f, Instances.PlayerMovement.whatIsGround))
-            {
-                Vector3 b = Vector3.one;
 
-                return raycastHit.point + b;
+            bool rayHitStuff = Physics.Raycast(playerCam.position, playerCam.forward, out var raycastHit, 5000f, GameManager.Instance.whatIsGround);
+            Vector3 result;
+            if (rayHitStuff)
+            {
+                Vector3 vector = Vector3.one;
+                result = raycastHit.point + vector;
             }
-            return Vector3.zero;
+            else
+            {
+                result = Vector3.zero;
+            }
+            return result;
         }
 
         public override void Update()
