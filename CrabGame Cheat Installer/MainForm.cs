@@ -21,7 +21,7 @@ namespace CrabGame_Cheat_Installer
             RepoOwner = "CodeName-Anti",
             DownloadURL = $"https://github.com/{RepoOwner}/{Repository}/releases/latest/download/CrabCheat_BepInEx.dll",
             ReleasesAPI = $"https://api.github.com/repos/{RepoOwner}/{Repository}/releases",
-            BepInExURL = "https://builds.bepis.io/projects/bepinex_be/522/BepInEx_UnityIL2CPP_x64_a1cd9be_6.0.0-be.522.zip";
+            BepInExURL = "https://github.com/BepInEx/BepInEx/releases/download/v6.0.0-pre.1/BepInEx_UnityIL2CPP_x64_6.0.0-pre.1.zip";
 
         private string
             _path,
