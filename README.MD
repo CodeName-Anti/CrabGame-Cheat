@@ -7,10 +7,6 @@
 
 A Cheat for [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by [DaniDev](https://www.youtube.com/c/DaniDev).
 
-Click [here](https://youtu.be/19Igp2FsL6w) for the Showcase Video.
-
-*This video isn't on YouTube anymore because my channel got deleted for "Spam, fraudulent or misleading commercial content is not allowed on YouTube."*
-
 ## **DISCLAIMER**
 **This software is for testing/educational purposes only. We do not encourage using it when you're not allowed, and will not bear liability for your actions.**
 
@@ -28,8 +24,7 @@ Click [here](https://youtu.be/19Igp2FsL6w) for the Showcase Video.
 
 
 ## Manual Installation
- 1. Download the [lastest BepInEx Build](https://builds.bepis.io/projects/bepinex_be), the file name should start with "BepInEx_UnityIL2CPP".
-    ![img.png](images/BepInEx_Build_Location_Screenshot.png)
+ 1. Download [BepInEx 6.0.0-pre.1](https://github.com/BepInEx/BepInEx/releases/download/v6.0.0-pre.1/BepInEx_UnityIL2CPP_x64_6.0.0-pre.1.zip).
  2. Download [CrabGame_Cheat_BepInEx.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat_BepInEx.dll)
  3. Extract the Zip archive in your Crab Game Installation Folder(Steam -> Right Click Crab Game -> Manage -> Browse local Files).  
  ![img_2.png](images/Game_Files_Directory_Screenshot.png)
