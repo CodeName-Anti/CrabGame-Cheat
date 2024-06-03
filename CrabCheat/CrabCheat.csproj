@@ -1,226 +1,182 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CAE884C7-91A9-4A0E-9281-931368520DFA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JNNJMods.CrabGameCheat</RootNamespace>
-    <AssemblyName>CrabCheat_BepInEx</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <LangVersion>10.0</LangVersion>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <TargetFramework>net6-windows</TargetFramework>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <AssemblyName>CrabCheat</AssemblyName>
+    <Description>My first plugin</Description>
+    <Version>2.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>JNNJMods.CrabCheat</RootNamespace>
+    <Configurations>Release;Debug</Configurations>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="Constants.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\AimCheats\Aimbot.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\ClickGUI.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\ButtonInfo.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\CustomInfo.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\ElementInfo.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\ElementManager.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\LabelInfo.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\SliderInfo.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\Elements\ToggleInfo.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\ClickGUI\KeyBindSelection.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Render\DrawingUtil.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Render\ESP.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Render\Outline.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Render\OutlineRenderer.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Utils\KeyCodeFormatter.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Utils\MouseOperations.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Utils\NativeWinAlert.cs" />
-    <Compile Include="JNNJMods Cheat Essentials\Utils\ReflectionExtensions.cs" />
-    <Compile Include="Cheat.cs" />
-    <Compile Include="Loader\BepInExLoad.cs" />
-    <Compile Include="Modules\Combat\AimModule.cs" />
-    <Compile Include="Modules\Combat\InfinityPunchModule.cs" />
-    <Compile Include="Modules\LobbyOwner\ForceStartModule.cs" />
-    <Compile Include="Modules\Movement\AirJumpModule.cs" />
-    <Compile Include="Modules\Player\AntiBoundKillsModule.cs" />
-    <Compile Include="Modules\Movement\ClickTPModule.cs" />
-    <Compile Include="Modules\Render\ESPModule.cs" />
-    <Compile Include="Modules\Base\SingleElementModuleBase.cs" />
-    <Compile Include="Modules\Base\SingleElementModule.cs" />
-    <Compile Include="Modules\Base\ModuleBase.cs" />
-    <Compile Include="Modules\Base\MultiElementModuleBase.cs" />
-    <Compile Include="Modules\Movement\NoClipModule.cs" />
-    <Compile Include="Modules\Other\GlassBreakerModule.cs" />
-    <Compile Include="Modules\Player\GodModeModule.cs" />
-    <Compile Include="Modules\Movement\MegaJumpModule.cs" />
-    <Compile Include="Modules\Player\NoFallModule.cs" />
-    <Compile Include="Modules\Movement\NoFreezeModule.cs" />
-    <Compile Include="Modules\Movement\NoPushModule.cs" />
-    <Compile Include="Modules\Render\OwnerHighlightModule.cs" />
-    <Compile Include="Modules\Other\QuestModule.cs" />
-    <Compile Include="Modules\Movement\SpeedModule.cs" />
-    <Compile Include="Patches\GameManagerPatch.cs" />
-    <Compile Include="Patches\PlayerStatusPatch.cs" />
-    <Compile Include="Patches\PromptPatch.cs" />
-    <Compile Include="Patches\BepInExDetectionPatch.cs" />
-    <Compile Include="Patches\SteamManagerPatch.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Translators\GlobalTranslations.cs" />
-    <Compile Include="Translators\Instances.cs" />
-    <Compile Include="Translators\TranslationsExtensions.cs" />
-    <Compile Include="Util\AntiCheat.cs" />
-    <Compile Include="Util\AutoUpdate.cs" />
-    <Compile Include="Util\CheatLog.cs" />
-    <Compile Include="Util\Config\CheatModuleAttribute.cs" />
-    <Compile Include="Util\Config\Config.cs" />
-    <Compile Include="Util\Config\ConfigPaths.cs" />
-    <Compile Include="Util\Harmony\HarmonyFindAttribute.cs" />
-    <Compile Include="Util\KeyBinds\KeyBind.cs" />
-    <Compile Include="Util\GameObjectExtensions.cs" />
-    <Compile Include="Util\Harmony\HarmonyMethodFinder.cs" />
-    <Compile Include="Util\KeyBinds\KeyBindManager.cs" />
-    <Compile Include="Util\RainbowColor.cs" />
-    <Compile Include="Util\UIChanger.cs" />
-    <Compile Include="Util\WelcomeScreen.cs" />
-    <Compile Include="Util\Utilities.cs" />
-    <Compile Include="WindowIDs.cs" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0">
+      <IncludeAssets></IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.682">
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Il2CppInterop.Common" Version="1.4.6-ci.394">
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Il2CppInterop.Runtime" Version="1.4.6-ci.394">
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\Libraries\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <ProjectReference Include="..\SharpGUI\SharpGUI.csproj">
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="ACTk.Examples.Genuine.Runtime">
-      <HintPath>..\Libraries\ACTk.Examples.Genuine.Runtime.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\ACTk.Examples.Genuine.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ACTk.Examples.Runtime">
-      <HintPath>..\Libraries\ACTk.Examples.Runtime.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\ACTk.Examples.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ACTk.Runtime">
-      <HintPath>..\Libraries\ACTk.Runtime.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\ACTk.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\Libraries\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\Libraries\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\Assembly-CSharp-firstpass.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="BepInEx.Core">
-      <HintPath>..\Libraries\BepInEx.Core.dll</HintPath>
+    <Reference Include="Boxophobic.Utils.Scripts">
+      <HintPath>..\Libraries\Crab Game\Boxophobic.Utils.Scripts.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="BepInEx.IL2CPP">
-      <HintPath>..\Libraries\BepInEx.IL2CPP.dll</HintPath>
+    <Reference Include="DissonanceVoip">
+      <HintPath>..\Libraries\Crab Game\DissonanceVoip.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>..\Libraries\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem">
-      <HintPath>..\Libraries\Il2CppSystem.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\Il2CppSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem.Configuration">
+      <HintPath>..\Libraries\Crab Game\Il2CppSystem.Configuration.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Core">
-      <HintPath>..\Libraries\Il2CppSystem.Core.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\Il2CppSystem.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Il2CppSystem.Xml">
+      <HintPath>..\Libraries\Crab Game\Il2CppSystem.Xml.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Xml.Linq.3.5.21022.801\lib\net20\System.Xml.Linq.dll</HintPath>
+    <Reference Include="ImGui.NET">
+      <HintPath>..\SharpGUI\Resources\ImGui.NET.dll</HintPath>
       <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="UnhollowerBaseLib">
-      <HintPath>..\Libraries\UnhollowerBaseLib.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>..\Libraries\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\Libraries\UnityEngine.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\Libraries\Crab Game\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>..\Libraries\Crab Game\UnityEngine.GIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\Libraries\Crab Game\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\Libraries\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\Libraries\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>..\Libraries\Crab Game\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\Libraries\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule, Version=3.7.1.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\Libraries\Crab Game\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UIModule">
-      <HintPath>..\Libraries\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>..\Libraries\Crab Game\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ILRepack.targets" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets" Condition="Exists('..\packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+
+  <Target Name="Package Release Zip" AfterTargets="PostBuildEvent" Condition="$(Configuration) == Release">
     <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+      <TempToZipDir>$(OutputPath)TempToZip</TempToZipDir>
+      <ZipOutput>$(OutputPath)CrabCheat.zip</ZipOutput>
+      <TempZipOutput>$(OutputPath)..\CrabCheat_Temp.zip</TempZipOutput>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets'))" />
+
+    <ItemGroup>
+      <FilesToCopy Include="$(OutputPath)*.dll" />
+    </ItemGroup>
+    
+    <Delete Files="$(ZipOutput)" Condition="Exists($(ZipOutput))" />
+    <Delete Files="$(TempZipOutput)" Condition="Exists($(TempZipOutput))" />
+
+    <RemoveDir Directories="$(TempToZipDir)" Condition="Exists($(TempToZipDir))" />
+    <MakeDir Directories="$(TempToZipDir)" />
+
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(TempToZipDir)" />
+    
+    <ZipDirectory SourceDirectory="$(TempToZipDir)" DestinationFile="$(TempZipOutput)" />
+
+    <Move SourceFiles="$(TempZipOutput)" DestinationFiles="$(ZipOutput)" />
+    <RemoveDir Directories="$(TempToZipDir)" />
+    
   </Target>
+
+  
+  
+  <!--Only copy when CrabGamePath is set-->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(CrabGamePath) != ''">
+    
+    <!--CrabGamePath is defined in CrabCheat.csproj.user which is not included because of the .gitignore-->
+    <Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;$(CrabGamePath)\plugins&quot; /Y" />
+    <Exec Command="xcopy &quot;$(TargetDir)$(AssemblyName).pdb&quot; &quot;$(CrabGamePath)\plugins&quot; /Y /I" />
+
+    <Exec Command="xcopy &quot;$(TargetDir)\ImGui.NET.dll&quot; &quot;$(CrabGamePath)\plugins&quot; /Y" />
+    <Exec Command="xcopy &quot;$(TargetDir)\SharpGUI.dll&quot; &quot;$(CrabGamePath)\plugins&quot; /Y" />
+    <Exec Command="xcopy &quot;$(TargetDir)\SharpGUI.pdb&quot; &quot;$(CrabGamePath)\plugins&quot; /Y /I" />
+  </Target>
+
 </Project>

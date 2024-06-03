@@ -1,34 +1,21 @@
-﻿using JNNJMods.CrabGameCheat.Patches;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Patches;
+using JNNJMods.CrabCheat.Rendering;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Movement;
+
+[CheatModule]
+public class NoPushModule : Module
 {
-    [CheatModule]
-    public class NoPushModule : SingleElementModule<ToggleInfo>
-    {
-        public NoPushModule(ClickGUI gui) : base("NoPush", gui, WindowIDs.Movement)
-        {
-        }
+	public bool Enabled;
 
-        public override void Init(ClickGUI gui, bool json = false)
-        {
-            base.Init(gui, json);
-        }
+	public NoPushModule() : base("NoPush", TabID.Movement)
+	{
+	}
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            Element = new ToggleInfo(windowId, Name, false, true);
-
-            Element.ToggleChanged += Element_ToggledChanged;
-
-            return Element;
-        }
-
-        private void Element_ToggledChanged(bool toggled)
-        {
-            GameManagerPatch.NoPush = toggled;
-        }
-    }
+	public override void RenderGUIElements()
+	{
+		if (ImGui.Checkbox(Name, ref Enabled))
+			GameManagerPatch.NoPush = Enabled;
+	}
 }

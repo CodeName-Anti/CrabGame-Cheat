@@ -1,38 +1,42 @@
 ﻿using HarmonyLib;
-using JNNJMods.CrabGameCheat.Modules;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
+using JNNJMods.CrabCheat.Modules;
+using JNNJMods.CrabCheat.Modules.Render;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Util;
 using SteamworksNative;
 using System;
 using System.Threading.Tasks;
 
-namespace JNNJMods.CrabGameCheat.Patches
+namespace JNNJMods.CrabCheat.Patches;
+
+public static class SteamManagerPatch
 {
-    public static class SteamManagerPatch
-    {
 
-        [HarmonyFind(typeof(SteamManager), typeof(LobbyEnter_t))]
-        [HarmonyPrefix]
-        public static void LobbyCreated()
-        {
-            Wait();
-        }
+	[HarmonyFind(typeof(SteamManager), typeof(LobbyEnter_t))]
+	[HarmonyPrefix]
+	public static void LobbyCreated()
+	{
+		Wait();
+	}
 
-        private static async void Wait()
-        {
-            await Task.Delay(3000);
+	private static async void Wait()
+	{
+		await Task.Delay(3000);
 
-            try
-            {
-                Config.Instance.GetModule<OwnerHighlightModule>().FixOutline();
-            }
-            catch (Exception)
-            {
-                // Ignored, OwnerHighlight has less priority than the Lobby Owner window.
-            }
+		try
+		{
+			OwnerHighlightModule module = ModuleManager.Instance.GetModule<OwnerHighlightModule>();
 
-            ClickGUI.Instance.GetWindow((int)WindowIDs.LobbyOwner).Visible = SteamManager.Instance.IsLobbyOwner();
-        }
+			if (module.Enabled)
+				module.FixOutline();
+		}
+		catch (Exception)
+		{
+			// Ignored, OwnerHighlight has less priority than the Lobby Owner tab.
+		}
 
-    }
+		//TODO: Read hiding the owner tab
+		Cheat.Instance.renderer.Tabs[TabID.LobbyOwner].Enabled = SteamManager.Instance.IsLobbyOwner();
+	}
+
 }

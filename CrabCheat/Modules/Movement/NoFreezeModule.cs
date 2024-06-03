@@ -1,30 +1,32 @@
-﻿using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Movement;
+
+[CheatModule]
+public class NoFreezeModule : Module
 {
-    [CheatModule]
-    public class NoFreezeModule : SingleElementModule<ToggleInfo>
-    {
+	public bool Enabled;
 
-        public NoFreezeModule(ClickGUI gui) : base("NoFreeze", gui, WindowIDs.Movement)
-        {
+	public NoFreezeModule() : base("NoFreeze", TabID.Movement)
+	{
 
-        }
+	}
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            return new ToggleInfo(windowId, Name, false, true);
-        }
+	public override void RenderGUIElements()
+	{
+		ImGui.Checkbox(Name, ref Enabled);
+	}
 
-        public override void Update()
-        {
-            if (InGame && Element.GetValue<bool>() && PersistentPlayerData.frozen)
-            {
-                PersistentPlayerData.frozen = false;
-            }
-        }
+	public override void Update()
+	{
+		if (!InGame)
+			return;
 
-    }
+		if (!Enabled)
+			return;
+
+		PersistentPlayerData.frozen = false;
+	}
+
 }

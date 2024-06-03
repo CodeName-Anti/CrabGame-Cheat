@@ -1,34 +1,42 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Translators;
+using JNNJMods.CrabCheat.Util;
+using UnityEngine;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Movement;
+
+[CheatModule]
+public class AirJumpModule : Module
 {
-    [CheatModule]
-    public class AirJumpModule : SingleElementModule<ToggleInfo>
-    {
+	public bool Enabled;
 
-        public AirJumpModule(ClickGUI gui) : base("AirJump", gui, WindowIDs.Movement)
-        {
+	public AirJumpModule() : base("AirJump", TabID.Movement)
+	{
 
-        }
+	}
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            return new ToggleInfo(windowId, Name, false, true);
-        }
+	public override void RenderGUIElements()
+	{
+		ImGui.Checkbox(Name, ref Enabled);
+	}
 
-        public override void Update()
-        {
-            if (InGame && Utilities.GetKeyDown(SaveManager.Instance.state.jump) && Element.GetValue<bool>())
-            {
-                var velocity = Instances.PlayerMovement.GetRb().velocity;
+	public override void Update()
+	{
+		if (!InGame)
+			return;
 
-                velocity.y = 20f;
+		if (!Utilities.GetKeyDown(SaveManager.Instance.state.jump))
+			return;
 
-                Instances.PlayerMovement.GetRb().velocity = velocity;
-            }
-        }
-    }
+		if (!Enabled)
+			return;
+
+		Vector3 velocity = Instances.PlayerMovement.GetRb().velocity;
+
+		velocity.y = 20f;
+
+		Instances.PlayerMovement.GetRb().velocity = velocity;
+
+	}
 }

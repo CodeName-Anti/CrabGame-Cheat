@@ -3,86 +3,92 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-namespace JNNJMods.CrabGameCheat.Util
+namespace JNNJMods.CrabCheat.Util;
+
+public class UIChanger
 {
-    public class UIChanger
-    {
-        public static bool Init
-        {
-            get => init;
-            set
-            {
-                init = value;
-                versionUIInit = value;
-                aboutUIInit = value;
-            }
-        }
+	public static bool Init
+	{
+		get => init;
+		set
+		{
+			init = value;
+			versionUIInit = value;
+			aboutUIInit = value;
+		}
+	}
 
-        private static bool
-            init,
-            versionUIInit,
-            aboutUIInit;
+	private static bool
+		init,
+		versionUIInit,
+		aboutUIInit;
 
-        public static void OnUpdate()
-        {
-            if (init)
-                return;
+	private static TextMeshProUGUI GetCreditsTMP()
+	{
+		MonoBehaviourPublicGalomeGacrsemiGaupObUnique ui = MonoBehaviourPublicGalomeGacrsemiGaupObUnique.Instance;
 
-            // Change the VersionUI
-            if (!versionUIInit)
-            {
-                try
-                {
-                    // Find TextMeshPro
-                    var versionText = VersionUI.Instance.versionText;
+		// Find CreditsWindow
+		GameObject creditsWindow = ui.gameObject.GetChildren().Where(obj => obj.name.Contains("Credits")).First();
 
-                    // Get current version
-                    string gameVersion = versionText.text;
+		// Find tab0
+		GameObject tab0 = creditsWindow.GetChildren().Where(obj => obj.name.Contains("Tab")).First();
 
-                    versionText.text = $"CrabGame Cheat {Cheat.FormattedVersion} by JNNJ Game Version {gameVersion}";
-                    versionUIInit = true;
-                    CheatLog.Msg("Version Changed");
-                }
-                catch (Exception) { }
-            }
+		// Find Content
+		GameObject content = tab0.GetChildren().First().GetChildren().Where(obj => obj.name.Contains("Content")).First();
 
-            // Change the AboutUI
-            if (!aboutUIInit)
-            {
-                try
-                {
-                    var ui = MenuUI.Instance;
+		// Find TextMeshPro
+		TextMeshProUGUI textMesh = content.GetChildren().Where(obj => obj.name.Contains("Text")).First().GetComponent<TextMeshProUGUI>();
 
-                    // Find CreditsWindow
-                    GameObject creditsWindow = ui.gameObject.GetChildren().Where(obj => obj.name.Contains("Credits")).First();
+		return textMesh;
+	}
 
-                    // Find tab0
-                    GameObject tab0 = creditsWindow.GetChildren().Where(obj => obj.name.Contains("Tab")).First();
+	public static void OnUpdate()
+	{
+		if (init)
+			return;
 
-                    // Find Content
-                    GameObject content = tab0.GetChildren().First().GetChildren().Where(obj => obj.name.Contains("Content")).First();
+		// Change the VersionUI
+		if (!versionUIInit)
+		{
+			try
+			{
+				// Find TextMeshPro
+				TextMeshProUGUI versionText = VersionUI.Instance.versionText;
 
-                    // Find TextMeshPro
-                    TextMeshProUGUI textMesh = content.GetChildren().Where(obj => obj.name.Contains("Text")).First().GetComponent<TextMeshProUGUI>();
+				// Get current version
+				string gameVersion = versionText.text;
 
-                    // Add Custom Text
-                    textMesh.text +=
-                        "<br><br>" +
-                        "<size=150%>CrabGame Cheat </size>is a Cheat made by JNNJ.";
+				versionText.text = $"CrabCheat {Cheat.FormattedVersion} by JNNJ Game Version {gameVersion}";
+				versionUIInit = true;
+				CheatLog.Msg("Version Changed");
+			}
+			catch (Exception) { }
+		}
 
-                    CheatLog.Msg("Credits Changed");
+		// Change the AboutUI
+		if (!aboutUIInit)
+		{
+			try
+			{
+				TextMeshProUGUI textMesh = GetCreditsTMP();
 
-                    aboutUIInit = true;
-                }
-                catch (Exception) { }
-            }
+				// Add Custom Text
+				textMesh.text +=
+					"<br><br>" +
+					"<color=red><size=150%>CrabCheat </size>is a Cheat made by JNNJ.</color>";
 
-            if (versionUIInit && aboutUIInit)
-            {
-                init = true;
-                CheatLog.Msg("UI Updated!");
-            }
-        }
+				CheatLog.Msg("Credits Changed");
 
-    }
+				aboutUIInit = true;
+			}
+			catch (Exception) { }
+		}
+
+		if (versionUIInit && aboutUIInit)
+		{
+			init = true;
+			CheatLog.Msg("UI Updated!");
+		}
+	}
+
 }

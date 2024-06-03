@@ -1,80 +1,63 @@
 ﻿using Gameloop.Vdf;
 using Gameloop.Vdf.Linq;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
-using System;
-using System.IO;
-using System.Linq;
-using System.Net;
 
-namespace CrabGame_Cheat_Installer
+namespace CrabGame_Cheat_Installer;
+
+public static class SteamUtils
 {
-    internal static class SteamUtils
-    {
 
-        public static string GetAppName(ulong appId)
-        {
-            using var client = new WebClient();
-            string json = client.DownloadString("http://api.steampowered.com/ISteamApps/GetAppList/v0002/");
+	public static string GetAppLocation(ulong appId, string appName)
+	{
+		// Find steam installation
+		string steamInstall = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null) as string;
 
-            JObject obj = JObject.Parse(json);
+		// Read steam libraries
+		VProperty prop = VdfConvert.Deserialize(File.ReadAllText(Path.Combine(steamInstall, "steamapps", "libraryfolders.vdf")));
 
-            JArray apps = obj.Value<JObject>("applist").Value<JArray>("apps");
+		string installPath = null;
 
-            string name = null;
+		// Loop through all libraries
+		for (int i = 0; i < prop.Value.Children().Count(); i++)
+		{
+			try
+			{
+				VToken t = prop.Value[$"{i}"];
 
-            foreach (var app in apps.Values<JObject>())
-            {
-                if (app.Value<ulong>("appid") == appId)
-                {
-                    name = app.Value<string>("name");
-                    break;
-                }
-            }
+				if (t == null)
+				{
+					break;
+				}
 
-            return name;
-        }
+				VToken apps = t["apps"];
 
-        public static string GetAppLocation(ulong appId, string appName = null)
-        {
-            string steamInstall = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null) as string;
+				// Test if app is in path
+				if (apps[$"{appId}"] == null)
+					continue;
 
-            VProperty prop = VdfConvert.Deserialize(File.ReadAllText(Path.Combine(steamInstall, "steamapps", "libraryfolders.vdf")));
+				installPath = t.Value<string>("path");
 
-            string installPath = null;
+			}
+			catch (Exception)
+			{
+				break;
+			}
+		}
 
-            for (int i = 0; i < prop.Value.Children().Count(); i++)
-            {
-                try
-                {
-                    VToken t = prop.Value[$"{i}"];
+		if (installPath != null)
+		{
+			string path = Path.Combine(installPath, "steamapps", "common", appName);
 
-                    if (t == null)
-                    {
-                        break;
-                    }
+			if (Directory.Exists(path))
+				return path;
+		}
 
-                    VToken apps = t["apps"];
+		return null;
+	}
 
-                    if (apps[$"{appId}"] == null)
-                        continue;
+	public static void StartSteamApp(ulong appId)
+	{
 
-                    installPath = t.Value<string>("path");
+	}
 
-                }
-                catch (Exception)
-                {
-                    break;
-                }
-            }
-
-            if (installPath != null)
-            {
-                return Path.Combine(installPath, "steamapps", "common", appName ?? GetAppLocation(appId));
-            }
-
-            return null;
-        }
-
-    }
 }

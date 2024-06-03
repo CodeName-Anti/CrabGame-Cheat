@@ -1,97 +1,53 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.CrabGameCheat.Util.KeyBinds;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
-using System;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Translators;
+using JNNJMods.CrabCheat.Util;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Movement;
+
+[CheatModule]
+public class SpeedModule : Module
 {
-    [CheatModule]
-    public class SpeedModule : MultiElementModuleBase
-    {
-        public float SpeedAmount
-        {
-            get => Elements[1].GetValue<float>();
-            set => Elements[1].SetValue(value);
-        }
+	public bool Enabled;
+	public float SpeedAmount;
 
-        public SpeedModule(ClickGUI gui) : base("Speed", gui, WindowIDs.Movement)
-        {
+	public SpeedModule() : base("Speed", TabID.Movement)
+	{
 
-        }
+	}
 
-        public override void Init(ClickGUI gui, bool json = false)
-        {
-            base.Init(gui, json);
+	public override void RenderGUIElements()
+	{
+		if (ImGui.Checkbox(Name, ref Enabled))
+			UnityMainThreadDispatcher.Enqueue(ToggleChanged);
 
-            ToggleInfo speedToggle = new(ID, Name, false, true);
-            speedToggle.ToggleChanged += SpeedToggle_ToggleChanged;
-            Elements.Add(speedToggle);
+		ImGui.SliderFloat("Speed Amount", ref SpeedAmount, 1, 40);
+	}
 
-            SliderInfo speedSlider = new(ID, 1, 40);
+	private void ToggleChanged()
+	{
+		if (!InGame)
+			return;
 
-            Elements.Add(speedSlider);
+		PlayerMovement move = Instances.PlayerMovement;
+		if (Enabled)
+		{
+			move.SetMaxRunSpeed(13 * SpeedAmount);
+			move.SetMaxSpeed(6.5f * SpeedAmount);
+		}
+		else
+		{
+			move.SetMaxRunSpeed(13);
+			move.SetMaxSpeed(6.5f);
+		}
+	}
 
-            foreach (ElementInfo info in Elements)
-            {
-                gui.AddElement(info);
-            }
-        }
+	public override void Update()
+	{
+		if (!InGame)
+			return;
 
-        public override void SetKeyBinds(KeyBind keybind)
-        {
-            base.SetKeyBinds(keybind);
+		ToggleChanged();
+	}
 
-            try
-            {
-                SpeedAmount = float.Parse(keybind.ModuleData[0].ToString());
-
-                if (SpeedAmount < 0)
-                    SpeedAmount = 1;
-
-            }
-            catch (Exception)
-            {
-                //Data invalid
-            }
-        }
-
-        public override KeyBind GetKeyBinds()
-        {
-            var bind = base.GetKeyBinds();
-
-            bind.ModuleData = new object[] { SpeedAmount };
-
-            return bind;
-        }
-
-        private void SpeedToggle_ToggleChanged(bool toggled)
-        {
-            if (InGame)
-            {
-                var move = Instances.PlayerMovement;
-                if (toggled)
-                {
-                    move.SetMaxRunSpeed(13 * SpeedAmount);
-                    move.SetMaxSpeed(6.5f * SpeedAmount);
-                }
-                else
-                {
-                    move.SetMaxRunSpeed(13);
-                    move.SetMaxSpeed(6.5f);
-                }
-            }
-
-        }
-
-        public override void Update()
-        {
-            if (!InGame)
-                return;
-
-            SpeedToggle_ToggleChanged(Elements[0].GetValue<bool>());
-        }
-
-    }
 }

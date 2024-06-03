@@ -1,43 +1,47 @@
-﻿using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Util;
 using SteamworksNative;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Other;
+
+[CheatModule]
+public class GlassBreakerModule : Module
 {
-    [CheatModule]
-    public class GlassBreakerModule : SingleElementModule<ButtonInfo>
-    {
 
-        public GlassBreakerModule(ClickGUI gui) : base("GlassBreaker", gui, WindowIDs.Other)
-        {
+	public GlassBreakerModule() : base("GlassBreaker", TabID.Other)
+	{
+	}
 
-        }
+	public override void RenderGUIElements()
+	{
+		if (!ImGui.Button(Name))
+			return;
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            Element = new ButtonInfo(windowId, Name, true);
+		UnityMainThreadDispatcher.Enqueue(BreakGlass);
+	}
 
-            Element.ButtonPress += Element_ButtonPress;
+	private void BreakGlass()
+	{
+		if (!InGame)
+			return;
 
-            return Element;
-        }
+		if (GameManager.Instance == null)
+			return;
 
-        private void Element_ButtonPress()
-        {
+		if (GameManager.Instance.gameMode.freezeTimer.field_Private_Single_0 < 18)
+			return;
 
-            if (GameManager.Instance != null && GameManager.Instance.gameMode.freezeTimer.field_Private_Single_0 < 18)
-                return;
+		foreach (MonoBehaviour1PublicGasoglGaVefxUnique glass in MonoBehaviourPublicObpiInObUnique.Instance.pieces)
+		{
+			if (glass == null)
+				continue;
 
-            foreach (var glass in MonoBehaviourPublicObpiInObUnique.Instance.pieces)
-            {
-                if (glass == null) continue;
+			if (glass.gameObject.name.Contains("Solid"))
+				continue;
 
-                if (glass.gameObject.name.Contains("Solid")) continue;
-
-                glass.LocalInteract();
-                glass.AllInteract(SteamUser.GetSteamID().m_SteamID);
-            }
-        }
-    }
+			glass.LocalInteract();
+			glass.AllInteract(SteamUser.GetSteamID().m_SteamID);
+		}
+	}
 }

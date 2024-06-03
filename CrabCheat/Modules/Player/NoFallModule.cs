@@ -1,31 +1,22 @@
-﻿using JNNJMods.CrabGameCheat.Patches;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Patches;
+using JNNJMods.CrabCheat.Rendering;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Player;
+
+[CheatModule]
+public class NoFallModule : Module
 {
-    [CheatModule]
-    public class NoFallModule : SingleElementModule<ToggleInfo>
-    {
+	public bool Enabled;
 
-        public NoFallModule(ClickGUI gui) : base("NoFall", gui, WindowIDs.Player)
-        {
+	public NoFallModule() : base("NoFall", TabID.Player)
+	{
 
-        }
+	}
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            Element = new ToggleInfo(windowId, Name, false, true);
-
-            Element.ToggleChanged += Element_ToggleChanged;
-
-            return Element;
-        }
-
-        private void Element_ToggleChanged(bool toggled)
-        {
-            PlayerStatusPatch.NoFall = toggled;
-        }
-    }
+	public override void RenderGUIElements()
+	{
+		if (ImGui.Checkbox(Name, ref Enabled))
+			PlayerStatusPatch.NoFall = Enabled;
+	}
 }

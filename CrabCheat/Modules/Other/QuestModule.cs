@@ -1,50 +1,40 @@
-﻿using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Util;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Other;
+
+[CheatModule]
+public class QuestModule : Module
 {
-    [CheatModule]
-    public class QuestModule : MultiElementModuleBase
-    {
-        private static PlayerSave Save => SaveManager.Instance.state;
+	private static PlayerSave Save => SaveManager.Instance.state;
 
-        public QuestModule(ClickGUI gui) : base("Quest", gui, WindowIDs.Other)
-        {
-        }
+	public QuestModule() : base("Quest", TabID.Other)
+	{
+	}
 
-        public override void Init(ClickGUI gui, bool json = false)
-        {
-            base.Init(gui, json);
+	public override void RenderGUIElements()
+	{
+		if (ImGui.Button("Complete Daily Quest"))
+			UnityMainThreadDispatcher.Enqueue(CompleteDaily);
 
-            ButtonInfo
-                completeDaily = new(ID, "Complete Daily Quest"),
-                resetDailyCooldown = new(ID, "Reset DailyCooldown");
+		if (ImGui.Button("Reset Daily Cooldown"))
+			UnityMainThreadDispatcher.Enqueue(ResetDailyCooldown);
+	}
 
-            completeDaily.ButtonPress += CompleteDaily;
-            resetDailyCooldown.ButtonPress += ResetDailyCooldown;
 
-            Elements.Add(completeDaily);
-            Elements.Add(resetDailyCooldown);
+	private void ResetDailyCooldown()
+	{
+		Save.nextQuestAvailableTime = Il2CppSystem.DateTime.Now;
+		SaveManager.Instance.Save();
+	}
 
-            foreach (ElementInfo info in Elements)
-                gui.AddElement(info);
+	private void CompleteDaily()
+	{
+		QuestManager.Instance.CompleteQuest();
 
-        }
+		SaveManager.Instance.state.AddQuestProgress(187);
 
-        private void ResetDailyCooldown()
-        {
-            Save.nextQuestAvailableTime = Il2CppSystem.DateTime.Now;
-            SaveManager.Instance.Save();
-        }
-
-        private void CompleteDaily()
-        {
-            QuestManager.Instance.CompleteQuest();
-
-            SaveManager.Instance.state.AddQuestProgress(187);
-
-            SaveManager.Instance.Save();
-        }
-    }
+		SaveManager.Instance.Save();
+	}
 }

@@ -7,8 +7,6 @@ echo Enter your Crab Game installation Directory(You need BepInEx installed)...
 set /p dir=""
 set dir=%dir%\BepInEx
 mkdir Libraries
-xcopy /s /Y /C "%dir%\unhollowed\" "%libs%"
-xcopy /s /Y /C "%dir%\unhollowed\" "%libs%"
-xcopy /s /Y /C "%dir%\core\" "%libs%"
+xcopy /s /Y /C "%dir%\interop\" "%libs%"
 echo Done!
 pause

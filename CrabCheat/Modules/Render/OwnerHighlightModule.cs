@@ -1,113 +1,111 @@
-﻿using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.Render;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Rendering.Outline;
+using JNNJMods.CrabCheat.Util;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Render;
+
+[CheatModule]
+public class OwnerHighlightModule : Module
 {
-    [CheatModule]
-    public class OwnerHighlightModule : SingleElementModule<ToggleInfo>
-    {
-        private PlayerManager owner;
+	public bool Enabled;
 
-        public OwnerHighlightModule(ClickGUI gui) : base("Owner Highlight", gui, WindowIDs.Render)
-        {
-        }
+	private PlayerManager owner;
 
-        public override void Init(ClickGUI gui, bool json = false)
-        {
-            base.Init(gui, json);
-        }
+	public OwnerHighlightModule() : base("Owner Highlight", TabID.Render)
+	{
+	}
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            Element = new ToggleInfo(windowId, Name, false, true);
+	public override void RenderGUIElements()
+	{
+		if (ImGui.Checkbox(Name, ref Enabled))
+			UnityMainThreadDispatcher.Enqueue(ToggleChanged);
+	}
 
-            Element.ToggleChanged += Element_ToggleChanged;
+	private void ToggleChanged()
+	{
+		if (!InGame)
+			return;
 
-            return Element;
-        }
+		if (owner == null)
+			owner = FindOwner();
 
-        private void Element_ToggleChanged(bool toggled)
-        {
+		if (owner == null)
+			return;
 
-            if (!InGame && toggled)
-            {
-                Element.SetValue(false);
-                return;
-            }
+		foreach (GameObject obj in GetOutlines(owner))
+		{
+			if (obj == null)
+				continue;
 
-            if (InGame)
-            {
-                if (owner == null)
-                    owner = FindOwner();
+			if (Enabled)
+				OutlineRenderer.Outline(obj, new Color(1F, 0.5333F, 0F), 7);
+			else
+				OutlineRenderer.UnOutline(obj);
+		}
+	}
 
-                if (owner == null)
-                    return;
+	public void FixOutline()
+	{
+		// Remove outline
+		Enabled = false;
+		ToggleChanged();
 
-                foreach (GameObject obj in GetOutlines(owner))
-                {
-                    if (obj == null) continue;
-                    if (toggled)
-                        OutlineRenderer.Outline(obj, new Color(1F, 0.5333F, 0F), 7);
-                    else
-                        OutlineRenderer.UnOutline(obj);
-                }
+		// Add new outline
+		Enabled = true;
+		ToggleChanged();
+	}
 
-            }
-        }
+	public override void FixedUpdate()
+	{
+		if (!InGame)
+			return;
 
-        public void FixOutline()
-        {
-            // Remove outline
-            Element_ToggleChanged(false);
+		if (!Enabled)
+			return;
 
-            // Add new outline
-            Element_ToggleChanged(true);
-        }
+		if (owner == null)
+			owner = FindOwner();
 
-        public override void FixedUpdate()
-        {
-            if (InGame && Element.GetValue<bool>())
-            {
-                if (owner == null)
-                    owner = FindOwner();
+		if (owner != null && owner.GetComponent<Outline>() == null)
+		{
+			FixOutline();
+		}
+	}
 
-                if (owner.GetComponent<Outline>() == null)
-                {
-                    FixOutline();
-                }
-            }
-        }
+	private List<GameObject> GetOutlines(PlayerManager manager)
+	{
+		List<GameObject> outlines = [];
 
-        private List<GameObject> GetOutlines(PlayerManager manager)
-        {
-            List<GameObject> outlines = new();
+		if (manager == null)
+			return outlines;
 
-            if (manager != null)
-            {
-                var customization = manager.playerCustomization;
-                outlines.Add(customization.sweater);
-                outlines.Add(customization.pants);
-            }
 
-            return outlines;
-        }
+		MonoBehaviourPublicGacrswGapaCoObGacrcoUnique customization = manager.playerCustomization;
 
-        private static PlayerManager FindOwner()
-        {
-            var players = GameManager.Instance.activePlayers;
+		if (customization == null)
+			return outlines;
 
-            foreach (var player in players.Values)
-            {
-                if (player.steamProfile.m_SteamID == SteamManager.Instance.originalLobbyOwnerId.m_SteamID)
-                    return player;
-            }
 
-            return null;
-        }
+		outlines.Add(customization.sweater);
+		outlines.Add(customization.pants);
 
-    }
+		return outlines;
+	}
+
+	private static PlayerManager FindOwner()
+	{
+		Il2CppSystem.Collections.Generic.Dictionary<ulong, PlayerManager> players = GameManager.Instance.activePlayers;
+
+		foreach (PlayerManager player in players.Values)
+		{
+			if (player.steamProfile.m_SteamID == SteamManager.Instance.originalLobbyOwnerId.m_SteamID)
+				return player;
+		}
+
+		return null;
+	}
+
 }

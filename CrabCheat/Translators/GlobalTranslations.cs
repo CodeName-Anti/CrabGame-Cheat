@@ -1,25 +1,29 @@
-﻿#region ===[Player]===
-// Local
+﻿// Local Player
+global using GameModeBombTag = GameModePublicInSiLiSiIn1UIObBoUnique;
+global using GameModeHat = GameModePublicLi1UItaDi2InUIplSiUnique;
+global using GameModeTag = GameModePublicLi1UIUnique;
+// GameModes
+global using GameModeRedLight = GameModePublicSiBoDi2UIObmoSiroSiUnique;
 global using PersistentPlayerData = MonoBehaviourPublicBofrhnBoObInUnique;
-global using PlayerMovement = MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique;
-global using PlayerStatus = MonoBehaviourPublicObcumaObInplInObUnique;
-
-// Online
+// Online Player
 global using PlayerManager = MonoBehaviourPublicCSstReshTrheObplBojuUnique;
-global using OnlinePlayerMovement = MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique;
-#endregion
+global using ItemManager = MonoBehaviourPublicDi2InItidGamoObInUnique;
 global using GameManager = MonoBehaviourPublicDi2UIObacspDi2UIObUnique;
+global using PlayerMovement = MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique;
 global using Prompt = MonoBehaviourPublicGaprLi1ObGaprInUnique;
+// Server
+global using ServerSend = MonoBehaviourPublicInInUnique;
+// Client
+global using ClientSend = MonoBehaviourPublicInpabyInInInUnique;
 global using QuestManager = MonoBehaviourPublicLi1QudaDi2InquQuacUnique;
+global using PlayerStatus = MonoBehaviourPublicObcumaObInplInObUnique;
 global using GameLoop = MonoBehaviourPublicObInLi1GagasmLi1GaUnique;
+global using MapManager = MonoBehaviourPublicObInMamaLi1plMadeMaUnique; // Probably has an other name, as it isnt in the pre-obfuscated version
 global using SteamManager = MonoBehaviourPublicObInUIgaStCSBoStcuCSUnique;
-#region ===[UI]===
+global using OnlinePlayerMovement = MonoBehaviourPublicObVeSiVeRiSiAnVeanTrUnique;
+// UI
 global using ChatBox = MonoBehaviourPublicRaovTMinTemeColoonCoUnique;
-global using MenuUI = MonoBehaviourPublicCSDi2UIInstObUIloDiUnique;
+global using CameraShaker = MonoBehaviourPublicShdaguShpuheObShInShUnique;
 global using VersionUI = MonoBehaviourPublicTeveObInUnique;
-global using PauseUI = MonoBehaviourPublicTrpaGasemaGainBoGapaUnique;
-#endregion
 
-namespace JNNJMods.CrabGameCheat.Translators
-{
-}
+namespace JNNJMods.CrabCheat.Translators;

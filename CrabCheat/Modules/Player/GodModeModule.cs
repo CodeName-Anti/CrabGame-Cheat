@@ -1,38 +1,28 @@
 ﻿using CodeStage.AntiCheat.ObscuredTypes;
-using JNNJMods.CrabGameCheat.Patches;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+using ImGuiNET;
+using JNNJMods.CrabCheat.Patches;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Util;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Player;
+
+[CheatModule]
+public class GodModeModule : Module
 {
-    [CheatModule]
-    public class GodModeModule : SingleElementModule<ToggleInfo>
-    {
-        public GodModeModule(ClickGUI gui) : base("GodMode", gui, WindowIDs.Player)
-        {
-        }
+	public bool Enabled;
 
-        public override void Init(ClickGUI gui, bool json = false)
-        {
-            base.Init(gui, json);
+	public GodModeModule() : base("GodMode", TabID.Player)
+	{
+	}
 
-        }
+	public override void RenderGUIElements()
+	{
+		if (!ImGui.Checkbox(Name, ref Enabled))
+			return;
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            Element = new ToggleInfo(windowId, "GodMode", false, true);
+		if (InGame)
+			UnityMainThreadDispatcher.Enqueue(() => PlayerStatus.Instance.currentHp = new ObscuredInt(100));
 
-            Element.ToggleChanged += Element_ToggleChanged;
-
-            return Element;
-        }
-
-        private void Element_ToggleChanged(bool toggled)
-        {
-            if (InGame)
-                PlayerStatus.Instance.currentHp = new ObscuredInt(100);
-            PlayerStatusPatch.GodMode = toggled;
-        }
-    }
+		PlayerStatusPatch.GodMode = Enabled;
+	}
 }

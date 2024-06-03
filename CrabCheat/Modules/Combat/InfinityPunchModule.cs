@@ -1,42 +1,43 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Translators;
+using JNNJMods.CrabCheat.Util;
+using UnityEngine;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Combat;
+
+[CheatModule]
+public class InfinityPunchModule : Module
 {
-    [CheatModule]
-    public class InfinityPunchModule : SingleElementModule<ToggleInfo>
-    {
-        public InfinityPunchModule(ClickGUI gui) : base("Infinity Punch", gui, WindowIDs.Combat)
-        {
-        }
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            ToggleInfo infPunch = new(windowId, Name, false, true);
+	public bool Enabled;
 
-            infPunch.ToggleChanged += InfinityPunch_Toggled;
+	public InfinityPunchModule() : base("Infinity Punch", TabID.Combat)
+	{
+	}
 
-            return infPunch;
-        }
+	public override void RenderGUIElements()
+	{
+		//GUILayout.Label("<i>Infinity Punch should be used with <b>No Camerashake</b></i>");
+		ImGui.Text("Infinity Punch should be used with");
+		ImGui.SameLine();
+		ImGui.TextColored(Color.red.ToSysVec(), "No Camerashake");
 
-        private void InfinityPunch_Toggled(bool toggled)
-        {
-            CurrentSettings.Instance.UpdateCamShake(!toggled);
-        }
+		ImGui.Checkbox(Name, ref Enabled);
+	}
 
-        public override void FixedUpdate()
-        {
-            if (InGame && Element.GetValue<bool>())
-            {
-                var punch = Instances.PlayerMovement.punchPlayers;
+	public override void FixedUpdate()
+	{
+		if (!InGame)
+			return;
 
-                punch.field_Private_Boolean_0 = true;
-                punch.field_Private_Single_0 = 3.1f;
+		if (!Enabled)
+			return;
 
-            }
-        }
+		MonoBehaviourPublicObsfBoLawhSiUnique punch = Instances.PlayerMovement.punchPlayers;
 
-    }
+		punch.field_Private_Boolean_0 = true;
+		punch.field_Private_Single_0 = 3.1f;
+	}
+
 }

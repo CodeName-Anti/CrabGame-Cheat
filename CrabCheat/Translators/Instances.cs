@@ -1,7 +1,6 @@
-﻿namespace JNNJMods.CrabGameCheat.Translators
+﻿namespace JNNJMods.CrabCheat.Translators;
+
+public static class Instances
 {
-    public static class Instances
-    {
-        public static PlayerMovement PlayerMovement => PlayerMovement.field_Private_Static_MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique_0;
-    }
+	public static PlayerMovement PlayerMovement => PlayerMovement.field_Private_Static_MonoBehaviourPublicGaplfoGaTrorplTrRiBoUnique_0;
 }

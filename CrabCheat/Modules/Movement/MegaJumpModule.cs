@@ -1,59 +1,59 @@
-﻿using JNNJMods.CrabGameCheat.Translators;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Translators;
+using JNNJMods.CrabCheat.Util;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Movement;
+
+[CheatModule]
+public class MegaJumpModule : Module
 {
-    [CheatModule]
-    public class MegaJumpModule : SingleElementModule<ToggleInfo>
-    {
+	public bool Enabled;
 
-        private bool init;
+	private bool init;
 
-        private float jumpForce;
+	private float jumpForce;
 
-        public MegaJumpModule(ClickGUI gui) : base("Mega Jump", gui, WindowIDs.Movement)
-        {
+	public MegaJumpModule() : base("Mega Jump", TabID.Movement)
+	{
 
-        }
+	}
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            Element = new ToggleInfo(windowId, Name, false, true);
+	public override void RenderGUIElements()
+	{
+		if (!ImGui.Checkbox(Name, ref Enabled))
+			return;
 
-            Element.ToggleChanged += Element_ToggleChanged;
+		UnityMainThreadDispatcher.Enqueue(OnToggleChanged);
+	}
 
-            return Element;
-        }
+	private void OnToggleChanged()
+	{
+		if (!InGame)
+			return;
 
-        public void Element_ToggleChanged(bool toggled)
-        {
-            if (!InGame) Element.SetValue(false);
+		if (Enabled)
+			Instances.PlayerMovement.SetJumpForce(jumpForce * 2f);
+		else
+			Instances.PlayerMovement.SetJumpForce(jumpForce);
+	}
 
-            if (toggled)
-                Instances.PlayerMovement.SetJumpForce(jumpForce * 2f);
-            else
-                Instances.PlayerMovement.SetJumpForce(jumpForce);
-        }
+	public override void Update()
+	{
+		if (!InGame)
+			return;
 
-        public override void Update()
-        {
-            if (InGame)
-            {
-                if (!init)
-                {
-                    init = true;
+		if (!init)
+		{
+			init = true;
 
-                    jumpForce = Instances.PlayerMovement.GetJumpForce();
-                }
+			jumpForce = Instances.PlayerMovement.GetJumpForce();
+		}
 
-                if (Element.GetValue<bool>())
-                {
-                    Element_ToggleChanged(true);
-                }
-            }
-        }
+		if (!Enabled)
+			return;
 
-    }
+		OnToggleChanged();
+	}
+
 }

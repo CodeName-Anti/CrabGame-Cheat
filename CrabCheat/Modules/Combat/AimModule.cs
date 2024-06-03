@@ -1,103 +1,152 @@
-﻿using JNNJMods.AimCheats;
-using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Translators;
 using Newtonsoft.Json;
-using SteamworksNative;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.Combat;
+
+// Temporarily disabled because it requires fixing
+//[CheatModule]
+public class AimModule : Module
 {
-    [CheatModule]
-    public class AimModule : MultiElementModuleBase
-    {
-        [JsonIgnore]
-        private Aimbot aim;
+	public bool Enabled;
 
-        public AimModule(ClickGUI gui) : base("Aim", gui, WindowIDs.Combat)
-        {
-        }
+	[JsonIgnore]
+	private LayerMask AimLayers = LayerMask.GetMask("Default", "Player", "Ground");
 
-        public override void Init(ClickGUI gui, bool json = false)
-        {
-            base.Init(gui, json);
+	[JsonIgnore]
+	private Camera MainCam;
 
-            aim = new Aimbot()
-            {
-                mask = LayerMask.GetMask("Default", "Player", "Ground")
-            };
+	public AimModule() : base("Aim", TabID.Combat)
+	{
+	}
 
-            ToggleInfo aimBot = new(ID, "AimBot", false, true);
-            aimBot.ToggleChanged += Aimbot_ToggleChanged;
+	private bool AimbotValid()
+	{
+		return InGame && PlayerInput.Instance.active;
+	}
 
-            ToggleInfo triggerBot = new(ID, "TriggerBot", false, true);
-            triggerBot.ToggleChanged += TriggerBot_ToggleChanged;
+	public override void Update()
+	{
+		if (!AimbotValid())
+			return;
 
-            Elements.Add(aimBot);
-            Elements.Add(triggerBot);
+		if (!Enabled)
+			return;
 
-            foreach (ElementInfo info in Elements)
-            {
-                gui.AddElement(info);
-            }
-        }
+		if (MainCam == null)
+			MainCam = Camera.main;
 
-        #region Toggles
-        private void TriggerBot_ToggleChanged(bool toggled)
-        {
-            aim.TriggerBot = toggled;
-        }
+		AimAt(GetClosestEnemy().head.position);
+	}
 
-        private void Aimbot_ToggleChanged(bool toggled)
-        {
-            aim.Enabled = toggled;
-        }
-        #endregion
+	public override void RenderGUIElements()
+	{
+		ImGui.Checkbox("Aimbot", ref Enabled);
+	}
 
-        private GameObject[] GetHeads()
-        {
-            List<GameObject> heads = new();
+	private void TriggerBot()
+	{
+		if (!IsOnEnemy())
+			return;
+		//TODO: IMPLEMENT
+	}
 
-            foreach (PlayerManager manager in GameManager.Instance.activePlayers.Values)
-            {
-                if (manager.dead || manager.steamProfile.m_SteamID == SteamUser.GetSteamID().m_SteamID)
-                    continue;
-                heads.Add(manager.head.gameObject);
-            }
+	public bool IsOnEnemy()
+	{
+		// RayCast to see if Collider is player
+		return Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 999999f, AimLayers)
+			&& IsEnemy(hit);
+	}
 
-            return heads.ToArray();
-        }
+	private bool IsEnemy(RaycastHit hit)
+	{
+		string name = hit.transform.name.ToLower();
+		return name.Contains("player") || hit.collider.gameObject.layer == AimLayers;
+	}
 
-        private bool AimbotValid()
-        {
-            return
-                // Should be InGame and alive
-                InGame &&
-                // GUI should be hidden
-                !Gui.Shown &&
-                // PlayerInput should be active
-                PlayerInput.Instance.active &&
-                // Game shouldn't be pause
-                !PauseUI.paused &&
-                // Cursor shouldn't be visible
-                !Cursor.visible &&
-                // Application should be focused
-                Application.isFocused;
-        }
+	public bool IsVisible(Vector3 toCheck)
+	{
+		// Raycast to enemy position, to see if the enemy is visible
+		return Physics.Linecast(Camera.main.transform.position, toCheck, out RaycastHit hit, AimLayers) && IsEnemy(hit);
+	}
 
-        public override void Update()
-        {
-            if (AimbotValid())
-            {
-                if (Elements[0].GetValue<bool>())
-                    aim.Aim(GetHeads());
+	private static Vector2 CalcAngle(Vector3 src, Vector3 dst)
+	{
+		Vector2 angle;
+		Vector3 relative;
+		relative = src - dst;
+		float magnitude = relative.magnitude;
+		float pitch = Mathf.Asin(relative.y / magnitude);
+		float yaw = -Mathf.Atan2(relative.x, -relative.z);
 
-                if (Elements[1].GetValue<bool>())
-                    aim.Trigger();
-            }
+		yaw *= Mathf.Rad2Deg;
+		pitch *= Mathf.Rad2Deg;
 
-        }
+		angle.x = pitch;
+		angle.y = yaw;
+		return angle;
+	}
 
-    }
+	public void AimAt(Vector3 target)
+	{
+		Vector3 direction = target - MainCam.transform.position;
+
+		Quaternion rotation = Quaternion.LookRotation(target);
+
+		Instances.PlayerMovement.GetPlayerCamTransform().rotation = rotation;
+
+		float deltaLength = Mathf.Sqrt((direction.x * direction.x) + (direction.y * direction.y) + (direction.z * direction.z));
+		float desiredXangle = -Mathf.Asin(direction.y / deltaLength) * (180 / Mathf.PI);
+
+		if (desiredXangle > 90)
+			desiredXangle = 90;
+		else if (desiredXangle < -90)
+			desiredXangle = -90;
+
+		PlayerInput.Instance.desiredX = desiredXangle;
+
+		//Vector3 euler = Instances.PlayerMovement.orientation.transform.eulerAngles;
+		//euler.y = aimAngle.y;
+		//Instances.PlayerMovement.orientation.transform.eulerAngles = euler;
+
+
+		/*
+		Vector3 camAngle = move.playerCam.transform.eulerAngles;
+		move.xRotation = aimAngle.x;
+		camAngle.y = aimAngle.y;
+		move.playerCam.transform.eulerAngles = camAngle;
+		*/
+	}
+
+	private PlayerManager GetClosestEnemy()
+	{
+		float closestEnemyDistance = float.MaxValue;
+		PlayerManager bestPlayer = null;
+
+		foreach (PlayerManager manager in GameManager.Instance.activePlayers.Values)
+		{
+			if (manager == null)
+				continue;
+
+			if (manager.dead)
+				continue;
+
+			if (!IsVisible(manager.head.transform.position))
+				continue;
+
+			float distance = Vector3.Distance(Instances.PlayerMovement.transform.position, manager.transform.position);
+
+			if (distance < closestEnemyDistance)
+			{
+				closestEnemyDistance = distance;
+				bestPlayer = manager;
+			}
+
+		}
+
+		return bestPlayer;
+	}
+
 }

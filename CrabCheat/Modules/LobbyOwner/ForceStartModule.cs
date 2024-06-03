@@ -1,30 +1,27 @@
-﻿using JNNJMods.CrabGameCheat.Util;
-using JNNJMods.UI;
-using JNNJMods.UI.Elements;
+﻿using ImGuiNET;
+using JNNJMods.CrabCheat.Rendering;
+using JNNJMods.CrabCheat.Util;
 
-namespace JNNJMods.CrabGameCheat.Modules
+namespace JNNJMods.CrabCheat.Modules.LobbyOwner;
+
+[CheatModule]
+public class ForceStartModule : Module
 {
-    [CheatModule]
-    public class ForceStartModule : SingleElementModule<ButtonInfo>
-    {
+	public ForceStartModule() : base("ForceStart", TabID.LobbyOwner)
+	{
+	}
 
-        public ForceStartModule(ClickGUI gui) : base("ForceStart", gui, WindowIDs.LobbyOwner)
-        {
-        }
+	public override void RenderGUIElements()
+	{
+		if (ImGui.Button(Name))
+			UnityMainThreadDispatcher.Enqueue(ForceStartGame);
+	}
 
-        public override ElementInfo CreateElement(int windowId)
-        {
-            ButtonInfo forceStart = new(windowId, Name, true);
+	private void ForceStartGame()
+	{
+		if (!InGame)
+			return;
 
-            forceStart.ButtonPress += ForceStartGame;
-
-            return forceStart;
-        }
-
-        private void ForceStartGame()
-        {
-            if (InGame)
-                GameLoop.Instance.StartGames();
-        }
-    }
+		GameLoop.Instance.StartGames();
+	}
 }
