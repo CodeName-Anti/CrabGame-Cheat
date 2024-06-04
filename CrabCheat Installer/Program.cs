@@ -5,6 +5,25 @@ namespace CrabGame_Cheat_Installer;
 public static class Program
 {
 	
+	private static string GetAppPathBackup()
+	{
+		Console.WriteLine("Crab Game folder was not found. Enter your Crab Game Path manually here.");
+		Console.WriteLine($"({"Steam -> Right click Crab Game -> Manage -> Browse local Files".Pastel(ConsoleColor.Yellow)})");
+
+		string gamePath = Console.ReadLine();
+
+		if (gamePath.StartsWith("\""))
+			gamePath = gamePath[1..];
+
+		if (gamePath.EndsWith("\""))
+			gamePath = gamePath[..^1];
+
+		if (!Directory.Exists(gamePath))
+			return GetAppPathBackup();
+
+		return gamePath;
+	}
+
 	public static void Main(string[] args)
 	{
 		WriteLine(@"
@@ -19,20 +38,15 @@ public static class Program
 
 		ulong steamAppId = 1782210;
 
-		string gamePath = SteamUtils.GetAppLocation(steamAppId, "Crab Game");
+		//string gamePath = SteamUtils.GetAppLocation(steamAppId, "Crab Game");
+		string gamePath = null;
 
 		if (gamePath == null)
 		{
-			Console.WriteLine("Crab Game folder was not found. Enter your Crab Game Path manually here.");
-			Console.WriteLine($"({"Steam -> Right click Crab Game -> Manage -> Browse local Files".Pastel(ConsoleColor.Yellow)})");
+			gamePath = SteamUtils.GetAppPathAltenative(steamAppId, "Crab Game");
 
-			gamePath = Console.ReadLine();
-
-			if (gamePath.StartsWith("\""))
-				gamePath = gamePath[1..];
-
-			if (gamePath.EndsWith("\""))
-				gamePath = gamePath[..^1];
+			// if gamePath is still null ask the user for the path
+			gamePath ??= GetAppPathBackup();
 		}
 
 		Console.WriteLine("Navigate with Arrow Keys and Enter");

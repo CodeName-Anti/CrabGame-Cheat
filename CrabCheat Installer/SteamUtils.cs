@@ -1,6 +1,7 @@
 ﻿using Gameloop.Vdf;
 using Gameloop.Vdf.Linq;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace CrabGame_Cheat_Installer;
 
@@ -55,9 +56,40 @@ public static class SteamUtils
 		return null;
 	}
 
+	public static string GetAppPathAltenative(ulong appId, string appName)
+	{
+		StartSteamApp(appId);
+
+		for (int i = 0;  i < 1000; i++)
+		{
+			Process[] processes = Process.GetProcessesByName(appName);
+
+			try
+			{
+				if (processes.Any())
+				{
+					Process proc = processes.First();
+
+					string path = proc.MainModule.FileName;
+					proc.Kill();
+
+					return path;
+				}
+			} catch(Exception) { }
+
+			Thread.Sleep(100);
+		}
+
+		return null;
+	}
+
 	public static void StartSteamApp(ulong appId)
 	{
-
+		Process.Start(new ProcessStartInfo()
+		{
+			FileName = $"steam://rungameid/{appId}",
+			UseShellExecute = true
+		});
 	}
 
 }

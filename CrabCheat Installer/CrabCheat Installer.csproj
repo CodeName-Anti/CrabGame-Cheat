@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>CrabGame_Cheat_Installer</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
-    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <CopyLocalLockFileAssemblies Condition="$(Configuration) == Release">false</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
