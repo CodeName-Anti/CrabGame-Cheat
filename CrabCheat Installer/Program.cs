@@ -38,8 +38,7 @@ public static class Program
 
 		ulong steamAppId = 1782210;
 
-		//string gamePath = SteamUtils.GetAppLocation(steamAppId, "Crab Game");
-		string gamePath = null;
+		string gamePath = SteamUtils.GetAppLocation(steamAppId, "Crab Game");
 
 		if (gamePath == null)
 		{
