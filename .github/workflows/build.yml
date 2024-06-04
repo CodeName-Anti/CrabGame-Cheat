@@ -2,12 +2,12 @@ name: Build
 
 on:
   push:
-    branches: [ master ]
+    tags:
+      - '*'
 
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -23,4 +23,13 @@ jobs:
       - name: Build Project
         run: |
           msbuild CrabCheat.sln /t:Restore /property:Configuration=Release /property:Platform=x64
+          dotnet publish "CrabCheat Installer/CrabCheat Installer.csproj" -c Release
           msbuild CrabCheat.sln /property:Configuration=Release /property:Platform=x64
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            CrabCheat Installer/bin/Release/net6.0-windows/win-x64/publish/CrabCheat Installer.exe
+            CrabCheat/bin/Release/net6-windows/CrabCheat.zip
