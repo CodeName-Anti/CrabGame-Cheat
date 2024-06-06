@@ -72,13 +72,12 @@ internal static class Utils
 	{
 		string tempFileName = Path.GetTempFileName();
 		string tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-		string tempFile = Path.Combine(tempPath, Path.GetFileName(tempFileName));
 
 		Directory.CreateDirectory(tempPath);
 
-		await DownloadFileAsync(url, tempFile, displayName, parent);
+		await DownloadFileAsync(url, tempFileName, displayName, parent);
 
-		await Task.Run(() => Unzip(tempFile, tempPath, displayName, parent));
+		await Task.Run(() => Unzip(tempFileName, tempPath, displayName, parent));
 
 		await CopyDirectoryAsync(tempPath, outPath);
 	}

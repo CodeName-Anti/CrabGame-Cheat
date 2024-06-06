@@ -31,9 +31,25 @@ public class CrabCheat
 		await Utils.DownloadAndUnzip(bepinexDownload, path, "BepInEx", parent);
 	}
 
+	private static void RemoveOldIstallation(string path)
+	{
+		if (Directory.Exists(Path.Combine(path, "mono")))
+		{
+			Utils.DeleteDirectory(path, "BepInEx", true);
+			Utils.DeleteDirectory(path, "mono", true);
+
+			Utils.DeleteFile(path, "changelog.txt");
+			Utils.DeleteFile(path, "winhttp.dll");
+			Utils.DeleteFile(path, "doorstop_config.ini");
+		}
+	}
+
 	public static async Task<string> Install(string path)
 	{
 		ProgressBar progressBar = new(1, "Installing CrabCheat", Utils.BaseProgressOptions);
+
+		// Check and remove old pre.1 BepInEx version
+		RemoveOldIstallation(path);
 
 		if (!File.Exists(Path.Combine(path, "BepInEx", "core", "BepInEx.Core.dll")))
 		{

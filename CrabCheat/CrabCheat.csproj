@@ -5,7 +5,7 @@
     <DebugType>full</DebugType>
     <AssemblyName>CrabCheat</AssemblyName>
     <Description>My first plugin</Description>
-    <Version>2.0</Version>
+    <Version>2.0.0.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>JNNJMods.CrabCheat</RootNamespace>
