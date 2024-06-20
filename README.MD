@@ -13,18 +13,18 @@ A Cheat for [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by
 ## Installing/Updating with the Installer
 
 ### Installing
-1. Download the [CrabCheat Installer](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_Installer.exe).
+1. Download the [CrabCheat Installer](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat.Installer.exe).
 2. Open the Installer.
-3. Press the Install Button
+3. Select the Install option.
 
 ### Updating
-1. Download the [CrabCheat Installer](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabGame_Cheat_Installer.exe) if you haven't already.
+1. Download the [CrabCheat Installer](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat.Installer.exe) if you haven't already.
 2. Open the Installer.
-3. Press the Update Button.
+3. PSelect the Update option.
 
 ## Manual Installation
 1. Download [BepInEx 6 bleeding edge](https://builds.bepinex.dev/projects/bepinex_be/691/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.691%2B3ba398f.zip).
-2. Download [CrabCheat.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat.dll).
+2. Download [CrabCheat.zip](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat.zip).
 3. Extract the Zip archive in your Crab Game Installation Folder(Steam -> Right Click Crab Game -> Manage -> Browse local Files).  
 ![Steam_Manage_Screenshot.png](images/Steam_Manage_Screenshot.png)
       
@@ -32,7 +32,7 @@ A Cheat for [CrabGame](https://store.steampowered.com/app/1782210/Crab_Game/) by
     ![Crab_Game_Root_Screenshot.png](images/Crab_Game_Root_Screenshot.png)
 
 4. **Start the Game** and then **close it** once you are in the Main Menu.
-5. Create a new Folder in "/BepInEx/plugins" (Will load after step 4) and name it "CrabCheat", then copy the [CrabCheat.dll](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat.dll) into it.
+5. Create a new Folder in "/BepInEx/plugins" (Will load after step 4) and name it "CrabCheat", then copy the [CrabCheat.zip](https://github.com/CodeName-Anti/CrabGame-Cheat/releases/latest/download/CrabCheat.zip) into it.
 
 ## Features
 
