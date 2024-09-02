@@ -4,7 +4,6 @@ using JNNJMods.CrabCheat.Modules.Player;
 using JNNJMods.CrabCheat.Rendering;
 using JNNJMods.CrabCheat.Rendering.Outline;
 using JNNJMods.CrabCheat.Util;
-using JNNJMods.CrabCheat.Util.Config;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -23,7 +22,6 @@ public class Cheat(IntPtr handle) : MonoBehaviour(handle)
 	public bool Shown => renderer != null && renderer.RenderGUI;
 
 	public ModuleManager ModuleManager;
-	public static Configuration Config => Configuration.Instance;
 	public static string FormattedVersion;
 
 	public GUIRenderer renderer;
@@ -53,8 +51,6 @@ public class Cheat(IntPtr handle) : MonoBehaviour(handle)
 
 		AntiCheat.StopAntiCheat();
 
-		Configuration.ReadConfiguration();
-
 		ModuleManager = new ModuleManager();
 
 		try
@@ -71,6 +67,9 @@ public class Cheat(IntPtr handle) : MonoBehaviour(handle)
 		}
 
 		LogLoadedMessage();
+
+		renderer = new();
+		renderer.Initialize();
 	}
 
 	private static void LogLoadedMessage()
@@ -107,19 +106,10 @@ public class Cheat(IntPtr handle) : MonoBehaviour(handle)
 
 	private void Start()
 	{
-		Config.WasFirstInitThisRun = Config.FirstInit;
-		Config.FirstInit = false;
-		Config.SaveConfig();
-
 		// Destroy AntiCheat GameObject
 		AntiCheat.LateStopAntiCheat();
 
 		WelcomeScreen.Draw = true;
-		WelcomeScreen.OnClose += () =>
-		{
-			renderer = new();
-			renderer.Initialize();
-		};
 	}
 
 	private void OnApplicationQuit()

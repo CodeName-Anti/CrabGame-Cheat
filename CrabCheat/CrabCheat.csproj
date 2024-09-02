@@ -31,12 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharpGUI\SharpGUI.csproj">
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="ACTk.Examples.Genuine.Runtime">
       <HintPath>..\Libraries\Crab Game\ACTk.Examples.Genuine.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -86,8 +80,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ImGui.NET">
-      <HintPath>..\SharpGUI\Resources\ImGui.NET.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\Libraries\SharpGUI\ImGui.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGUI">
+      <HintPath>..\Libraries\SharpGUI\SharpGUI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>..\Libraries\Crab Game\Unity.TextMeshPro.dll</HintPath>

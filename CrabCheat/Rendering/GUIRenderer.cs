@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using ImGuiNET;
 using JNNJMods.CrabCheat.Util;
-using JNNJMods.CrabCheat.Util.Config;
 using SharpGUI;
 using System;
 using System.Collections.Generic;
@@ -15,8 +14,6 @@ public class GUIRenderer
 	public Dictionary<TabID, GUITab> Tabs { get; private set; }
 	public TabID CurrentTabId { get; private set; }
 
-	public bool UsingOverlay;
-
 	public bool RenderGUI
 	{
 		get => _RenderGUI;
@@ -24,37 +21,18 @@ public class GUIRenderer
 		{
 			_RenderGUI = value;
 			GUI.HandleInput = _RenderGUI;
+			GUI.BlockInput = _RenderGUI;
 		}
 	}
 
 	private bool _RenderGUI;
 
-	private int frameCount;
-	private bool checkHooking = false;
-
 	private ImGuiKey MenuKey = ImGuiKey.RightShift;
 
 	public void Initialize()
 	{
-		Configuration config = Cheat.Config;
-
-		if (config.WasFirstInitThisRun || config.CanInitHook)
-			config.UseDXOverlay = false;
-		else if (!config.CanInitHook)
-			config.UseDXOverlay = true;
-
-		UsingOverlay = config.UseDXOverlay;
 		SetKey();
-		InitBackend();
-	}
 
-	public void SetKey()
-	{
-		MenuKey = Cheat.Instance.ModuleManager.ClickGuiKeyBind.ToImGuiKey();
-	}
-
-	private void InitBackend()
-	{
 		Tabs = Enum.GetValues<TabID>().ToDictionary(id => id, id => new GUITab(TabHelper.GetTabName(id), id));
 
 		// Disable LobbyOwner tab
@@ -65,47 +43,12 @@ public class GUIRenderer
 		GUI.OnRender += OnRender;
 		GUI.OnInitImGui += SetupImGuiStyle;
 
-		Configuration config = Cheat.Config;
-		/*if (UsingOverlay)
-		{
-			GUI.Initialize(BackendType.Overlay);
-			GUI.HandleInput = false;
-		}
-		else
-		{
-			config.CanInitHook = false;
-			GUI.Initialize();
-		}*/
-
 		GUI.Initialize();
-		UsingOverlay = false;
-		config.UseDXOverlay = false;
-
-		config.SaveConfig();
 	}
 
-	private void EnableHooking()
+	private void SetKey()
 	{
-		if (UsingOverlay)
-			return;
-
-		if (!checkHooking)
-			return;
-
-		// Use frame count because hooking may work for a single frame
-		frameCount++;
-
-		if (frameCount < 30)
-			return;
-
-		checkHooking = false;
-
-		Configuration config = Cheat.Config;
-
-		config.UseDXOverlay = false;
-		config.CanInitHook = true;
-
-		config.SaveConfig();
+		MenuKey = Cheat.Instance.ModuleManager.ClickGuiKeyBind.ToImGuiKey();
 	}
 
 	public void Shutdown()
@@ -135,8 +78,6 @@ public class GUIRenderer
 
 		if (!RenderGUI)
 			return;
-
-		EnableHooking();
 
 		ImGui.Begin("CrabCheat by JNNJ");
 
@@ -169,33 +110,6 @@ public class GUIRenderer
 		ImGui.SetWindowSize(new Vector2(0, 0), ImGuiCond.Once);
 
 		ImGui.End();
-
-#if DEBUG
-		ImGui.Begin("CrabCheat Debug");
-
-		ImGui.SetWindowPos(new Vector2(300, 300), ImGuiCond.Once);
-
-		ImGui.Text("FPS: " + ImGui.GetIO().Framerate.ToString());
-
-		ImGui.Text("Using Overlay: " + UsingOverlay.ToString());
-
-		if (ImGui.Button("Switch"))
-		{
-			UnityMainThreadDispatcher.Enqueue(() =>
-			{
-				GUI.Shutdown();
-
-				UsingOverlay = !UsingOverlay;
-				Cheat.Config.UseDXOverlay = UsingOverlay;
-				Cheat.Config.SaveConfig();
-				InitBackend();
-			});
-		}
-
-
-		ImGui.End();
-
-#endif
 	}
 
 	private static void SetupImGuiStyle()
@@ -269,9 +183,9 @@ public class GUIRenderer
 		style.Colors[(int)ImGuiCol.ResizeGripActive] = new Vector4(0.2352941185235977f, 0.2156862765550613f, 0.5960784554481506f, 1.0f);
 		style.Colors[(int)ImGuiCol.Tab] = new Vector4(0.0470588244497776f, 0.05490196123719215f, 0.07058823853731155f, 1.0f);
 		style.Colors[(int)ImGuiCol.TabHovered] = new Vector4(0.1176470592617989f, 0.1333333402872086f, 0.1490196138620377f, 1.0f);
-		style.Colors[(int)ImGuiCol.TabActive] = new Vector4(0.09803921729326248f, 0.105882354080677f, 0.1215686276555061f, 1.0f);
-		style.Colors[(int)ImGuiCol.TabUnfocused] = new Vector4(0.0470588244497776f, 0.05490196123719215f, 0.07058823853731155f, 1.0f);
-		style.Colors[(int)ImGuiCol.TabUnfocusedActive] = new Vector4(0.0784313753247261f, 0.08627451211214066f, 0.1019607856869698f, 1.0f);
+		//style.Colors[(int)ImGuiCol.TabActive] = new Vector4(0.09803921729326248f, 0.105882354080677f, 0.1215686276555061f, 1.0f);
+		//style.Colors[(int)ImGuiCol.TabUnfocused] = new Vector4(0.0470588244497776f, 0.05490196123719215f, 0.07058823853731155f, 1.0f);
+		//style.Colors[(int)ImGuiCol.TabUnfocusedActive] = new Vector4(0.0784313753247261f, 0.08627451211214066f, 0.1019607856869698f, 1.0f);
 		style.Colors[(int)ImGuiCol.PlotLines] = new Vector4(0.5215686559677124f, 0.6000000238418579f, 0.7019608020782471f, 1.0f);
 		style.Colors[(int)ImGuiCol.PlotLinesHovered] = new Vector4(0.03921568766236305f, 0.9803921580314636f, 0.9803921580314636f, 1.0f);
 		style.Colors[(int)ImGuiCol.PlotHistogram] = new Vector4(1.0f, 0.2901960909366608f, 0.5960784554481506f, 1.0f);
