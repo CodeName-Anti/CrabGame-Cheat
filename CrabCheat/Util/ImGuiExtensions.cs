@@ -1,4 +1,8 @@
 ﻿using ImGuiNET;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 using SysVec2 = System.Numerics.Vector2;
@@ -38,6 +42,42 @@ public static class ImGuiExtensions
 	public static uint ToImGuiColor(this Color color)
 	{
 		return color.ToSysVec().ToImguiColor();
+	}
+
+	private static IntPtr GetFontDataFromResources(string resourceName, Assembly assembly, out int fontDataLength)
+	{
+		using Stream fontStream = assembly.GetManifestResourceStream(resourceName);
+
+		byte[] fontData = new byte[fontStream.Length];
+		fontStream.Read(fontData, 0, (int)fontStream.Length);
+
+		IntPtr fontPtr = ImGui.MemAlloc((uint)fontData.Length);
+		Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+
+		fontDataLength = fontData.Length;
+
+		return fontPtr;
+	}
+
+	public static unsafe ImFontPtr LoadFontFromResources(this ImFontAtlasPtr fontAtlas, string resourceName, Assembly assembly, float fontSize)
+	{
+		IntPtr fontPtr = GetFontDataFromResources(resourceName, assembly, out int fontDataLength);
+
+		return fontAtlas.AddFontFromMemoryTTF(fontPtr, fontDataLength, fontSize);
+	}
+
+	public static unsafe ImFontPtr LoadFontFromResources(this ImFontAtlasPtr fontAtlas, string resourceName, Assembly assembly, float fontSize, ImFontConfigPtr fontConfig)
+	{
+		IntPtr fontPtr = GetFontDataFromResources(resourceName, assembly, out int fontDataLength);
+
+		return fontAtlas.AddFontFromMemoryTTF(fontPtr, fontDataLength, fontSize, fontConfig);
+	}
+
+	public static unsafe ImFontPtr LoadFontFromResources(this ImFontAtlasPtr fontAtlas, string resourceName, Assembly assembly, float fontSize, ImFontConfigPtr fontConfig, IntPtr glyphRanges)
+	{
+		IntPtr fontPtr = GetFontDataFromResources(resourceName, assembly, out int fontDataLength);
+
+		return fontAtlas.AddFontFromMemoryTTF(fontPtr, fontDataLength, fontSize, fontConfig, glyphRanges);
 	}
 
 }

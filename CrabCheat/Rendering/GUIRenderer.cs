@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 
 namespace JNNJMods.CrabCheat.Rendering;
 
@@ -41,7 +42,7 @@ public class GUIRenderer
 		CurrentTabId = Tabs.ElementAt(0).Key;
 
 		GUI.OnRender += OnRender;
-		GUI.OnInitImGui += SetupImGuiStyle;
+		GUI.OnInitImGui += InitImGui;
 
 		GUI.Initialize();
 	}
@@ -54,6 +55,32 @@ public class GUIRenderer
 	public void Shutdown()
 	{
 		GUI.Shutdown();
+	}
+
+	private unsafe void InitImGui()
+	{
+		try
+		{
+			SetupImGuiStyle();
+
+			string assetsPath = typeof(Cheat).Namespace + ".Assets";
+			Assembly assembly = Assembly.GetExecutingAssembly();
+
+			ImFontAtlasPtr fonts = ImGui.GetIO().Fonts;
+
+			float baseFontSize = 15f;
+			float iconFontSize = baseFontSize / 3 * 3.5f;
+
+			ImFontPtr robotoFont = fonts.LoadFontFromResources(assetsPath + ".Roboto.Roboto-Regular.ttf", assembly, baseFontSize);
+			ImGui.GetIO().NativePtr->FontDefault = robotoFont.NativePtr;
+
+			fonts.Build();
+
+		}
+		catch (Exception ex)
+		{
+			CheatLog.Error($"Failed to init ImGui {ex}");
+		}
 	}
 
 	private void OnRender()

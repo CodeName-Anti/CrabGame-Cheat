@@ -5,7 +5,7 @@
     <DebugType>full</DebugType>
     <AssemblyName>CrabCheat</AssemblyName>
     <Description>My first plugin</Description>
-    <Version>2.0.0.1</Version>
+    <Version>2.0.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>JNNJMods.CrabCheat</RootNamespace>
@@ -13,6 +13,11 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\**">
+    </EmbeddedResource>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0">
@@ -79,12 +84,6 @@
       <HintPath>..\Libraries\Crab Game\Il2CppSystem.Xml.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ImGui.NET">
-      <HintPath>..\Libraries\SharpGUI\ImGui.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpGUI">
-      <HintPath>..\Libraries\SharpGUI\SharpGUI.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>..\Libraries\Crab Game\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
@@ -132,6 +131,12 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>..\Libraries\Crab Game\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="ImGui.NET">
+      <HintPath>..\Libraries\SharpGUI\ImGui.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGUI">
+      <HintPath>..\Libraries\SharpGUI\SharpGUI.dll</HintPath>
     </Reference>
   </ItemGroup>
 
