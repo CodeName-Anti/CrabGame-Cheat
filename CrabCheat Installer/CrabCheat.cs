@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Pastel;
 using ShellProgressBar;
 using System.Reflection;
 
@@ -33,23 +34,27 @@ public class CrabCheat
 
 	private static void RemoveOldIstallation(string path)
 	{
-		if (Directory.Exists(Path.Combine(path, "mono")))
-		{
-			Utils.DeleteDirectory(path, "BepInEx", true);
-			Utils.DeleteDirectory(path, "mono", true);
+		if (!Directory.Exists(Path.Combine(path, "mono")))
+			return;
 
-			Utils.DeleteFile(path, "changelog.txt");
-			Utils.DeleteFile(path, "winhttp.dll");
-			Utils.DeleteFile(path, "doorstop_config.ini");
-		}
+		Console.WriteLine("BepInEx pre.1 version detected, THIS IS NOT SUPPORTED AND IT WILL BE REMOVED AS PART OF THE INSTALL PROCESS!".Pastel(ConsoleColor.Red));
+		Console.WriteLine("If you have no idea what this means, you can ignore this message and just press enter.".Pastel(ConsoleColor.Yellow));
+
+		Console.ReadLine();
+		Utils.DeleteDirectory(path, "BepInEx", true);
+		Utils.DeleteDirectory(path, "mono", true);
+
+		Utils.DeleteFile(path, "changelog.txt");
+		Utils.DeleteFile(path, "winhttp.dll");
+		Utils.DeleteFile(path, "doorstop_config.ini");
 	}
 
 	public static async Task<string> Install(string path)
 	{
-		ProgressBar progressBar = new(1, "Installing CrabCheat", Utils.BaseProgressOptions);
-
 		// Check and remove old pre.1 BepInEx version
 		RemoveOldIstallation(path);
+
+		ProgressBar progressBar = new(1, "Installing CrabCheat", Utils.BaseProgressOptions);
 
 		if (!File.Exists(Path.Combine(path, "BepInEx", "core", "BepInEx.Core.dll")))
 		{
