@@ -80,4 +80,34 @@ public static class ImGuiExtensions
 		return fontAtlas.AddFontFromMemoryTTF(fontPtr, fontDataLength, fontSize, fontConfig, glyphRanges);
 	}
 
+	public static unsafe ImFontPtr LoadIconFontFromResources(this ImFontAtlasPtr fontAtlas, string resourceName, Assembly assembly, float size, (ushort, ushort) range)
+	{
+		ImFontConfigPtr configuration = ImGuiNative.ImFontConfig_ImFontConfig();
+
+		configuration.MergeMode = true;
+		configuration.PixelSnapH = true;
+		configuration.GlyphOffset = new SysVec2(0, 1);
+
+		GCHandle rangeHandle = GCHandle.Alloc(new ushort[]
+		{
+			range.Item1,
+			range.Item2,
+			0
+		}, GCHandleType.Pinned);
+
+		try
+		{
+			return fontAtlas.LoadFontFromResources(resourceName, assembly, size, configuration, rangeHandle.AddrOfPinnedObject());
+		}
+		finally
+		{
+			configuration.Destroy();
+
+			if (rangeHandle.IsAllocated)
+			{
+				rangeHandle.Free();
+			}
+		}
+	}
+
 }

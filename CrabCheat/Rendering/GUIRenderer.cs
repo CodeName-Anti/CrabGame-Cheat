@@ -74,6 +74,9 @@ public class GUIRenderer
 			ImFontPtr robotoFont = fonts.LoadFontFromResources(assetsPath + ".Roboto.Roboto-Regular.ttf", assembly, baseFontSize);
 			ImGui.GetIO().NativePtr->FontDefault = robotoFont.NativePtr;
 
+			(ushort, ushort) fontAwesomeRange = (FontAwesome6.IconMin, FontAwesome6.IconMax16);
+			fonts.LoadIconFontFromResources($"{assetsPath}.FontAwesome.{FontAwesome6.FontIconFileNameFAR}", assembly, iconFontSize, fontAwesomeRange);
+
 			fonts.Build();
 
 		}
