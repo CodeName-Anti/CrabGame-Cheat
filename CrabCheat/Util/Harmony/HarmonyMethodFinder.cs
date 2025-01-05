@@ -1,10 +1,9 @@
 ﻿using HarmonyLib;
-using JNNJMods.CrabCheat.Util;
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace JNNJMods.CrabCheat.Utils;
+namespace JNNJMods.CrabCheat.Util;
 
 public static class HarmonyMethodFinder
 {
