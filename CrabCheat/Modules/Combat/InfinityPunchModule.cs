@@ -18,7 +18,6 @@ public class InfinityPunchModule : Module
 
 	public override void RenderGUIElements()
 	{
-		//GUILayout.Label("<i>Infinity Punch should be used with <b>No Camerashake</b></i>");
 		ImGui.Text("Infinity Punch should be used with");
 		ImGui.SameLine();
 		ImGui.TextColored(Color.red.ToSysVec(), "No Camerashake");
